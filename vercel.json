@@ -1,0 +1,35 @@
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "content-type"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "DELETE,PUT,POST,GET,OPTIONS"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/engine/(.*)",
+      "destination": "/api/engine"
+    },
+    {
+      "source": "/plugin/transcode/v4",
+      "destination": "/api/plugin-pro"
+    },
+    {
+      "source": "/plugin/(.*)",
+      "destination": "/api/plugin"
+    }
+  ]
+}
