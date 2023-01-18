@@ -12,11 +12,11 @@
 :::
 
 官方提供了最新版本的下载链接：
-- [Linux](https://m7s.live/bin/m7s_linux_amd64.tar.gz)
-- [Linux-arm64](https://m7s.live/bin/m7s_linux_arm64.tar.gz)
-- [Mac](https://m7s.live/bin/m7s_darwin_amd64.tar.gz)
-- [Mac-arm64](https://m7s.live/bin/m7s_darwin_arm64.tar.gz)
-- [Windows](https://m7s.live/bin/m7s_windows_amd64.zip)
+- [Linux](https://download.m7s.live/bin/m7s_linux_amd64.tar.gz)
+- [Linux-arm64](https://download.m7s.live/bin/m7s_linux_arm64.tar.gz)
+- [Mac](https://download.m7s.live/bin/m7s_darwin_amd64.tar.gz)
+- [Mac-arm64](https://download.m7s.live/bin/m7s_darwin_arm64.tar.gz)
+- [Windows](https://download.m7s.live/bin/m7s_windows_amd64.zip)
 
 ## 运行
 

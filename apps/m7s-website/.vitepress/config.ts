@@ -148,9 +148,7 @@ export default defineConfigWithTheme<ThemeConfig>({
       exclude: ['@vue/repl']
     },
     // @ts-ignore
-    ssr: {
-      external: ['@vue/repl']
-    },
+    ssr: false,
     server: {
       host: true,
       fs: {

@@ -31,23 +31,23 @@ const data = [
     children: [
       {
         name: 'Windows',
-        url: 'https://m7s.live/bin/m7s_windows_amd64.tar.gz'
+        url: 'https://download.m7s.live/bin/m7s_windows_amd64.tar.gz'
       },
       {
         name: 'Mac',
-        url: 'https://m7s.live/bin/m7s_darwin_amd64.tar.gz'
+        url: 'https://download.m7s.live/bin/m7s_darwin_amd64.tar.gz'
       },
       {
         name: 'Mac(arm64)',
-        url: 'https://m7s.live/bin/m7s_darwin_arm64.tar.gz'
+        url: 'https://download.m7s.live/bin/m7s_darwin_arm64.tar.gz'
       },
       {
         name: 'Linux',
-        url: 'https://m7s.live/bin/m7s_linux_amd64.tar.gz'
+        url: 'https://download.m7s.live/bin/m7s_linux_amd64.tar.gz'
       },
       {
         name: 'Linux(arm64)',
-        url: 'https://m7s.live/bin/m7s_linux_arm64.tar.gz'
+        url: 'https://download.m7s.live/bin/m7s_linux_arm64.tar.gz'
       }
     ]
   },
@@ -64,7 +64,7 @@ const data = [
       { name: '诞生故事', url: '/about/born' }
     ]
   }
-]
+];
 
 export const menu = data.slice(1).map((item) => {
   if (item.activeMatch) {
@@ -74,11 +74,11 @@ export const menu = data.slice(1).map((item) => {
         name: child.name,
         url: child.url + '.html'
       }))
-    }
-    return result
+    };
+    return result;
   }
-  return item
-})
+  return item;
+});
 export const nav = data.map((item) => {
   const result = {
     text: item.name,
@@ -87,6 +87,6 @@ export const nav = data.map((item) => {
       text: child.name,
       link: child.url
     }))
-  }
-  return result
-})
+  };
+  return result;
+});

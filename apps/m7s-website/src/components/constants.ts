@@ -33,23 +33,23 @@ const data = [
     children: [
       {
         name: 'Windows',
-        url: 'https://m7s.live/bin/m7s_windows_amd64.tar.gz'
+        url: 'https://download.m7s.live/bin/m7s_windows_amd64.tar.gz'
       },
       {
         name: 'Mac',
-        url: 'https://m7s.live/bin/m7s_darwin_amd64.tar.gz'
+        url: 'https://download.m7s.live/bin/m7s_darwin_amd64.tar.gz'
       },
       {
         name: 'Mac(arm64)',
-        url: 'https://m7s.live/bin/m7s_darwin_arm64.tar.gz'
+        url: 'https://download.m7s.live/bin/m7s_darwin_arm64.tar.gz'
       },
       {
         name: 'Linux',
-        url: 'https://m7s.live/bin/m7s_linux_amd64.tar.gz'
+        url: 'https://download.m7s.live/bin/m7s_linux_amd64.tar.gz'
       },
       {
         name: 'Linux(arm64)',
-        url: 'https://m7s.live/bin/m7s_linux_arm64.tar.gz'
+        url: 'https://download.m7s.live/bin/m7s_linux_arm64.tar.gz'
       }
     ]
   },
@@ -91,7 +91,7 @@ export const nav = data.map<NavItem>((item) => {
       }))
     };
   }
-  return  {
+  return {
     text: item.name,
     link: item.url,
   };
