@@ -2,8 +2,8 @@ import { defineConfigWithTheme } from 'vitepress';
 import { searchForWorkspaceRoot } from 'vite';
 import type { Config as ThemeConfig } from '@vue/theme';
 import baseConfig from '@vue/theme/config';
-import { headerPlugin } from './headerMdPlugin';
 import { nav } from './theme/components/constants';
+import MermaidPlugin from "vitepress-plugin-mermaid";
 
 export const sidebar = {
   '/guide/': [
@@ -136,9 +136,7 @@ export default defineConfigWithTheme<ThemeConfig>({
   },
 
   markdown: {
-    config(md) {
-      md.use(headerPlugin);
-    }
+    config: MermaidPlugin
   },
 
   vite: {
