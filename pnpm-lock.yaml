@@ -29,7 +29,7 @@ importers:
       less: ^4.1.2
       mermaid: 9.1.7
       vitepress: 0.22.2
-      vitepress-plugin-mermaid: 1.0.0
+      vitepress-plugin-mermaid: 1.0.2
       vue: ^3.2.31
     dependencies:
       '@m7s/shared': link:../../packages/shared
@@ -47,7 +47,7 @@ importers:
       '@types/node': 16.11.26
       less: 4.1.2
       mermaid: 9.1.7
-      vitepress-plugin-mermaid: 1.0.0_xbtadjfpwmzx6xxewk5gjpqv3u
+      vitepress-plugin-mermaid: 1.0.2_xbtadjfpwmzx6xxewk5gjpqv3u
 
   packages/shared:
     specifiers:
@@ -5036,12 +5036,11 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
 
-  /vitepress-plugin-mermaid/1.0.0_xbtadjfpwmzx6xxewk5gjpqv3u:
-    resolution: {integrity: sha512-K62HvMy0h4rl2FRti13mWsaBKYAhkL9XuPxSKSM5Eo17b/kA/oUg1SUdgW2w7DK3gj5j439RHUDgJ0qKTe2fZw==}
+  /vitepress-plugin-mermaid/1.0.2_xbtadjfpwmzx6xxewk5gjpqv3u:
+    resolution: {integrity: sha512-Gmy2zAAHV674tTB0mXb0s36KB+TbIUq6PDKbveXBpPP4genQdVv7B7q4L2CLSW09VYNo+oWTTWW29aFj/b/WFA==}
     peerDependencies:
       mermaid: ^8.0.0 || ^9.0.0
-      mutation-observer: ^1.0.0
-      vitepress: ^0.21.6 || ^1.0.0
+      vitepress: ^0.21.6 || ^1.0.0 || ^1.0.0-alpha
     dependencies:
       mermaid: 9.1.7
       vitepress: 0.22.2_less@4.1.2
