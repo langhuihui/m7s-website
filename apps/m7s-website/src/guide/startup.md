@@ -16,7 +16,7 @@
 - [Linux-arm64](https://download.m7s.live/bin/m7s_linux_arm64.tar.gz)
 - [Mac](https://download.m7s.live/bin/m7s_darwin_amd64.tar.gz)
 - [Mac-arm64](https://download.m7s.live/bin/m7s_darwin_arm64.tar.gz)
-- [Windows](https://download.m7s.live/bin/m7s_windows_amd64.zip)
+- [Windows](https://download.m7s.live/bin/m7s_windows_amd64.tar.gz)
 
 ## 运行
 
