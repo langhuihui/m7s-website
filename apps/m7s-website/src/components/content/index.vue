@@ -90,6 +90,7 @@ const plugins = {
   rtsp: "rtsp协议接受推拉、对外推拉",
   hls: "1、提供HLS协议拉流播放。2、远程拉取HLS到m7s",
   gb28181: "GB28181协议拉流播放、查看录像",
+  onvif: "ONVIF协议拉流播放",
   webrtc: "WebRTC协议的推流和拉流",
   webtransport: "通过WebTransport进行推拉流",
   record: "hls、flv、mp4、裸流格式录制功能以及回放",
@@ -121,6 +122,10 @@ const plugins3 = [
   {
     name:"transcode",
     desc: "提供转码能力，可以将流转码为其他格式",
+  },
+  {
+    name:"recordpro",
+    desc: "高级录制插件，增加定时任务等额外的功能",
   },
   {
     name:"虚位以待",

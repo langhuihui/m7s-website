@@ -138,23 +138,23 @@ type Track interface {
 	GetBase() *Base
 	LastWriteTime() time.Time
 	SnapForJson()
+	SetStuff(stuff ...any)
 }
 
 type AVTrack interface {
 	Track
+	PreFrame() *AVFrame
+	CurrentFrame() *AVFrame
 	Attach()
 	Detach()
-	WriteAVCC(ts uint32, frame AVCCFrame) //写入AVCC格式的数据
+	WriteAVCC(ts uint32, frame util.BLL) error //写入AVCC格式的数据
 	WriteRTP([]byte)
 	WriteRTPPack(*rtp.Packet)
 	Flush()
-	SetSpeedLimit(int)
+	SetSpeedLimit(time.Duration)
 }
 type VideoTrack interface {
 	AVTrack
-	GetDecoderConfiguration() DecoderConfiguration[NALUSlice]
-	CurrentFrame() *AVFrame[NALUSlice]
-	PreFrame() *AVFrame[NALUSlice]
 	WriteSliceBytes(slice []byte)
 	WriteAnnexB(uint32, uint32, AnnexBFrame)
 	SetLostFlag()
@@ -162,12 +162,10 @@ type VideoTrack interface {
 
 type AudioTrack interface {
 	AVTrack
-	GetDecoderConfiguration() DecoderConfiguration[[]byte]
-	CurrentFrame() *AVFrame[[]byte]
-	PreFrame() *AVFrame[[]byte]
 	WriteADTS([]byte)
 	WriteRaw(uint32, []byte)
 }
+
 
 ```
 对于不同的数据格式我们可以选择对应的写入方法，例如`rtmp`格式的数据，我们使用`WriteAVCC`来写入，
@@ -254,7 +252,7 @@ classDiagram
     }
     class Video{
       +CodecID     codec.VideoCodecID
-      +IDRing      *util.Ring[AVFrame[NALUSlice]]
+      +IDRing      *util.Ring[AVFrame]
       +GOP         int 
       +Attach()
       +Detach()
@@ -269,28 +267,28 @@ classDiagram
       +WriteADTS()
       +WriteRaw(pts uint32, raw []byte)
       +WriteAVCC(ts uint32, frame AVCCFrame)
-      +CompleteAVCC(value *AVFrame[[]byte])
-      +CompleteRTP(value *AVFrame[[]byte])
+      +CompleteAVCC(value *AVFrame)
+      +CompleteRTP(value *AVFrame)
     }
     class H264{
       +WriteSliceBytes(slice []byte)
-      +WriteAVCC(ts uint32, frame AVCCFrame)
+      +WriteAVCC(ts uint32, frame util.BLL)
       +WriteRTPFrame(frame *RTPFrame)
-      +CompleteRTP(value *AVFrame[NALUSlice]) 
+      +CompleteRTP(value *AVFrame) 
     }
     class H265{
       +WriteSliceBytes(slice []byte)
-      +WriteAVCC(ts uint32, frame AVCCFrame)
+      +WriteAVCC(ts uint32, frame util.BLL)
       +WriteRTPFrame(frame *RTPFrame)
-      +CompleteRTP(value *AVFrame[NALUSlice]) 
+      +CompleteRTP(value *AVFrame) 
     }
     class AAC{
-      +WriteAVCC(ts uint32, frame AVCCFrame)
+      +WriteAVCC(ts uint32, frame util.BLL)
       +WriteRTPFrame(frame *RTPFrame)
-      +CompleteRTP(value *AVFrame[NALUSlice]) 
+      +CompleteRTP(value *AVFrame) 
     }
     class G711{
-      +WriteAVCC(ts uint32, frame AVCCFrame)
+      +WriteAVCC(ts uint32, frame util.BLL)
       +WriteRTPFrame(frame *RTPFrame)
     }
 ```

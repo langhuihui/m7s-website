@@ -26,9 +26,10 @@ global:
       pubaudio: true # 是否发布音频流
       pubvideo: true # 是否发布视频流
       kickexist: false # 剔出已经存在的发布者，用于顶替原有发布者
-      publishtimeout: 10 # 发布流默认过期时间单位秒，超过该时间发布者没有恢复流将被删除
-      delayclosetimeout: 0 # 自动关闭触发后延迟的秒数(期间内如果有新的订阅则取消触发关闭)，0为关闭该功能，保持连接。
+      publishtimeout: 10s # 发布流默认过期时间，超过该时间发布者没有恢复流将被删除
+      delayclosetimeout: 0 # 自动关闭触发后延迟的时间(期间内如果有新的订阅则取消触发关闭)，0为关闭该功能，保持连接。
       waitclosetimeout: 0 # 发布者断开后等待时间，超过该时间发布者没有恢复流将被删除，0为关闭该功能，由订阅者决定是否删除
+      buffertime: 0 # 缓存时间，用于时光回溯，0为关闭缓存
   subscribe:
       subaudio: true # 是否订阅音频流
       subvideo: true # 是否订阅视频流
@@ -37,15 +38,16 @@ global:
       subdataargname: dts # 订阅数据轨道参数名
       subaudiotracks: [] # 订阅音频轨道名称列表
       subvideotracks: [] # 订阅视频轨道名称列表
+      submode: 0 # 订阅模式，0为跳帧追赶模式，1为不追赶（多用于录制），2为时光回溯模式
       iframeonly: false # 只订阅关键帧
-      waittimeout: 10 # 等待发布者的秒数，用于订阅尚未发布的流
+      waittimeout: 10s # 等待发布者的超时时间，用于订阅尚未发布的流
   rtpreorder : true # 启用RTP包乱序重排
   enableavcc : true  # 启用AVCC格式缓存，用于rtmp协议
   enablertp : true # 启用rtp格式缓存，用于rtsp、websocket、gb28181协议
   enableauth: true # 启用鉴权,详细查看鉴权机制
   enablesubevent: true # 启用订阅事件，用于订阅者上下线事件,关闭可以提高性能
   rtpreoderbufferlen: 50 # rtp乱序重排缓存长度
-  speedlimit: 500 # 限速超时时间（毫秒）0为不限速，对于读取文件这类流需要限速，否则读取过快
+  speedlimit: 500ms # 限速超时时间0为不限速，对于读取文件这类流需要限速，否则读取过快
   eventbussize: 10 # 事件总线缓存大小，事件较多时容易堵阻塞线程，需要增大缓存
   console: 
     server : console.monibuca.com:4242 # 连接远程控制台的地址

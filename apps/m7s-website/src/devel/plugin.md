@@ -19,7 +19,8 @@ func (p *MyPluginConfig) OnEvent(event any) {
     case Config://插件热更新逻辑
     case *Stream://按需拉流逻辑
     case SEwaitPublish://由于发布者掉线等待发布者
-    case SEpublish://进入发布状态
+    case SEpublish://首次进入发布状态
+    case SErepublish://再次进入发布状态
     case SEsubscribe://订阅者逻辑
     case SEwaitClose://由于最后一个订阅者离开等待关闭流
     case SEclose://关闭流
