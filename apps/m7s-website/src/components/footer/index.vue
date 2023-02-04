@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import { menu } from '../constants'
 const showWx = ref(false)
 const showZf = ref(false)
 </script>

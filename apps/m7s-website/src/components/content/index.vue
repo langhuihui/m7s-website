@@ -19,7 +19,7 @@ const list = [
     title: '简单易用'
   }
 ]
-const list2 = ['官方插件','第三方开源','收费插件']
+const list2 = ['官方插件','第三方开源','付费插件']
 const url = ref({
   ...UrlEnum,
 })
@@ -223,14 +223,14 @@ const plugins3 = [
           </div>
         </div>
         <div class="plugin-content"  v-if="active2 == 1">
-          <div class="plugin-item" @click="jump2(item.url)" v-for="(item, name) in plugins2">
+          <div class="plugin-item" @click="jump2(item.url)" v-for="(item) in plugins2">
             <img class="plugin-item-logo" src="/images/m7s/plugin.png" />
             <div class="plugin-item-title">{{ item.name }}</div>
             <div class="plugin-item-content">{{ item.desc }}</div>
           </div>
         </div>
         <div class="plugin-content"  v-if="active2 == 2">
-          <div class="plugin-item" v-for="(item, name) in plugins3">
+          <div class="plugin-item" v-for="(item) in plugins3">
             <img class="plugin-item-logo" src="/images/m7s/plugin.png" />
             <div class="plugin-item-title">{{ item.name }}</div>
             <div class="plugin-item-content">{{ item.desc }}</div>
