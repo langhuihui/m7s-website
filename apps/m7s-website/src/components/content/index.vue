@@ -113,6 +113,11 @@ const plugins2 = [
     url:"https://github.com/kingecg/mpegts"
   },
   {
+    name:"plugin-snapplug",
+    desc:"录制开始或结束就 自动生成 视频封面图",
+    url:"https://github.com/3201301734/plugin-snapplug"
+  },
+  {
     name:"虚位以待",
     desc:"可联系作者添加到此列表",
     url:""

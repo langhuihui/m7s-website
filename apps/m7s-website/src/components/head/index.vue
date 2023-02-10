@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Logo } from '@m7s/ui/vue'
-import { menu } from '../constants'
+import { menu } from '../../../.vitepress/constants'
 </script>
 
 <template>

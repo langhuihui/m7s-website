@@ -16,7 +16,7 @@
         <div class="item-2">开源Go语言流媒体服务器开发框架</div>
         <div class="item-3">
           <slot>
-            <span>v4.0.0</span>
+            <span>v4.4.4</span>
           </slot>
         </div>
         <div class="flex">

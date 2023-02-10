@@ -8,5 +8,5 @@ import Home from './components/M7S.vue'
 </script>
 
 <Home>
-<<< src/release.txt
+
 </Home>

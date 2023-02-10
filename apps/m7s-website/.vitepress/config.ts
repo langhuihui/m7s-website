@@ -2,7 +2,7 @@ import { defineConfigWithTheme } from 'vitepress';
 import { searchForWorkspaceRoot } from 'vite';
 import type { Config as ThemeConfig } from '@vue/theme';
 import baseConfig from '@vue/theme/config';
-import { nav } from './theme/components/constants';
+import { nav } from './constants';
 import MermaidPlugin from "vitepress-plugin-mermaid";
 
 export const sidebar = {
