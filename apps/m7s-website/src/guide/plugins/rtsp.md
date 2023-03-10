@@ -87,3 +87,7 @@ subscribe
 
 ### `rtsp/api/push?target=[RTSP地址]&streamPath=[流标识]`
 将本地的流推送到远端
+
+:::danger 注意
+target地址一定要用encodeURI防止特殊字符影响解析,可以用在线转换工具对url地址进行encode
+:::

@@ -41,7 +41,6 @@ global:
       submode: 0 # 订阅模式，0为跳帧追赶模式，1为不追赶（多用于录制），2为时光回溯模式
       iframeonly: false # 只订阅关键帧
       waittimeout: 10s # 等待发布者的超时时间，用于订阅尚未发布的流
-  rtpreorder : true # 启用RTP包乱序重排
   enableavcc : true  # 启用AVCC格式缓存，用于rtmp协议
   enablertp : true # 启用rtp格式缓存，用于rtsp、websocket、gb28181协议
   enableauth: true # 启用鉴权,详细查看鉴权机制

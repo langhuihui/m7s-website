@@ -4,7 +4,7 @@
 
 ## 安装
 - 官方提供已编译好的各个平台的二进制可执行文件（即绿色软件），所以无需安装任何其他软件即可运行。
-- 如果需要自己编译启动工程，则需要安装go1.18以上版本。
+- 如果需要自己编译启动工程，则需要安装go1.19以上版本。
 
 :::tip 配置go环境
 - go可以在https://golang.google.cn/dl 中下载到
@@ -43,3 +43,21 @@
 
 - [m7s v4 视频教程——插件引入](https://www.bilibili.com/video/BV1sP4y1g7BF/)
 
+## 使用
+m7s默认已开启所有的插件，故已开始监听rtmp、rtsp、gb28181等所有协议的端口，可以直接推流到m7s。
+### 推流
+
+- 通过OBS，推到`rtmp://localhost/live/test`
+- 通过ffmpeg，`ffmpeg -i [视频源] -c:v h264 -c:a aac -f flv rtmp://localhost/live/test`
+- 通过ffmpeg，`ffmpeg -i [视频源] -c:v h264 -c:a aac -f rtsp rtsp://localhost/live/test`
+- 通过webrtc测试页面推流，访问`http://localhost:8080/webrtc/test/publish`
+- 通过对摄像头配置sip服务器地址到本机，指定5060端口即可将设备流送入m7s中
+
+### 播放
+
+> 播放详情请参考[播放](/guide/qa/play.html)
+
+- 通过访问`http://localhost:8080/preview/` 可以预览所有的流（多种协议预览页面）
+- 通过ffplay可以播放rtmp流，`ffplay rtmp://localhost/live/test`
+- 通过ffplay可以播放rtsp流，`ffplay rtsp://localhost/live/test`
+- 通过ffplay可以播放hls流，`ffplay http://localhost:8080/hls/live/test.m3u8`
