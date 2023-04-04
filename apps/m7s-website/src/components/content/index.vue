@@ -104,7 +104,8 @@ const plugins = {
   exporter: "提供监控数据导出能力，支持Prometheus、InfluxDB、ElasticSearch",
   logrotate: "提供日志轮转能力",
   edge: "可以m7s实例作为边缘节点",
-  debug: "提供调试能力"
+  debug: "提供调试能力",
+  monitor: "提供监控数据存储和访问"
 }
 const plugins2 = [
   {
@@ -127,6 +128,14 @@ const plugins3 = [
   {
     name:"transcode",
     desc: "提供转码能力，可以将流转码为其他格式",
+  },
+  {
+    name:"cryptor",
+    desc: "提供对流的加密能力",
+  },
+  {
+    name:"gb28181pro",
+    desc: "提供GB28181协议的级联等功能",
   },
   {
     name:"recordpro",

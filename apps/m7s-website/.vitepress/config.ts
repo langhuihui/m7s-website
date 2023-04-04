@@ -37,6 +37,7 @@ export const sidebar = {
         { text: 'snap', link: '/guide/plugins/snap' },
         { text: 'edge', link: '/guide/plugins/edge' },
         { text: 'exporter', link: '/guide/plugins/exporter' },
+        { text: 'monitor', link: '/guide/plugins/monitor' },
       ]
     },
     {
