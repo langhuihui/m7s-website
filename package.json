@@ -12,21 +12,6 @@
     "build": "turbo run build",
     "deploy": "turbo run build --scope=m7s-website --includeDependencies --no-deps"
   },
-  "turbo": {
-    "pipeline": {
-      "dev": {
-        "cache": false
-      },
-      "build": {
-        "dependsOn": [
-          "^build"
-        ],
-        "outputs": [
-          ".vitepress/dist/**"
-        ]
-      }
-    }
-  },
   "devDependencies": {
     "@vercel/node": "^1.14.1",
     "pnpm": "^6.32.6",
