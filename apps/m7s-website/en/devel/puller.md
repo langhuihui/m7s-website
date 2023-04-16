@@ -1,12 +1,12 @@
-# 拉流者Puller
+# Puller
 
-这里的拉流者指的是从远程拉流的功能。
+Here, Puller refers to the function of pulling streams from remote servers.
 
 :::tip
-可以结合官方插件中对Puller的使用，来掌握拉流者的使用方法。包含Puller功能的插件有rtmp、rtsp、hls、hdl
+To master the usage of Puller, you can refer to the official plugins that make use of it, including rtmp, rtsp, hls, and hdl.
 :::
 
-## 拉流时序图
+## Sequence Diagram of Pulling Streams
   
 ```mermaid
 sequenceDiagram
@@ -19,9 +19,9 @@ loop
   Plugin ->> Puller: Reconnet()
 end
 ```
-## 自定义拉流者
+## Customized Puller
 
-通常拉流者需要将拉过来的流发布到engine中，所以都会同时包含Publisher
+Usually, Puller needs to publish the pulled stream to the engine, so it usually contains Publisher as well.
 
 ```go
 import . "m7s.live/engine/v4"
@@ -31,37 +31,36 @@ type MyPuller struct {
 }
 ```
 
-包含 `Puller` 后，并不会自动实现了 `IPuller` 接口。所以需要自己实现 `IPuller` 接口。
-这个结构体中可以随意的放入自己需要的属性。
+Including `Puller` does not automatically implement the `IPuller` interface, so you need to implement the `IPuller` interface yourself. You can freely add any properties you need to this struct.
 
-## 实现IPuller接口
-第一个需要实现的接口就是连接事件回调，在这个回调里面需要去连接远程服务器。
+## Implementing the IPuller interface
+The first interface that needs to be implemented is the connection event callback, which needs to connect to the remote server.
 
 ```go
 func (puller *MyPuller) Connect() (err error) {
-  //连接远程服务器
+  // Connect to the remote server
 }
 ```
-第二个需要实现的接口就是拉流事件回调，在这个回调里面需要去拉流。
+The second interface that needs to be implemented is the pull stream event callback, which needs to pull the stream.
 
 ```go
 func (puller *MyPuller) Pull() error {
-  //拉流，将数据填入Publisher的Track中
+  // Pull the stream and put the data into the Track of Publisher
 }
 ```
-如果连接失败则不会自动发布流，否则会自动发布流，然后调用 `Pull` 方法。
+If the connection fails, the stream will not be published automatically, otherwise it will be published automatically, and then the `Pull` method will be called.
 
-## 启动拉流
+## Starting the Puller
 
-通常包含拉流功能的插件都会提供自动拉流功能，可以看到在插件启动的时候会调用下面的方法。
+Usually, plugins that include Puller provide automatic pull stream functions. You can see that the following method is called when the plugin is started.
 
-此外也有按需拉流，和调用API后拉流的功能，调用方式也是一样。
+In addition, there is also an on-demand pull stream function and a pull stream function after calling the API, and the calling method is the same.
 
 ```go
 plugin.Pull(streamPath, url, new(MyPuller), 0)
 ```
-如果需要则特定的条件下拉流，可以以上面的以编程方式调用开始拉流。
+If necessary, you can start to pull the stream programmatically as shown above.
 
-## 断线重连
+## Reconnection after Disconnection
 
-默认支持断线重连功能，即在远程连接断开的时候会再次调用`Connect`和`Pull`。配置文件后可配置重连次数等。
+Reconnection after disconnection is supported by default, which means that when the remote connection is disconnected, `Connect` and `Pull` will be called again. It can be configured in the configuration file, such as the number of retries.

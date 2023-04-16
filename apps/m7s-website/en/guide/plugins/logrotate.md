@@ -1,29 +1,28 @@
-# LogRotate插件
+# LogRotate Plugin
 
-可以实时查看日志输出，和日志查询
-日志查询暂时只支持linux系统
+The LogRotate plugin can be used to view the logs in real-time and query logs, currently only supporting Linux systems.
 
-## 插件地址
+## Plugin Address
 https://github.com/Monibuca/plugin-logrotate
 
-# 插件引入
+# Plugin Introduction
 ```go
 import (
     _ "m7s.live/plugin/logrotate/v4"
 )
 ```
-## 默认配置
+## Default Configuration
 ```yaml
 logrotate:
- path: ./logs # 生成日志的目录
- size: 0 # 每个日志文件的大小，单位字节，0表示不限制
- days: 1 # 按时间分割，单位是天，即24小时
- formatter : 2006-01-02T15 # 日志文件名格式化，按照go layout格式化，默认按照小时
+ path: ./logs # directory where the logs are generated
+ size: 0 # size of each log file in bytes, with 0 indicating unlimited size
+ days: 1 # divide logs by time, in days, i.e. 24 hours
+ formatter : 2006-01-02T15 # log file name format, formatted according to the go layout by default, in hourly format by default
 ```
-## API接口
+## API Interface
 
-- `logrotate/api/tail` 监听日志输出，该请求是一个SSE（server-sent Event）
-- `logrotate/api/find` 查找日志，目前只支持linux系统（使用grep）
-- `logrotate/api/list` 列出所有日志文件
-- `logrotate/api/open?file=xxx` 查看日志内容，入参是文件名
-- `logrotate/api/download?file=xxx` 下载某个日志，入参是文件名
+- `logrotate/api/tail` Listens for log output, which is an SSE (server-sent Event) request.
+- `logrotate/api/find` Finds logs, currently only supporting Linux systems (using grep)
+- `logrotate/api/list` Lists all log files.
+- `logrotate/api/open?file=xxx` Views the log content, where the input parameter is the file name.
+- `logrotate/api/download?file=xxx` Downloads a certain log, where the input parameter is the file name.

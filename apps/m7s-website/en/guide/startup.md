@@ -1,63 +1,62 @@
-# 快速起步
+# Quick Start
 
-根据你的使用场景和个人偏好，使用Monibuca时，你可以选择是否自己编译启动工程。
+Depending on your usage scenario and personal preferences, you can choose to compile and start the project by yourself when using Monibuca.
 
-## 安装
-- 官方提供已编译好的各个平台的二进制可执行文件（即绿色软件），所以无需安装任何其他软件即可运行。
-- 如果需要自己编译启动工程，则需要安装go1.19以上版本。
+## Installation
+- The official provides pre-compiled binary executable files (i.e. green software) for various platforms, so no other software needs to be installed to run it.
+- If you need to compile and start the project by yourself, you need to install go1.19 or higher.
 
-:::tip 配置go环境
-- go可以在https://golang.google.cn/dl 中下载到
-- 国内需要执行go env -w GOPROXY=https://goproxy.cn 来下载到被屏蔽的第三方库
+:::tip Configure the Go environment
+- Go can be downloaded from https://golang.google.cn/dl
+- In China, execute `go env -w GOPROXY=https://goproxy.cn` to download the third-party libraries that are blocked.
 :::
 
-官方提供了最新版本的下载链接：
+The official provides download links for the latest version:
 - [Linux](https://download.m7s.live/bin/m7s_linux_amd64.tar.gz)
 - [Linux-arm64](https://download.m7s.live/bin/m7s_linux_arm64.tar.gz)
 - [Mac](https://download.m7s.live/bin/m7s_darwin_amd64.tar.gz)
 - [Mac-arm64](https://download.m7s.live/bin/m7s_darwin_arm64.tar.gz)
 - [Windows](https://download.m7s.live/bin/m7s_windows_amd64.tar.gz)
 
-## 运行
+## Run
 
-### 可执行文件直接运行
+### Running Executable Files Directly
 
-- Linux 例如下载到了/opt/m7s_linux_x86,则 `cd /opt` 然后 `./m7s_linux_x86`
-- Mac 和Linux类似，需要注意的时候可能需要修改文件的可执行权限，也可以双击运行
-- Windows，直接双击m7s_windows_x86.exe即可启动
+- Linux, for example, if downloaded to /opt/m7s_linux_x86, then `cd /opt` and run `./m7s_linux_x86`
+- Mac is similar to Linux. Note that executable permissions of the files may need to be modified. You can also double-click to run them.
+- Windows, simply double-click m7s_windows_x86.exe to start.
 
-:::tip 运行多实例
-由于实例会监听http端口，所以如果需要运行多实例，就需要为每个实例指定不同的http端口，因此需要启动时指定配置文件，例如./m7s_linux_x86 -c config.yaml
+:::tip Running Multiple Instances
+Since the instance listens on the http port, to run multiple instances, a different http port needs to be specified for each instance at startup. Therefore, the configuration file needs to be specified at startup, for example, `./m7s_linux_x86 -c config.yaml`.
 :::
 
-### 自行编译启动工程
+### Compile the Starting Project by Yourself
 1. `git clone https://github.com/langhuihui/monibuca`
 2. `cd monibuca`
 3. `go run main.go`
 
-### 自行创建启动工程
+### Create a Starting Project by Yourself
 
-可以观看视频教程：
+You can watch the video tutorial:
+- [Start m7s V4 from scratch](https://www.bilibili.com/video/BV1iq4y147N4/)
+- [m7s v4 Video Tutorial - Plugin Introduction](https://www.bilibili.com/video/BV1sP4y1g7BF/)
 
-- [从零启动 m7s V4](https://www.bilibili.com/video/BV1iq4y147N4/)
+## Usage
+m7s has enabled all plugins by default, so it has started listening on ports of all protocols such as rtmp, rtsp, and gb28181, and streams can be pushed to m7s directly.
 
-- [m7s v4 视频教程——插件引入](https://www.bilibili.com/video/BV1sP4y1g7BF/)
+### Push Stream
 
-## 使用
-m7s默认已开启所有的插件，故已开始监听rtmp、rtsp、gb28181等所有协议的端口，可以直接推流到m7s。
-### 推流
+- Use OBS to push to `rtmp://localhost/live/test`.
+- Use ffmpeg, `ffmpeg -i [video source] -c:v h264 -c:a aac -f flv rtmp://localhost/live/test`
+- Use ffmpeg, `ffmpeg -i [video source] -c:v h264 -c:a aac -f rtsp rtsp://localhost/live/test`
+- Use the webrtc test page to push streams, access `http://localhost:8080/webrtc/test/publish`
+- Configure the camera's SIP server address to the local machine and specify port 5060 to send the device streams to m7s.
 
-- 通过OBS，推到`rtmp://localhost/live/test`
-- 通过ffmpeg，`ffmpeg -i [视频源] -c:v h264 -c:a aac -f flv rtmp://localhost/live/test`
-- 通过ffmpeg，`ffmpeg -i [视频源] -c:v h264 -c:a aac -f rtsp rtsp://localhost/live/test`
-- 通过webrtc测试页面推流，访问`http://localhost:8080/webrtc/test/publish`
-- 通过对摄像头配置sip服务器地址到本机，指定5060端口即可将设备流送入m7s中
+### Play
 
-### 播放
+> For details on play, please refer to [Play](/guide/qa/play.html)
 
-> 播放详情请参考[播放](/guide/qa/play.html)
-
-- 通过访问`http://localhost:8080/preview/` 可以预览所有的流（多种协议预览页面）
-- 通过ffplay可以播放rtmp流，`ffplay rtmp://localhost/live/test`
-- 通过ffplay可以播放rtsp流，`ffplay rtsp://localhost/live/test`
-- 通过ffplay可以播放hls流，`ffplay http://localhost:8080/hls/live/test.m3u8`
+- You can preview all streams (multiple protocol preview pages) by visiting `http://localhost:8080/preview/`.
+- ffplay can play rtmp streams, `ffplay rtmp://localhost/live/test`
+- ffplay can play rtsp streams, `ffplay rtsp://localhost/live/test`
+- ffplay can play hls streams, `ffplay http://localhost:8080/hls/live/test.m3u8`

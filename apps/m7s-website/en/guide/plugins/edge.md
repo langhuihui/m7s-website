@@ -1,12 +1,12 @@
 # plugin-edge
-边缘服务器插件——使得m7s实例可作为边缘服务器
+Edge server plugin - allows m7s instances to act as edge servers.
 
 
-## 插件地址
+## Plugin Address
 
 https://github.com/Monibuca/plugin-edge
 
-## 插件引入
+## Plugin Introduction
 
 ```go
 import (
@@ -14,18 +14,18 @@ import (
 )
 ```
 
-## 配置
+## Configuration
 
 ```yaml
 edge:
   origin: "http://localhost:8080/hdl/"
 ```
 
-origin代表源服务器拉流地址前缀，可以由如下几种格式：
-- http://[host]:[port]/hdl/ 使用hdl协议拉流
-- rtmp://[host]:[port]/ 使用rtmp协议拉流
-- rtsp://[host]:[port]/ 使用rtsp协议拉流
+Origin represents the prefix of the source server's stream pulling address and can be in the following formats:
+- http://[host]:[port]/hdl/ - pull streams using the hdl protocol
+- rtmp://[host]:[port]/ - pull streams using the rtmp protocol
+- rtsp://[host]:[port]/ - pull streams using the rtsp protocol
 
-## 使用
+## Usage
 
-当配置了edge后，该实例即可成为边缘服务器，即当收到一个订阅者时将自动向源服务器发送拉流请求，从而实现级联的效果。
+When the edge configuration is set, the instance will act as an edge server, and automatically send a stream pulling request to the source server when a subscriber is received, thereby achieving cascading effects.

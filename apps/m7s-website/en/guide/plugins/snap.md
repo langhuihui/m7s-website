@@ -1,29 +1,29 @@
-# 截图插件
+# Screenshot Plugin
 
-可通过http请求获取到指定流的I帧截图（jpg格式）。
+This plugin allows you to obtain an I-frame screenshot (in jpg format) of a specified stream through an HTTP request.
 
-## 插件地址
+## Plugin Address
 
 https://github.com/Monibuca/plugin-snap
 
-## 插件引入
+## Plugin Importing
 ```go
 import (
     _ "m7s.live/plugin/snap/v4"
 )
 ```
-## 默认配置
+## Default Configuration
 
 ```yaml
 snap:
     ffmpeg: "ffmpeg"
 ```
-如果ffmpeg无法全局访问，则可修改ffmpeg路径为本地的绝对路径
+
+If ffmpeg cannot be accessed globally, you can modify the ffmpeg path to the local absolute path.
+
 ## API
 
 ### `/snap/[streamPath]`
 
-获取一帧截图，返回最新的I帧的jpg图片。
-例如m7s（localhost)中有流live/test,
-可以通过http://localhost:8080/snap/live/test 获取到该流的最新截图
-
+Get a screenshot of the latest I-frame of the specified stream in jpg format.
+For example, if there is a stream live/test in Monibuca (localhost), you can obtain the latest screenshot of the stream by accessing http://localhost:8080/snap/live/test.

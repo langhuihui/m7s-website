@@ -1,15 +1,15 @@
-# 订阅者
+# Subscriber
 
-订阅者的功能就是将音视频或者其他数据从 engine 中读取出来。
+The role of a subscriber is to extract audio, video or other data from the engine.
 
-读取出来后，通常会发送给播放器，或者写入磁盘。
+Once extracted, it is usually sent to a player or written to disk.
 
 :::tip
-可以结合官方插件中对Subscriber的使用，来掌握订阅者的使用方法。
+To master the usage of Subscriber, we recommend to study the use of Subscriber in official plugins.
 :::
 
-## 订阅时序图
-  
+## Sequence diagram of subscription
+
 ```mermaid
 sequenceDiagram
   Subscriber ->> Plugin: Subscribe
@@ -27,9 +27,9 @@ sequenceDiagram
   Subscriber ->> Subscriber: PlayBlock
 ```
 
-## 定义订阅者
+## Defining a Subscriber
 
-虽然可以直接使用 `Subscriber` 作为订阅者，但是通常我们需要自定义一个结构，里面包含 `Subscriber`，这样就成为了一个特定功能的 `Subscriber`。
+Although `Subscriber` can be used directly as a subscriber, we usually need to customize a structure that contains `Subscriber`, which becomes a specific `Subscriber` with its own functions.
 
 ```go
 import . "m7s.live/engine/v4"
@@ -38,13 +38,13 @@ type MySubscriber struct {
   Subscriber
 }
 ```
-包含 `Subscriber` 后，就自动实现了 `ISubscriber` 接口。
-这个结构体中可以随意的放入自己需要的属性。
 
+By including `Subscriber`, the `ISubscriber` interface is automatically implemented.
+In this structure, you can freely include the properties you need.
 
-## 定义订阅者事件回调
+## Defining subscriber event callbacks
 
-v4 中事件回调取代了之前的所有的逻辑，下面演示了可能接收到的事件：
+In v4, event callbacks replace all previous logic. The following are possible events:
 
 ```go
 import (
@@ -54,73 +54,78 @@ import (
 )
 func (p *MySubscriber) OnEvent(event any) {
   switch v:=event.(type) {
-    case ISubscriber://代表订阅成功事件，v就是p
-    case SEclose://代表关闭事件
-    case common.Track: //代表收到Track事件(包括所有的Track事件),响应了这个就屏蔽了下面三个
-    case *track.Audio: //代表收到AudioTrack事件
-    case *track.Video: //代表收到VideoTrack事件
-    case *track.Data: //代表收到DataTrack事件
-    case AudioDeConf: //代表收到Audio 的序列头事件
-    case VideoDeConf: //代表收到Video 的序列头事件
-    case common.ParamaterSets: //代表收到Video 的VPS、SPS、PPS事件
-    case AudioFrame: //代表收到AudioFrame事件，使用raw订阅时会收到
-    case VideoFrame: //代表收到VideoFrame事件，使用raw订阅时会收到
-    case FLVFrame: //代表收到含有FLV数据的帧事件,使用flv订阅时会收到
-    case VideoRTP: //收到了视频RTP包，使用rtp订阅时会收到
-    case AudioRTP: //收到了音频RTP包，使用rtp订阅时会收到
+    case ISubscriber://Indicates a successful subscription event, and v is p
+    case SEclose://Indicates a closed event
+    case common.Track: //Indicates a Track event (including all Track events). If this is responded to, the following three types will be blocked
+    case *track.Audio: //Indicates an AudioTrack event
+    case *track.Video: //Indicates a VideoTrack event
+    case *track.Data: //Indicates a DataTrack event
+    case AudioDeConf: //Indicates an Audio sequence header event
+    case VideoDeConf: //Indicates a Video sequence header event
+    case common.ParamaterSets: //Indicates a VPS, SPS, PPS event for video
+    case AudioFrame: //Indicates an AudioFrame event, which is received when using raw subscription
+    case VideoFrame: //Indicates a VideoFrame event, which is received when using raw subscription
+    case FLVFrame: //Indicates an event frame with FLV data, which is received when using flv subscription
+    case VideoRTP: //Received a video RTP packet, which is received when using rtp subscription
+    case AudioRTP: //Received an audio RTP packet, which is received when using rtp subscription
     default:
       p.Subscriber.OnEvent(event)
   }
 }
 ```
-其中收到`Track`或者`*track.Audio`、`*track.Video`、`*track.Data` 后需要判断是否接收这个Track，即调用
-`p.AddTrack(v)`
 
-通常我们如果需要全盘接收的话，可以不响应这些类型的事件，而交给 `Subscriber` 的 `OnEvent` 去处理(即从上方的default进入)。内部代码如下
+If you receive `Track` or `*track.Audio`, `*track.Video`, `*track.Data`, you need to determine whether to receive the track and call `p.AddTrack(v)`.
+
+Usually, if you want to receive everything, you can not respond to these types of events, and instead leave them to be handled by `Subscriber`'s `OnEvent` (i.e. enter from `default` above). The internal code is as follows:
 
 ```go
 func (s *Subscriber) OnEvent(event any) {
-	switch v := event.(type) {
-	case Track: //默认接受所有track
-		s.AddTrack(v)
-	default:
-		s.IO.OnEvent(event)
-	}
+    switch v := event.(type) {
+    case Track: //Receive all tracks by default
+        s.AddTrack(v)
+    default:
+        s.IO.OnEvent(event)
+    }
 }
 ```
 
-## 开始订阅
+## Starting the subscription
 
-订阅流需要先注册订阅流，成功后可以对音视频轨道进行读取操作。
+To read audio and video data, you need to register a subscription first.
 
-### 注册订阅流（订阅）
+### Register subscription (subscribe)
 
-该函数会阻塞一小段时间，直到注册成功或者失败。
+This function blocks for a short time until registration is successful or fails.
+
 ```go
 sub := new(MySubscriber)
 if plugin.Subscribe("live/test", sub) == nil {
-  //注册成功
+  //Registration is successful
 }
 ```
-一旦注册成功就会在OnEvent收到事件。
 
-### 开始读取
-可以任选以下三种方式读取音视频数据，不同的读取方式收到的事件也不同的
+Once registration is successful, the subscription will be received in `OnEvent`.
+
+### Start reading
+
+You can read audio and video data using any of the following three methods, and different read methods will receive different events.
+
 ```go
 func (s *Subscriber) PlayRaw() {
-	s.PlayBlock(SUBTYPE_RAW)
+    s.PlayBlock(SUBTYPE_RAW)
 }
 
 func (s *Subscriber) PlayFLV() {
-	s.PlayBlock(SUBTYPE_FLV)
+    s.PlayBlock(SUBTYPE_FLV)
 }
 
 func (s *Subscriber) PlayRTP() {
-	s.PlayBlock(SUBTYPE_RTP)
+    s.PlayBlock(SUBTYPE_RTP)
 }
 ```
 
-如果没有其他逻辑要分离处理也可以直接调用下面这个方法
+If there is no other logic to separate processing, you can call the following method directly.
+
 ```go
 func (opt *Plugin) SubscribeBlock(streamPath string, sub ISubscriber, t byte) (err error) {
 	if err = opt.Subscribe(streamPath, sub); err == nil {
@@ -129,30 +134,31 @@ func (opt *Plugin) SubscribeBlock(streamPath string, sub ISubscriber, t byte) (e
 	return
 }
 ```
-从字面上就看出是阻塞读取数据。
-读取到的数据我们从OnEvent中去处理。
-如果订阅完成或者中途退出了，那么这个阻塞就会释放。
 
+It reads data in a blocking manner.
+Data received needs to be handled in `OnEvent`.
+If the subscription is complete or interrupted, the blocking process will be released.
 
-
-## 停止订阅
+## Stop subscription
 
 ```go
 sub.Stop()
 ```
 
-## 资源跟随关闭
+## Resource follow-up closure
 
-如果订阅者和某个可关闭的资源(例如conn)是强绑定关系，则可以调用
+If a subscriber is strongly bound to a closeable resource (such as conn), you can call
+
 ```go
 sub.SetIO(conn)
 ```
-那么当这个sub被关闭的时候，也会调用conn的Close方法。
-注意：主动停止订阅即，调用sub.Stop不会调用conn的Close方法。
 
-## 给订阅者加父级Context
+Then when the sub is closed, the `Close` method of `conn` will also be called.
+Note: If the subscription is stopped actively (i.e. by calling `sub.Stop`), the `Close` method of `conn` will not be called.
 
-有时候我们需要订阅者跟随某个Context而关闭则可以调用
+## Adding a parent context to the subscriber
+
+Sometimes we need the subscriber to follow a `Context` to be closed, you can call
 
 ```go
 sub.SetParent(ctx)

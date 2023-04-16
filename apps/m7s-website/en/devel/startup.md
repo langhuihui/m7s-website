@@ -1,25 +1,25 @@
-# 开发准备
+# Development Preparation
 
-## 操作系统
+## Operating System
 
-不限
+Not restricted.
 
-## 安装go环境
+## Installing Go Environment
 
-- 需要安装go1.18以上版本
-- go可以在https://golang.google.cn/dl 中下载到
-- 国内需要执行go env -w GOPROXY=https://goproxy.cn 来下载到被屏蔽的第三方库
+- Go version 1.18 or later is required.
+- Go can be downloaded from https://golang.google.cn/dl.
+- In China, execute "go env -w GOPROXY=https://goproxy.cn" to download third-party libraries that are blocked.
 
 ## IDE
 
-- 推荐vscode
-- goland也可以，目前对泛型的支持不是特别完美
+- VSCode is recommended.
+- Goland is also supported, although its support for generics is not perfect.
 
-## 一键搭建开发项目目录
+## One-Click Setup of Development Project Directory
 
-为了方便快速二次开发，目前提供一个包含git子模块的项目可供一次性拉取所有官方插件和engine方便快速开发。
+To facilitate rapid secondary development, we currently provide a project with Git submodules that can be used to pull all official plugins and engines in one go to facilitate rapid development.
 `git clone --recurse-submodules git@github.com:Monibuca/workspace`
 
-注意：为了方便在github上顺利下载项目故需要采取ssh的方式，需要在你的github上配置一下ssh key。
+Note: To download the project smoothly from Github, SSH key configuration is required on your Github account.
 
-下载成功后，即可进入monibuca目录下运行go run main.go启动项目。
+Once downloaded, you can enter the monibuca directory and run "go run main.go" to start the project.

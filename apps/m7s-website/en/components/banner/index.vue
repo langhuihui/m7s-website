@@ -6,22 +6,22 @@
         <div class="item-1">
           Monibuca
         </div>
-        <div class="item-2">开源Go语言流媒体服务器开发框架</div>
+        <div class="item-2">Open-source development framework for Go language multimedia servers.</div>
         <div class="item-3">
           <slot>
-            <span>最新版:v4.5.2</span>
+            <span>Latest version: v4.5.2</span>
           </slot>
         </div>
         <div class="flex">
           <a href="https://m7s.live/guide/introduction.html" target="_blank">
-            <div class="item-4">快速开始</div>
+            <div class="item-4">Quick Started</div>
           </a>
           <a href="https://github.com/langhuihui/monibuca" target="_blank" style="margin-left: 20px;">
             <div class="item-4">Github</div>
           </a>
         </div>
         <div class="item-5">
-          旨在提供一个对开发者友好，兼具高性能的流媒体服务器开发框架，对于想快速入门流媒体开发的公司和个人提供一个低门槛的方案。Monibuca 的理念是共建共赢，平等互利，打造一个行业业务复用生态环境，降低企业在音视频领域重复开发付出的高昂成本。
+          Monibuca is an open-source development framework for Go language multimedia servers. It aims to provide a developer-friendly and high-performance solution for companies and individuals who want to quickly get started with multimedia development. The philosophy behind Monibuca is co-building and mutual benefit, creating an ecosystem of business reuse and lowering the high cost of repetitive development in the audio and video industry for enterprises.
         </div>
       </div>
       <div class="right">

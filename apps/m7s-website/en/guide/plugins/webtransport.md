@@ -1,17 +1,17 @@
-# WebTransport 插件
+# WebTransport Plugin
 
-通过WebTransport进行推拉流
+Push and pull streams with WebTransport.
 
-## 插件地址
+## Plugin Address
 
 https://github.com/Monibuca/plugin-webtransport
 
-## 插件引入
+## Plugin Introduction
 ```go
     import (  _ "m7s.live/plugin/webtransport/v4" )
 ```
 
-## 配置
+## Configuration
 
 ```yaml
 webtransport:
@@ -20,9 +20,9 @@ webtransport:
   keyfile: monibuca.com.key
 ```
 
-## API接口
+## API Interface
 
-- `/play/[streamPath]` 用来播放
-- `/push/[streamPath]` 用来推流
+- `/play/[streamPath]` used for playback.
+- `/push/[streamPath]` used for pushing.
 
-建立双向流后传输flv格式的数据
+After establishing the two-way stream, transmit data in flv format.

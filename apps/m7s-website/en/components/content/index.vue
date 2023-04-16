@@ -10,16 +10,16 @@ const pushProtocol = ref("rtmp")
 const pullProtocol = ref("rtmp")
 const list = [
   {
-    title: '极致简洁'
+    title: 'Extremely Simple'
   },
   {
-    title: '高可扩展'
+    title: 'Highly Scalable'
   },
   {
-    title: '简单易用'
+    title: 'Easy To Use'
   }
 ]
-const list2 = ['官方插件','第三方开源','付费插件']
+const list2 = ['Official plugins', 'Third-party open source', 'Paid plugins']
 const url = ref({
   ...UrlEnum,
 })
@@ -86,64 +86,65 @@ const pullURL = computed(() => {
   }
 })
 const plugins = {
-  rtmp: "rtmp协议接受推拉、对外推拉",
-  rtsp: "rtsp协议接受推拉、对外推拉",
-  hls: "1、提供HLS协议拉流播放。2、远程拉取HLS到m7s",
-  gb28181: "GB28181协议拉流播放、查看录像",
-  onvif: "ONVIF协议拉流播放",
-  webrtc: "WebRTC协议的推流和拉流",
-  webtransport: "通过WebTransport进行推拉流",
-  record: "hls、flv、mp4、裸流格式录制功能以及回放",
-  hdl: "1、HTTP-FLV格式拉流播放。2、远程拉取HTTP-FLV到m7s",
-  jessica: "1、提供WS-FLV协议拉流播放。2、提供WS-RAW协议拉流播放。",
-  fmp4: "提供FMP4格式拉流播放",
-  preview: "借助Jessibuca提供视频实时预览能力",
-  snap: "提供对I帧的实时截图能力",
-  room: "提供房间功能，可以向房间内用户广播信息",
-  hook: "提供API钩子回调能力，通知远程服务器",
-  exporter: "提供监控数据导出能力，支持Prometheus、InfluxDB、ElasticSearch",
-  logrotate: "提供日志轮转能力",
-  edge: "可以m7s实例作为边缘节点",
-  debug: "提供调试能力",
-  monitor: "提供监控数据存储和访问"
+  rtmp: "Accept push and pull of RTMP protocol, and push and pull to external",
+  rtsp: "Accept push and pull of RTSP protocol, and push and pull to external",
+  hls: "1. Provide HLS protocol for pulling and playing streams. 2. Remotely pull HLS to m7s",
+  gb28181: "GB28181 protocol for pulling and playing streams, and viewing recordings",
+  onvif: "ONVIF protocol for pulling and playing streams",
+  webrtc: "Push and pull of WebRTC protocol",
+  webtransport: "Push and pull streams through WebTransport",
+  record: "Recording function for HLS, FLV, MP4, raw stream format and playback",
+  hdl: "1. HTTP-FLV format for pulling and playing streams. 2. Remotely pull HTTP-FLV to m7s",
+  jessica: "1. Provide WS-FLV protocol for pulling and playing streams. 2. Provide WS-RAW protocol for pulling and playing streams.",
+  fmp4: "Provide FMP4 format for pulling and playing streams",
+  preview: "Provide real-time video preview capability with Jessibuca",
+  snap: "Provide real-time screenshot capability for I-frame",
+  room: "Provide room function to broadcast information to users in the room",
+  hook: "Provide API hook callback capability to notify remote servers",
+  exporter: "Provide monitoring data export capability, supporting Prometheus, InfluxDB, ElasticSearch",
+  logrotate: "Provide log rotation capability",
+  edge: "Use m7s instance as edge node",
+  debug: "Provide debugging capability",
+  monitor: "Provide monitoring data storage and access"
 }
 const plugins2 = [
   {
-    name:"mpegts",
-    desc:"提供MPEG-TS格式拉流播放",
-    url:"https://github.com/kingecg/mpegts"
+    name: "mpegts",
+    desc: "Provides MPEG-TS format for pulling and playing streams",
+    url: "https://github.com/kingecg/mpegts"
   },
   {
-    name:"plugin-snapplug",
-    desc:"录制开始或结束就 自动生成 视频封面图",
-    url:"https://github.com/3201301734/plugin-snapplug"
+    name: "plugin-snapplug",
+    desc: "Automatically generates video cover images when recording starts or ends",
+    url: "https://github.com/3201301734/plugin-snapplug"
   },
   {
-    name:"虚位以待",
-    desc:"可联系作者添加到此列表",
-    url:""
+    name: "Vacancy",
+    desc: "Contact the author to add to this list",
+    url: ""
   }
 ]
+
 const plugins3 = [
   {
-    name:"transcode",
-    desc: "提供转码能力，可以将流转码为其他格式",
+    name: "transcode",
+    desc: "Provides transcoding capabilities to convert streams to other formats"
   },
   {
-    name:"cryptor",
-    desc: "提供对流的加密能力",
+    name: "cryptor",
+    desc: "Provides encryption capabilities for streams"
   },
   {
-    name:"gb28181pro",
-    desc: "提供GB28181协议的级联等功能",
+    name: "gb28181pro",
+    desc: "Provides cascade functionality for GB28181 protocol"
   },
   {
-    name:"recordpro",
-    desc: "高级录制插件，增加定时任务等额外的功能",
+    name: "recordpro",
+    desc: "Advanced recording plugin with additional features like scheduling"
   },
   {
-    name:"虚位以待",
-    desc:"可联系作者添加到此列表",
+    name: "Vacancy",
+    desc: "Contact the author to add to this list"
   }
 ]
 </script>
@@ -154,7 +155,7 @@ const plugins3 = [
     <section id="m7s">
       <div class="box">
         <div class="title">
-          <div>优势</div>
+          <div>Advantages</div>
           <img src="/images/m7s/title-bar.png" alt="">
         </div>
         <div class="m7s-feature">
@@ -164,12 +165,12 @@ const plugins3 = [
           <div class="m7s-item" v-if="active == 0">
             <div class="left">
               <div class="feature-desc">
-                <div class="h1">简洁</div>
-                <p>Go语言本身的简洁+代码设计追求极致精简、优雅，阅读源码变成一件愉快的事</p>
-                <p>启动工程提供了标准化的接入示例，插件引入十分简单</p>
+                <div class="h1">Concise</div>
+                <p>The Go language is known for its simplicity and pursuit of minimal and elegant code design, making it a pleasant experience to read the source code.</p>
+<p>The project provides standardized access examples for easy plugin integration during startup.</p>
               </div>
               <a href="https://github.com/langhuihui/monibuca">
-                <div class="btn">查看示例</div>
+                <div class="btn">View example</div>
               </a>
             </div>
             <div class="right">
@@ -179,9 +180,9 @@ const plugins3 = [
           <div class="m7s-item" v-if="active == 1">
             <div class="left">
               <div class="feature-desc">
-                <div class="h1">精致</div>
-                <p>设计精巧的插件机制，实现高内聚低耦合，具有高超的扩展能力</p>
-                <p>无锁化设计以及手术刀般精确的内存复用，充分利用多核计算，性能强悍</p>
+                <div class="h1">Exquisite</div>
+                <p>Exquisite plugin mechanism with high cohesion and low coupling, providing excellent scalability</p>
+                <p>Designed with a lock-free approach and precise memory reuse, fully utilizing multi-core computing for powerful performance</p>
               </div>
               <a href="https://github.com/Monibuca">
                 <div class="btn">Github</div>
@@ -194,12 +195,12 @@ const plugins3 = [
           <div class="m7s-item" v-if="active == 2">
             <div class="left">
               <div class="feature-desc">
-                <div class="h1">易用</div>
-                <p>无需配置环境，无需安装运行时，直接下载可执行文件</p>
-                <p>为arm架构提供贴心的编译版本，可以直接下载运行</p>
+                <div class="h1">Easy to Use</div>
+                <p>No configuration of environment or installation of runtime is required. Simply download the executable file.</p>
+                <p>Provides a considerate compilation version for ARM architecture, which can be downloaded and run directly.</p>
               </div>
               <a href="https://github.com/langhuihui/monibuca/releases">
-                <div class="btn">所有版本</div>
+                <div class="btn">All Versions</div>
               </a>
             </div>
             <div class="right">
@@ -214,7 +215,7 @@ const plugins3 = [
                   <a class="iconfont icon-linux" :href="url.M7S_LINUX"></a>
                 </div>
               </div>
-              <div class="download-desc">windows直接双击exe运行，mac需要设置一下文件的可执行权限</div>
+              <div class="download-desc">For Windows, simply double-click the .exe file to run it. For Mac, you may need to set the executable permission for the file in order to run it.</div>
             </div>
           </div>
         </div>
@@ -223,7 +224,7 @@ const plugins3 = [
     <section id="plugin">
       <div class="box">
         <div class="title">
-          <div>插件生态</div>
+          <div>Plugin Ecosystem</div>
           <img src="/images/m7s/title-bar.png" alt="">
         </div>
         <div class="tab">
@@ -255,17 +256,17 @@ const plugins3 = [
     <section id="stream-path">
       <div class="box">
         <div class="title">
-          <div>推拉地址生成</div>
+          <div>Push-pull address generation</div>
           <img src="/images/m7s/title-bar.png" alt="">
         </div>
         <div class="stream-path-content">
           <div>
-            <div>选择推流协议：</div>
+            <div>Choosing a push protocol:</div>
             <select @change="onChangePush">
               <option value="rtmp">rtmp</option>
               <option value="rtsp">rtsp</option>
             </select>
-            <div>推流地址：</div>
+            <div>Push url: </div>
             <div class="URL">{{ pushURL }}</div>
           </div>
           <div>
@@ -275,7 +276,7 @@ const plugins3 = [
             <input type="text" class="stream-path-input" :value="streamPath" @input="onChangeStreamPath" />
           </div>
           <div>
-            <div>选择拉流协议：</div>
+            <div>Choosing a pull protocol:</div>
             <select @change="onChangePull">
               <option value="rtmp">rtmp</option>
               <option value="rtsp">rtsp</option>
@@ -284,7 +285,7 @@ const plugins3 = [
               <option value="ws-flv">ws-flv</option>
               <option value="ws-raw">ws-raw</option>
             </select>
-            <div>拉流地址：</div>
+            <div>Pull url: </div>
             <div class="URL">{{ pullURL }}</div>
           </div>
         </div>

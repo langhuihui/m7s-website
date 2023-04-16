@@ -1,74 +1,77 @@
-# 配置
+# Configuration
 
-v4 默认支持零配置启动，即无需配置文件即可运行。如果有配置文件则配置文件中配置将会覆盖默认配置。
-:::tip 配置缓存文件
-调用部分API会导致产生缓存配置文件，存放于.m7s目录下。例如调用了拉流转发后，会保存配置到该目录下，启动实例时会合并缓存中的配置信息和配置文件的配置信息。 
+v4 supports zero-configuration startup by default, which means no configuration file is required to run. If there is a configuration file, the configuration in the file will override the default configuration.
+
+:::tip Configuration Cache File
+Calling some APIs will cause a cached configuration file to be generated and stored in the ".m7s" directory. For example, calling stream forwarding will save the configuration to that directory. When the instance is started, the cached configuration information and the configuration information in the configuration file will be merged.
 :::
 
-## 全局配置
+## Global Configuration
 
-以下是全局配置的全部配置项，以及对应的默认值：
-:::tip 注意
-下面是默认配置项，所以不需要复制到配置文件中去，只需要把需要修改的部分填写到配置文件中即可覆盖默认配置。 
+The following are all the configuration items for global configuration and their default values:
+
+:::tip Note
+Below are default configuration items, so they do not need to be copied to the configuration file. Just fill in the parts that need to be modified in the configuration file to override the default configuration.
 :::
+
 ```yaml
 global:
-  loglang: zh # 日志语言，可选值：zh,en
-  loglevel: info # 日志级别，可选值：debug,info,warn,error,panic,fatal
+  loglang: zh # Language of log message, optional values: zh, en
+  loglevel: info # Log level, optional values: debug, info, warn, error, panic, fatal
   http:
-    listenaddr: :8080 # 网关地址，用于访问API
-    listenaddrtls: ""  # 用于HTTPS方式访问API的端口配置
+    listenaddr: :8080 # Gateway address for API access
+    listenaddrtls: "" # Port configuration for accessing the API in HTTPS mode
     certfile: ""
     keyfile: ""
-    cors: true  # 是否自动添加cors头
-    username: ""  # 用户名和密码，用于API访问时的基本身份认证
+    cors: true  # Whether to automatically add CORS headers
+    username: ""  # Username and password for basic authentication when accessing the API
     password: ""
   publish:
-      pubaudio: true # 是否发布音频流
-      pubvideo: true # 是否发布视频流
-      kickexist: false # 剔出已经存在的发布者，用于顶替原有发布者
-      publishtimeout: 10s # 发布流默认过期时间，超过该时间发布者没有恢复流将被删除
-      delayclosetimeout: 0 # 自动关闭触发后延迟的时间(期间内如果有新的订阅则取消触发关闭)，0为关闭该功能，保持连接。
-      waitclosetimeout: 0 # 发布者断开后等待时间，超过该时间发布者没有恢复流将被删除，0为关闭该功能，由订阅者决定是否删除
-      buffertime: 0 # 缓存时间，用于时光回溯，0为关闭缓存
+      pubaudio: true # Whether to publish audio stream
+      pubvideo: true # Whether to publish video stream
+      kickexist: false # Whether to kick out existing publishers for replacing
+      publishtimeout: 10s # Default expiration time for published streams. If the publisher does not recover the stream after this time, it will be deleted
+      delayclosetimeout: 0 # Delay time after auto-close trigger (if there is a new subscription during this period, the trigger will be cancelled), 0 means disabling this feature and keeping the connection open.
+      waitclosetimeout: 0 # Waiting time after the publisher is disconnected, if the publisher does not recover the stream after this time, it will be deleted. 0 means to disable this feature, and it is up to the subscriber to decide whether to delete it
+      buffertime: 0 # Buffer time for time-shift playback, 0 means closing the buffer
   subscribe:
-      subaudio: true # 是否订阅音频流
-      subvideo: true # 是否订阅视频流
-      subaudioargname: ats # 订阅音频轨道参数名
-      subvideoargname: vts # 订阅视频轨道参数名
-      subdataargname: dts # 订阅数据轨道参数名
-      subaudiotracks: [] # 订阅音频轨道名称列表
-      subvideotracks: [] # 订阅视频轨道名称列表
-      submode: 0 # 订阅模式，0为跳帧追赶模式，1为不追赶（多用于录制），2为时光回溯模式
-      iframeonly: false # 只订阅关键帧
-      waittimeout: 10s # 等待发布者的超时时间，用于订阅尚未发布的流
-  enableavcc : true  # 启用AVCC格式缓存，用于rtmp协议
-  enablertp : true # 启用rtp格式缓存，用于rtsp、websocket、gb28181协议
-  enableauth: true # 启用鉴权,详细查看鉴权机制
-  enablesubevent: true # 启用订阅事件，用于订阅者上下线事件,关闭可以提高性能
-  rtpreoderbufferlen: 50 # rtp乱序重排缓存长度
-  speedlimit: 500ms # 限速超时时间0为不限速，对于读取文件这类流需要限速，否则读取过快
-  eventbussize: 10 # 事件总线缓存大小，事件较多时容易堵阻塞线程，需要增大缓存
-  pulseinterval: 5s # 心跳事件间隔时间
+      subaudio: true # Whether to subscribe to audio stream
+      subvideo: true # Whether to subscribe to video stream
+      subaudioargname: ats # Parameter name for subscribing to audio tracks
+      subvideoargname: vts # Parameter name for subscribing to video tracks
+      subdataargname: dts # Parameter name for subscribing to data tracks
+      subaudiotracks: [] # A list of audio track names to be subscribed to
+      subvideotracks: [] # A list of video track names to be subscribed to
+      submode: 0 # Subscription mode, 0 is frame skipping and chasing mode, 1 is no chasing mode (mostly used for recording), 2 is time-shift playback mode
+      iframeonly: false # Only subscribe to keyframes
+      waittimeout: 10s # Timeout for waiting for the publisher, used for subscribing to streams that have not been published yet
+  enableavcc : true  # Enable AVCC format caching for the RTMP protocol
+  enablertp : true # Enable RTP format caching for the RTSP, WebSocket, and GB28181 protocols
+  enableauth: true # Enable authentication, see authentication mechanism for details
+  enablesubevent: true # Enable subscription events, used for subscriber online and offline events, disabled to improve performance
+  rtpreoderbufferlen: 50 # Buffer length for RTP reordering
+  speedlimit: 500ms # Timeout for speed limitation. If it is set to 0, the limit is turned off. Speed limitation is required for some streams such as file reading, otherwise it will be read too fast
+  eventbussize: 10 # Event bus cache size. When there are too many events, it is easy to block threads and the cache needs to be increased
+  pulseinterval: 5s # Interval time for heartbeat events
   console: 
-    server : console.monibuca.com:4242 # 连接远程控制台的地址
-    secret: "" # 远程控制台的秘钥
-    publicaddr: "" # 实例公网地址，提供远程控制台访问的地址，不配置的话使用自动识别的地址
-    publicaddrtls: "" # 实例公网地址，提供远程控制台访问的地址，不配置的话使用自动识别的地址（https）
+    server : console.monibuca.com:4242 # Address for connecting to the remote console
+    secret: "" # Secret key for the remote console
+    publicaddr: "" # Instance public address, which provides an address for remote console access. If not configured, the automatically recognized address will be used
+    publicaddrtls: "" # The instance public address provides an address for remote console access. If not configured, the automatically recognized address will be used (https)
 ```
 
-## 插件配置
+## Plugin Configuration
 
-:::tip 插件配置由插件定义
-每个插件的具体配置信息请查看插件文档
+:::tip Plugins Configuration Defined by Plugins
+Please refer to the plugin document for specific configuration information for each plugin.
 :::
 
-### 拉流配置
+### Pulling Stream Configuration
 
-某些插件包含从远端拉流的能力，故具有拉流配置，这些配置的格式都是一致的，如下：
+Some plugins have the ability to pull streams from a remote server, so they have pulling stream configurations, which have the same format. For example:
 
 ```yaml
-某插件:
+Plugin:
   pull:
     repull: 10
     proxy: [Proxy URL]
@@ -79,23 +82,27 @@ global:
       live/test3: [URL3]
       live/test4: [URL4]
 ```
-- 其中`repull`代表重试的次数，如果设置为`-1`则为无限重试，`0`则是不重试
-- `proxy`代表代理地址，如果需要代理拉流，可以配置该项
-- `pullonstart`代表随着`m7s`启动，则立即进行拉流
-- `pullonstart`是一个键值对映射（map）`key`代表拉流进入`m7s`后的`streamPath`，`value`就是远程流地址。
-- `pullonsub`代表的是按需拉流，即`m7s`收到指定流的订阅时才开始拉流。
-- `pullonsub`也是一个键值对映射（map）格式同`pullonstart`
 
-### 推流配置
-某些插件包含向远端服务器推流的能力，故具有推流配置，这些配置的格式都是一致的，如下：
+- `repull` indicates how many retries are allowed. If it is set to `-1`, it means that there are unlimited retries. If it is set to `0`, it means that no retries are allowed.
+- `proxy` indicates the proxy address. If you need to proxy fetch a stream, you can configure this item
+- `pullonstart` represents that the stream is pulled immediately when the `m7s` is started.
+- `pullonstart` is a key-value pair map. `key` represents the `streamPath` of the stream after it enters `m7s`, and `value` is the remote stream address.
+- `pullonsub` represents on-demand stream pulling, that is, the stream will be pulled when `m7s` receives the subscription for the specified stream.
+- `pullonsub` is also a key-value pair map, with the same format as `pullonstart`.
+
+### Push Stream Configuration
+
+Some plugins have the ability to push streams to a remote server, so they have push stream configurations, which have the same format. For example:
+
 ```yaml
-某插件:
+Plugin:
   push:
     repush: 10
     pushlist:
       live/test: [URL1]
       live/test2: [URL2]
 ```
-- 其中`repush`代表重试的次数，如果设置为`-1`则为无限重试，`0`则是不重试
-- `pushlist`是一个键值对映射（map）`key`代表`streamPath`，`value`就是远程流地址。
-- 当`m7s`中一旦出现map中包含的流时，就会推流到远端服务器
+
+- `repush` indicates how many retries are allowed. If it is set to `-1`, it means that there are unlimited retries. If it is set to `0`, it means that no retries are allowed.
+- `pushlist` is a key-value pair map. `key` represents the `streamPath` of the stream, and `value` is the remote stream address.
+- Once `m7s` contains a stream that is included in the map, it will be pushed to the remote server.

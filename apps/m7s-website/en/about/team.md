@@ -1,13 +1,13 @@
-# 开发团队
+# Development Team
 
-## 核心团队
+## Core Team
 
-核心团队由若干对Monibuca的代码、测试、资源提供相当大贡献的人员组成，秉承相同的价值观和愿景和Monibuca项目共同成长。
+The core team consists of individuals who have made significant contributions to the Monibuca code, testing, and resource provision and share the same values and vision as the Monibuca project in growing together.
 
-## 贡献者
+## Contributors
 
-贡献者由对项目提供PR的广大开发者组成，核心团队会给贡献者体提供技术上的无偿帮助。
+Contributors are made up of developers who contribute to the project by providing PRs. The core team provides technical assistance to contributors free of charge.
 
-## 赞助者
+## Sponsors
 
-赞助者由对Monibuca提供资金、项目支持的个人或组织组成，核心团队会给赞助者体提供技术支持以及项目开发等服务。
+Sponsors are individuals or organizations that provide financial or project support to Monibuca. The core team provides technical support and project development services to sponsors.

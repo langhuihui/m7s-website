@@ -1,45 +1,45 @@
-# 定义插件
+# Plugin Definition
 
-- 插件是实现扩展m7s的标准做法。
-- 插件可以包含音视频协议的解析或者其他业务逻辑。
+- Plugins are a standard way to extend m7s.
+- Plugins can include the parsing of audio and video protocols or other business logic.
 
-## 标准写法
+## Standard Writing
 
-以下是插件的定义和安装插件的最简代码，这个插件没有任何作用。(该插件名称为"MyPlugin")
-插件定义必须包含一个`OnEvent`方法来接收所有的插件事件包括事件总线的事件。
+The following is the simplest code for defining and installing a plugin, and this plugin has no effect. (The name of the plugin is "MyPlugin")
+The plugin definition must include an `OnEvent` method to receive all plugin events, including events on the event bus.
 ```go
 import . "m7s.live/engine/v4"
 type MyPluginConfig struct {
-  // 定义插件的配置
+  // Define the plugin's configuration
   ABC int
 }
 func (p *MyPluginConfig) OnEvent(event any) {
   switch event.(type) {
-    case FirstConfig: //插件初始化逻辑
-    case Config://插件热更新逻辑
-    case *Stream://按需拉流逻辑
-    case SEwaitPublish://由于发布者掉线等待发布者
-    case SEpublish://首次进入发布状态
-    case SErepublish://再次进入发布状态
-    case SEsubscribe://订阅者逻辑
-    case SEwaitClose://由于最后一个订阅者离开等待关闭流
-    case SEclose://关闭流
-    case UnsubscribeEvent://订阅者离开
-    case ISubscribe://订阅者进入
+    case FirstConfig: // Plugin initialization logic
+    case Config:// Plugin hot update logic
+    case *Stream://On-demand pull stream logic
+    case SEwaitPublish:// Wait for publisher to come online
+    case SEpublish:// First enter publishing status
+    case SErepublish:// Enter publishing status again
+    case SEsubscribe:// Subscriber logic
+    case SEwaitClose:// Wait for the last subscriber to leave and close the stream
+    case SEclose:// Close stream
+    case UnsubscribeEvent:// Subscriber leaves
+    case ISubscribe:// Subscriber enters
   }
 }
 var plugin = InstallPlugin(new(MyPluginConfig))
 ```
 
-## 插件配置
+## Plugin Configuration
 
 ```yaml
 myplugin:
   abc: 123
 ```
-用户配置了插件配置后，引擎会自动解析并给插件的配置进行赋值。
+After the user configures the plugin configuration, the engine automatically parses and assigns values to the plugin's configuration.
 
-## 预设配置插件
+## Predefined Configuration Plugins
 
 ```go
 import 	"m7s.live/engine/v4/config"
@@ -51,9 +51,9 @@ type MyPluginConfig struct {
   config.Push
 }
 ```
-可以选择其中一个或者多个预设结构体来定义插件的配置，使得插件具备特定的能力。
-这些配置项可以覆盖全局配置。
+You can choose one or more pre-defined structure to define the plugin's configuration, which makes the plugin have specific abilities.
+These configuration items can override global configuration.
 
-:::warning 强制性
-如果插件需要实现发布者能力，则必须加入`config.Publish`配置结构体，因为在注册发布流的时候会自动读取发布者配置信息。
+:::warning Mandatory
+If the plugin needs to implement the publisher's ability, it must add the `config.Publish` configuration structure, because the publisher's configuration information will be automatically read when registering the publishing stream.
 :::

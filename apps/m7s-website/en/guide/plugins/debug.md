@@ -1,12 +1,12 @@
-# debug插件
+# Debug Plugin
 
-该插件可以使得pprof通过公共端口访问，并且调用profile可以将CPU分析文件保存为cpu.profile文件，然后自动打开分析UI界面。
+This plugin allows accessing pprof through a public port, and calling profile will save the CPU analysis file as cpu.profile and automatically open the analysis UI interface.
 
-## 插件地址
+## Plugin Address
 
 https://github.com/Monibuca/plugin-debug
 
-## 插件引入
+## Plugin Importing
 ```go
 import (
     _ "m7s.live/plugin/debug/v4"
@@ -16,9 +16,9 @@ import (
 ## API
 
 ### `/debug/pprof`
-打开pprof界面
+Open pprof interface
 
 ### `/debug/profile`
-默认30s采样，可以通过传入seconds=xxx来指定采样时间长度
+By default, sampling lasts for 30s, and you can specify the sampling time by passing in seconds=xxx.
 
-将CPU分析文件保存为cpu.profile文件，然后自动打开分析UI界面。
+Save the CPU analysis file as cpu.profile and automatically open the analysis UI interface.

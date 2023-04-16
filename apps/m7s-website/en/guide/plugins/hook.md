@@ -1,12 +1,12 @@
-# Hook 插件
+# Hook Plugin
 
 WebHook For Monibuca
 
-## 插件地址
+## Plugin Address
 
 https://github.com/Monibuca/plugin-hook
 
-## 插件引入
+## Plugin Import
 
 ```go
 import (
@@ -14,34 +14,34 @@ import (
 )
 ```
 
-## 配置
+## Configuration
 
 ```yaml
 hook:
-  keepalive: 0 # 定时发送心跳请求，单位秒，默认0不开启
-  retrytimes: 3 # 重试次数
-  baseurl: "" # url前缀
-  header: {} # 自定义HTTP请求头
-  urllist: {} # url列表
-  requestlist: {} # 请求列表
-  extra: {} # 额外自定义传输数据
+  keepalive: 0 # Send heartbeat request every X seconds (default 0 is off)
+  retrytimes: 3 # Retry times
+  baseurl: "" # Prefix of the URL
+  header: {} # Custom HTTP request header
+  urllist: {} # URL list
+  requestlist: {} # Request list
+  extra: {} # Additional custom data to send
 ```
 
-其中 urllist 是简单的地址列表，例如：
+where urllist is a simple address list such as:
 
 ```yaml
 hook:
   urllist:
-    "*": "http://www.example.com" # 任意时间均会发送请求
-    startup: "http://www.example.com" # m7s启动时发送请求
-    publish: "http://www.example.com/publish" # 发布时发送请求
-    subscribe: "http://www.example.com/subscribe" # 订阅时发送请求
-    unsubscribe: "http://www.example.com/unsubscribe" # 取消订阅时发送请求
-    streamClose: "http://www.example.com/streamClose" # 流关闭时发送请求
-    keepalive: "http://www.example.com/keepalive" # 心跳时发送请求
+    "*": "http://www.example.com" # Always send request
+    startup: "http://www.example.com" # Send request on m7s startup
+    publish: "http://www.example.com/publish" # Send request on publish
+    subscribe: "http://www.example.com/subscribe" # Send request on subscribe
+    unsubscribe: "http://www.example.com/unsubscribe" # Send request on unsubscribe
+    streamClose: "http://www.example.com/streamClose" # Send request on streamClose
+    keepalive: "http://www.example.com/keepalive" # Send request on heartbeat
 ```
 
-requestlist 是需要单独配置 Method 和 header 时用到的
+requestlist is used when you need to configure method and header separately:
 
 ```yaml
 hook:
@@ -53,9 +53,9 @@ hook:
       url: "http://www.example.com"
 ```
 
-## 发送请求数据
+## Sending Request Data
 
-默认使用 POST 发送一个 json 数据：
+By default, a JSON data is sent using the POST method:
 
 ```json
 {
@@ -122,5 +122,4 @@ hook:
 }
 ```
 
-如果指定为 GET 方法，则不会发送 json
-而是将 event 和 streamPath 加在 url 后面
+If specified as the GET method, no JSON is sent. Instead, the event and streamPath are appended to the URL.

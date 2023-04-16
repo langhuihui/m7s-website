@@ -1,13 +1,13 @@
 # FAQ
 
-## Monibuca对执行的环境有什么要求？
-Monibuca是Go语言编写，可以在任何Go语言能运行的平台上运行，包括x86和arm架构，对机器的配置没有特殊需求。
+## What are the requirements for the execution environment of Monibuca?
+Monibuca is written in the Go language and can run on any platform that can run Go, including x86 and arm architectures, with no special requirements for machine configuration.
 
-## Monibuca的并发能力如何？
-Monibuca得益于Go语言的超强并发能力，可以充分利用多核计算。
+## How is Monibuca's concurrency ability?
+Monibuca benefits from the Go language's powerful concurrency capabilities and can fully utilize multi-core computing.
 
-## Monibuca要收费吗？
-Monibuca是完全开源免费的，但是基于Monibuca二次开发的软件可以收费。
+## Is Monibuca free of charge?
+Monibuca is completely open source and free of charge. However, software based on Monibuca can be charged for secondary development.
 
-## Monibuca的愿景是什么？
-Monibuca致力于打造一个对开发者友好的生态体系，能极大降低企业以及个人开发流媒体相关系统的成本。
+## What is Monibuca's vision?
+Monibuca is committed to creating an eco-system that is friendly to developers, which can greatly reduce the cost of developing media-related systems for enterprises and individuals.

@@ -1,3 +1,3 @@
-# 错误
+# Error
 
-- 如果遇到直接退出（崩溃）查看一下fatal.log。windows 可以拖入cmd窗口运行m7s保留现场。
+- If there is a direct exit (crash), check the fatal.log. On Windows, you can drag and drop m7s to the cmd window to preserve the scene.

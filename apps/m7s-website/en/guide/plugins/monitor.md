@@ -1,11 +1,11 @@
 # plugin-monitor
-生成监控数据
+Generate monitor data
 
-## 插件地址
+## Plugin Address
 
 https://github.com/Monibuca/plugin-monitor
 
-## 插件引入
+## Import Plugin
 
 ```go
 import (
@@ -13,33 +13,33 @@ import (
 )
 ```
 
-## 配置
+## Configuration
 
 ```yaml
 monitor:
-  path: monitor # 监控数据存储路径
+  path: monitor # Monitor data storage path
 ```
 
 ## API
 
-### 获取监控的流历史数据
+### Get historical data of monitored streams
 
 ```
 GET /monitor/api/list/stream?time=xxxx-xxxx&streamPath=xxxx
 ```
-streamPath 是可选的，用于筛选指定的流
-time 是可选的，用于筛选指定时间段的数据，不传则返回当天的数据
+streamPath is optional, used to filter specified streams
+time is optional, used to filter data within a specified time period, and returns data for the current day if not passed
 
-### 获取历史流的轨道列表
+### Get the track list of historical streams
   
 ```
 GET /monitor/api/list/track?streamPath=xxxx
 ```
-该 streamPath 的值来自上一个 API 中的 path 拼接时间而成（时间格式为 2006-01-02T15:04:05）
+The value of streamPath comes from concatenating path and time in the previous API (time format is 2006-01-02T15:04:05)
 
-### 获取历史数据
+### Get historical data
 
 ```
 GET /monitor/[streamPath]/track/h264.yaml
 ```
-就是从 monitor 目录里面读取文件，路径就是文件路径，自行替换。
+Just read the file from the monitor directory, where the path is the file path and should be replaced accordingly.

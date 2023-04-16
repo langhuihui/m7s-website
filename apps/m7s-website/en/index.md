@@ -1,6 +1,6 @@
 ---
 page: true
-title: Monibuca - GO语言开源插件式流媒体服务器开发框架
+title: Monibuca - An open-source, plug-in based streaming media server development framework in GO language
 ---
 
 <script setup>

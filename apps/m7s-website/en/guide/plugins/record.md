@@ -1,36 +1,35 @@
-# RECORD插件
+# RECORD Plugin
 
-对流进行录制的功能插件，提供Flv、fmp4、hls、裸流格式的录制功能。
+A function plugin for recording streams, providing Flv, fmp4, hls, and naked stream formats.
 
-## 插件地址
+## Plugin Address
 
 https://github.com/Monibuca/plugin-record
 
-## 插件引入
+## Plugin Introduction
 ```go
 import (
     _ "m7s.live/plugin/record/v4"
 )
 ```
-## 配置
+## Configuration
 
-- 配置中的path 表示要保存的文件的根路径，可以使用相对路径或者绝对路径
-- filter 代表要过滤的StreamPath正则表达式，如果不匹配，则表示不录制。为空代表不进行过滤
-- fragment表示分片大小（秒），0代表不分片
-
+- The path in the configuration represents the root path of the file to be saved, and can use relative or absolute paths.
+- Filter represents the regular expression for the StreamPath to be filtered. If it does not match, it means that it is not recorded. Empty means no filtering.
+- Fragment represents the size of the fragment (in seconds), 0 means no fragmentation.
 ```yaml
 record:
   subscribe:
-      subaudio: true # 是否订阅音频流
-      subvideo: true # 是否订阅视频流
-      subaudioargname: ats # 订阅音频轨道参数名
-      subvideoargname: vts # 订阅视频轨道参数名
-      subdataargname: dts # 订阅数据轨道参数名
-      subaudiotracks: [] # 订阅音频轨道名称列表
-      subvideotracks: [] # 订阅视频轨道名称列表
-      submode: 0 # 订阅模式，0为跳帧追赶模式，1为不追赶（多用于录制），2为时光回溯模式
-      iframeonly: false # 只订阅关键帧
-      waittimeout: 10s # 等待发布者的超时时间，用于订阅尚未发布的流
+      subaudio: true # Whether to subscribe to the audio stream
+      subvideo: true # Whether to subscribe to the video stream
+      subaudioargname: ats # Audio track parameter name
+      subvideoargname: vts # Video track parameter name
+      subdataargname: dts # Data track parameter name
+      subaudiotracks: [] # Audio track name list to subscribe to
+      subvideotracks: [] # Video track name list to subscribe to
+      submode: 0 # Subscription mode, 0 is frame skipping and chasing mode, 1 is no chasing (mostly used for recording), 2 is time rewind mode
+      iframeonly: false # Only subscribe to key frames
+      waittimeout: 10s # Timeout for waiting for the publisher, used to subscribe to unpublished streams
   flv:
       ext: .flv
       path: record/flv
@@ -59,18 +58,18 @@ record:
 
 ## API
 
-- `/record/api/list/recording` 罗列所有正在录制中的流的信息
-- `/record/api/list?type=flv` 罗列所有录制的flv文件
-- `/record/api/start?type=flv&streamPath=live/rtc` 开始录制某个流,返回一个字符串用于停止录制用的id
-- `/record/api/stop?id=xxx` 停止录制某个流
+- `/record/api/list/recording` list all the information of the current recording stream
+- `/record/api/list?type=flv` list all the recorded flv files
+- `/record/api/start?type=flv&streamPath=live/rtc` start recording a stream and return a string for stopping the recording
+- `/record/api/stop?id=xxx` stop recording a stream
 
-其中将type值改为mp4则录制成fmp4格式。
-## 点播功能
+Change the value of type to mp4 to record in fmp4 format.
 
-访问格式：
- [http/https]://[host]:[port]/record/[streamPath].[flv|mp4|m3u8|h264|h265]
+## VOD Function
 
-例如：
-- `http://localhost:8080/record/live/test.flv` 将会读取对应的flv文件
-- `http://localhost:8080/record/live/test.mp4` 将会读取对应的fmp4文件
+Access format:
+[http/https]://[host]:[port]/record/[streamPath].[flv|mp4|m3u8|h264|h265]
 
+For example:
+- `http://localhost:8080/record/live/test.flv` will read the corresponding flv file
+- `http://localhost:8080/record/live/test.mp4` will read the corresponding fmp4 file

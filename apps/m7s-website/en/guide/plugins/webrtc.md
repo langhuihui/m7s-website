@@ -1,26 +1,28 @@
-# WebRTC 插件
+# WebRTC Plugin
 
-提供通过网页发布视频到monibuca，以及从monibuca拉流通过webrtc进行播放的功能，遵循WHIP规范
+This plugin provides the functionality to stream videos to Monibuca through a web page and to play streams from Monibuca using WebRTC technology. It follows the WHIP specification.
 
-## 插件地址
+## Plugin URL
 
 https://github.com/Monibuca/plugin-webrtc
 
-## 插件引入
+## Plugin Import
+
 ```go
     import (  _ "m7s.live/plugin/webrtc/v4" )
 ```
 
-## 默认配置
+## Default Configuration
 
 ```yaml
 webrtc:
   iceservers: []
-  publicip: [] # 可以是数组也可以是字符串（内部自动转成数组）
-  port: tcp:9000 # 可以是udp:8000-9000 范围端口，也可以udp:9000 单个端口
+  publicip: [] # can be an array or a single string (automatically converted to an array)
+  port: tcp:9000 # can be a range of ports like udp:8000-9000 or a single port like udp:9000
   pli: 2s # 2s
 ```
-### ICE服务器配置格式
+
+### ICE Server Configuration Format
 
 ```yaml
 webrtc:
@@ -32,15 +34,17 @@ webrtc:
       credential: pass
 ```
 
-### 本地测试无需修改配置，如果远程访问，则需要配置publicip
+### Configuration for Local Testing
 
-## 基本原理
+If testing locally, no change in configuration is required. However, if you are accessing it remotely, then you need to configure the public IP.
 
-通过浏览器和monibuca交换sdp信息，然后读取rtp包或者发送rtp的方式进行
+## Basic Principle
+
+The exchange of SDP messages between the browser and Monibuca takes place and RTP packets are read or sent to stream videos.
 
 ## API
 
-### 播放地址
+### Play address
 `/webrtc/play/[streamPath]`
 
 Body: `SDP`
@@ -49,7 +53,7 @@ Content-Type: `application/sdp`
 
 Response Body: `SDP`
 
-### 推流地址
+### Push address
 
 `/webrtc/push/[streamPath]`
 
@@ -59,12 +63,13 @@ Content-Type: `application/sdp`
 
 Response Body: `SDP`
 
-### 推流测试页面
+### Push Test Page
 
 `/webrtc/test/publish`
 
 ## WHIP
+
 WebRTC-HTTP ingestion protocol
-用于WebRTC交换SDP信息的规范
+A specification for the exchange of SDP messages between WebRTC clients.
 
 [WHIP ietf](https://datatracker.ietf.org/doc/html/draft-ietf-wish-whip-02)

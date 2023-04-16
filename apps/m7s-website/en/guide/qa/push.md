@@ -1,5 +1,4 @@
-# 推流问题
+# Streaming Issues
 
-
-- ffmpeg推流是请加-c:v h264 -c:a aac 否则推出的视频格式无法使用
-- StreamPath 必须形如 live/test 。不能只有一级，或者斜杠开头，如/live 是错误的。
+- For ffmpeg streaming, please add -c:v h264 -c:a aac; otherwise, the output video format cannot be used.
+- StreamPath must be in the form of live/test. It cannot have only one level, or start with a slash, such as /live is incorrect.

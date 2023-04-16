@@ -1,12 +1,12 @@
-# 推流者Pusher
+# Pusher
 
-这里的推流者指的是从远程推流的功能。
+The pusher here refers to the function of pushing streams remotely.
 
 :::tip
-可以结合官方插件中对Pusher的使用，来掌握推流者的使用方法。包含Pusher功能的插件有rtmp、rtsp
+You can master the usage of the pusher by combining the use of Pusher in official plugins. Plugins that include the Pusher function are rtmp and rtsp.
 :::
 
-## 推流时序图
+## Pusher Timing Diagram
   
 ```mermaid
 sequenceDiagram
@@ -20,9 +20,9 @@ loop
 end
 ```
 
-## 自定义推流者
+## Custom Pusher
 
-通常推流者需要将engine中的流订阅出来后推出去，所以都会同时包含Subscriber
+Usually, the pusher needs to subscribe to the flows in the engine and then push them out, so they usually also contain Subscriber.
 
 ```go
 import . "m7s.live/engine/v4"
@@ -32,35 +32,35 @@ type MyPusher struct {
 }
 ```
 
-包含 `Pusher` 后，并不会自动实现了 `IPusher` 接口。所以需要自己实现 `IPusher` 接口。
-这个结构体中可以随意的放入自己需要的属性。
+After including `Pusher`, `IPusher` interface is not automatically implemented. Therefore, you need to implement the `IPusher` interface by yourself.
+You can put your own required properties in this structure as you like.
 
-## 实现IPusher接口
-第一个需要实现的接口就是连接事件回调，在这个回调里面需要去连接远程服务器。
+## Implement IPusher interface
+The first interface to be implemented is the connection event callback, where you need to connect to the remote server.
 
 ```go
 func (Pusher *MyPusher) Connect() (err error) {
-  //连接远程服务器
+  // Connect to remote server
 }
 ```
-第二个需要实现的接口就是推流事件回调，在这个回调里面需要去推流。
+The second interface to be implemented is the push event callback, where you need to push the stream.
 
 ```go
 func (Pusher *MyPusher) Push() error {
-  // 将数据推送到远程服务器
+  // Push data to remote server
 }
 ```
-如果连接失败则不会自动订阅流，否则会自动订阅流，然后调用 `Push` 方法。
+If the connection fails, it will not automatically subscribe to the stream. Otherwise, it will automatically subscribe to the stream and call the `Push` method.
 
-## 启动推流
+## Start Pushing Streams
 
-可以配置按需推流，和调用API后推流的功能，调用方式也是一样。
+You can configure on-demand pushing and the function of pushing after calling the API, and the method of calling is the same.
 
 ```go
 plugin.Push(streamPath, url, new(MyPusher), false)
 ```
-如果需要则特定的条件下推流，可以以上面的以编程方式调用开始推流。
+If you need to push the stream under certain conditions, you can start pushing the stream by calling the API programmatically.
 
-## 断线重连
+## Reconnect to the Server After Disconnection
 
-默认支持断线重连功能，即在远程连接断开的时候会再次调用`Connect`和`Push`。配置文件后可配置重连次数等。
+By default, the reconnection function is supported. That is, when the remote connection is disconnected, `Connect` and `Push` will be called again. It can be configured after the configuration file is set.

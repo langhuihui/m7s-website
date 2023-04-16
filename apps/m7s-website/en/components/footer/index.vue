@@ -8,10 +8,10 @@ const showZf = ref(false)
     <div class="box">
       <div class="p1">
         <div class="item" >
-          <a href="https://opencollective.com/monibuca" style="color: #fff;" target="_blank">Monibuca 开源社区</a>
+          <a href="https://opencollective.com/monibuca" style="color: #fff;" target="_blank">Monibuca Open-source community</a>
         </div>
         <div class="item">
-          <div class="title">支持我们</div>
+          <div class="title">Support US</div>
           <div class="icon-list">
             <div class="hover" v-if="showWx">
               <img src="/images/m7s/footer/wx-pay.jpg" alt />
@@ -37,7 +37,7 @@ const showZf = ref(false)
         </div>
       </div>
       <div class="p2">
-        <div class="rights">Copyright © Monibuca 开发团队</div>
+        <div class="rights">Copyright © Monibuca Team</div>
       </div>
     </div>
   </div>

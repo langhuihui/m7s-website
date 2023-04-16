@@ -1,2 +1,2 @@
 # plugin-fmp4
-可以通过http访问MP4
+Enables HTTP access to MP4 files.

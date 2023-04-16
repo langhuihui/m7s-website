@@ -1,12 +1,12 @@
-# 预览插件
+# Preview Plugin
 
-用于预览本地视频播放器插件
+Plugin for previewing local video player.
 
-## 插件地址
+## Plugin Address
 
 https://github.com/Monibuca/plugin-preview
 
-## 插件引入
+## Plugin Import
 
 ```go
 import (
@@ -14,16 +14,16 @@ import (
 )
 ```
 
-## 配置
+## Configuration
 
-无
+None
 
 ## API
 
-- `/preview/[streamPath]?type=[hdl|hls|ws|wt|rtc]` 可用于预览直播流
-- `/preview/[filepath]` 可用于预览录像文件（开发中）
+- `/preview/[streamPath]?type=[hdl|hls|ws|wt|rtc]` can be used to preview live streams.
+- `/preview/[filepath]` can be used to preview recorded files (under development).
 
-## 使用WebTransport注意事项
+## Notes for Using WebTransport
 
-- 本地测试需要本地启动https服务，并配置有效的证书
-- 由于证书与域名绑定，所以需要host里面配置对应的域名 例如：`127.0.0.1  monibuca.com`
+- Local testing requires a locally started HTTPS service with a valid certificate configured.
+- Since the certificate is bound to the domain name, it is necessary to configure the corresponding domain name in the host file. For example: `127.0.0.1  monibuca.com`

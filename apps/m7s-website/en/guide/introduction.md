@@ -2,98 +2,98 @@
 footer: false
 ---
 
-# 介绍
+# Introduction
 
-:::tip 您正在阅读的是m7s v4的文档en
-- m7s v3 文档请访问https://docs.m7s.live
-- [v4升级的功能](/guide/v4)
+:::tip You are reading the documentation for Monibuca (m7s) v4.
+- For m7s v3 documentation, please visit https://docs.m7s.live
+- Learn about [v4 upgraded features](/guide/v4).
 :::
 
-## 什么是Monibuca（m7s)？
+## What is Monibuca (m7s)?
 
-Monibuca(发音：模拟不卡，m7s是其缩写，类似k8s) 是一个开源的Go语言开发的流媒体服务器开发框架。
-它基于go1.19+，此外并无任何其他依赖构建，并提供了一套插件式的二次开发模型，帮助你高效地开发流媒体服务器，你既可以直接使用官方提供的插件，也可以自己开发插件扩展任意的功能，所以Monibuca是可以支持**任意**流媒体协议的框架！
+Monibuca (pronounced as "mo-ni-bu-ca", abbreviated as "m7s", similar to "k8s") is an open-source Go language-based streaming server development framework. Built on go1.19+, it has no other dependencies and provides a plug-in-based secondary development model that helps you develop streaming media servers efficiently. You can use official plugins or develop your own plugins to extend any functionality. Therefore, Monibuca is a framework that supports **any** streaming media protocol!
 
-:::tip 如果您需要二次开发
-- 请访问[开发文档](/devel/startup)
-- 建议先熟悉使用文档后再进行二次开发
+:::tip If you need secondary development
+- Please visit the [Documentation](/devel/startup)
+- It is recommended to familiarize yourself with the usage documentation before second development.
 :::
 
-> 流媒体服务器是一种用于分发流媒体的服务器端软件，可用于直播、监控、会议等需要实时观看音视频的场景。流媒体服务器区别于传统Web服务器对于实时性要求极高，需要使用各种传输协议，而Web服务器则主要以http/https协议为主。
+> A streaming media server is software used to distribute streaming media and is used in scenarios that require real-time viewing of audio and video, such as live broadcasts, monitoring, and conferences. Streaming media servers differ from traditional web servers in that they have extremely high real-time performance requirements and require the use of various transmission protocols, while web servers are mainly based on the http/https protocol.
 
-Monibuca由三部分组成：引擎、插件、实例工程。
-- 引擎提供一套通用的流媒体数据缓存以及转发的机制，本身不关心协议如何实现
-- 插件提供其他所有的功能，并可以无限扩展
-- 实例工程是引入引擎和插件并启动引擎的项目工程，可以完全自己编写
+Monibuca consists of three parts: engine, plugin, and instance project.
+- The engine provides a set of general streaming media data caching and forwarding mechanisms, and does not care about how the protocol is implemented
+- The plugin provides all other functions and can be extended indefinitely
+- The instance project is a project that introduces the engine and plugins and starts the engine, and can be fully self-written
 
-## 插件式框架
+## Plug-in-based framework
 
-Monibuca旨在构建一个通用的流媒体开发生态，所以从v1版本开始就考虑到业务和流转发的解耦，从而设计了一套可供任意扩展的插件机制。根据你的需求场景，可以灵活引入不同类型的插件：
-- 提供流媒体协议打包/解包，例如rtmp插件、rtsp插件等
-- 提供日志持久化的处理——logrotate插件
-- 提供录像功能——record插件
-- 提供丰富的调试功能——debug插件
-- 提供http回调能力——hook插件
+Monibuca is designed to build a universal streaming media development ecosystem, so it has considered the decoupling of business and stream forwarding since version v1, thus designing a plugin mechanism that can be extended arbitrarily according to your needs:
+- Provide streaming media protocol packaging/unpacking, such as rtmp plugin and rtsp plugin
+- Provide log persistence processing-logrotate plugin
+- Provide recording function-record plugin
+- Provide rich debugging functions-debug plugin
+- Provide http callback capability-hook plugin
 
-如果你是有经验的开发者，那么最佳的方式是在现有的插件基础上进行二次开发，并可向更多的人提供可重用的插件丰富生态。
-如果你是流媒体的初学者，那么最佳的方式是利用现有的插件拼凑出你需要的功能，并向有经验的开发者寻求帮助。
+If you are an experienced developer, the best way is to perform secondary development based on existing plugins to provide reusable plugins to enrich the ecosystem for more people.
+If you are a beginner in streaming media, the best way is to use existing plugins to patch together the functions you need, and seek help from experienced developers.
 
-## 主要功能
+## Main Functions
 
-### 引擎方面
-- 提供插件机制，对插件的启动，配置解析，事件派发等进行统一管理
-- 提供H264、H265、AAC、G711格式的转发
-- 提供可复用的AVCC格式、RTP格式、AnnexB格式、ADTS格式等预封装机制
-- 提供多Track机制，支持大小流，加密流扩展
-- 提供DataTrack机制，可用于实现房间文字聊天等功能
-- 提供时间戳同步机制，限速机制
-- 提供RTP包乱序重排机制
-- 提供订阅者追帧跳帧机制（首屏秒开）
-- 提供发布订阅对外推拉的基础架构
-- 提供鉴权机制的底层架构支持
-- 提供内存复用机制
-- 提供发布者断线重连机制
-- 提供按需拉流机制
-- 提供HTTP服务端口公用机制
-- 提供HTTP API接口自动注册机制
-- 提供HTTP接口中间件机制
-- 提供结构化日志
-- 提供流信息统计和输出
-- 提供事件总线机制，可以对所有插件广播事件
-- 提供配置热更新机制
+### In terms of engine
+- Provide plugin mechanism, unified management of plugin startup, configuration parsing, event dispatch, etc.
+- Provide forwarding of H264, H265, AAC, G711 formats
+- Provide reusable pre-packaging mechanisms such as AVCC format, RTP format, AnnexB format, ADTS format, etc.
+- Provide multi-track mechanism, support for large and small streams, encrypted streams extension
+- Provide DataTrack mechanism, which can be used to implement room text chat functions
+- Provide timestamp synchronization mechanism, speed limiting mechanism
+- Provide RTP packet disorder and sorting mechanism
+- Provide subscriber chasing and skipping mechanism (first screen seconds opening)
+- Provide basic architecture for publishing and subscribing to external pushes and pulls
+- Provide underlying architecture support for authentication mechanism
+- Provide memory reuse mechanism
+- Provide publisher disconnection reconnection mechanism
+- Provide on-demand streaming mechanism
+- Provide HTTP service port sharing mechanism
+- Provide automatic registration mechanism for HTTP API interface
+- Provide middleware mechanism for HTTP interface
+- Provide structured logging
+- Provide streaming information statistics and output
+- Provide event bus mechanism, which can broadcast events to all plugins
+- Provide configuration hot update mechanism
 
-### 插件方面
+### In terms of plugins
 
-- 提供RTMP协议的推拉流，对外推拉流（支持RTMPS）
-- 提供RTSP协议的推拉流，对外推拉流
-- 提供HTTP-FLV协议的拉流，对外拉流，读取本地FLV文件
-- 提供WebSocket协议的拉流
-- 提供HLS协议的拉流，对外拉流
-- 提供WebRTC协议的推拉流
-- 提供GB28181协议的推流,提供dump回放分析能力
-- 提供Onif协议的支持
-- 提供WebTransport协议的拉流
-- 提供fmp4协议的拉流
-- 提供边缘服务器功能，实现级联拉流
-- 提供录像功能，支持flv、mp4、hls、raw格式
-- 提供日志持久化功能，支持按天、按小时、按分钟、按秒、按大小、按文件数等多种方式
-- 提供截屏功能
-- 提供HTTP回调功能
-- 提供预览功能（集成Jessibuca Pro）
-- 提供房间功能（可实现视频会议）
-- 提供对接Prometheus的功能
+- Provide push and pull streams of RTMP protocol, and external push and pull streams (support RTMPS)
+- Provide push and pull streams of RTSP protocol, and external push and pull streams
+- Provide pull streams of HTTP-FLV protocol, external pull streams, and read local FLV files
+- Provide pull streams of WebSocket protocol
+- Provide pull streams of HLS protocol, external pull streams
+- Provide push and pull streams of WebRTC protocol
+- Provide push stream of GB28181 protocol, and provide dump replay analysis capabilities
+- Support for Onif protocol
+- Provide streaming media transfer with WebTransport protocol
+- Provide pull streams of fmp4 protocol
+- Provide edge server function to implement cascading streaming
+- Provide recording function, support flv, mp4, hls, raw formats
+- Provide logging persistence function, support multiple methods such as daily, hourly, minute, second, size, and file number
+- Provide screenshot function
+- Provide HTTP callback function
+- Provide preview function (integrated with Jessibuca Pro)
+- Provide room function (can implement video conference)
+- Provide integration with Prometheus function
 
-第三方插件和收费插件提供更多额外功能，不在此罗列。
-### 远程控制台
-- 提供多实例管理功能
-- 提供流详情显示
-- 提供配置可视化编辑
-- 提供日志可视化显示
-- 提供插件可视化管理
-- 提供GB设备管理
-- 提供动态添加远程推拉流界面
-- 提供WebRTC背景墙功能
-- 提供多人视频演示
+Third-party plugins and paid plugins provide additional functionality, which is not listed here.
+### Remote Console
+- Provides multi-instance management function
+- Provides stream details display
+- Provide visual editing of configurations
+- Provide visual display of logs
+- Provide visual management of plugins
+- Provide GB device management
+- Provide dynamically added remote push-pull interface
+- Provide WebRTC background wall function
+- Provide multi-person video demonstration
 
-## 名称的由来
-Monibuca这个单词来源于 `Monica` （莫妮卡），为了解决起名的难题，使用了三个名称分别是 `Monica` 、 `Jessica` 、`Rebecca` 用来代表服务器、播放器、推流器。由于莫妮卡、杰西卡、瑞贝卡，都带卡字，对直播来说寓意不好，所以改为莫妮不卡（`Monibuca`）、杰西不卡[Jessibuca](https://jessibuca.com)、瑞贝不卡[Rebebuca](https://rebebuca.com)。
+## The Story of the Name `Monibuca`
+
+The name Monibuca is derived from "Monica" and was created to solve naming difficulties. Three names, Monica, Jessica, and Rebecca, were used to represent the server, player, and streaming respectively. As Monica, Jessica, and Rebecca all contain the character "ka," which is not suitable for live streaming, they were changed to Monibuca, Jessibuca, and Rebebuca.

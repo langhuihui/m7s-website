@@ -1,88 +1,84 @@
-# RTMP插件
-rtmp插件提供rtmp协议的推拉流能力，以及向远程服务器推拉rtmp协议的能力。
-
-## 仓库地址
-
+# RTMP Plugin
+The RTMP plugin provides the ability to push and pull streams via the RTMP protocol to remote servers.
+ 
+## Repository Address
 https://github.com/Monibuca/plugin-rtmp
 
-## 引入
+## Import
 ```go
 import _ "m7s.live/plugin/rtmp/v4"
 ```
 
-## 推拉地址形式
+## Push and Pull Address Format
 ```
 rtmp://localhost/live/test
 ```
-- `localhost`是m7s的服务器域名或者IP地址，默认端口`1935`可以不写，否则需要写
-- `live`代表`appName`
-- `test`代表`streamName`
-- m7s中`live/test`将作为`streamPath`为流的唯一标识
+- `localhost` is the m7s server domain name or IP address, the default port `1935` can be omitted or explicitly stated. 
+- `live` represents the `appName`.
+- `test` represents the `streamName`.
+- In m7s, `live/test` serves as the unique identifier of the stream.
 
-
-例如通过ffmpeg向m7s进行推流
+For example, if pushing a stream to m7s via FFmpeg:
 
 ```bash
-ffmpeg -i [视频源] -c:v h264 -c:a aac -f flv rtmp://localhost/live/test
+ffmpeg -i [source] -c:v h264 -c:a aac -f flv rtmp://localhost/live/test
 ```
 
-会在m7s内部形成一个名为live/test的流
+it will form a stream named live/test inside m7s.
 
 
-如果m7s中已经存在live/test流的话就可以用rtmp协议进行播放
+Once a stream named live/test already exists in m7s, it can be played using the rtmp protocol:
 ```bash
 ffplay -i rtmp://localhost/live/test
 ```
 
 
-## 配置
+## Configuration
 
 ```yaml
 rtmp:
     publish:
-        pubaudio: true # 是否发布音频流
-        pubvideo: true # 是否发布视频流
-        kickexist: false # 剔出已经存在的发布者，用于顶替原有发布者
-        publishtimeout: 10s # 发布流默认过期时间，超过该时间发布者没有恢复流将被删除
-        delayclosetimeout: 0 # 自动关闭触发后延迟的时间(期间内如果有新的订阅则取消触发关闭)，0为关闭该功能，保持连接。
-        waitclosetimeout: 0 # 发布者断开后等待时间，超过该时间发布者没有恢复流将被删除，0为关闭该功能，由订阅者决定是否删除
-        buffertime: 0 # 缓存时间，用于时光回溯，0为关闭缓存
+        pubaudio: true # Whether to publish the audio stream
+        pubvideo: true # Whether to publish the video stream
+        kickexist: false # Whether to remove existing publishers, useful for replacing the existing publisher.
+        publishtimeout: 10s # The default expiration time for publishing streams, publishers who do not recover the stream by the deadline will be removed.
+        delayclosetimeout: 0 # The time delay from triggering auto-close to actual closing (the trigger is cancelled if a new subscription is made during the delay). 0 disables this function, so the connection is maintained.
+        waitclosetimeout: 0 # The time to wait for the publisher to recover the stream once disconnected. Publishers who don't recover the stream will be removed after the specified timeout. 0 disables this function, with subscription deciding whether to remove it.
+        buffertime: 0 # The cache time used for time-back tracking. 0 disables this function.
     subscribe:
-        subaudio: true # 是否订阅音频流
-        subvideo: true # 是否订阅视频流
-        subaudioargname: ats # 订阅音频轨道参数名
-        subvideoargname: vts # 订阅视频轨道参数名
-        subdataargname: dts # 订阅数据轨道参数名
-        subaudiotracks: [] # 订阅音频轨道名称列表
-        subvideotracks: [] # 订阅视频轨道名称列表
-        submode: 0 # 订阅模式，0为跳帧追赶模式，1为不追赶（多用于录制），2为时光回溯模式
-        iframeonly: false # 只订阅关键帧
-        waittimeout: 10s # 等待发布者的超时时间，用于订阅尚未发布的流
+        subaudio: true # Whether to subscribe to the audio stream
+        subvideo: true # Whether to subscribe to the video stream
+        subaudioargname: ats # The name of the parameter for the subscribing audio track.
+        subvideoargname: vts # The name of the parameter for the subscribing video track.
+        subdataargname: dts # The name of the parameter for the subscribing data track.
+        subaudiotracks: [] # The list of the subscribing audio track names.
+        subvideotracks: [] # The list of the subscribing video track names.
+        submode: 0 # Subscription mode, 0 indicates the skip-frame chasing mode, 1 indicates the non-chasing mode (mainly used for recording), and 2 indicates the time-back tracking mode.
+        iframeonly: false # Subscribe only to keyfranes.
+        waittimeout: 10s # Timeout for waiting for publishers, used for subscribing to not-yet-published streams.
     tcp:
         listenaddr: :1935
         listennum: 0
     pull:
-        repull: 0 # 当断开后是否自动重新拉流，0代表不进行重新拉流，-1代表无限次重新拉流
-        pullonstart: {} # 是否在m7s启动的时候自动拉流
-        pullonsub: {}  # 是否在有人订阅的时候自动拉流（按需拉流）
+        repull: 0 # Whether to automatically pull the stream if disconnected. 0 indicates no automatic re-pull, -1 indicates unlimited re-pulls.
+        pullonstart: {} # Whether to automatically pull the stream when m7s starts.
+        pullonsub: {}  # Whether to automatically pull the stream upon subscription (pull according to demand).
     push:
-        repush: 0 # 当断开后是否自动重新推流，0代表不进行重新推流，-1代表无限次重新推流
-        pushlist: {} # 推流列表，以 streamPath为key，远程地址为value
-    chunksize: 65536 # rtmp chunk size
-    keepalive: false #保持rtmp连接，默认随着stream的close而主动断开
+        repush: 0 # Whether to automatically push the stream if disconnected. 0 indicates no automatic re-push, -1 indicates unlimited re-pushes.
+        pushlist: {} # The push list, with streamPath as key and the remote address as the value.
+    chunksize: 65536 # RTMP chunk size
+    keepalive: false # Whether to keep the RTMP connection open. The default is to disconnect the session when stream is closed.
 ```
-:::tip 配置覆盖
-publish
-subscribe
-两项中未配置部分将使用全局配置
+:::tip Configuration override
+publish and subscribe items inherit from the global config if any relevant item is unspecified in them.
 :::
 
 ## API
 ### `rtmp/api/list`
-获取所有rtmp流
+Get all RTMP streams.
 
-### `rtmp/api/pull?target=[RTMP地址]&streamPath=[流标识]`
-从远程拉取rtmp到m7s中
+### `rtmp/api/pull?target=[RTMP Address]&streamPath=[Stream Identifier]`
+Fetch RTMP from remote to m7s.
 
-### `rtmp/api/push?target=[RTMP地址]&streamPath=[流标识]`
-将本地的流推送到远端
+### `rtmp/api/push?target=[RTMP Address]&streamPath=[Stream Identifier]`
+Push the local stream to the remote end.

@@ -1,16 +1,18 @@
-# 中间件
-中间件指对http请求进行预处理的函数。中间件可以用来处理请求，添加日志，验证用户身份等等。
+# Middleware
 
-## 中间件的定义
+Middleware refers to the functions that pre-process HTTP requests. Middleware can be used to handle requests, add logs, and verify user identity, among other things.
 
-中间件的定义如下：
+## Definition of Middleware
+
+The definition of middleware is as follows:
 
 ```go
 type Middleware func(string, http.Handler) http.Handler
 ```
-其中第一个参数是path，第二个参数是下一个中间件，返回值是当前中间件。
+The first parameter is the path, the second parameter is the next middleware, and the return value is the current middleware.
 
-例如：源码中对每一个请求都打印一条日志就是典型的中间件
+For example, to print a log for every request in the source code is a typical middleware:
+
 ```go
 func (opt *Plugin) logHandler(pattern string, handler http.Handler) http.Handler {
 	return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
@@ -20,16 +22,17 @@ func (opt *Plugin) logHandler(pattern string, handler http.Handler) http.Handler
 }
 ```
 
-## 添加中间件
+## Adding Middleware
 
-中间件可以通过`AddMiddleware`方法添加到`HTTPConfig`中，添加的顺序与中间件执行的顺序相反，最后添加的最先执行。
+Middleware can be added to `HTTPConfig` through the `AddMiddleware` method. The order in which middleware is added is the reverse order in which it is executed, and the last middleware added is the first to be executed.
 
 ```go
 func (config *HTTP) AddMiddleware(middleware Middleware) {
 	config.middlewares = append(config.middlewares, middleware)
 }
 ```
-### 添加全局中间件
+
+### Adding Global Middleware
 
 ```go
 func init(){
@@ -40,19 +43,21 @@ func init(){
     })
   })
 }
-
 ```
-### 添加插件中间件
-对于具备http请求响应的插件，则可以单独添加中间件
+
+### Adding Plugin Middleware
+
+For plugins that have HTTP request responses, middlewares can be added separately:
 ```go
-import 	"m7s.live/engine/v4/config"
+import	"m7s.live/engine/v4/config"
 
 type MyPluginConfig struct {
   config.HTTP
 }
 
 var myPluginConfig = MyPluginConfig{}
-func init(){
+
+func init() {
   myPluginConfig.HTTP.AddMiddleware(func(pattern string, handler http.Handler) http.Handler {
     return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
       // do something
@@ -60,7 +65,8 @@ func init(){
     })
   })
 }
-``` 
-:::warning 注意
-当插件的http没有单独配置端口时，将复用全局的http配置，此时设置的插件中间件无效。
+```
+
+:::warning Note
+When the HTTP of the plugin does not have a separately configured port, the global HTTP configuration will be reused, and the middleware set for the plugin will be invalid.
 :::
