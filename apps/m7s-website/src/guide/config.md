@@ -50,6 +50,7 @@ global:
   speedlimit: 500ms # 限速超时时间0为不限速，对于读取文件这类流需要限速，否则读取过快
   eventbussize: 10 # 事件总线缓存大小，事件较多时容易堵阻塞线程，需要增大缓存
   pulseinterval: 5s # 心跳事件间隔时间
+  printts: false # 打印时间戳
   console: 
     server : console.monibuca.com:4242 # 连接远程控制台的地址
     secret: "" # 远程控制台的秘钥
@@ -99,3 +100,15 @@ global:
 - 其中`repush`代表重试的次数，如果设置为`-1`则为无限重试，`0`则是不重试
 - `pushlist`是一个键值对映射（map）`key`代表`streamPath`，`value`就是远程流地址。
 - 当`m7s`中一旦出现map中包含的流时，就会推流到远端服务器
+
+## 环境变量覆盖配置
+
+示例：
+设置global下的loglevel为debug
+```bash
+$ export GLOBAL_LOGLEVEL=debug
+```
+设置record下的flv的fragment为10s
+```bash
+$ export RECORD_FLV_FRAGMENT=10s
+```
