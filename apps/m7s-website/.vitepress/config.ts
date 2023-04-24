@@ -13,7 +13,8 @@ export const sidebar = {
         { text: '介绍', link: '/guide/introduction' },
         { text: '快速起步', link: '/guide/startup' },
         { text: '配置', link: '/guide/config' },
-        { text: 'API', link: '/guide/api' }
+        { text: 'API', link: '/guide/api' },
+        { text: '鉴权', link: '/guide/authentication' }
       ]
     },
     {
