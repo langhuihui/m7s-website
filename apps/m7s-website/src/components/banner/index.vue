@@ -9,7 +9,7 @@
         <div class="item-2">开源Go语言流媒体服务器开发框架</div>
         <div class="item-3">
           <slot>
-            <span>最新版:v4.5.2</span>
+            <span>最新版:v4.5.4</span>
           </slot>
         </div>
         <div class="flex">
