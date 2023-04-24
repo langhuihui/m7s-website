@@ -1,8 +1,27 @@
 # 鉴权
 
-目前没有内置任何鉴权的逻辑，但是提供了可供二次开发的鉴权钩子，方便自定义鉴权。
+## 内置鉴权机制
 
-## 针对单协议鉴权
+在publish 和 subscribe 中配置 key 引擎会自动进行鉴权,
+推流或者拉流时需要在url中添加参数 secret=xxx&expire=xxx。
+
+- secret为鉴权前面，MD5(key+StreamPath+expire)
+- expire为鉴权失效时间，格式是十六进制 UNIX 时间戳
+
+### 时间戳计算
+```
+设置时间：2018.12.01 08:30:00
+十进制 UNIX 时间戳：1543624200
+十六进制 UNIX 时间戳：5C01D608（云直播鉴权配置使用十六进制 UNIX 时间戳，十六进制不区分字母大小写）
+```
+### 鉴权签名计算
+```
+secret = MD5(key+StreamPath+expire) 
+secret = MD5(ngoeiq03+test/01+5C01D608)
+secret = MD5(ngoeiq03test/015C01D608)
+secret = ce797dc6238156d548ef945e6ad1ea20
+```
+## 针对单协议自定义鉴权
 
 引擎中定义如下两个接口，插件中的发布者或者订阅者可以实现这两个接口，引擎会在发布或者订阅时调用这两个接口进行鉴权
 ```go
@@ -60,7 +79,7 @@ func (p *MyAuthPublisher) AuthPub(promise *util.Promise[IPublisher]) error {
 
 ```
 
-## 全局鉴权
+## 自定义全局鉴权
 引擎中定义如下两个全局函数的变量，插件中可以对这两个变量进行赋值，引擎会在发布或者订阅时调用这两个接口进行鉴权
 ```go
 var OnAuthSub func(p *util.Promise[ISubscriber]) error
