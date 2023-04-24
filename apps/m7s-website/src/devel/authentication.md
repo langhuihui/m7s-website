@@ -5,7 +5,7 @@
 在publish 和 subscribe 中配置 key 引擎会自动进行鉴权,
 推流或者拉流时需要在url中添加参数 secret=xxx&expire=xxx。
 
-- secret为鉴权前面，MD5(key+StreamPath+expire)
+- secret为鉴权签名：MD5(key+StreamPath+expire)
 - expire为鉴权失效时间，格式是十六进制 UNIX 时间戳
 
 ### 时间戳计算
