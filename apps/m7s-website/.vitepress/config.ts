@@ -93,6 +93,13 @@ export default defineConfigWithTheme<ThemeConfig>({
   lastUpdated: true,
 
   head: [
+   [
+      'link',
+      {
+        rel: 'icon',
+        href: '/svg/logo.svg',
+      }
+    ],
     [
       'script',
       {
