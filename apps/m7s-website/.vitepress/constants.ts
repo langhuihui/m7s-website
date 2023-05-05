@@ -4,17 +4,13 @@ const data = [
   { name: '首页', url: '/' },
   {
     name: '文档',
-    activeMatch: `^/(guide)/`,
-    children: [
-      { name: '使用指南', url: '/guide/introduction' },
-      { name: '开发指南', url: '/devel/startup' }
-    ]
+    url: 'https://docs.m7s.live'
   },
   {
-    name: 'B站视频',
+    name: '视频教程',
     children: [
       {
-        name: '视频教程',
+        name: 'B站视频',
         url: 'https://space.bilibili.com/328443019/channel/collectiondetail?sid=514619'
       },
       { name: 'RTS分享', url: 'https://www.bilibili.com/video/BV1jg411H7qE/' }

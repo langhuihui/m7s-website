@@ -5,7 +5,7 @@ footer: false
 # 介绍
 
 :::tip 您正在阅读的是m7s v4的文档
-- m7s v3 文档请访问https://docs.m7s.live
+- m7s v3 文档需要自行访问[https://github.com/langhuihui/m7s-docs](https://github.com/langhuihui/m7s-docs) 的v3分支
 - [v4升级的功能](/guide/v4)
 :::
 
