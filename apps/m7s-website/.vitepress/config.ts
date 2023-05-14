@@ -25,6 +25,7 @@ export const sidebar = {
         { text: 'hdl', link: '/guide/plugins/hdl' },
         { text: 'hls', link: '/guide/plugins/hls' },
         { text: 'gb28181', link: '/guide/plugins/gb28181' },
+        { text: 'ps', link: '/guide/plugins/ps' },
         { text: 'jessica', link: '/guide/plugins/jessica' },
         { text: 'webrtc', link: '/guide/plugins/webrtc' },
         { text: 'webtransport', link: '/guide/plugins/webtransport' },
