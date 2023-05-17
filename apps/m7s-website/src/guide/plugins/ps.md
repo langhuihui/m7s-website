@@ -16,7 +16,9 @@ https://github.com/Monibuca/plugin-ps
 
 ```yaml
 ps:
+  http: # 格式参考全局配置
   publish: # 格式参考全局配置
+  subscribe: # 格式参考全局配置
   relaymode: 1 # 0:纯转发 1:转协议，不转发 2:转发并且转协议
 ```
 
@@ -32,3 +34,11 @@ ps:
 `/ps/api/replay?streamPath=xxx&dump=xxx`
 - dump 代表需要回放的文件，默认是dump/ps
 - streamPath 代表回放时生成的视频流的streamPath, 默认是replay/dump/ps (如果dump传了abc, 那么streamPath默认是replay/abc)
+
+### 以ws协议读取PS流
+
+`ws://[host]/ps/[streamPath]`
+
+例如： ws://localhost:8080/ps/live/test
+
+数据包含的是裸的PS数据，不包含rtp头
