@@ -20,6 +20,10 @@
   ],
   "rewrites": [
     {
+      "source": "/chat/(.*)",
+      "destination": "/api/chat"
+    },
+    {
       "source": "/engine/(.*)",
       "destination": "/api/engine"
     },
