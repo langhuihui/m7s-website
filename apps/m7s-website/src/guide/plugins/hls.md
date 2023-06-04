@@ -2,6 +2,7 @@
 
 - 该插件可用来拉取网络上的m3u8文件并解析后转换成其他协议
 - 可以直接访问`http://localhost:8080/hls/live/user1.m3u8` 进行播放，其中8080端口是全局HTTP配置，live/user1是streamPath，需要根据实际情况修改
+- llhls地址形式`http://localhost:8080/llhls/live/user1/index.m3u8` 进行播放，其中8080端口是全局HTTP配置，live/user1是streamPath，需要根据实际情况修改
 
 ## 插件地址
 
@@ -26,7 +27,10 @@ import (
 - 配置信息按照需要添加到配置文件中，无需复制全部默认配置信息
 - publish 和 subscribe 配置会覆盖全局配置
 ```yaml
+llhls:
+    http: # 参考全局配置格式
 hls:
+    http: # 参考全局配置格式
     publish: # 格式参考全局配置
     subscribe: # 格式参考全局配置
     pull: # 格式 https://m7s.live/guide/config.html#%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE
@@ -53,3 +57,8 @@ relaymode 可以配置不同的转发模式
 hls:
   relaymode: 1
 ```
+## HLS.js测试页面
+
+访问 `http://localhost:8080/hls/index.html`
+
+域名和端口根据实际情况修改
