@@ -30,6 +30,9 @@ const showZf = ref(false)
           </div>
         </div>
         <div class="item">
+          <img class="qun" src="/images/m7s/footer/wx-mp.jpg" alt />
+        </div>
+        <div class="item">
           <img class="qun" src="https://console.monibuca.com/api/files/wxqrcode.png" alt />
         </div>
          <div class="item">
@@ -37,7 +40,7 @@ const showZf = ref(false)
         </div>
       </div>
       <div class="p2">
-        <div class="rights">Copyright © Monibuca 开发团队</div>
+        <div class="rights">Copyright © 不卡科技</div>
       </div>
     </div>
   </div>
