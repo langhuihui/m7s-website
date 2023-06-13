@@ -30,6 +30,11 @@
 由于实例会监听http端口，所以如果需要运行多实例，就需要为每个实例指定不同的http端口，因此需要启动时指定配置文件，例如./m7s_linux_x86 -c config.yaml
 :::
 
+### Docker启动
+```bash
+docker run -id -p 1935:1935 -p 8080:8080 -p 8443:8443 -p 554:554 -p 58200:58200 -p 5060:5060/udp -p 8000:8000/udp -p 9000:9000 langhuihui/monibuca:latest
+```
+
 ### 自行编译启动工程
 1. `git clone https://github.com/langhuihui/monibuca`
 2. `cd monibuca`
