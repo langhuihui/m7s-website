@@ -9,7 +9,7 @@
         <div class="item-2">开源Go语言流媒体服务器开发框架</div>
         <div class="item-3">
           <slot>
-            <a href="https://mp.weixin.qq.com/s/T12tOpIyVbJGjsDxP_s_Zg">v4.6.3 发布说明</a>
+            <a href="https://mp.weixin.qq.com/s/pLiZedUeibYoccyIqP6mog">v4.6.4 发布说明</a>
           </slot>
         </div>
         <div class="flex">

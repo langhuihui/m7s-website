@@ -9,7 +9,6 @@ const showZf = ref(false)
       <div class="p1">
         <div class="item" >
           <a href="https://opencollective.com/monibuca" style="color: #fff;" target="_blank">Monibuca 开源社区</a>
-          <img src="/images/alogo.png"/>
         </div>
         <div class="item">
           <div class="title">支持我们</div>
