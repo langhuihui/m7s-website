@@ -51,7 +51,10 @@ const data = [
   },
   {
     name: '控制台',
-    url: 'https://console.monibuca.com'
+    children: [
+      { name: '在线版本', url: 'https://console.monibuca.com' },
+      { name: '本地部署', url: 'https://mp.weixin.qq.com/s/nlaKVhT-H8JTcfd0uCj40g' }
+    ]
   },
   {
     name: '关于',
