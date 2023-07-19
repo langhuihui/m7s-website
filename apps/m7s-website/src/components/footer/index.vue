@@ -1,15 +1,12 @@
 <script setup>
-import { ref } from 'vue'
-const showWx = ref(false)
-const showZf = ref(false)
+import { ref } from 'vue';
+const showWx = ref(false);
+const showZf = ref(false);
 </script>
 <template>
   <div class="footer" id="footer">
     <div class="box">
       <div class="p1">
-        <div class="item" >
-          <a href="https://opencollective.com/monibuca" style="color: #fff;" target="_blank">Monibuca 开源社区</a>
-        </div>
         <div class="item">
           <div class="title">支持我们</div>
           <div class="icon-list">
@@ -35,7 +32,10 @@ const showZf = ref(false)
         <div class="item">
           <img class="qun" src="https://console.monibuca.com/api/files/wxqrcode.png" alt />
         </div>
-         <div class="item">
+        <div class="item">
+          <img class="qun" src="/images/m7s/footer/qqgroup.jpg" alt />
+        </div>
+        <div class="item">
           <img class="qun" src="/images/m7s/footer/qq-qun.jpeg" alt />
         </div>
       </div>
@@ -45,5 +45,4 @@ const showZf = ref(false)
     </div>
   </div>
 </template>
-<style lang="less" scoped src="./index.less">
-</style>
+<style lang="less" scoped src="./index.less"></style>
