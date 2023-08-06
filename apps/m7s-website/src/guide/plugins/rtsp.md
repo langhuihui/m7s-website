@@ -48,7 +48,7 @@ rtsp:
     rtcpaddr: :8001
     readbuffercount: 2048 # 读取缓存队列大小
     writebuffercount: 2048 # 写出缓存队列大小
-    pullprotocol: 'auto' # auto, tcp, udp
+    pullprotocol: tcp # auto, tcp, udp
 ```
 :::tip 配置覆盖
 publish
@@ -60,8 +60,9 @@ subscribe
 ### `rtsp/api/list`
 获取所有rtsp流
 
-### `rtsp/api/pull?target=[RTSP地址]&streamPath=[流标识]&save=[0|1]`
+### `rtsp/api/pull?target=[RTSP地址]&streamPath=[流标识]&save=[0|1|2]`
 从远程拉取rtsp到m7s中
-
+- save含义：0、不保存；1、保存到pullonstart；2、保存到pullonsub
+- RTSP地址需要进行urlencode 防止其中的特殊字符影响解析
 ### `rtsp/api/push?target=[RTSP地址]&streamPath=[流标识]`
 将本地的流推送到远端

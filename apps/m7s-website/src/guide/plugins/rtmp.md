@@ -41,13 +41,15 @@ ffplay -i rtmp://localhost/live/test
 rtmp:
     publish: # 参考全局配置格式
     subscribe: # 参考全局配置格式
+    tcp:
+        listenaddr: :1935
+        listenaddrtls: ""  # 用于RTMPS协议
+        certfile: ""
+        keyfile: ""
+        listennum: 0
+        nodelay: false
     pull: # 格式参考文档 https://m7s.live/guide/config.html#%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE
     push: # 格式参考文档 https://m7s.live/guide/config.html#%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE
-    tcp:
-        nodelay: true # 是否禁用nagle算法
-        listenaddr: :1935
-        listenaddrtls: "" # 用于tls加密的监听地址，如果为空则不启用tls
-        listennum: 0
     chunksize: 65536 # rtmp chunk size
     keepalive: false #保持rtmp连接，默认随着stream的close而主动断开
 ```
@@ -61,8 +63,9 @@ subscribe
 ### `rtmp/api/list`
 获取所有rtmp流
 
-### `rtmp/api/pull?target=[RTMP地址]&streamPath=[流标识]`
+### `rtmp/api/pull?target=[RTMP地址]&streamPath=[流标识]&save=[0|1|2]`
 从远程拉取rtmp到m7s中
-
+- save含义：0、不保存；1、保存到pullonstart；2、保存到pullonsub
+- RTMP地址需要进行urlencode 防止其中的特殊字符影响解析
 ### `rtmp/api/push?target=[RTMP地址]&streamPath=[流标识]`
 将本地的流推送到远端
