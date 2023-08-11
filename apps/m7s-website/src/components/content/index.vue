@@ -120,8 +120,13 @@ const plugins2 = [
     url:"https://github.com/3201301734/plugin-snapplug"
   },
   {
+    name:"m7s-reportor",
+    desc:"将m7s的流信息和设备信息上报到redis",
+    url:"https://github.com/bigbeer1/m7s-reportor"
+  },
+  {
     name:"虚位以待",
-    desc:"可联系作者添加到此列表",
+    desc:"可联系我们添加到此列表",
     url:""
   }
 ]
@@ -144,7 +149,7 @@ const plugins3 = [
   },
   {
     name:"虚位以待",
-    desc:"可联系作者添加到此列表",
+    desc:"可联系我们添加到此列表",
   }
 ]
 </script>
