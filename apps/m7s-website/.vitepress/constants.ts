@@ -4,7 +4,7 @@ const data = [
   { name: '首页', url: '/' },
   {
     name: '文档',
-    url: 'https://docs.m7s.live'
+    url: '/docs/index.html'
   },
   {
     name: '视频教程',
