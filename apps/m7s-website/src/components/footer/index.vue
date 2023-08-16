@@ -40,7 +40,7 @@ const showZf = ref(false);
         </div>
       </div>
       <div class="p2">
-        <div class="rights">Copyright © 不卡科技</div>
+        <div class="rights">@2023 Monibuca All Rights Reserved 南京莫妮不卡科技有限公司 <a href="https://beian.miit.gov.cn/" target="_blank">苏ICP备2023025807号-1</a></div>
       </div>
     </div>
   </div>

@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "copy": "node scripts/copy-readme.js",
+    "upload": "./scripts/deploy.mjs",
     "dev": "turbo run dev",
     "build": "turbo run build",
     "deploy": "turbo run build --scope=m7s-website --includeDependencies --no-deps"
@@ -16,6 +17,7 @@
     "@vercel/node": "^1.14.1",
     "pnpm": "^6.32.6",
     "prettier": "^2.6.2",
-    "turbo": "^1.2.2"
+    "turbo": "^1.2.2",
+    "zx": "^7.2.3"
   }
 }
