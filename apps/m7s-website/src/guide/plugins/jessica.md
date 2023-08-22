@@ -27,22 +27,12 @@ jessica:
       cors: true  # 是否自动添加cors头
       username: ""  # 用户名和密码，用于API访问时的基本身份认证
       password: ""
-    subscribe:
-        subaudio: true # 是否订阅音频流
-        subvideo: true # 是否订阅视频流
-        subaudioargname: ats # 订阅音频轨道参数名
-        subvideoargname: vts # 订阅视频轨道参数名
-        subdataargname: dts # 订阅数据轨道参数名
-        subaudiotracks: [] # 订阅音频轨道名称列表
-        subvideotracks: [] # 订阅视频轨道名称列表
-        submode: 0 # 订阅模式，0为跳帧追赶模式，1为不追赶（多用于录制），2为时光回溯模式
-        iframeonly: false # 只订阅关键帧
-        waittimeout: 10s # 等待发布者的超时时间，用于订阅尚未发布的流
+    subscribe: # 格式参考全局配置
 ```
 
 ## 协议说明
 
-该插件提供两种格式的协议供播放器播放。
+该插件提供websocket格式的协议供jessibuca播放器播放。
 
 ### WS-RAW
 
@@ -54,3 +44,8 @@ jessica:
 
 - 地址格式：ws://[HOST]/jessica/[streamPath].flv
 - 该协议传输的flv格式的文件流
+
+## Raw-H26x
+
+- 地址格式：`<http|ws>://[HOST]/jessica/[streamPath].<h264|h265>`
+- 该协议传输裸流格式的H264或H265数据

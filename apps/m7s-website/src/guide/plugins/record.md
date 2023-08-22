@@ -20,20 +20,16 @@ import (
 
 ```yaml
 record:
-  subscribe:
-      subaudio: true # 是否订阅音频流
-      subvideo: true # 是否订阅视频流
-      subaudioargname: ats # 订阅音频轨道参数名
-      subvideoargname: vts # 订阅视频轨道参数名
-      subdataargname: dts # 订阅数据轨道参数名
-      subaudiotracks: [] # 订阅音频轨道名称列表
-      subvideotracks: [] # 订阅视频轨道名称列表
-      submode: 0 # 订阅模式，0为跳帧追赶模式，1为不追赶（多用于录制），2为时光回溯模式
-      iframeonly: false # 只订阅关键帧
-      waittimeout: 10s # 等待发布者的超时时间，用于订阅尚未发布的流
+  subscribe: # 格式参考全局配置
   flv:
       ext: .flv
       path: record/flv
+      autorecord: false
+      filter: ""
+      fragment: 0
+  fmp4:
+      ext: .mp4
+      path: record/fmp4
       autorecord: false
       filter: ""
       fragment: 0

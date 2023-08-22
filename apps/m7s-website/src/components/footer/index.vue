@@ -28,15 +28,16 @@ const showZf = ref(false);
         </div>
         <div class="item">
           <img class="qun" src="/images/m7s/footer/wx-mp.jpg" alt />
-        </div>
-        <div class="item">
-          <img class="qun" src="https://console.monibuca.com/api/files/wxqrcode.png" alt />
+          <div class="pic">关注公众号获取更多信息</div>
         </div>
         <div class="item">
           <img class="qun" src="/images/m7s/footer/qqgroup.jpg" alt />
+          <div class="pic">加入QQ频道互动交流
+          </div>
         </div>
         <div class="item">
           <img class="qun" src="/images/m7s/footer/qq-qun.jpeg" alt />
+          <div class="pic">QQ群</div>
         </div>
       </div>
       <div class="p2">

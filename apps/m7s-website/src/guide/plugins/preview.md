@@ -20,7 +20,7 @@ import (
 
 ## API
 
-- `/preview/[streamPath]?type=[hdl|hls|ws|wt|rtc]` 可用于预览直播流
+- `/preview/[streamPath]?type=[hdl|hls|ws|wt|rtc|http-h265|http-h264|ws-h265|ws-h264]` 可用于预览直播流
 - `/preview/[filepath]` 可用于预览录像文件（开发中）
 
 ## 使用WebTransport注意事项

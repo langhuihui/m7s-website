@@ -17,7 +17,7 @@ func (p *MyPluginConfig) OnEvent(event any) {
   switch event.(type) {
     case FirstConfig: //插件初始化逻辑
     case Config://插件热更新逻辑
-    case *Stream://按需拉流逻辑
+    case InvitePublish://按需拉流逻辑
     case SEwaitPublish://由于发布者掉线等待发布者
     case SEpublish://首次进入发布状态
     case SErepublish://再次进入发布状态

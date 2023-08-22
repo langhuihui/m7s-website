@@ -155,9 +155,9 @@ type AudioTrack interface {
 
 ```
 对于不同的数据格式我们可以选择对应的写入方法，例如
-- `rtmp`格式的数据，我们使用`WriteAVCC`来写入，
+- `rtmp`格式的数据，我们使用`WriteAVCC`来写入，时间戳为毫秒
 - RTP格式数据则可以选择`WriteRTP`或者`WriteRTPPack`来写入。
-- 视频支持`AnnexB`格式写入，使用WriteAnnexB来写入。
+- 视频支持`AnnexB`格式写入，使用WriteAnnexB来写入。时间戳为 90KHZ：毫秒数*90。
 - 视频支持`WriteNalu`,写入Nalu格式的数据。
 - 音频支持`WriteADTS`来写入`ADTS`头信息。
 - 其他数据我们可以先获取到裸数据然后调用`WriteSliceBytes`来写入。

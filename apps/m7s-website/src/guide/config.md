@@ -50,6 +50,7 @@ global:
       subaudiotracks: [] # 订阅音频轨道名称列表
       subvideotracks: [] # 订阅视频轨道名称列表
       submode: 0 # 订阅模式，0为跳帧追赶模式，1为不追赶（多用于录制），2为时光回溯模式
+      syncmode: 0 # 音视频同步模式，0 为按照时间戳同步，1 为按照写入时间同步
       iframeonly: false # 只订阅关键帧
       waittimeout: 10s # 等待发布者的超时时间，用于订阅尚未发布的流
       writebuffersize: 0 # 订阅者写缓存大小，用于减少io次数，但可能影响实时性
@@ -63,6 +64,7 @@ global:
   enablesubevent: true # 启用订阅事件，用于订阅者上下线事件,关闭可以提高性能
   rtpreorderbufferlen: 50 # rtp乱序重排缓存长度
   eventbussize: 10 # 事件总线缓存大小，事件较多时容易堵阻塞线程，需要增大缓存
+  poolsize: 0 # 内存池大小，高并发需要提高性能可以加大内存池，减少 GC
   pulseinterval: 5s # 心跳事件间隔时间
   console: 
     server : console.monibuca.com:44944 # 连接远程控制台的地址
