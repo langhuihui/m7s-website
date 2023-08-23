@@ -276,13 +276,13 @@ const plugins3 = [
               <div class="btn">Docker 部署</div>
             </a>
             <div>下载桌面版</div>
-            <a href="./download/console_windows_amd64.zip" target="_blank">
+            <a href="https://monibuca.com/download/console_windows_amd64.zip" target="_blank">
               <div class="btn"> Windows </div>
             </a>
-            <a href="./download/console_mac_amd64.zip" target="_blank">
+            <a href="https://monibuca.com/download/console_mac_amd64.zip" target="_blank">
               <div class="btn"> Mac(x86) </div>
             </a>
-            <a href="./download/console_mac_arm64.zip" target="_blank">
+            <a href="https://monibuca.com/download/console_mac_arm64.zip" target="_blank">
               <div class="btn"> Mac(arm64) </div>
             </a>
           </div>

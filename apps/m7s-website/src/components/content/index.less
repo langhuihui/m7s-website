@@ -219,6 +219,24 @@
 }
 @media (max-width: 960px) {
   .content {
+    .btn {
+      //  position: relative;
+       margin: 20px 0;
+       cursor: pointer;
+       border-radius: 25px;
+       width: 124px;
+       height: 40px;
+       background: #89d8d7;
+       font-size: 20px;
+       font-family: Microsoft YaHei-Regular, Microsoft YaHei;
+       font-weight: 400;
+       color: #000000;
+       line-height: 40px;
+       text-align: center;
+      //  left: 50%;
+       margin-left: 50%;
+       transform: translateX(-50%);
+     }
     section {
       .tab {
         margin-top: 30px;
@@ -231,6 +249,36 @@
           font-size: 20px;
           font-weight: 400;
           color: #ffffff;
+        }
+      }
+      .box {
+        width: 100%;
+        .title {
+          font-size: 24px;
+          img {
+            margin-top: 6px;
+            height: 8px;
+          }
+        }
+        .ui-content{
+          position: relative;
+          // justify-content: center;
+          // align-items: center;
+          img {
+            transform: perspective(3000px) rotateY(60deg) translateX(-200px) scale(0.7,0.7);
+          }
+          .btn {
+            margin: 4px 0px 0 0;
+          }
+          &>div{
+            position: absolute;
+            top: 10%;
+            right: 0;
+            &>div{
+              margin: 10px -50px;
+              font-size: 16px;
+            }
+          }
         }
       }
     }
@@ -286,33 +334,7 @@
 
   #m7s {
     margin-top: 10px;
-    .btn {
-      //  position: relative;
-       margin: 20px 0;
-       cursor: pointer;
-       border-radius: 25px;
-       width: 124px;
-       height: 40px;
-       background: #89d8d7;
-       font-size: 20px;
-       font-family: Microsoft YaHei-Regular, Microsoft YaHei;
-       font-weight: 400;
-       color: #000000;
-       line-height: 40px;
-       text-align: center;
-      //  left: 50%;
-       margin-left: 50%;
-       transform: translateX(-50%);
-     }
-    .box {
-     width: 100%;
-     .title {
-       font-size: 24px;
-       img {
-         margin-top: 6px;
-         height: 8px;
-       }
-     }
+  
      .m7s-feature {
        margin-top: 30px;
        .m7s-tab {
@@ -431,5 +453,4 @@
        }
      }
    }
-  }
 }
