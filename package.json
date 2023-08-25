@@ -11,7 +11,7 @@
     "upload": "./scripts/deploy.mjs",
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "deploy": "turbo run build --scope=m7s-website --includeDependencies --no-deps"
+    "deploy": "turbo run build --scope=m7s-website --includeDependencies --no-deps && npm run upload"
   },
   "devDependencies": {
     "@vercel/node": "^1.14.1",
