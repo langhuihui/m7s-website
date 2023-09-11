@@ -469,7 +469,7 @@
           </g>
         </g>
       </g>
-      <image xlink:href="/stage.gif" transform="matrix(1, 0.58, 0, 1, 23, 450) scale(.7)" />
+      <!-- <image xlink:href="/stage.gif" transform="matrix(1, 0.58, 0, 1, 23, 450) scale(.7)" /> -->
       <!-- <foreignObject x="0" y="0" width="120" height="90" style="transform: matrix(1, 0.58, 0, 1, 23, 450)">
           <video  xmlns="http://www.w3.org/1999/xhtml" width="120" height="90" loop="" src="/stage.webm" autoplay="">
           </video>

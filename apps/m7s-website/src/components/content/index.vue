@@ -4,10 +4,10 @@ import { ref, computed } from 'vue';
 import Roles from '../Roles.vue';
 const active = ref(0);
 const active2 = ref(0);
-const server = ref("localhost");
-const streamPath = ref("live/test");
-const pushProtocol = ref("rtmp");
-const pullProtocol = ref("rtmp");
+// const server = ref("localhost");
+// const streamPath = ref("live/test");
+// const pushProtocol = ref("rtmp");
+// const pullProtocol = ref("rtmp");
 const list = [
   {
     title: '极致简洁'
@@ -49,42 +49,42 @@ function jump(url: string) {
 function jump2(url: string) {
   window.open(url);
 }
-function onChangeServer(evt: Event) {
-  server.value = evt.target.value;
-}
-function onChangeStreamPath(evt) {
-  streamPath.value = evt.target.value;
-}
-function onChangePush(evt) {
-  pushProtocol.value = evt.target.value;
-}
-function onChangePull(evt) {
-  pullProtocol.value = evt.target.value;
-}
-const pushURL = computed(() => {
-  switch (pushProtocol.value) {
-    case "rtmp":
-      return "rtmp://" + server.value + "/" + streamPath.value;
-    case "rtsp":
-      return "rtsp://" + server.value + "/" + streamPath.value;
-  }
-});
-const pullURL = computed(() => {
-  switch (pullProtocol.value) {
-    case "rtmp":
-      return "rtmp://" + server.value + "/" + streamPath.value;
-    case "rtsp":
-      return "rtsp://" + server.value + "/" + streamPath.value;
-    case "hls":
-      return "http://" + server.value + ":8080/hls/" + streamPath.value + ".m3u8";
-    case "hdl":
-      return "http://" + server.value + ":8080/hdl/" + streamPath.value + ".flv";
-    case "ws-flv":
-      return "ws://" + server.value + ":8080/jessica/" + streamPath.value + ".flv";
-    case "ws-raw":
-      return "ws://" + server.value + ":8080/jessica/" + streamPath.value;
-  }
-});
+// function onChangeServer(evt: Event) {
+//   server.value = evt.target.value;
+// }
+// function onChangeStreamPath(evt) {
+//   streamPath.value = evt.target.value;
+// }
+// function onChangePush(evt) {
+//   pushProtocol.value = evt.target.value;
+// }
+// function onChangePull(evt) {
+//   pullProtocol.value = evt.target.value;
+// }
+// const pushURL = computed(() => {
+//   switch (pushProtocol.value) {
+//     case "rtmp":
+//       return "rtmp://" + server.value + "/" + streamPath.value;
+//     case "rtsp":
+//       return "rtsp://" + server.value + "/" + streamPath.value;
+//   }
+// });
+// const pullURL = computed(() => {
+//   switch (pullProtocol.value) {
+//     case "rtmp":
+//       return "rtmp://" + server.value + "/" + streamPath.value;
+//     case "rtsp":
+//       return "rtsp://" + server.value + "/" + streamPath.value;
+//     case "hls":
+//       return "http://" + server.value + ":8080/hls/" + streamPath.value + ".m3u8";
+//     case "hdl":
+//       return "http://" + server.value + ":8080/hdl/" + streamPath.value + ".flv";
+//     case "ws-flv":
+//       return "ws://" + server.value + ":8080/jessica/" + streamPath.value + ".flv";
+//     case "ws-raw":
+//       return "ws://" + server.value + ":8080/jessica/" + streamPath.value;
+//   }
+// });
 const plugins = {
   rtmp: "rtmp协议接受推拉、对外推拉",
   rtsp: "rtsp协议接受推拉、对外推拉",
@@ -134,6 +134,10 @@ const plugins3 = [
   {
     name: "transcode",
     desc: "提供转码能力，可以将流转码为其他格式",
+  },
+  {
+    name: "snappro",
+    desc: "极速截图，比 snap 插件截图速度高 10 倍以上",
   },
   {
     name: "cryptor",
@@ -204,6 +208,7 @@ const plugins3 = [
                 <div class="h1">易用</div>
                 <p>无需配置环境，无需安装运行时，直接下载可执行文件</p>
                 <p>为arm架构提供贴心的编译版本，可以直接下载运行</p>
+                <p>也可以用 docker 启动</p>
               </div>
               <a href="https://github.com/langhuihui/monibuca/releases">
                 <div class="btn">所有版本</div>
@@ -221,7 +226,9 @@ const plugins3 = [
                   <a class="iconfont icon-linux" :href="url.M7S_LINUX"></a>
                 </div>
               </div>
-              <div class="download-desc">windows直接双击exe运行，mac需要设置一下文件的可执行权限</div>
+              <div class="docker">
+                <code>docker run -id -p 1935:1935 -p 8080:8080 -p 8443:8443 -p 554:554 -p 58200:58200 -p 5060:5060/udp -p 8000:8000/udp -p 9000:9000 langhuihui/monibuca:latest</code>
+              </div>
             </div>
           </div>
         </div>
@@ -276,7 +283,17 @@ const plugins3 = [
               <div class="btn">Docker 部署</div>
             </a>
             <div>下载桌面版</div>
-            <a href="https://monibuca.com/download/console_windows_amd64.zip" target="_blank">
+            <div class="download">
+              <div class="download-item windows">
+                <a class="iconfont icon-windows"
+                  href="https://download.m7s.live/bin/console_windows_amd64.zip"></a>
+              </div>
+              <div class="download-item apple">
+                <a class="iconfont icon-apple"
+                  href="https://download.m7s.live/bin/target/console_mac.zip"></a>
+              </div>
+            </div>
+            <!-- <a href="https://monibuca.com/download/console_windows_amd64.zip" target="_blank">
               <div class="btn"> Windows </div>
             </a>
             <a href="https://monibuca.com/download/console_mac_amd64.zip" target="_blank">
@@ -284,7 +301,7 @@ const plugins3 = [
             </a>
             <a href="https://monibuca.com/download/console_mac_arm64.zip" target="_blank">
               <div class="btn"> Mac(arm64) </div>
-            </a>
+            </a> -->
           </div>
         </div>
       </div>

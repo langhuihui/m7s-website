@@ -1,3 +1,55 @@
+  .download {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    .download-item {
+      height: 180px;
+      padding: 20px 0px;
+      border-radius: 2px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .iconfont {
+        font-size: 80px;
+      }
+    }
+  
+    .windows {
+      background-color: #0066aa;
+  
+      &:hover {
+        background-color: #f2f2f2;
+        color: #0066aa;
+      }
+    }
+  
+    .apple {
+      background-color: #a9a9a9;
+  
+      &:hover {
+        background-color: #f2f2f2;
+        color: #a9a9a9;
+      }
+    }
+  
+    .linux {
+      background-color: #ee4433;
+  
+      &:hover {
+        background-color: #f2f2f2;
+        color: #ee4433;
+      }
+    }
+  }
+  .docker {
+    background-color: black;
+    padding: 20px;
+    border: #000000 1px solid;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
 
 .content {
   width: 100%;
@@ -135,55 +187,9 @@
               border-radius: 5px;
             }
             .download {
-              height: 200px;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              color: #fff;
               .download-item {
-                height: 180px;
-                padding: 20px 0px;
-                border-radius: 2px;
-                cursor: pointer;
-                display: flex;
-                justify-content: center;
-                align-items: center;
                 width: 30%;
-                .iconfont {
-                  font-size: 80px;
-                }
               }
-
-              .windows {
-                background-color: #0066aa;
-
-                &:hover {
-                  background-color: #f2f2f2;
-                  color: #0066aa;
-                }
-              }
-
-              .apple {
-                background-color: #a9a9a9;
-
-                &:hover {
-                  background-color: #f2f2f2;
-                  color: #a9a9a9;
-                }
-              }
-
-              .linux {
-                background-color: #ee4433;
-
-                &:hover {
-                  background-color: #f2f2f2;
-                  color: #ee4433;
-                }
-              }
-            }
-            .download-desc {
-              margin-top: 20px;
-              font-size: 20px;
             }
           }
         }
@@ -199,9 +205,19 @@
           position: absolute;
           top: 50px;
           right: 100px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
           &>div{
             font-size: 30px;
             margin: 30px;
+          }
+        }
+        .download {
+          .download-item {
+            width: 120px;
+            height: 120px;
+            margin: 10px;
           }
         }
       }
@@ -233,9 +249,7 @@
        color: #000000;
        line-height: 40px;
        text-align: center;
-      //  left: 50%;
-       margin-left: 50%;
-       transform: translateX(-50%);
+       margin-left: 0;
      }
     section {
       .tab {
@@ -273,10 +287,22 @@
           &>div{
             position: absolute;
             top: 10%;
-            right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             &>div{
-              margin: 10px -50px;
+              margin: 10px;
               font-size: 16px;
+            }
+          }
+          .download {
+            height: 100px;
+            flex-direction: column;
+            .download-item {
+              margin: 5px;
+              .iconfont {
+                font-size: 40px;
+              }
             }
           }
         }
@@ -399,56 +425,8 @@
              border-radius: 5px;
            }
            .download {
-             height: 150px;
-             display: flex;
-             justify-content: space-between;
              align-items: flex-start;
-             color: #fff;
-             .download-item {
-               height: 100px;
-               padding: 20px 0px;
-               border-radius: 2px;
-               cursor: pointer;
-               display: flex;
-               justify-content: center;
-               align-items: center;
-               width: 30%;
-               .iconfont {
-                 font-size: 40px;
-               }
-             }
-
-             .windows {
-               background-color: #0066aa;
-
-               &:hover {
-                 background-color: #f2f2f2;
-                 color: #0066aa;
-               }
-             }
-
-             .apple {
-               background-color: #a9a9a9;
-
-               &:hover {
-                 background-color: #f2f2f2;
-                 color: #a9a9a9;
-               }
-             }
-
-             .linux {
-               background-color: #ee4433;
-
-               &:hover {
-                 background-color: #f2f2f2;
-                 color: #ee4433;
-               }
-             }
            }
-          .download-desc {
-            margin-top: -20px;
-            font-size: 16px;
-          }
          }
        }
      }
