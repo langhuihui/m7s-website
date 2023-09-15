@@ -50,6 +50,11 @@ const data = [
     ]
   },
   {
+    name: 'UI',
+    url: '#ui',
+    target: '_self'
+  },
+  {
     name: '关于',
     activeMatch: `^/(about)/`,
     children: [
@@ -66,7 +71,7 @@ export const menu = data.slice(1).map((item) => {
       name: item.name,
       children: item.children?.map((child) => ({
         name: child.name,
-        url: child.url + '.html'
+        url: child.url + '.html',
       }))
     };
     return result;
@@ -79,12 +84,14 @@ export const nav = data.map<NavItem>((item) => {
       text: item.name,
       items: item.children.map((child) => ({
         text: child.name,
-        link: child.url
+        link: child.url,
+        target: child.url.startsWith('#') ? '_self' : '_blank'
       }))
     };
   }
   return {
     text: item.name,
     link: item.url,
+    target: item.url.startsWith('#') ? '_self' : '_blank'
   };
 });

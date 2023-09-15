@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import { Logo } from '@m7s/ui/vue'
 import { menu } from '../../../.vitepress/constants'
+function handleClick(arch: string) {
+  document.querySelector(arch)?.scrollIntoView({ behavior: 'smooth' })
+}
 </script>
 
 <template>
@@ -19,7 +22,10 @@ import { menu } from '../../../.vitepress/constants'
               <a target="_blank" :href="j.url" v-for="(j, i) in item.children" :key="i" class="nav-sheet-item">{{ j.name }}</a>
             </div>
           </template>
-          <span v-else><a target="_blank" :href="item.url" class="nav-sheet-item">{{ item.name }}</a></span>
+          <span v-else>
+            <a v-if="item.url.startsWith('#')" @click="handleClick(item.url)">{{ item.name }}</a>
+            <a v-else target="_blank" :href="item.url" class="nav-sheet-item">{{ item.name }}</a>
+          </span>
         </div>
       </div>
     </div>

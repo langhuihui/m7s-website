@@ -41,9 +41,19 @@ const showZf = ref(false);
         </div>
       </div>
       <div class="p2">
-        <div class="rights">@2023 Monibuca All Rights Reserved 南京莫妮不卡科技有限公司 <a href="https://beian.miit.gov.cn/" target="_blank">苏ICP备2023025807号-1</a></div>
+        <div class="rights">@2023 Monibuca All Rights Reserved 南京莫妮不卡科技有限公司</div>
+        <div style="margin:0 auto;">
+          <a href="https://beian.miit.gov.cn/" target="_blank" style="display:inline-block;color:#939393;height:20px;line-height:20px;">
+            <p style="float:left;height:20px;line-height:20px;margin: 0px 5px 0px 5px; color:#939393;">苏ICP备2023025807号-1</p>
+          </a>
+          <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32011302321580"
+            style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="/images/beian.png"
+              style="float:left;" />
+            <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">苏公网安备
+              32011302321580号</p>
+          </a>
+        </div>
       </div>
-    </div>
   </div>
-</template>
+</div></template>
 <style lang="less" scoped src="./index.less"></style>
