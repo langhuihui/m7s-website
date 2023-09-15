@@ -286,11 +286,11 @@ const plugins3 = [
             <div class="download">
               <div class="download-item windows">
                 <a class="iconfont icon-windows"
-                  href="https://download.m7s.live/bin/console_windows_amd64.zip"></a>
+                  href="https://download.m7s.live/bin/console_windows_amd64.zip?v=0.1.20"></a>
               </div>
               <div class="download-item apple">
                 <a class="iconfont icon-apple"
-                  href="https://download.m7s.live/bin/target/console_mac.zip"></a>
+                  href="https://download.m7s.live/bin/target/console_mac.zip?v=0.1.20"></a>
               </div>
             </div>
             <!-- <a href="https://monibuca.com/download/console_windows_amd64.zip" target="_blank">
