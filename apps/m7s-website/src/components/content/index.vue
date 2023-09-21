@@ -152,6 +152,10 @@ const plugins3 = [
     desc: "高级录制插件，增加定时任务等额外的功能",
   },
   {
+    name: "plugin-cdn",
+    desc: "可以将流推送到CDN,适配多种云厂商",
+  },
+  {
     name: "虚位以待",
     desc: "可联系我们添加到此列表",
   }
