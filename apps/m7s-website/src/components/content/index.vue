@@ -132,6 +132,10 @@ const plugins2 = [
 ];
 const plugins3 = [
   {
+    name: "cascade",
+    desc: "级联插件，提供 m7s 无限级联能力",
+  },
+  {
     name: "transcode",
     desc: "提供转码能力，可以将流转码为其他格式",
   },
