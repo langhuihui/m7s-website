@@ -195,29 +195,35 @@
         }
       }
       .ui-content{
-        position: relative;
+        margin-top: 50px;
+        // position: relative;
+        display: flex;
         // justify-content: center;
         // align-items: center;
         img {
-          transform: perspective(2000px) rotateY(60deg) translateX(-300px) scale(0.7,0.7);
+          // transform: perspective(2000px) rotateY(60deg) translateX(-300px) scale(0.7,0.7);
+          // transform: translateX(-300px)  scale(0.5,0.5);
+         
+          width:700px;
+        }
+        .detail{
+          font-size: 14px;
         }
         &>div{
-          position: absolute;
-          top: 50px;
-          right: 100px;
+          margin: 20px;
           display: flex;
           flex-direction: column;
           align-items: center;
           &>div{
+            margin: 20px;
             font-size: 30px;
-            margin: 30px;
           }
         }
         .download {
           .download-item {
             width: 120px;
             height: 120px;
-            margin: 10px;
+            margin: 5px;
           }
         }
       }
@@ -275,17 +281,18 @@
           }
         }
         .ui-content{
-          position: relative;
+          // position: relative;
+          display: flex;
+          flex-direction: column;
           // justify-content: center;
           // align-items: center;
           img {
-            transform: perspective(3000px) rotateY(60deg) translateX(-200px) scale(0.7,0.7);
+            // transform: perspective(3000px) rotateY(60deg) translateX(-200px) scale(0.7,0.7);
           }
           .btn {
             margin: 4px 0px 0 0;
           }
           &>div{
-            position: absolute;
             top: 10%;
             display: flex;
             flex-direction: column;
@@ -297,7 +304,7 @@
           }
           .download {
             height: 100px;
-            flex-direction: column;
+            // flex-direction: row;
             .download-item {
               margin: 5px;
               .iconfont {
@@ -327,28 +334,30 @@
         .plugin-item {
           padding: 0 5px;
           border: 1px solid #d1e8f8;
-          width: 45%;
+          width: 40%;
+          height: 50px;
           display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
+          // flex-direction: row;
+          // align-items: first baseline;
+          justify-content: start;
           &-logo {
-            height: 40px;
+            height: 20px;
+            display: none;
           }
           &-title {
-            height: 37px;
-            font-size: 20px;
+            height: 10px;
+            font-size:12px;
             font-weight: 400;
             color: #ffffff;
-            // line-height: 58px;
+            line-height: 12px;
           }
           &-content {
-            margin-top: 10px;
-            height: 30px;
-            font-size: 14px;
+            margin-top: 2px;
+            height: 10px;
+            font-size: 10px;
             font-weight: 500;
             color: #d8d8d8;
-            line-height: 20px;
+            line-height: 10px;
           }
         }
       }

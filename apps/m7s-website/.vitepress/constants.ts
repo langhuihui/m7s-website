@@ -50,11 +50,6 @@ const data = [
     ]
   },
   {
-    name: 'UI',
-    url: '#ui',
-    target: '_self'
-  },
-  {
     name: '关于',
     activeMatch: `^/(about)/`,
     children: [

@@ -275,10 +275,29 @@ const plugins3 = [
         </div>
       </div>
     </section>
+    <section>
+      <div class="box">
+        <div class="title">
+          <div>API调试工具</div>
+          <img src="/images/m7s/title-bar.png" alt="">
+        </div>
+        <div class="ui-content">
+          <img src="/images/restful.png" alt="">
+          <div>
+            <a name="ui" href="https://apifox.com/apidoc/shared-46cf252a-7527-4912-8c9e-9017b3cc3581?pwd=5gK6MBvC" target="_blank">
+              <div class="btn">体验版</div>
+            </a>
+            <div class="detail">
+              说明：体验版包括 global 下的所有接口，但不包括插件接口，获取完整版步骤：扫描本页面最下面左侧支持我们，赞助 99 元，将截图发送到公众号私信，我们将发送完整版给您。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <section id="ui">
       <div class="box">
         <div class="title">
-          <div>UI</div>
+          <div>console</div>
           <img src="/images/m7s/title-bar.png" alt="">
         </div>
         <div class="ui-content">
@@ -310,6 +329,36 @@ const plugins3 = [
             <a href="https://monibuca.com/download/console_mac_arm64.zip" target="_blank">
               <div class="btn"> Mac(arm64) </div>
             </a> -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="ui">
+      <div class="box">
+        <div class="title">
+          <div>admin（即将推出）</div>
+          <img src="/images/m7s/title-bar.png" alt="">
+        </div>
+        <div class="ui-content">
+          <img src="/images/admin.png" alt="">
+          <div>
+            <a name="ui" href="https://test.monibuca.com:8081/ui/" target="_blank">
+              <div class="btn">在线体验</div>
+            </a>
+            <!-- <a href="https://mp.weixin.qq.com/s/nlaKVhT-H8JTcfd0uCj40g" target="_blank">
+              <div class="btn">Docker 部署</div>
+            </a> -->
+            <!-- <div>即将推出</div> -->
+            <!-- <div class="download">
+              <div class="download-item windows">
+                <a class="iconfont icon-windows"
+                  href="https://download.m7s.live/bin/console_windows_amd64.zip?v=0.1.20"></a>
+              </div>
+              <div class="download-item apple">
+                <a class="iconfont icon-apple"
+                  href="https://download.m7s.live/bin/target/console_mac.zip?v=0.1.20"></a>
+              </div>
+            </div> -->
           </div>
         </div>
       </div>
