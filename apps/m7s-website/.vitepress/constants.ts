@@ -1,11 +1,6 @@
 import { NavItem } from "@vue/theme/src/vitepress/config";
 
 const data = [
-  { name: '首页', url: '/' },
-  {
-    name: '文档',
-    url: '/docs/index.html'
-  },
   {
     name: '视频教程',
     children: [
@@ -19,7 +14,7 @@ const data = [
   {
     name: '不卡系列',
     children: [
-      { name: 'Monibuca', url: '/' },
+      { name: 'Monibuca', url: 'https://monibuca.com' },
       { name: 'Jessibuca', url: 'https://jessibuca.com' },
       { name: 'Rebebuca', url: 'https://rebebuca.com' }
     ]

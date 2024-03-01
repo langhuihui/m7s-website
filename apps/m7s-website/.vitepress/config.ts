@@ -93,6 +93,7 @@ export default defineConfigWithTheme<ThemeConfig>({
   scrollOffset: 'header',
   lastUpdated: true,
 
+  base: '/docs/',
   head: [
    [
       'link',
@@ -161,6 +162,7 @@ export default defineConfigWithTheme<ThemeConfig>({
         ]
       }
     },
+    base: '/docs/',
     build: {
       minify: 'terser',
       chunkSizeWarningLimit: Infinity
