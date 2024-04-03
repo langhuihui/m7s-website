@@ -6,7 +6,7 @@ footer: false
 
 :::tip 您正在阅读的是m7s v4的文档
 - m7s v3 文档需要自行访问[https://github.com/langhuihui/m7s-docs](https://github.com/langhuihui/m7s-docs) 的v3分支
-- [v4升级的功能](/guide/v4)
+- [v4升级的功能](./v4)
 :::
 
 ## 什么是Monibuca（m7s)？
@@ -15,7 +15,7 @@ Monibuca(发音：模拟不卡，m7s是其缩写，类似k8s) 是一个开源的
 它基于go1.19+，此外并无任何其他依赖构建，并提供了一套插件式的二次开发模型，帮助你高效地开发流媒体服务器，你既可以直接使用官方提供的插件，也可以自己开发插件扩展任意的功能，所以Monibuca是可以支持**任意**流媒体协议的框架！
 
 :::tip 如果您需要二次开发
-- 请访问[开发文档](/devel/startup)
+- 请访问[开发文档](../devel/startup)
 - 建议先熟悉使用文档后再进行二次开发
 :::
 

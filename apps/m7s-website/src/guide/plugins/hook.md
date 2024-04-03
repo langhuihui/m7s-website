@@ -22,16 +22,15 @@ hook:
   retrytimes: 3 # 重试次数
   baseurl: "" # url前缀
   header: {} # 自定义HTTP请求头
-  urllist: {} # url列表
   requestlist: {} # 请求列表
   extra: {} # 额外自定义传输数据
 ```
 
-其中 urllist 是简单的地址列表，例如：
+### 简单配置
 
 ```yaml
 hook:
-  urllist:
+  requestlist:
     "*": "http://www.example.com" # 任意时间均会发送请求
     startup: "http://www.example.com" # m7s启动时发送请求
     publish: "http://www.example.com/publish" # 发布时发送请求
@@ -41,7 +40,7 @@ hook:
     keepalive: "http://www.example.com/keepalive" # 心跳时发送请求
 ```
 
-requestlist 是需要单独配置 Method 和 header 时用到的
+### 复杂配置
 
 ```yaml
 hook:
