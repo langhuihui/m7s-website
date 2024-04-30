@@ -23,4 +23,4 @@ secret = ce797dc6238156d548ef945e6ad1ea20
 ```
 ## 自定义鉴权
 
-自定义鉴权需要二次开发，可以参考[开发文档——鉴权](https://m7s.live/devel/authentication.html)。
+自定义鉴权需要二次开发，可以参考[开发文档——鉴权](https://monibuca.com/docs/devel/authentication.html)。

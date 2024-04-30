@@ -27,13 +27,14 @@ type MyAuthPublisher struct {
   Publisher
 }
 
-func (p *MyAuthPublisher) AuthPub(promise *util.Promise[IPublisher]) error {
+func (p *MyAuthPublisher) OnAuth(promise *util.Promise[IPublisher]) error {
   var auth bool
   var puber = promise.Value
   // do auth
   if !auth {
     return errors.New("auth failed")
   }
+  promise.Resolve()
   return nil
 }
 
@@ -46,7 +47,7 @@ type MyAuthPublisher struct {
   Publisher
 }
 
-func (p *MyAuthPublisher) AuthPub(promise *util.Promise[IPublisher]) error {
+func (p *MyAuthPublisher) OnAuth(promise *util.Promise[IPublisher]) error {
   go func(){
     var auth bool
     var puber = promise.Value
