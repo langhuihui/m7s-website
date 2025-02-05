@@ -1,0 +1,55 @@
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "content-type"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "DELETE,PUT,POST,GET,OPTIONS"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/chat/(.*)",
+      "destination": "/api/chat"
+    },
+    {
+      "source": "/engine/(.*)",
+      "destination": "/api/engine"
+    },
+    {
+      "source": "/plugin/(.*)",
+      "destination": "/api/plugin"
+    },
+    {
+      "source": "/v5",
+      "destination": "/api/v5"
+    },
+    {
+      "source": "/v5/(.*)",
+      "destination": "/api/v5"
+    },
+    {
+      "source": "/docs/:path*",
+      "destination": "https://monibuca.com/docs/:path*"
+    },
+    {
+      "source": "/guide/:path*",
+      "destination": "https://monibuca.com/docs/guide/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
+}
