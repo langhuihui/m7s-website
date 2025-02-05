@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monibuca - High-Performance Streaming Media Server Framework</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="container">
+        <div class="logo">
+          <img src="logo.svg" alt="Monibuca Logo">
+          <span>Monibuca v5</span>
+        </div>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#quickstart">Quick Start</a>
+          <a href="#plugins">Plugins</a>
+          <a href="#pricing">Pricing</a>
+          <a href="https://github.com/langhuihui/monibuca" class="github-link" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Next Generation Streaming Media Server Framework</h1>
+        <p class="subtitle">High-performance, scalable, plugin-based pure Go streaming media server development
+          framework</p>
+        <div class="cta-buttons">
+          <a href="#quickstart" class="primary-button">Quick Start</a>
+          <a href="https://github.com/langhuihui/monibuca" class="secondary-button" target="_blank" rel="noopener">View
+            Docs</a>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="icon">🚀</div>
+            <h3>High Performance</h3>
+            <p>Lock-free design, partial manual memory management, multi-core computing</p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">⚡</div>
+            <h3>Low Latency</h3>
+            <p>Zero-wait forwarding, sub-second end-to-end latency</p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">🌐</div>
+            <h3>Multi-Protocol</h3>
+            <p>Support for RTMP, RTSP, WebRTC, HLS, GB28181, and more</p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">📦</div>
+            <h3>Plugin-Based</h3>
+            <p>Load on demand, unlimited extensibility</p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">🤖</div>
+            <h3>AI Capabilities</h3>
+            <p>Integrated ONNX inference engine, custom processing support</p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">🎥</div>
+            <h3>Media Processing</h3>
+            <p>Support for screenshots, transcoding, SEI data processing</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="features">
+      <div class="container">
+        <h2>Core Features</h2>
+        <div class="features-list">
+          <div class="feature">
+            <h3>🎥 Media Processing</h3>
+            <p>Support for screenshots, transcoding, SEI data processing</p>
+          </div>
+          <div class="feature">
+            <h3>🎮 Preview Features</h3>
+            <p>Support for video preview, split-screen, custom screen layouts</p>
+          </div>
+          <div class="feature">
+            <h3>📊 Performance Monitoring</h3>
+            <p>Support for stress testing and performance metrics collection</p>
+          </div>
+          <div class="feature">
+            <h3>📝 Log Management</h3>
+            <p>Log rotation, automatic cleanup, custom extensions</p>
+          </div>
+          <div class="feature">
+            <h3>🎬 Recording & Playback</h3>
+            <p>Support for MP4, HLS, FLV recording, speed control, and seeking</p>
+          </div>
+          <div class="feature">
+            <h3>⏱️ Dynamic Time Shift</h3>
+            <p>Dynamic cache design, support for live stream time-shift playback</p>
+          </div>
+          <div class="feature">
+            <h3>🌐 Remote Calls</h3>
+            <p>gRPC interface support for cross-language integration</p>
+          </div>
+          <div class="feature">
+            <h3>🏷️ Stream Aliases</h3>
+            <p>Support for dynamic stream aliases, flexible multi-stream management</p>
+          </div>
+          <div class="feature">
+            <h3>🤖 AI Capabilities</h3>
+            <p>Integrated inference engine, ONNX model and custom processing support</p>
+          </div>
+          <div class="feature">
+            <h3>🪝 WebHook</h3>
+            <p>Subscribe to stream lifecycle events for business system integration</p>
+          </div>
+          <div class="feature">
+            <h3>🔒 Private Protocols</h3>
+            <p>Support for custom private protocols to meet special business needs</p>
+          </div>
+          <div class="feature">
+            <h3>🌐 Multi-Protocol Support</h3>
+            <p>RTMP, RTSP, HTTP-FLV, WS-FLV, HLS, WebRTC, GB28181, ONVIF, SRT</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quickstart" class="quickstart">
+      <div class="container">
+        <h2>Quick Start</h2>
+        <div class="code-block">
+          <div class="code-header">
+            <span>Installation</span>
+            <button class="copy-button" data-target="install-code">Copy</button>
+          </div>
+          <pre><code id="install-code"># Clone repository
+git clone https://github.com/langhuihui/monibuca.git
+cd monibuca
+
+# Enter example directory
+cd example/default
+
+# Run with default configuration
+go run -tags sqlite main.go
+
+# Access management interface
+# Place admin.zip in the same directory as the configuration file
+# Visit http://localhost:8080</code></pre>
+        </div>
+        <div id="pricing" class="pricing-section">
+          <h3>Version Information</h3>
+          <div class="pricing-cards">
+            <div class="pricing-card free">
+              <h4>Free Version</h4>
+              <ul>
+                <li>✅ Complete core functionality</li>
+                <li>✅ Basic plugin support</li>
+                <li>✅ Community support</li>
+                <li>❌ Not for commercial use</li>
+                <li>❌ Admin source code not included</li>
+              </ul>
+            </div>
+            <div class="pricing-card commercial">
+              <h4>Commercial Version</h4>
+              <ul>
+                <li>✅ Complete core functionality</li>
+                <li>✅ All plugin support</li>
+                <li>✅ Commercial technical support</li>
+                <li>✅ Commercial use license</li>
+                <li>💰 Admin source code (sold separately)</li>
+              </ul>
+              <p class="contact-info">For commercial licensing details, please contact: <a
+                  href="mailto:support@monibuca.com">support@monibuca.com</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="plugins" class="plugins-section">
+      <div class="container">
+        <h2>Official Plugins</h2>
+        <div class="plugin-categories">
+          <div class="plugin-category">
+            <h3>📹 Protocol Plugins</h3>
+            <ul>
+              <li>RTMP - RTMP protocol push and pull streaming</li>
+              <li>RTSP - RTSP protocol push and pull streaming</li>
+              <li>HLS - HLS protocol live and VOD streaming</li>
+              <li>WebRTC - Low-latency WebRTC protocol transmission</li>
+              <li>GB28181 - National standard protocol support</li>
+              <li>ONVIF - ONVIF protocol device integration</li>
+              <li>SRT - SRT protocol transmission</li>
+              <li>FLV - HTTP-FLV and WebSocket-FLV support</li>
+            </ul>
+          </div>
+          <div class="plugin-category">
+            <h3>📱 Feature Plugins</h3>
+            <ul>
+              <li>Preview - Video preview and split-screen functionality</li>
+              <li>Room - Room management and cascade functionality</li>
+              <li>SEI - SEI data processing</li>
+              <li>Snap - Video frame screenshots</li>
+              <li>Transcode - Video transcoding</li>
+              <li>MP4 - MP4 recording and playback</li>
+            </ul>
+          </div>
+          <div class="plugin-category">
+            <h3>🛠️ System Plugins</h3>
+            <ul>
+              <li>Monitor - System monitoring</li>
+              <li>Debug - Debugging tools</li>
+              <li>LogRotate - Log rotation</li>
+              <li>Stress - Stress testing</li>
+              <li>Crypto - Encrypted transmission</li>
+              <li>Cascade - Cascade functionality</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Resources</h4>
+          <a href="https://github.com/langhuihui/monibuca">Documentation</a>
+          <a href="https://pkg.go.dev/m7s.live/v5">API Reference</a>
+          <a href="https://github.com/langhuihui/monibuca/tree/main/example">Example Code</a>
+        </div>
+        <div class="footer-section">
+          <h4>Community</h4>
+          <a href="https://github.com/langhuihui/monibuca">GitHub</a>
+          <a href="https://github.com/langhuihui/monibuca/issues">Issue Tracker</a>
+        </div>
+        <div class="footer-section">
+          <h4>About</h4>
+          <p>© 2024 Monibuca. Licensed under AGPL.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

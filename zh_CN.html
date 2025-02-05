@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monibuca - 高性能流媒体服务器框架</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="container">
+        <div class="logo">
+          <img src="logo.svg" alt="Monibuca Logo">
+          <span>Monibuca v5</span>
+        </div>
+        <div class="nav-links">
+          <a href="#features">特性</a>
+          <a href="#quickstart">快速开始</a>
+          <a href="#plugins">插件</a>
+          <a href="#pricing">价格</a>
+          <a href="https://github.com/langhuihui/monibuca" class="github-link" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>下一代流媒体服务器框架</h1>
+        <p class="subtitle">高性能、可扩展、插件化的纯 Go 流媒体服务器开发框架</p>
+        <div class="cta-buttons">
+          <a href="#quickstart" class="primary-button">快速开始</a>
+          <a href="https://github.com/langhuihui/monibuca" class="secondary-button" target="_blank" rel="noopener">查看文档</a>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="icon">🚀</div>
+            <h3>高性能</h3>
+            <p>无锁设计、部分手动管理内存、多核计算</p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">⚡</div>
+            <h3>低延迟</h3>
+            <p>0等待转发、全链路亚秒级延迟</p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">🌐</div>
+            <h3>多协议</h3>
+            <p>RTMP、RTSP、WebRTC、HLS、GB28181等协议支持</p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">📦</div>
+            <h3>插件化</h3>
+            <p>按需加载，无限扩展能力</p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">🤖</div>
+            <h3>AI能力</h3>
+            <p>集成ONNX推理引擎，支持自定义处理</p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">🎥</div>
+            <h3>媒体处理</h3>
+            <p>支持截图、转码、SEI数据处理</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="features">
+      <div class="container">
+        <h2>核心特性</h2>
+        <div class="features-list">
+          <div class="feature">
+            <h3>🎥 媒体处理</h3>
+            <p>支持截图、转码、SEI数据处理</p>
+          </div>
+          <div class="feature">
+            <h3>🎮 预览功能</h3>
+            <p>支持视频预览、分屏预览、自定义分屏</p>
+          </div>
+          <div class="feature">
+            <h3>📊 性能监控</h3>
+            <p>支持压力测试和性能指标采集</p>
+          </div>
+          <div class="feature">
+            <h3>📝 日志管理</h3>
+            <p>日志轮转、自动清理、自定义扩展</p>
+          </div>
+          <div class="feature">
+            <h3>🎬 录制回放</h3>
+            <p>支持MP4、HLS、FLV格式录制、倍速播放、拖拽快进</p>
+          </div>
+          <div class="feature">
+            <h3>⏱️ 动态时移</h3>
+            <p>动态缓存设计，支持直播时移回看</p>
+          </div>
+          <div class="feature">
+            <h3>🌐 远程调用</h3>
+            <p>支持gRPC接口，方便跨语言集成</p>
+          </div>
+          <div class="feature">
+            <h3>🏷️ 流别名</h3>
+            <p>支持动态设置流别名，灵活管理多路流</p>
+          </div>
+          <div class="feature">
+            <h3>🤖 AI能力</h3>
+            <p>集成推理引擎，支持ONNX模型和自定义处理</p>
+          </div>
+          <div class="feature">
+            <h3>🪝 WebHook</h3>
+            <p>支持订阅流的生命周期事件，实现业务系统联动</p>
+          </div>
+          <div class="feature">
+            <h3>🔒 私有协议</h3>
+            <p>支持自定义私有协议，满足特殊业务需求</p>
+          </div>
+          <div class="feature">
+            <h3>🌐 多协议支持</h3>
+            <p>RTMP、RTSP、HTTP-FLV、WS-FLV、HLS、WebRTC、GB28181、ONVIF、SRT</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quickstart" class="quickstart">
+      <div class="container">
+        <h2>快速开始</h2>
+        <div class="code-block">
+          <div class="code-header">
+            <span>安装</span>
+            <button class="copy-button" data-target="install-code">复制</button>
+          </div>
+          <pre><code id="install-code"># 克隆仓库
+git clone https://github.com/langhuihui/monibuca.git
+cd monibuca
+
+# 进入示例目录
+cd example/default
+
+# 运行默认配置
+go run -tags sqlite main.go
+
+# 访问管理界面
+# 将 admin.zip 放在配置文件相同目录下
+# 访问 http://localhost:8080</code></pre>
+        </div>
+        <div id="pricing" class="pricing-section">
+          <h3>版本说明</h3>
+          <div class="pricing-cards">
+            <div class="pricing-card free">
+              <h4>免费版</h4>
+              <ul>
+                <li>✅ 完整的核心功能</li>
+                <li>✅ 基础插件支持</li>
+                <li>✅ 社区支持</li>
+                <li>❌ 不可商用</li>
+                <li>❌ 不含Admin源码</li>
+              </ul>
+            </div>
+            <div class="pricing-card commercial">
+              <h4>商业版</h4>
+              <ul>
+                <li>✅ 完整的核心功能</li>
+                <li>✅ 全部插件支持</li>
+                <li>✅ 商业技术支持</li>
+                <li>✅ 可商用授权</li>
+                <li>💰 Admin源码（单独收费）</li>
+              </ul>
+              <p class="contact-info">了解商业授权详情请联系：<a href="mailto:support@monibuca.com">support@monibuca.com</a></p>
+            </div>
+          </div>
+        </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="plugins" class="plugins-section">
+      <div class="container">
+        <h2>官方插件</h2>
+        <div class="plugin-categories">
+          <div class="plugin-category">
+            <h3>📹 协议插件</h3>
+            <ul>
+              <li>RTMP - 支持RTMP协议推流和拉流</li>
+              <li>RTSP - 支持RTSP协议推流和拉流</li>
+              <li>HLS - 支持HLS协议直播和点播</li>
+              <li>WebRTC - 支持WebRTC协议低延迟传输</li>
+              <li>GB28181 - 支持国标协议</li>
+              <li>ONVIF - 支持ONVIF协议设备接入</li>
+              <li>SRT - 支持SRT协议传输</li>
+              <li>FLV - 支持HTTP-FLV和WebSocket-FLV</li>
+            </ul>
+          </div>
+          <div class="plugin-category">
+            <h3>📱 功能插件</h3>
+            <ul>
+              <li>Preview - 视频预览和分屏功能</li>
+              <li>Room - 房间管理和级联功能</li>
+              <li>SEI - SEI数据处理</li>
+              <li>Snap - 视频帧截图</li>
+              <li>Transcode - 视频转码</li>
+              <li>MP4 - MP4录制和点播</li>
+            </ul>
+          </div>
+          <div class="plugin-category">
+            <h3>🛠️ 系统插件</h3>
+            <ul>
+              <li>Monitor - 系统监控</li>
+              <li>Debug - 调试工具</li>
+              <li>LogRotate - 日志分片</li>
+              <li>Stress - 压力测试</li>
+              <li>Crypto - 加密传输</li>
+              <li>Cascade - 级联功能</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>资源</h4>
+          <a href="https://github.com/langhuihui/monibuca">文档</a>
+          <a href="https://pkg.go.dev/m7s.live/v5">API 参考</a>
+          <a href="https://github.com/langhuihui/monibuca/tree/main/example">示例代码</a>
+        </div>
+        <div class="footer-section">
+          <h4>社区</h4>
+          <a href="https://github.com/langhuihui/monibuca">GitHub</a>
+          <a href="https://github.com/langhuihui/monibuca/issues">问题反馈</a>
+        </div>
+        <div class="footer-section">
+          <h4>关于</h4>
+          <p>© 2024 Monibuca. 采用 AGPL 许可证.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
