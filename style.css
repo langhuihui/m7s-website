@@ -240,6 +240,9 @@ nav .container {
 
 .features h2 {
     color: var(--text-color-dark);
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
 }
 
 .features-list {
@@ -259,6 +262,17 @@ nav .container {
 
 .feature p {
     color: var(--text-color-dark-2);
+}
+
+.architecture .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.architecture .container h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
 }
 
 /* Pricing Section */
