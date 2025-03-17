@@ -16,6 +16,10 @@ export default {
       title: 'Low Latency',
       desc: 'Zero-wait forwarding, sub-second end-to-end latency'
     },
+    observability: {
+      title: 'Observability',
+      desc: 'Comprehensive monitoring, logging, and diagnostic capabilities'
+    },
     multiProtocol: {
       title: 'Multi-Protocol',
       desc: 'Support for RTMP, RTSP, WebRTC, HLS, SRT, ONVIF and other protocols'
@@ -34,7 +38,16 @@ export default {
     }
   },
   architecture: {
-    title: 'Architecture'
+    title: 'Architecture',
+    visualization: 'Visualization',
+    admin: 'Admin',
+    integration: 'Integration',
+    functional_plugins: 'Functional Plugins',
+    protocol_plugins: 'Protocol Plugins',
+    util_plugins: 'Utility Plugins',
+    core: 'Core',
+    database: 'Database',
+    clients: 'Clients'
   },
   coreFeatures: {
     title: 'Core Features',

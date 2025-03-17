@@ -10,9 +10,11 @@
                 {{ i18n.hero.subtitle }}
               </p>
               <div class="cta-buttons">
-                <a :href="withBase('/guide/quickstart')" class="primary-button">{{
-                  i18n.hero.documentation
-                }}</a>
+                <a
+                  :href="withBase('/guide/quickstart')"
+                  class="primary-button"
+                  >{{ i18n.hero.documentation }}</a
+                >
                 <a
                   href="https://github.com/langhuihui/monibuca"
                   class="secondary-button"
@@ -51,8 +53,8 @@
             </div>
             <div class="feature-card">
               <div class="icon"><ProtocolIcon /></div>
-              <h3>{{ i18n.features.multiProtocol.title }}</h3>
-              <p>{{ i18n.features.multiProtocol.desc }}</p>
+              <h3>{{ i18n.features.observability.title }}</h3>
+              <p>{{ i18n.features.observability.desc }}</p>
             </div>
             <div class="feature-card">
               <div class="icon"><PluginIcon /></div>
@@ -75,66 +77,13 @@
       <section id="architecture" class="architecture">
         <div class="container">
           <h2>{{ i18n.architecture.title }}</h2>
-          <Architecture viewBox="0 0 1200 1200" style="width: 1200px; height: 1200px;"/>
+          <Architecture />
         </div>
       </section>
       <section id="features" class="features">
         <div class="container">
           <h2>{{ i18n.coreFeatures.title }}</h2>
-          <div class="features-list">
-            <div class="feature">
-              <h3>{{ i18n.coreFeatures.mediaProcessing.title }}</h3>
-              <p>{{ i18n.coreFeatures.mediaProcessing.desc }}</p>
-            </div>
-            <div class="feature">
-              <h3>{{ i18n.coreFeatures.preview.title }}</h3>
-              <p>{{ i18n.coreFeatures.preview.desc }}</p>
-            </div>
-            <div class="feature">
-              <h3>
-                {{ i18n.coreFeatures.performanceMonitoring.title }}
-              </h3>
-              <p>{{ i18n.coreFeatures.performanceMonitoring.desc }}</p>
-            </div>
-            <div class="feature">
-              <h3>{{ i18n.coreFeatures.logManagement.title }}</h3>
-              <p>{{ i18n.coreFeatures.logManagement.desc }}</p>
-            </div>
-            <div class="feature">
-              <h3>{{ i18n.coreFeatures.recordingPlayback.title }}</h3>
-              <p>{{ i18n.coreFeatures.recordingPlayback.desc }}</p>
-            </div>
-            <div class="feature">
-              <h3>{{ i18n.coreFeatures.dynamicTimeshift.title }}</h3>
-              <p>{{ i18n.coreFeatures.dynamicTimeshift.desc }}</p>
-            </div>
-            <div class="feature">
-              <h3>{{ i18n.coreFeatures.remoteCall.title }}</h3>
-              <p>{{ i18n.coreFeatures.remoteCall.desc }}</p>
-            </div>
-            <div class="feature">
-              <h3>{{ i18n.coreFeatures.streamAlias.title }}</h3>
-              <p>{{ i18n.coreFeatures.streamAlias.desc }}</p>
-            </div>
-            <div class="feature">
-              <h3>{{ i18n.coreFeatures.aiCapabilities.title }}</h3>
-              <p>{{ i18n.coreFeatures.aiCapabilities.desc }}</p>
-            </div>
-            <div class="feature">
-              <h3>{{ i18n.coreFeatures.webhook.title }}</h3>
-              <p>{{ i18n.coreFeatures.webhook.desc }}</p>
-            </div>
-            <div class="feature">
-              <h3>{{ i18n.coreFeatures.privateProtocol.title }}</h3>
-              <p>{{ i18n.coreFeatures.privateProtocol.desc }}</p>
-            </div>
-            <div class="feature">
-              <h3>
-                {{ i18n.coreFeatures.multiProtocolSupport.title }}
-              </h3>
-              <p>{{ i18n.coreFeatures.multiProtocolSupport.desc }}</p>
-            </div>
-          </div>
+          <CoreFeatures :i18n="i18n" />
         </div>
       </section>
 
@@ -163,7 +112,7 @@ go run -tags sqlite main.go
 {{ i18n.quickstart.code.visit }}</code></pre>
           </div>
           <div id="pricing" class="pricing-section">
-            <h3>{{ i18n.pricing.title }}</h3>
+            <h2>{{ i18n.pricing.title }}</h2>
             <div class="pricing-cards">
               <div class="pricing-card free">
                 <h4>{{ i18n.pricing.free.title }}</h4>
@@ -252,10 +201,27 @@ import ProtocolIcon from "./icons/ProtocolIcon.vue";
 import PluginIcon from "./icons/PluginIcon.vue";
 import AiIcon from "./icons/AiIcon.vue";
 import MediaIcon from "./icons/MediaIcon.vue";
-import Architecture from "./icons/ArchitectureIcon.vue";
+import Architecture from "./Architecture.vue";
 import RingBuffer from "./icons/RingBuffer.vue";
+import CoreFeatures from "./CoreFeatures.vue";
 const { lang } = useData();
 const i18n = computed(() => translations[lang.value] || translations.zh);
+
+// 定义核心特征键数组 - 已移到CoreFeatures组件中
+// const coreFeatureKeys = [
+//   "mediaProcessing",
+//   "preview",
+//   "performanceMonitoring",
+//   "logManagement",
+//   "recordingPlayback",
+//   "dynamicTimeshift",
+//   "remoteCall",
+//   "streamAlias",
+//   "aiCapabilities",
+//   "webhook",
+//   "privateProtocol",
+//   "multiProtocolSupport",
+// ];
 </script>
 
 <style scoped>
@@ -303,7 +269,11 @@ h3 {
 .hero {
   padding: 96px 0;
   min-height: 640px;
-  background: linear-gradient(to bottom, var(--vp-c-bg) 0%, var(--vp-c-bg-soft) 100%);
+  background: linear-gradient(
+    to bottom,
+    var(--vp-c-bg) 0%,
+    var(--vp-c-bg-soft) 100%
+  );
 }
 
 .hero-content {
@@ -346,21 +316,31 @@ h3 {
 
 /* 添加连接线效果 */
 .hero-content::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 45%;
   width: 10%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--vp-c-brand-light), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--vp-c-brand-light),
+    transparent
+  );
   opacity: 0.5;
   z-index: 0;
   animation: pulse 3s infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 0.2; }
-  50% { opacity: 0.6; }
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.6;
+  }
 }
 
 h1 {
@@ -368,22 +348,49 @@ h1 {
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 24px;
-  background: linear-gradient(180deg,#fff,#ffffff4f);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   position: relative;
 }
 
-/* 添加标题光晕效果 */
+/* 暗色主题下使用白色渐变 */
+.dark h1 {
+  background: linear-gradient(180deg, #fff, #ffffff4f);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 亮色主题下使用品牌色渐变，加强对比度 */
+:root:not(.dark) h1 {
+  background: linear-gradient(
+    180deg,
+    var(--vp-c-brand-darker, #3e54c8) 0%,
+    var(--vp-c-brand-dark) 60%,
+    var(--vp-c-brand) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* 增强阴影效果，提高亮色模式下的可见度 */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2),
+    -2px -2px 4px rgba(255, 255, 255, 0.5);
+  filter: drop-shadow(0 2px 8px rgba(100, 108, 255, 0.5));
+  font-weight: 800; /* 加粗字体 */
+  opacity: 0.95; /* 轻微降低透明度以增强可读性 */
+}
+
+/* 添加标题光晕效果 - 基础样式 */
 h1::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -20px;
   right: -40px;
   width: 80px;
   height: 80px;
-  background: radial-gradient(circle, var(--vp-c-brand-light) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    var(--vp-c-brand-light) 0%,
+    transparent 70%
+  );
   opacity: 0.3;
   border-radius: 50%;
   filter: blur(10px);
@@ -392,8 +399,33 @@ h1::after {
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-10px) scale(1.1); }
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.1);
+  }
+}
+
+/* 增强光晕效果在亮色主题下的表现 */
+:root:not(.dark) h1::after {
+  opacity: 0.5;
+  background: radial-gradient(circle, var(--vp-c-brand) 0%, transparent 70%);
+  filter: blur(16px);
+  animation: float-light 6s ease-in-out infinite;
+}
+
+@keyframes float-light {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-10px) scale(1.2);
+    opacity: 0.7;
+  }
 }
 
 .subtitle {

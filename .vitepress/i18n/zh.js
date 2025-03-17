@@ -16,6 +16,10 @@ export default {
       title: '低延迟',
       desc: '0等待转发、全链路亚秒级延迟'
     },
+    observability: {
+      title: '可观测',
+      desc: '全面的监控、日志和诊断能力'
+    },
     multiProtocol: {
       title: '多协议',
       desc: 'RTMP、RTSP、WebRTC、HLS、SRT、ONVIF、GB28181等协议支持'
@@ -34,7 +38,16 @@ export default {
     }
   },
   architecture: {
-    title: '架构'
+    title: '架构',
+    visualization: '可视化',
+    admin: 'Admin',
+    integration: '集成',
+    functional_plugins: '功能插件',
+    protocol_plugins: '协议插件',
+    util_plugins: '工具插件',
+    core: '核心',
+    database: '数据库',
+    clients: '客户端'
   },
   coreFeatures: {
     title: '核心特性',
