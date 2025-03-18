@@ -5,9 +5,11 @@
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build",
-    "preview": "vitepress preview"
+    "preview": "vitepress preview",
+    "test:lang": "node tests/language-detection.js"
   },
   "devDependencies": {
+    "chrome-remote-interface": "^0.33.0",
     "less": "^4.2.2",
     "vitepress": "2.0.0-alpha.3",
     "vue": "^3.3.0"

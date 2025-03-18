@@ -212,6 +212,7 @@ import AiIcon from "./icons/AiIcon.vue";
 import MediaIcon from "./icons/MediaIcon.vue";
 import Architecture from "./Architecture.vue";
 import RingBuffer from "./icons/RingBuffer.vue";
+
 const { lang } = useData();
 const i18n = computed(() => translations[lang.value] || translations.zh);
 

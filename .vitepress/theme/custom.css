@@ -1,0 +1,19 @@
+/* 英文页面样式覆盖 */
+html[lang="en"] .VPFooter {
+  display: block !important;
+}
+
+html[lang="en"] .VPHome {
+  margin-bottom: 128px !important;
+}
+
+/* 中文页面样式覆盖 */
+html[lang="zh"] .VPFooter {
+  display: none !important;
+}
+
+html[lang="zh"] .VPHome {
+  margin-bottom: 0 !important;
+}
+
+/* 添加其他全局样式覆盖 */ 
