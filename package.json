@@ -2,7 +2,6 @@
   "name": "monibuca-docs",
   "version": "1.0.0",
   "description": "Monibuca Documentation",
-  "type": "module",
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build",
