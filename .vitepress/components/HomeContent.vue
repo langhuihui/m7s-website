@@ -13,26 +13,32 @@
                 <a
                   :href="withBase('/guide/quickstart')"
                   class="primary-button"
-                  >{{ i18n.hero.documentation }}</a
+                  ><Icon icon="teenyicons:doc-solid" width="20" height="20" />{{ i18n.hero.documentation }}</a
                 >
                 <a
                   href="https://github.com/langhuihui/monibuca"
                   class="secondary-button"
                   target="_blank"
                   rel="noopener"
-                  ><svg
-                    height="20"
+                  ><Icon
+                    icon="simple-icons:github"
                     width="20"
+                    height="20"
                     style="margin-right: 8px"
-                    aria-hidden="true"
-                    viewBox="0 0 16 16"
-                    version="1.1"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
-                    ></path></svg
-                  >Github</a
+                  />Github</a
+                >
+                <a
+                  v-if="lang === 'zh'"
+                  href="https://gitee.com/m7s/monibuca"
+                  class="secondary-button"
+                  target="_blank"
+                  rel="noopener"
+                  ><Icon
+                    icon="simple-icons:gitee"
+                    width="20"
+                    height="20"
+                    style="margin-right: 8px"
+                  />Gitee</a
                 >
               </div>
             </div>
@@ -156,7 +162,7 @@ go run -tags sqlite main.go
         </div>
       </section>
 
-      <section id="plugins" class="plugins-section">
+      <section id="plugins" class="plugins">
         <div class="container">
           <h2>{{ i18n.plugins.title }}</h2>
           <div class="plugin-categories">
@@ -212,6 +218,7 @@ import AiIcon from "./icons/AiIcon.vue";
 import MediaIcon from "./icons/MediaIcon.vue";
 import Architecture from "./Architecture.vue";
 import RingBuffer from "./icons/RingBuffer.vue";
+import { Icon } from "@iconify/vue";
 
 const { lang } = useData();
 const i18n = computed(() => translations[lang.value] || translations.zh);
@@ -274,6 +281,10 @@ const coreFeatureKeys = [
 .hover-lift() {
   transform: translateY(-5px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+
+  html:not(.dark) & {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }
 }
 
 .gradient-text(@direction: 120deg, @color1: @gradient-highlight-1, @color2: @gradient-highlight-2) {
@@ -319,6 +330,15 @@ h3 {
   // Dark mode variables
   .dark & {
     --code-background: #101010;
+  }
+
+  // Light mode variables
+  html:not(.dark) & {
+    --background-color: #ffffff;
+    --text-color-dark: @text-color;
+    --text-color-dark-2: @text-color-light;
+    color: var(--text-color);
+    background: #ffffff;
   }
 }
 
@@ -573,11 +593,23 @@ h1 {
   color: var(--text-color-dark);
   border: 1px solid rgba(255, 255, 255, 0.2);
 
+  html:not(.dark) & {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text-color);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
   &:hover {
     background: rgba(255, 255, 255, 0.15);
     transform: translateY(-2px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     color: white;
+
+    html:not(.dark) & {
+      background: rgba(0, 0, 0, 0.08);
+      color: var(--text-color);
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
   }
 }
 
@@ -605,6 +637,11 @@ h1 {
   &:hover {
     .hover-lift();
     border-color: rgba(255, 255, 255, 0.2);
+
+    html:not(.dark) & {
+      border-color: @primary-color;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
   }
 
   .icon {
@@ -664,11 +701,28 @@ h1 {
     z-index: -1;
   }
 
+  html:not(.dark) &::before {
+    background: radial-gradient(
+        circle at 0% 0%,
+        rgba(189, 52, 254, 0.05),
+        rgba(255, 255, 255, 0) 50%
+      ),
+      radial-gradient(
+        circle at 100% 0%,
+        rgba(71, 202, 255, 0.05),
+        rgba(255, 255, 255, 0) 50%
+      );
+  }
+
   h2 {
     color: var(--text-color-dark);
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 3rem;
+
+    html:not(.dark) & {
+      color: var(--text-color);
+    }
   }
 
   &-list {
@@ -723,6 +777,10 @@ h1 {
 
 // Architecture section
 .architecture {
+  html:not(.dark) & {
+    background: #ffffff;
+  }
+
   .container {
     display: flex;
     flex-direction: column;
@@ -731,6 +789,10 @@ h1 {
     h2 {
       font-size: 2.5rem;
       margin-bottom: 3rem;
+
+      html:not(.dark) & {
+        color: var(--text-color);
+      }
     }
   }
 }
@@ -763,10 +825,27 @@ h1 {
     z-index: -1;
   }
 
+  html:not(.dark) &::before {
+    background: radial-gradient(
+        circle at 30% 0%,
+        rgba(189, 52, 254, 0.05),
+        rgba(255, 255, 255, 0) 50%
+      ),
+      radial-gradient(
+        circle at 70% 0%,
+        rgba(71, 202, 255, 0.05),
+        rgba(255, 255, 255, 0) 50%
+      );
+  }
+
   h2 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
     text-align: center;
+
+    html:not(.dark) & {
+      color: var(--text-color);
+    }
   }
 
   &-cards {
@@ -842,6 +921,11 @@ h1 {
   padding: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 
+  html:not(.dark) & {
+    color: @text-color-light;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
   a {
     color: @primary-color;
     text-decoration: none;
@@ -856,10 +940,18 @@ h1 {
 .quickstart {
   padding: 80px 0;
 
+  html:not(.dark) & {
+    background: #ffffff;
+  }
+
   h2 {
     text-align: center;
     margin-bottom: 3rem;
     font-size: 2.5rem;
+
+    html:not(.dark) & {
+      color: var(--text-color);
+    }
   }
 }
 
@@ -927,6 +1019,10 @@ h1 {
 pre {
   margin: 0;
   padding: 1.5rem;
+
+  html:not(.dark) & {
+    background: @code-background-light;
+  }
 }
 
 code {
@@ -944,6 +1040,10 @@ code {
   padding: 80px 0;
   background: @black-card-bg;
   position: relative;
+
+  html:not(.dark) & {
+    background: #ffffff;
+  }
 
   &::before {
     content: "";
@@ -965,8 +1065,25 @@ code {
     z-index: -1;
   }
 
+  html:not(.dark) &::before {
+    background: radial-gradient(
+        circle at 100% 50%,
+        rgba(71, 202, 255, 0.05),
+        rgba(255, 255, 255, 0) 50%
+      ),
+      radial-gradient(
+        circle at 0% 50%,
+        rgba(189, 52, 254, 0.05),
+        rgba(255, 255, 255, 0) 50%
+      );
+  }
+
   h2 {
     color: @text-color-dark;
+
+    html:not(.dark) & {
+      color: var(--text-color);
+    }
   }
 
   &-grid {
@@ -1067,6 +1184,12 @@ footer {
   color: var(--text-color-dark);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 
+  html:not(.dark) & {
+    background: var(--code-background-light);
+    color: var(--text-color);
+    border-top: 1px solid @border-color;
+  }
+
   &::before {
     background: radial-gradient(
         circle at 0% 0%,
@@ -1078,6 +1201,19 @@ footer {
         rgba(71, 202, 255, 0.15),
         rgba(26, 26, 26, 0) 50%
       );
+
+    html:not(.dark) & {
+      background: radial-gradient(
+          circle at 0% 0%,
+          rgba(189, 52, 254, 0.05),
+          rgba(255, 255, 255, 0) 50%
+        ),
+        radial-gradient(
+          circle at 100% 100%,
+          rgba(71, 202, 255, 0.05),
+          rgba(255, 255, 255, 0) 50%
+        );
+    }
   }
 }
 

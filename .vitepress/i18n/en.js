@@ -1,6 +1,6 @@
 export default {
   hero: {
-    title: 'Monibuca 5.0',
+    title: 'Monibuca',
     subtitle: 'High-performance, scalable, plugin-based pure Go streaming server development framework',
     quickStart: 'Quick Start',
     viewDocs: 'View Docs',
@@ -153,7 +153,29 @@ export default {
     features: 'Features',
     coreFeatures: 'Core Features',
     mediaProcessing: 'Media Processing',
-    aiCapabilities: 'AI Capabilities'
+    aiCapabilities: 'AI Capabilities',
+    whyMonibuca: 'Why Monibuca',
+    streamPushing: 'Stream Pushing',
+    streamSubscription: 'Stream Subscription',
+    pushProxy: 'Push Proxy',
+    pullProxy: 'Pull Proxy',
+    recording: 'Recording',
+    playback: 'Playback',
+    timeShift: 'Time Shift',
+    authentication: 'Authentication',
+    alias: 'Alias',
+    grpc: 'gRPC',
+    hook: 'Hook',
+    transcoding: 'Transcoding',
+    encryption: 'Encryption',
+    screenshot: 'Screenshot',
+    preview: 'Preview',
+    monitoring: 'Monitoring',
+    cluster: 'Cluster',
+    secondaryDevelopment: 'Secondary Development',
+    pluginDevelopment: 'Plugin Development',
+    apiReference: 'API Reference',
+    coreArchitecture: 'Core Architecture'
   },
   themeConfig: {
     siteTitle: 'Monibuca',

@@ -7,7 +7,9 @@
     xmlns="http://www.w3.org/2000/svg"
     :class="['ring-buffer', props.className]"
     @mouseenter="accelerateAnimation"
-    @mouseleave="normalizeAnimation"
+    @mouseleave="handleMouseLeave"
+    @mousedown="handleMouseDown"
+    @mouseup="handleMouseUp"
   >
     <!-- 背景 -->
     <circle cx="200" cy="200" r="200" class="ring-background" />
@@ -115,7 +117,6 @@
       />
     </g>
 
-    <!-- 中心罗马数字 V -->
     <text
       x="200"
       y="220"
@@ -125,7 +126,7 @@
       stroke="currentColor"
       stroke-width="1"
     >
-      V
+      v5
     </text>
   </svg>
 </template>
@@ -173,11 +174,13 @@ for (let i = 0; i < segmentCount; i++) {
 // 动画计时器和速度控制
 let animationTimer: number | null = null;
 let currentWriteIndex = 0;
-let currentReadIndex = 0;
-const animationSpeed = ref(1.5); // 动画持续时间（秒）
-const normalInterval = 600; // 正常间隔（毫秒）
-const fastInterval = 200; // 快速间隔（毫秒）
-let currentInterval = normalInterval;
+const maxInterval = 600; // 最大间隔（毫秒）
+const minInterval = 50; // 最小间隔（毫秒）
+let currentInterval = maxInterval;
+let lastUsedInterval = maxInterval; // 记录上一次使用的间隔
+let isHovering = false;
+let isMouseDown = false; // 记录鼠标是否按下
+let speedTransitionTimer: number | null = null;
 
 // 添加旋转角度状态
 const rotationAngle = ref(0);
@@ -192,26 +195,57 @@ const updateRotation = () => {
   rotationTimer = requestAnimationFrame(updateRotation);
 };
 
-// 修改加速动画函数
-const accelerateAnimation = () => {
-  if (animationTimer !== null) {
-    clearInterval(animationTimer);
+// 逐渐改变速度
+const transitionSpeed = () => {
+  if (isHovering) {
+    // 如果鼠标按下，则更快地加速
+    const decrementStep = isMouseDown ? 30 : 10;
+    // 逐渐加速到最小间隔
+    currentInterval = Math.max(minInterval, currentInterval - decrementStep);
+  } else {
+    // 逐渐减速到最大间隔
+    currentInterval = Math.min(maxInterval, currentInterval + 5);
   }
-  currentInterval = fastInterval;
+
   // 更新旋转速度
   rotationSpeed.value = -360 / (currentInterval * 2);
-  animationTimer = window.setInterval(simulateRingBuffer, currentInterval);
+
+  // 如果达到目标速度，停止过渡
+  if (
+    (isHovering && currentInterval <= minInterval) ||
+    (!isHovering && currentInterval >= maxInterval)
+  ) {
+    if (speedTransitionTimer !== null) {
+      clearInterval(speedTransitionTimer);
+      speedTransitionTimer = null;
+    }
+  }
+};
+
+// 修改加速动画函数
+const accelerateAnimation = () => {
+  isHovering = true;
+  // 如果没有活动的过渡计时器，启动一个
+  if (speedTransitionTimer === null) {
+    speedTransitionTimer = window.setInterval(transitionSpeed, 50);
+  }
 };
 
 // 修改恢复正常速度函数
 const normalizeAnimation = () => {
-  if (animationTimer !== null) {
-    clearInterval(animationTimer);
+  isHovering = false;
+  // 如果没有活动的过渡计时器，启动一个
+  if (speedTransitionTimer === null) {
+    speedTransitionTimer = window.setInterval(transitionSpeed, 50);
   }
-  currentInterval = normalInterval;
-  // 更新旋转速度
-  rotationSpeed.value = -360 / (currentInterval * 2);
-  animationTimer = window.setInterval(simulateRingBuffer, currentInterval);
+};
+
+// 处理鼠标离开事件 - 结合恢复速度和松开按钮的功能
+const handleMouseLeave = () => {
+  // 处理鼠标松开
+  isMouseDown = false;
+  // 处理鼠标离开（恢复速度）
+  normalizeAnimation();
 };
 
 // 创建圆弧路径
@@ -256,6 +290,17 @@ const polarToCartesian = (
 
 // 模拟环形缓冲区操作
 const simulateRingBuffer = () => {
+  // 检查间隔是否发生变化
+  if (currentInterval !== lastUsedInterval) {
+    // 更新定时器使用新的间隔
+    if (animationTimer !== null) {
+      clearInterval(animationTimer);
+    }
+    animationTimer = window.setInterval(simulateRingBuffer, currentInterval);
+    // 更新记录的间隔
+    lastUsedInterval = currentInterval;
+  }
+
   // 重置所有节点状态
   segments.value.forEach((segment) => {
     segment.active = false;
@@ -273,6 +318,16 @@ const simulateRingBuffer = () => {
   currentWriteIndex = nextIndex;
 };
 
+// 处理鼠标按下事件
+const handleMouseDown = () => {
+  isMouseDown = true;
+};
+
+// 处理鼠标释放事件
+const handleMouseUp = () => {
+  isMouseDown = false;
+};
+
 onMounted(() => {
   // 启动动画
   animationTimer = window.setInterval(simulateRingBuffer, currentInterval);
@@ -286,6 +341,9 @@ onUnmounted(() => {
   }
   if (rotationTimer !== null) {
     cancelAnimationFrame(rotationTimer);
+  }
+  if (speedTransitionTimer !== null) {
+    clearInterval(speedTransitionTimer);
   }
 });
 </script>
@@ -301,6 +359,7 @@ onUnmounted(() => {
   --ring-indicator-opacity: 0.3;
   --ring-divider-color: var(--vp-c-divider);
   color: var(--vp-c-text-1); /* 设置默认文本颜色 */
+  cursor: pointer;
 }
 
 /* 背景圆形 */
@@ -353,7 +412,7 @@ onUnmounted(() => {
 }
 
 .center-text {
-  font-family: "Times New Roman", serif;
+  font-family: "Tahoma", serif;
   font-size: 48px;
   font-weight: bold;
   filter: drop-shadow(0 0 8px var(--ring-active-color));

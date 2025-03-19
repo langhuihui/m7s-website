@@ -1,6 +1,6 @@
 export default {
   hero: {
-    title: 'Monibuca 5.0',
+    title: 'Monibuca',
     subtitle: '高性能、可扩展、插件化的纯 Go 流媒体服务器开发框架',
     quickStart: '快速开始',
     viewDocs: '查看文档',
@@ -153,7 +153,29 @@ export default {
     features: '功能特性',
     coreFeatures: '核心功能',
     mediaProcessing: '媒体处理',
-    aiCapabilities: 'AI 能力'
+    aiCapabilities: 'AI 能力',
+    whyMonibuca: '为什么选择 Monibuca',
+    streamPushing: '接受推流',
+    streamSubscription: '接受订阅',
+    pushProxy: '推流代理',
+    pullProxy: '拉流代理',
+    recording: '录像',
+    playback: '回放',
+    timeShift: '时移',
+    authentication: '鉴权',
+    alias: '别名',
+    grpc: 'gRPC',
+    hook: 'Hook',
+    transcoding: '转码',
+    encryption: '加密',
+    screenshot: '截图',
+    preview: '预览',
+    monitoring: '监控',
+    cluster: '集群',
+    secondaryDevelopment: '二次开发',
+    pluginDevelopment: '插件开发',
+    apiReference: 'API 参考',
+    coreArchitecture: '核心架构'
   },
   themeConfig: {
     siteTitle: 'Monibuca',
