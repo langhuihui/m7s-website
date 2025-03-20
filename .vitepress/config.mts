@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress';
 import translations from "./i18n";
 
-const commonThemeConfig = (translation) => ({
+const commonThemeConfig = (locales: '' | 'zh' | 'en' = '', translation = translations[locales || 'zh']) => ({
   nav: [
     { text: translation.nav.features, link: '/#features' },
     { text: translation.nav.quickStart, link: '/#quickstart' },
@@ -15,39 +15,39 @@ const commonThemeConfig = (translation) => ({
     {
       text: translation.sidebar.introduction,
       items: [
-        { text: translation.sidebar.whatIsMonibuca, link: '/guide/what-is-monibuca' },
-        { text: translation.sidebar.quickStart, link: '/guide/quickstart' },
-        { text: translation.sidebar.whyMonibuca, link: '/guide/why' }
+        { text: translation.sidebar.whatIsMonibuca, link: locales + '/guide/what-is-monibuca' },
+        { text: translation.sidebar.quickStart, link: locales + '/guide/quickstart' },
+        { text: translation.sidebar.whyMonibuca, link: locales + '/guide/why' }
       ]
     },
     {
       text: translation.sidebar.features,
       items: [
-        { text: translation.sidebar.streamPushing, link: '/features/stream-pushing' },
-        { text: translation.sidebar.streamSubscription, link: '/features/stream-subscription' },
-        { text: translation.sidebar.pushProxy, link: '/features/push-proxy' },
-        { text: translation.sidebar.pullProxy, link: '/features/pull-proxy' },
-        { text: translation.sidebar.recording, link: '/features/recording' },
-        { text: translation.sidebar.playback, link: '/features/playback' },
-        { text: translation.sidebar.timeShift, link: '/features/time-shift' },
-        { text: translation.sidebar.authentication, link: '/features/authentication' },
-        { text: translation.sidebar.alias, link: '/features/alias' },
-        { text: translation.sidebar.grpc, link: '/features/grpc' },
-        { text: translation.sidebar.hook, link: '/features/hook' },
-        { text: translation.sidebar.transcoding, link: '/features/transcoding' },
-        { text: translation.sidebar.encryption, link: '/features/encryption' },
-        { text: translation.sidebar.screenshot, link: '/features/screenshot' },
-        { text: translation.sidebar.preview, link: '/features/preview' },
-        { text: translation.sidebar.monitoring, link: '/features/monitoring' },
-        { text: translation.sidebar.cluster, link: '/features/cluster' }
+        { text: translation.sidebar.streamPushing, link: locales + '/features/stream-pushing' },
+        { text: translation.sidebar.streamSubscription, link: locales + '/features/stream-subscription' },
+        { text: translation.sidebar.pushProxy, link: locales + '/features/push-proxy' },
+        { text: translation.sidebar.pullProxy, link: locales + '/features/pull-proxy' },
+        { text: translation.sidebar.recording, link: locales + '/features/recording' },
+        { text: translation.sidebar.playback, link: locales + '/features/playback' },
+        { text: translation.sidebar.timeShift, link: locales + '/features/time-shift' },
+        { text: translation.sidebar.authentication, link: locales + '/features/authentication' },
+        { text: translation.sidebar.alias, link: locales + '/features/alias' },
+        { text: translation.sidebar.grpc, link: locales + '/features/grpc' },
+        { text: translation.sidebar.hook, link: locales + '/features/hook' },
+        { text: translation.sidebar.transcoding, link: locales + '/features/transcoding' },
+        { text: translation.sidebar.encryption, link: locales + '/features/encryption' },
+        { text: translation.sidebar.screenshot, link: locales + '/features/screenshot' },
+        { text: translation.sidebar.preview, link: locales + '/features/preview' },
+        { text: translation.sidebar.monitoring, link: locales + '/features/monitoring' },
+        { text: translation.sidebar.cluster, link: locales + '/features/cluster' }
       ]
     },
     {
       text: translation.sidebar.secondaryDevelopment,
       items: [
-        { text: translation.sidebar.pluginDevelopment, link: '/development/plugin-development' },
-        { text: translation.sidebar.apiReference, link: '/development/api-reference' },
-        { text: translation.sidebar.coreArchitecture, link: '/development/core-architecture' }
+        { text: translation.sidebar.pluginDevelopment, link: locales + '/develop/plugin' },
+        { text: translation.sidebar.apiReference, link: locales + '/develop/api' },
+        { text: translation.sidebar.coreArchitecture, link: locales + '/develop/core' }
       ]
     }
   ],
@@ -92,13 +92,13 @@ export default defineConfig({
       label: '中文',
       lang: 'zh',
       description: '高性能流媒体服务器框架',
-      themeConfig: commonThemeConfig(translations.zh)
+      themeConfig: commonThemeConfig()
     },
     en: {
       label: 'English',
       lang: 'en',
       description: 'High-performance streaming media server framework',
-      themeConfig: commonThemeConfig(translations.en)
+      themeConfig: commonThemeConfig('en')
     }
   },
 
@@ -108,6 +108,12 @@ export default defineConfig({
       { icon: 'x', link: 'https://x.com/m7server' },
       { icon: 'discord', link: 'https://discord.gg/QKrKMtCuDg' },
       { icon: 'github', link: 'https://github.com/langhuihui/monibuca' }
-    ]
+    ],
+    search: {
+      provider: 'local' as const,
+      options: {
+        detailedView: true
+      }
+    }
   }
 }); 

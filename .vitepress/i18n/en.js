@@ -172,7 +172,7 @@ export default {
     preview: 'Preview',
     monitoring: 'Monitoring',
     cluster: 'Cluster',
-    secondaryDevelopment: 'Secondary Development',
+    secondaryDevelopment: 'Development',
     pluginDevelopment: 'Plugin Development',
     apiReference: 'API Reference',
     coreArchitecture: 'Core Architecture'
@@ -185,6 +185,11 @@ export default {
     docFooter: {
       prev: 'Previous page',
       next: 'Next page'
+    },
+    search: {
+      placeholder: 'Search documentation',
+      noResults: 'No results found',
+      buttonText: 'Search'
     }
   },
   footer: {

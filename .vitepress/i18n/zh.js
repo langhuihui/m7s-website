@@ -172,7 +172,7 @@ export default {
     preview: '预览',
     monitoring: '监控',
     cluster: '集群',
-    secondaryDevelopment: '二次开发',
+    secondaryDevelopment: '开发指南',
     pluginDevelopment: '插件开发',
     apiReference: 'API 参考',
     coreArchitecture: '核心架构'
@@ -185,6 +185,11 @@ export default {
     docFooter: {
       prev: '上一页',
       next: '下一页'
+    },
+    search: {
+      placeholder: '搜索文档',
+      noResults: '没有找到相关结果',
+      buttonText: '搜索'
     }
   },
   footer: {
