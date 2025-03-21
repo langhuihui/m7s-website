@@ -2,9 +2,7 @@ export default {
   hero: {
     title: 'Monibuca',
     subtitle: '高性能、可扩展、插件化的纯 Go 流媒体服务器开发框架',
-    quickStart: '快速开始',
-    viewDocs: '查看文档',
-    documentation: '技术文档'
+    quickStart: '快速入门',
   },
   features: {
     title: '核心特性',
@@ -186,7 +184,7 @@ export default {
     alias: '别名系统'
   },
   themeConfig: {
-    siteTitle: 'Monibuca',
+    siteTitle: 'Monibuca v5',
     darkModeSwitchLabel: '切换深色模式',
     returnToTopLabel: '返回顶部',
     lastUpdatedText: '最后更新于',

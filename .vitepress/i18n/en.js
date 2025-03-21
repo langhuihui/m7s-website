@@ -3,8 +3,6 @@ export default {
     title: 'Monibuca',
     subtitle: 'High-performance, scalable, plugin-based pure Go streaming server development framework',
     quickStart: 'Quick Start',
-    viewDocs: 'View Docs',
-    documentation: 'Documentation'
   },
   features: {
     title: 'Core Features',
@@ -186,7 +184,7 @@ export default {
     alias: 'Alias System'
   },
   themeConfig: {
-    siteTitle: 'Monibuca',
+    siteTitle: 'Monibuca v5',
     darkModeSwitchLabel: 'Toggle dark mode',
     returnToTopLabel: 'Return to top',
     lastUpdatedText: 'Last updated',

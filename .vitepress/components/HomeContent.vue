@@ -13,7 +13,7 @@
                 <a
                   :href="withBase('/guide/quickstart')"
                   class="primary-button"
-                  ><Icon icon="teenyicons:doc-solid" width="20" height="20" />{{ i18n.hero.documentation }}</a
+                  ><Icon icon="teenyicons:doc-solid" width="20" height="20" />{{ i18n.hero.quickStart }}</a
                 >
                 <a
                   href="https://github.com/langhuihui/monibuca"
@@ -114,10 +114,9 @@
             </div>
             <pre><code id="install-code">{{ i18n.quickstart.code.clone }}
 git clone https://github.com/langhuihui/monibuca.git
-cd monibuca
 
 {{ i18n.quickstart.code.enterExample }}
-cd example/default
+cd monibuca/example/default
 
 {{ i18n.quickstart.code.runConfig }}
 go run -tags sqlite main.go

@@ -48,7 +48,7 @@
         </div>
       </div>
 
-      <div class="footer-links">
+      <!-- <div class="footer-links">
         <div class="link-column">
           <h3>视频教程</h3>
           <a href="https://space.bilibili.com/328443019/lists?sid=514619"
@@ -158,7 +158,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="chinese-copyright">
       <div class="copyright-content">
