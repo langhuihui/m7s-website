@@ -140,6 +140,7 @@ export default {
     quickStart: 'Quick Start',
     plugins: 'Plugins',
     pricing: 'Pricing',
+    document: 'Document',
     admin: 'Admin',
     github: 'GitHub'
   },
@@ -180,8 +181,7 @@ export default {
     log: 'Logging',
     task: 'Task System',
     relay: 'Relay System',
-    http: 'HTTP',
-    alias: 'Alias System'
+    http: 'HTTP'
   },
   themeConfig: {
     siteTitle: 'Monibuca v5',

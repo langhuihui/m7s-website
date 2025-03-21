@@ -10,10 +10,10 @@
                 {{ i18n.hero.subtitle }}
               </p>
               <div class="cta-buttons">
-                <a
-                  :href="withBase('/guide/quickstart')"
-                  class="primary-button"
-                  ><Icon icon="teenyicons:doc-solid" width="20" height="20" />{{ i18n.hero.quickStart }}</a
+                <a :href="withBase('/guide/quickstart')" class="primary-button"
+                  ><Icon icon="teenyicons:doc-solid" width="20" height="20" />{{
+                    i18n.hero.quickStart
+                  }}</a
                 >
                 <a
                   href="https://github.com/langhuihui/monibuca"
@@ -1246,6 +1246,11 @@ footer {
     flex-direction: column;
     text-align: center;
     gap: 32px;
+    margin-bottom: 32px;
+
+    &::before {
+      display: none;
+    }
   }
 
   .hero-visual {
@@ -1258,6 +1263,8 @@ footer {
 
   .cta-buttons {
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
   h1 {
@@ -1268,31 +1275,139 @@ footer {
     font-size: 18px;
   }
 
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
   .plugin-categories {
     grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .pricing-card {
+    width: 100%;
+    flex: 0 1 auto;
+  }
+
+  .container {
+    padding: 0 1rem;
   }
 }
 
 @media (max-width: 640px) {
   .hero {
-    padding: 64px 0;
+    padding: 48px 0;
     min-height: auto;
   }
 
   .ring-buffer {
-    transform: scale(0.7);
+    transform: scale(0.6);
+    margin: -40px;
   }
 
   .cta-buttons {
     flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .primary-button,
+  .secondary-button {
+    width: 100%;
   }
 
   h1 {
     font-size: 32px;
+    margin-bottom: 16px;
   }
 
   .subtitle {
     font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card {
+    padding: 1.5rem;
+
+    .icon svg {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  .pricing-section {
+    padding: 2rem 0;
+  }
+
+  .pricing-cards {
+    gap: 1rem;
+  }
+
+  .pricing-card {
+    padding: 1.5rem;
+  }
+
+  .quickstart {
+    padding: 40px 0;
+  }
+
+  .code-block {
+    margin: 0 1rem;
+  }
+
+  pre {
+    padding: 1rem;
+    overflow-x: auto;
+  }
+
+  code {
+    font-size: 0.8rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .plugins {
+    padding: 40px 0;
+  }
+
+  h2 {
+    font-size: 2rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .plugin-category {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 32px 0;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .ring-buffer {
+    transform: scale(0.5);
+    margin: -60px;
+  }
+
+  .feature-card {
+    padding: 1.25rem;
+  }
+
+  .plugin-category h3 {
+    font-size: 1.25rem;
   }
 }
 </style>

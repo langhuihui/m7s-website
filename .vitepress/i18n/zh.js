@@ -140,6 +140,7 @@ export default {
     quickStart: '快速开始',
     plugins: '插件',
     pricing: '价格',
+    document: '文档',
     admin: 'Admin',
     github: 'GitHub'
   },
@@ -180,8 +181,7 @@ export default {
     log: '日志系统',
     task: '任务系统',
     relay: '中继系统',
-    http: 'HTTP',
-    alias: '别名系统'
+    http: 'HTTP'
   },
   themeConfig: {
     siteTitle: 'Monibuca v5',

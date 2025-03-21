@@ -48,19 +48,17 @@
         </div>
       </div>
 
-      <!-- <div class="footer-links">
+      <div class="footer-links">
         <div class="link-column">
-          <h3>视频教程</h3>
+          <h3>教程</h3>
           <a href="https://space.bilibili.com/328443019/lists?sid=514619"
-            >B 站视频</a
+            >视频教程</a
           >
           <a href="https://www.bilibili.com/video/BV1jg411H7qE">RTS 分享</a>
-        </div>
-
-        <div class="link-column">
-          <h3>产品文档</h3>
-          <a href="/guide/quickstart">快速上手</a>
-          <a href="/guide/faq">常见问题</a>
+          <a
+            href="https://apifox.com/apidoc/shared-25b77980-8f42-42f3-b1b3-9b36275c2439"
+            >API</a
+          >
         </div>
 
         <div class="link-column">
@@ -71,94 +69,52 @@
           <a href="#">Linux</a>
           <a href="#">Linux(arm64)</a>
         </div>
-
-        <div class="link-column">
-          <h3>不卡系列</h3>
-          <a href="https://monibuca.com">Monibuca</a>
-          <a href="https://jessibuca.com">Jessibuca</a>
-          <a href="https://rebebuca.com">Rebebuca</a>
-        </div>
-
-        <div class="link-column">
-          <h3>关于我们</h3>
-          <a href="/about/faq">FAQ</a>
-          <a href="/about/team">开发团队</a>
-          <a href="/about/story">诞生故事</a>
-        </div>
-
-        <div class="link-column">
+        <section id="contact">
+          <div class="link-column">
+            <h3>不卡系列</h3>
+            <a href="https://monibuca.com">Monibuca</a>
+            <a href="https://jessibuca.com">Jessibuca</a>
+            <a href="https://rebebuca.com">Rebebuca</a>
+          </div>
+        </section>
+        <div class="link-column contact-section">
           <h3>联系我们</h3>
-          <div
-            class="contact-item"
-            @mouseenter="showWxMpQR = true"
-            @mouseleave="showWxMpQR = false"
-          >
-            <span>微信公众号：不卡科技</span>
-            <div class="popover-wrapper">
+          <div class="contact-grid">
+            <div class="contact-card">
+              <span>微信公众号：不卡科技</span>
               <img
-                :src="withBase('/img/ic_QR code.svg')"
-                alt="二维码图标"
-                class="qr-small"
+                :src="withBase('/img/wx-mp.jpg')"
+                alt="微信公众号"
+                class="contact-qr-img"
               />
-              <div class="popover-content contact-qrcode" v-show="showWxMpQR">
-                <img
-                  :src="withBase('/img/wx-mp.jpg')"
-                  alt="微信公众号"
-                  height="250"
-                />
-              </div>
             </div>
-          </div>
-          <div
-            class="contact-item"
-            @mouseenter="showQQGroupQR = true"
-            @mouseleave="showQQGroupQR = false"
-          >
-            <span>QQ群：751639168</span>
-            <div class="popover-wrapper">
+            <div class="contact-card">
+              <span>腾讯频道：流媒体技术</span>
               <img
-                :src="withBase('/img/ic_QR code.svg')"
-                alt="二维码图标"
-                class="qr-small"
+                :src="withBase('/img/tengroup.png')"
+                alt="腾讯频道"
+                class="contact-qr-img"
               />
-              <div
-                class="popover-content contact-qrcode"
-                v-show="showQQGroupQR"
-              >
-                <img
-                  :src="withBase('/img/qqgroup.jpg')"
-                  alt="QQ群"
-                  height="250"
-                />
-              </div>
             </div>
-          </div>
-          <div
-            class="contact-item"
-            @mouseenter="showQQChannelQR = true"
-            @mouseleave="showQQChannelQR = false"
-          >
-            <span>QQ频道：p0qq0crz08</span>
-            <div class="popover-wrapper">
+            <div class="contact-card">
+              <span>QQ频道：p0qq0crz08</span>
               <img
-                :src="withBase('/img/ic_QR code.svg')"
-                alt="二维码图标"
-                class="qr-small"
+              :src="withBase('/img/qqgroup.jpg')"
+              alt="QQ群"
+              class="contact-qr-img"
               />
-              <div
-                class="popover-content contact-qrcode"
-                v-show="showQQChannelQR"
-              >
-                <img
-                  :src="withBase('/img/qq-qun.jpeg')"
-                  alt="QQ频道"
-                  height="250"
-                />
-              </div>
+            </div>
+            <div class="contact-card">
+              <span>QQ群：751639168</span>
+              <img
+                :src="withBase('/img/qq-qun.jpeg')"
+                alt="QQ频道"
+                class="contact-qr-img"
+              />
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
     </div>
     <div class="chinese-copyright">
       <div class="copyright-content">
@@ -188,6 +144,7 @@ const { site } = useData();
 const showWxQR = ref(false);
 const showZfQR = ref(false);
 const showWxMpQR = ref(false);
+const showTxGroupQR = ref(false);
 const showQQGroupQR = ref(false);
 const showQQChannelQR = ref(false);
 </script>
@@ -265,7 +222,7 @@ const showQQChannelQR = ref(false);
 
 .footer-links {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   gap: 30px;
   padding-bottom: 50px;
 }
@@ -379,6 +336,70 @@ const showQQChannelQR = ref(false);
   .contact-qrcode {
     left: -280px;
     right: auto;
+  }
+}
+
+.contact-section {
+  grid-column: span 5;
+}
+
+.contact-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 10px;
+  width: calc(25% - 12px);
+}
+
+.contact-card span {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.contact-qr-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 4px;
+}
+
+@media (max-width: 1100px) {
+  .contact-section {
+    grid-column: span 3;
+  }
+
+  .contact-grid {
+    flex-wrap: wrap;
+  }
+
+  .contact-card {
+    width: calc(50% - 10px);
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-section {
+    grid-column: span 2;
+  }
+
+  .contact-card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-section {
+    grid-column: span 1;
   }
 }
 </style>

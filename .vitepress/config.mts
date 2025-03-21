@@ -1,35 +1,21 @@
 import { defineConfig } from 'vitepress';
 import translations from "./i18n";
 const nav = {
+  en: [],
   zh: [
     {
-      text: '视频教程', items: [
-        { text: 'B站视频', link: 'https://space.bilibili.com/328443019/lists?sid=514619' },
-        { text: 'RTS 分享', link: 'https://www.bilibili.com/video/BV1Q5411y7QV' },
-      ]
-    },
-    { text: 'API', link: 'https://apifox.com/apidoc/shared-25b77980-8f42-42f3-b1b3-9b36275c2439' },
-    {
-      text: '不卡系列', items: [
-        { text: 'Monibuca', link: 'https://monibuca.com' },
-        { text: 'Jessibuca', link: 'https://jessibuca.com' },
-        { text: 'Rebebuca', link: 'https://rebebuca.com' },
-      ]
-    },
-    {
-      text: '联系我们', items: [
-        { component: 'ContactQQGroup' },
-        { component: 'ContactQQChannel' },
-        { component: 'ContactWechatPublic' }
-      ]
+      text: '联系我们', link: '/#contact'
     }
   ],
-  en: [
-    { text: 'API', link: 'https://apifox.com/apidoc/shared-25b77980-8f42-42f3-b1b3-9b36275c2439' }
-  ]
 };
 const commonThemeConfig = (locales: '' | 'zh' | 'en' = '', translation = translations[locales || 'zh']) => ({
   nav: [
+    { text: translation.nav.document, link: '/guide/what-is-monibuca' },
+    { text: translation.nav.features, link: '/#features' },
+    { text: translation.nav.quickStart, link: '/#quickstart' },
+    { text: translation.nav.plugins, link: '/#plugins' },
+    { text: translation.nav.admin, link: '/#admin' },
+    { text: translation.nav.pricing, link: '/#pricing' },
     ...nav[locales || 'zh']
   ],
 
@@ -59,8 +45,6 @@ const commonThemeConfig = (locales: '' | 'zh' | 'en' = '', translation = transla
         { text: translation.sidebar.encryption, link: locales + '/features/encryption' },
         { text: translation.sidebar.screenshot, link: locales + '/features/screenshot' },
         { text: translation.sidebar.preview, link: locales + '/features/preview' },
-        { text: translation.sidebar.monitoring, link: locales + '/features/monitoring' },
-        { text: translation.sidebar.cluster, link: locales + '/features/cluster' }
       ]
     },
     {
