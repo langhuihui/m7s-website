@@ -27,12 +27,11 @@ const commonThemeConfig = (locales: '' | 'zh' | 'en' = '', translation = transla
         { text: translation.sidebar.streamSubscription, link: locales + '/features/stream-subscription' },
         { text: translation.sidebar.pushProxy, link: locales + '/features/push-proxy' },
         { text: translation.sidebar.pullProxy, link: locales + '/features/pull-proxy' },
+        { text: translation.sidebar.alias, link: locales + '/features/alias' },
         { text: translation.sidebar.recording, link: locales + '/features/recording' },
         { text: translation.sidebar.playback, link: locales + '/features/playback' },
         { text: translation.sidebar.timeShift, link: locales + '/features/time-shift' },
         { text: translation.sidebar.authentication, link: locales + '/features/authentication' },
-        { text: translation.sidebar.alias, link: locales + '/features/alias' },
-        { text: translation.sidebar.grpc, link: locales + '/features/grpc' },
         { text: translation.sidebar.hook, link: locales + '/features/hook' },
         { text: translation.sidebar.transcoding, link: locales + '/features/transcoding' },
         { text: translation.sidebar.encryption, link: locales + '/features/encryption' },
@@ -45,9 +44,16 @@ const commonThemeConfig = (locales: '' | 'zh' | 'en' = '', translation = transla
     {
       text: translation.sidebar.secondaryDevelopment,
       items: [
+        { text: translation.sidebar.catalog, link: locales + '/develop/catalog' },
+        { text: translation.sidebar.config, link: locales + '/develop/config' },
         { text: translation.sidebar.pluginDevelopment, link: locales + '/develop/plugin' },
-        { text: translation.sidebar.apiReference, link: locales + '/develop/api' },
-        { text: translation.sidebar.coreArchitecture, link: locales + '/develop/core' }
+        { text: translation.sidebar.db, link: locales + '/develop/db' },
+        { text: translation.sidebar.grpc, link: locales + '/develop/grpc' },
+        { text: translation.sidebar.log, link: locales + '/develop/log' },
+        { text: translation.sidebar.task, link: locales + '/develop/task' },
+        { text: translation.sidebar.relay, link: locales + '/develop/relay' },
+        { text: translation.sidebar.http, link: locales + '/develop/http' },
+        { text: translation.sidebar.alias, link: locales + '/develop/alias' }
       ]
     }
   ],

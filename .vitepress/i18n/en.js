@@ -172,10 +172,18 @@ export default {
     preview: 'Preview',
     monitoring: 'Monitoring',
     cluster: 'Cluster',
-    secondaryDevelopment: 'Development',
+    secondaryDevelopment: 'Advanced Guide',
     pluginDevelopment: 'Plugin Development',
     apiReference: 'API Reference',
-    coreArchitecture: 'Core Architecture'
+    coreArchitecture: 'Core Architecture',
+    config: 'Configuration',
+    catalog: 'Catalog',
+    db: 'Database',
+    log: 'Logging',
+    task: 'Task System',
+    relay: 'Relay System',
+    http: 'HTTP',
+    alias: 'Alias System'
   },
   themeConfig: {
     siteTitle: 'Monibuca',

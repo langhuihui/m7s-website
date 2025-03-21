@@ -172,10 +172,18 @@ export default {
     preview: '预览',
     monitoring: '监控',
     cluster: '集群',
-    secondaryDevelopment: '开发指南',
+    secondaryDevelopment: '进阶指南',
     pluginDevelopment: '插件开发',
     apiReference: 'API 参考',
-    coreArchitecture: '核心架构'
+    coreArchitecture: '核心架构',
+    config: '配置系统',
+    catalog: '目录说明',
+    db: '数据库',
+    log: '日志系统',
+    task: '任务系统',
+    relay: '中继系统',
+    http: 'HTTP',
+    alias: '别名系统'
   },
   themeConfig: {
     siteTitle: 'Monibuca',
