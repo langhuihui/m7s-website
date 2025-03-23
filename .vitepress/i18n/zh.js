@@ -1,10 +1,8 @@
 export default {
   hero: {
-    title: 'Monibuca 5.0',
+    title: 'Monibuca',
     subtitle: '高性能、可扩展、插件化的纯 Go 流媒体服务器开发框架',
-    quickStart: '快速开始',
-    viewDocs: '查看文档',
-    documentation: '技术文档'
+    quickStart: '快速入门',
   },
   features: {
     title: '核心特性',
@@ -142,6 +140,7 @@ export default {
     quickStart: '快速开始',
     plugins: '插件',
     pricing: '价格',
+    document: '文档',
     admin: 'Admin',
     github: 'GitHub'
   },
@@ -153,16 +152,50 @@ export default {
     features: '功能特性',
     coreFeatures: '核心功能',
     mediaProcessing: '媒体处理',
-    aiCapabilities: 'AI 能力'
+    aiCapabilities: 'AI 能力',
+    whyMonibuca: '为什么选择 Monibuca',
+    streamPushing: '接受推流',
+    streamSubscription: '接受订阅',
+    pushProxy: '推流代理',
+    pullProxy: '拉流代理',
+    recording: '录像',
+    playback: '回放',
+    timeShift: '时移',
+    authentication: '鉴权',
+    alias: '别名',
+    grpc: 'gRPC',
+    hook: 'Hook',
+    transcoding: '转码',
+    encryption: '加密',
+    screenshot: '截图',
+    preview: '预览',
+    monitoring: '监控',
+    cluster: '集群',
+    secondaryDevelopment: '进阶指南',
+    pluginDevelopment: '插件开发',
+    apiReference: 'API 参考',
+    coreArchitecture: '核心架构',
+    config: '配置系统',
+    catalog: '目录说明',
+    db: '数据库',
+    log: '日志系统',
+    task: '任务系统',
+    relay: '中继系统',
+    http: 'HTTP'
   },
   themeConfig: {
-    siteTitle: 'Monibuca',
+    siteTitle: 'Monibuca v5',
     darkModeSwitchLabel: '切换深色模式',
     returnToTopLabel: '返回顶部',
     lastUpdatedText: '最后更新于',
     docFooter: {
       prev: '上一页',
       next: '下一页'
+    },
+    search: {
+      placeholder: '搜索文档',
+      noResults: '没有找到相关结果',
+      buttonText: '搜索'
     }
   },
   footer: {

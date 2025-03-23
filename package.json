@@ -6,7 +6,8 @@
     "dev": "vitepress dev",
     "build": "vitepress build",
     "preview": "vitepress preview",
-    "test:lang": "node tests/language-detection.js"
+    "test:lang": "node tests/language-detection.js",
+    "test:search": "node tests/verify-search.js"
   },
   "devDependencies": {
     "chrome-remote-interface": "^0.33.0",

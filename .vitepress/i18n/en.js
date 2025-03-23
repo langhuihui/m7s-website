@@ -1,10 +1,8 @@
 export default {
   hero: {
-    title: 'Monibuca 5.0',
+    title: 'Monibuca',
     subtitle: 'High-performance, scalable, plugin-based pure Go streaming server development framework',
     quickStart: 'Quick Start',
-    viewDocs: 'View Docs',
-    documentation: 'Documentation'
   },
   features: {
     title: 'Core Features',
@@ -142,6 +140,7 @@ export default {
     quickStart: 'Quick Start',
     plugins: 'Plugins',
     pricing: 'Pricing',
+    document: 'Document',
     admin: 'Admin',
     github: 'GitHub'
   },
@@ -153,16 +152,50 @@ export default {
     features: 'Features',
     coreFeatures: 'Core Features',
     mediaProcessing: 'Media Processing',
-    aiCapabilities: 'AI Capabilities'
+    aiCapabilities: 'AI Capabilities',
+    whyMonibuca: 'Why Monibuca',
+    streamPushing: 'Stream Pushing',
+    streamSubscription: 'Stream Subscription',
+    pushProxy: 'Push Proxy',
+    pullProxy: 'Pull Proxy',
+    recording: 'Recording',
+    playback: 'Playback',
+    timeShift: 'Time Shift',
+    authentication: 'Authentication',
+    alias: 'Alias',
+    grpc: 'gRPC',
+    hook: 'Hook',
+    transcoding: 'Transcoding',
+    encryption: 'Encryption',
+    screenshot: 'Screenshot',
+    preview: 'Preview',
+    monitoring: 'Monitoring',
+    cluster: 'Cluster',
+    secondaryDevelopment: 'Advanced Guide',
+    pluginDevelopment: 'Plugin Development',
+    apiReference: 'API Reference',
+    coreArchitecture: 'Core Architecture',
+    config: 'Configuration',
+    catalog: 'Catalog',
+    db: 'Database',
+    log: 'Logging',
+    task: 'Task System',
+    relay: 'Relay System',
+    http: 'HTTP'
   },
   themeConfig: {
-    siteTitle: 'Monibuca',
+    siteTitle: 'Monibuca v5',
     darkModeSwitchLabel: 'Toggle dark mode',
     returnToTopLabel: 'Return to top',
     lastUpdatedText: 'Last updated',
     docFooter: {
       prev: 'Previous page',
       next: 'Next page'
+    },
+    search: {
+      placeholder: 'Search documentation',
+      noResults: 'No results found',
+      buttonText: 'Search'
     }
   },
   footer: {

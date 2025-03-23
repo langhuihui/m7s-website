@@ -2,6 +2,9 @@
 import DefaultTheme from 'vitepress/theme';
 import HomeContent from '../components/HomeContent.vue';
 import FooterChinese from '../components/FooterChinese.vue';
+import ContactQQGroup from '../components/ContactQQGroup.vue';
+import ContactQQChannel from '../components/ContactQQChannel.vue';
+import ContactWechatPublic from '../components/ContactWechatPublic.vue';
 import './custom.css'; // 导入自定义 CSS
 
 export default {
@@ -10,6 +13,9 @@ export default {
     // Register custom components
     app.component('HomeContent', HomeContent);
     app.component('FooterChinese', FooterChinese);
+    app.component('ContactQQGroup', ContactQQGroup);
+    app.component('ContactQQChannel', ContactQQChannel);
+    app.component('ContactWechatPublic', ContactWechatPublic);
   },
   setup() {
     // Theme setup
