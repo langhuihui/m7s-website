@@ -1,7 +1,7 @@
 export default {
   hero: {
     title: 'Monibuca',
-    subtitle: '高性能、可扩展、插件化的纯 Go 流媒体服务器开发框架',
+    subtitle: '纯 Go 开源一站式流媒体服务器开发框架',
     quickStart: '快速入门',
   },
   features: {

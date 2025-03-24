@@ -6,10 +6,6 @@
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     :class="['ring-buffer', props.className]"
-    @mouseenter="accelerateAnimation"
-    @mouseleave="handleMouseLeave"
-    @mousedown="handleMouseDown"
-    @mouseup="handleMouseUp"
   >
     <!-- 背景 -->
     <circle cx="200" cy="200" r="200" class="ring-background" />
@@ -132,18 +128,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, watch } from "vue";
 
 interface Props {
   width?: number;
   height?: number;
   className?: string;
+  speed?: number; // 0-100之间的值，表示速度百分比
 }
 
 const props = withDefaults(defineProps<Props>(), {
   width: 400,
   height: 400,
   className: "",
+  speed: 0, // 默认为最慢速度
 });
 
 interface Segment {
@@ -178,74 +176,66 @@ const maxInterval = 600; // 最大间隔（毫秒）
 const minInterval = 50; // 最小间隔（毫秒）
 let currentInterval = maxInterval;
 let lastUsedInterval = maxInterval; // 记录上一次使用的间隔
-let isHovering = false;
-let isMouseDown = false; // 记录鼠标是否按下
-let speedTransitionTimer: number | null = null;
 
 // 添加旋转角度状态
 const rotationAngle = ref(0);
-// 调整旋转速度，使其与波浪动画同步
-const rotationSpeed = ref(-360 / (currentInterval * 2)); // 负值使其逆时针旋转，移除 *2 使速度加快
+// 基于props.speed计算旋转速度
+const rotationSpeed = ref(0);
+// 目标速度和当前实际速度
+const targetSpeed = ref(props.speed);
+const currentSpeed = ref(0);
+// 速度过渡动画
+let speedTransitionTimer: number | null = null;
 
 // 旋转动画
 let rotationTimer: number | null = null;
 
+// 根据速度属性计算动画间隔
+const calculateInterval = (speed: number) => {
+  // 将0-100的速度映射到最大间隔-最小间隔
+  return maxInterval - ((maxInterval - minInterval) * speed) / 100;
+};
+
+// 平滑过渡到目标速度
+const transitionToTargetSpeed = () => {
+  // 如果当前速度接近目标速度，则直接设置为目标速度
+  if (Math.abs(currentSpeed.value - targetSpeed.value) < 0.3) {
+    currentSpeed.value = targetSpeed.value;
+    if (speedTransitionTimer !== null) {
+      cancelAnimationFrame(speedTransitionTimer);
+      speedTransitionTimer = null;
+    }
+  } else {
+    // 否则，逐渐向目标速度过渡
+    // 使用缓动函数使过渡更平滑自然
+    const step = (targetSpeed.value - currentSpeed.value) * 0.01;
+    currentSpeed.value += step;
+
+    // 更新基于当前实际速度的间隔和旋转速度
+    currentInterval = calculateInterval(currentSpeed.value);
+    rotationSpeed.value = -360 / (currentInterval * 2);
+
+    // 继续动画
+    speedTransitionTimer = requestAnimationFrame(transitionToTargetSpeed);
+  }
+};
+
+// 更新旋转速度
+const updateRotationSpeed = (newSpeed) => {
+  const speedValue = Math.max(0, Math.min(100, newSpeed));
+  targetSpeed.value = speedValue;
+  // 如果没有正在进行的过渡动画，启动一个
+  if (speedTransitionTimer === null) {
+    speedTransitionTimer = requestAnimationFrame(transitionToTargetSpeed);
+  }
+};
+
+// 监听speed属性变化
+watch(() => props.speed, updateRotationSpeed, { immediate: true });
+
 const updateRotation = () => {
   rotationAngle.value += rotationSpeed.value;
   rotationTimer = requestAnimationFrame(updateRotation);
-};
-
-// 逐渐改变速度
-const transitionSpeed = () => {
-  if (isHovering) {
-    // 如果鼠标按下，则更快地加速
-    const decrementStep = isMouseDown ? 30 : 10;
-    // 逐渐加速到最小间隔
-    currentInterval = Math.max(minInterval, currentInterval - decrementStep);
-  } else {
-    // 逐渐减速到最大间隔
-    currentInterval = Math.min(maxInterval, currentInterval + 5);
-  }
-
-  // 更新旋转速度
-  rotationSpeed.value = -360 / (currentInterval * 2);
-
-  // 如果达到目标速度，停止过渡
-  if (
-    (isHovering && currentInterval <= minInterval) ||
-    (!isHovering && currentInterval >= maxInterval)
-  ) {
-    if (speedTransitionTimer !== null) {
-      clearInterval(speedTransitionTimer);
-      speedTransitionTimer = null;
-    }
-  }
-};
-
-// 修改加速动画函数
-const accelerateAnimation = () => {
-  isHovering = true;
-  // 如果没有活动的过渡计时器，启动一个
-  if (speedTransitionTimer === null) {
-    speedTransitionTimer = window.setInterval(transitionSpeed, 50);
-  }
-};
-
-// 修改恢复正常速度函数
-const normalizeAnimation = () => {
-  isHovering = false;
-  // 如果没有活动的过渡计时器，启动一个
-  if (speedTransitionTimer === null) {
-    speedTransitionTimer = window.setInterval(transitionSpeed, 50);
-  }
-};
-
-// 处理鼠标离开事件 - 结合恢复速度和松开按钮的功能
-const handleMouseLeave = () => {
-  // 处理鼠标松开
-  isMouseDown = false;
-  // 处理鼠标离开（恢复速度）
-  normalizeAnimation();
 };
 
 // 创建圆弧路径
@@ -318,16 +308,6 @@ const simulateRingBuffer = () => {
   currentWriteIndex = nextIndex;
 };
 
-// 处理鼠标按下事件
-const handleMouseDown = () => {
-  isMouseDown = true;
-};
-
-// 处理鼠标释放事件
-const handleMouseUp = () => {
-  isMouseDown = false;
-};
-
 onMounted(() => {
   // 启动动画
   animationTimer = window.setInterval(simulateRingBuffer, currentInterval);
@@ -343,7 +323,7 @@ onUnmounted(() => {
     cancelAnimationFrame(rotationTimer);
   }
   if (speedTransitionTimer !== null) {
-    clearInterval(speedTransitionTimer);
+    cancelAnimationFrame(speedTransitionTimer);
   }
 });
 </script>

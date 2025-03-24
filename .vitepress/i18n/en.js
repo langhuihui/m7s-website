@@ -1,7 +1,7 @@
 export default {
   hero: {
     title: 'Monibuca',
-    subtitle: 'High-performance, scalable, plugin-based pure Go streaming server development framework',
+    subtitle: 'Pure Go open-source one-stop streaming media server development framework',
     quickStart: 'Quick Start',
   },
   features: {
