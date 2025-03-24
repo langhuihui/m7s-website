@@ -6,6 +6,7 @@
           <div class="hero-content">
             <div class="hero-text">
               <h1>{{ i18n.hero.title }}</h1>
+
               <p class="subtitle">
                 {{ i18n.hero.subtitle }}
               </p>
@@ -43,7 +44,26 @@
               </div>
             </div>
             <div class="hero-visual">
-              <RingBuffer class="ring-buffer" :width="480" :height="480" />
+              <RingBuffer
+                class="ring-buffer"
+                :width="480"
+                :height="480"
+                :speed="ringSpeed"
+              />
+              <div
+                class="logo-container"
+                @click="toggleLogo(void 0)"
+                @mouseover="toggleLogo(true)"
+                @mouseleave="toggleLogo(false)"
+                :class="{ 'logo-open': isLogoOpen }"
+              >
+                <div class="logo-left">
+                  <div class="logo"></div>
+                </div>
+                <div class="logo-right">
+                  <div class="logo"></div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="features-grid">
@@ -207,7 +227,7 @@ go run -tags sqlite main.go
 
 <script setup lang="ts">
 import { useData, withBase } from "vitepress";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import translations from "../i18n";
 import PerformanceIcon from "./icons/PerformanceIcon.vue";
 import LatencyIcon from "./icons/LatencyIcon.vue";
@@ -221,6 +241,20 @@ import { Icon } from "@iconify/vue";
 
 const { lang } = useData();
 const i18n = computed(() => translations[lang.value] || translations.zh);
+
+// RingBuffer速度控制
+const ringSpeed = ref(100); // 默认速度0
+
+// 添加logo开关状态控制
+const isLogoOpen = ref(false);
+
+// 处理logo点击事件
+const toggleLogo = (value?: boolean) => {
+  if (typeof value === "boolean") {
+    isLogoOpen.value = value;
+  } else isLogoOpen.value = !isLogoOpen.value;
+  ringSpeed.value = isLogoOpen.value ? 0 : 100;
+};
 
 // Core features keys array
 const coreFeatureKeys = [
@@ -348,6 +382,99 @@ h3 {
   padding: 0 2rem;
 }
 
+// Animation keyframes
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.1);
+  }
+}
+
+@keyframes float-light {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-10px) scale(1.2);
+    opacity: 0.7;
+  }
+}
+
+// Logo container with sliding door effect
+.logo-container {
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  position: absolute;
+  z-index: 2;
+  user-select: none;
+  pointer-events: auto;
+  cursor: pointer;
+  display: flex;
+
+  transition: all 0.3s ease;
+}
+
+.logo {
+  width: 300px;
+  height: 300px;
+  opacity: 0.9;
+  background: url("/logo+dark.svg") no-repeat center center;
+  background-size: contain;
+  backdrop-filter: blur(4px);
+  html:not(.dark) & {
+    background: url("/logo+.svg") no-repeat center center;
+    background-size: contain;
+  }
+}
+
+// Left half of the logo
+.logo-left {
+  width: 150px;
+  height: 300px;
+  overflow: hidden;
+  transition: transform 0.5s ease;
+  border: gray 1px solid;
+}
+
+// Right half of the logo
+.logo-right {
+  width: 150px;
+  height: 300px;
+  overflow: hidden;
+  transition: transform 0.5s ease;
+  .logo {
+    margin-left: -150px;
+  }
+  border: gray 1px solid;
+}
+
+// 添加基于类的效果
+.logo-container.logo-open {
+  .logo-left {
+    transform: translateX(-50px);
+  }
+
+  .logo-right {
+    transform: translateX(50px);
+  }
+}
+
 // Hero Section
 .hero {
   padding: 96px 0;
@@ -388,7 +515,6 @@ h3 {
 
   &-text {
     flex: 1;
-    position: relative;
     z-index: 2;
   }
 
@@ -432,36 +558,6 @@ h1 {
     font-weight: 800;
     opacity: 0.95;
   }
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: -20px;
-    right: -40px;
-    width: 80px;
-    height: 80px;
-    background: radial-gradient(
-      circle,
-      var(--vp-c-brand-light) 0%,
-      transparent 70%
-    );
-    opacity: 0.3;
-    border-radius: 50%;
-    filter: blur(10px);
-    z-index: -1;
-    animation: float 6s ease-in-out infinite;
-
-    html:not(.dark) & {
-      opacity: 0.5;
-      background: radial-gradient(
-        circle,
-        var(--vp-c-brand) 0%,
-        transparent 70%
-      );
-      filter: blur(16px);
-      animation: float-light 6s ease-in-out infinite;
-    }
-  }
 }
 
 // Subtitle
@@ -472,51 +568,18 @@ h1 {
   margin-bottom: 32px;
 }
 
-// Animation keyframes
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 0.6;
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(-10px) scale(1.1);
-  }
-}
-
-@keyframes float-light {
-  0%,
-  100% {
-    transform: translateY(0) scale(1);
-    opacity: 0.5;
-  }
-  50% {
-    transform: translateY(-10px) scale(1.2);
-    opacity: 0.7;
-  }
-}
-
 // Ring buffer styles
 .ring-buffer {
   color: var(--vp-c-brand);
   opacity: 0.8;
-  transform: scale(0.9);
+  transform: scale(0.5);
   transition: all 0.3s ease;
   position: relative;
   z-index: 1;
 
   &:hover {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(0.7);
   }
 }
 
@@ -674,6 +737,28 @@ h1 {
   }
 }
 
+// Architecture section
+.architecture {
+  html:not(.dark) & {
+    background: #ffffff;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+
+      html:not(.dark) & {
+        color: var(--text-color);
+      }
+    }
+  }
+}
+
 // Features section
 .features {
   padding: 80px 0;
@@ -774,167 +859,6 @@ h1 {
   }
 }
 
-// Architecture section
-.architecture {
-  html:not(.dark) & {
-    background: #ffffff;
-  }
-
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    h2 {
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-
-      html:not(.dark) & {
-        color: var(--text-color);
-      }
-    }
-  }
-}
-
-// Pricing section
-.pricing-section {
-  padding: 4rem 0;
-  text-align: center;
-  background: var(--background-color);
-  position: relative;
-  width: 100%;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(
-        circle at 30% 0%,
-        rgba(189, 52, 254, 0.15),
-        rgba(36, 36, 36, 0) 50%
-      ),
-      radial-gradient(
-        circle at 70% 0%,
-        rgba(71, 202, 255, 0.15),
-        rgba(36, 36, 36, 0) 50%
-      );
-    z-index: -1;
-  }
-
-  html:not(.dark) &::before {
-    background: radial-gradient(
-        circle at 30% 0%,
-        rgba(189, 52, 254, 0.05),
-        rgba(255, 255, 255, 0) 50%
-      ),
-      radial-gradient(
-        circle at 70% 0%,
-        rgba(71, 202, 255, 0.05),
-        rgba(255, 255, 255, 0) 50%
-      );
-  }
-
-  h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    text-align: center;
-
-    html:not(.dark) & {
-      color: var(--text-color);
-    }
-  }
-
-  &-cards {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    align-items: stretch;
-    margin: 2rem auto;
-    max-width: 800px;
-    flex-wrap: wrap;
-  }
-}
-.pricing-cards {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  align-items: stretch;
-  margin: 2rem auto;
-  max-width: 800px;
-  flex-wrap: wrap;
-}
-// Pricing card
-.pricing-card {
-  .card-base();
-  .dark-card();
-  width: 350px;
-  flex: 0 0 350px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  html:not(.dark) & {
-    .light-card();
-  }
-
-  &:hover {
-    transform: translateY(-5px);
-    border-color: @primary-color;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  }
-
-  h4 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: @primary-color;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: left;
-    flex-grow: 1;
-  }
-
-  li {
-    margin: 1rem 0;
-    padding-left: 1.5rem;
-    position: relative;
-    color: @text-color-dark-2;
-
-    html:not(.dark) & {
-      color: @text-color-light;
-    }
-  }
-}
-
-// Contact info
-.contact-info {
-  margin-top: 2rem;
-  font-size: 0.9rem;
-  color: @text-color-dark-2;
-  padding: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-
-  html:not(.dark) & {
-    color: @text-color-light;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  a {
-    color: @primary-color;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
-
 // Quickstart section
 .quickstart {
   padding: 80px 0;
@@ -1031,6 +955,137 @@ code {
 
   html:not(.dark) & {
     color: @text-color;
+  }
+}
+
+// Pricing section
+.pricing-section {
+  padding: 4rem 0;
+  text-align: center;
+  background: var(--background-color);
+  position: relative;
+  width: 100%;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        circle at 30% 0%,
+        rgba(189, 52, 254, 0.15),
+        rgba(36, 36, 36, 0) 50%
+      ),
+      radial-gradient(
+        circle at 70% 0%,
+        rgba(71, 202, 255, 0.15),
+        rgba(36, 36, 36, 0) 50%
+      );
+    z-index: -1;
+  }
+
+  html:not(.dark) &::before {
+    background: radial-gradient(
+        circle at 30% 0%,
+        rgba(189, 52, 254, 0.05),
+        rgba(255, 255, 255, 0) 50%
+      ),
+      radial-gradient(
+        circle at 70% 0%,
+        rgba(71, 202, 255, 0.05),
+        rgba(255, 255, 255, 0) 50%
+      );
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+
+    html:not(.dark) & {
+      color: var(--text-color);
+    }
+  }
+}
+
+.pricing-cards {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: stretch;
+  margin: 2rem auto;
+  max-width: 800px;
+  flex-wrap: wrap;
+}
+
+// Pricing card
+.pricing-card {
+  .card-base();
+  .dark-card();
+  width: 350px;
+  flex: 0 0 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  html:not(.dark) & {
+    .light-card();
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: @primary-color;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  h4 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: @primary-color;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    flex-grow: 1;
+  }
+
+  li {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: @text-color-dark-2;
+
+    html:not(.dark) & {
+      color: @text-color-light;
+    }
+  }
+}
+
+// Contact info
+.contact-info {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: @text-color-dark-2;
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  html:not(.dark) & {
+    color: @text-color-light;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  a {
+    color: @primary-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 

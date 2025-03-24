@@ -84,6 +84,11 @@ export default defineConfig({
   lastUpdated: true,
   appearance: 'dark',
 
+  // 添加head配置，包含keywords元标签
+  head: [
+    ['meta', { name: 'keywords', content: '流媒体服务器,Monibuca,直播服务器,推流,拉流,录制,回放,转码,流媒体框架,RTMP,RTSP,WebRTC,HLS,SRT,Go' }]
+  ],
+
   // 忽略死链接检查，特别是对于本地服务器URL和某些协议前缀
   ignoreDeadLinks: [
     // 本地开发服务器URL
@@ -99,23 +104,64 @@ export default defineConfig({
     /arch\/index\.md/
   ],
 
+  // 添加Vite配置以优化静态编译
+  vite: {
+    // 优化静态构建
+    build: {
+      // 禁用SSR
+      ssr: false,
+      // 减小构建包体积
+      minify: 'terser',
+      // 移除console和debugger语句
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+        }
+      },
+      // 并行构建提高性能
+      reportCompressedSize: false,
+      // 拆分块以优化加载
+      chunkSizeWarningLimit: 1000,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['vue'],
+            vitepress: ['vitepress']
+          }
+        }
+      }
+    },
+    // 优化依赖预构建
+    optimizeDeps: {
+      // 排除不需要预构建的依赖
+      exclude: ['@vueuse/core', '@vueuse/head']
+    },
+  },
+
   locales: {
     root: {
       label: '中文',
       lang: 'zh',
       description: '高性能流媒体服务器框架',
-      themeConfig: commonThemeConfig()
+      themeConfig: commonThemeConfig(),
+      head: [
+        ['meta', { name: 'keywords', content: '流媒体服务器,Monibuca,直播服务器,推流,拉流,代理,录制,回放,时移,认证,转码,加密,截图,预览,二次开发,插件开发,高性能' }]
+      ]
     },
     en: {
       label: 'English',
       lang: 'en',
       description: 'High-performance streaming media server framework',
-      themeConfig: commonThemeConfig('en')
+      themeConfig: commonThemeConfig('en'),
+      head: [
+        ['meta', { name: 'keywords', content: 'streaming media server,Monibuca,live server,stream pushing,stream subscription,proxy,recording,playback,time shift,authentication,transcoding,encryption,screenshot,preview,secondary development,plugin development,high-performance' }]
+      ]
     }
   },
 
   themeConfig: {
-    logo: '/logo.svg',
+    logo: { light: '/logo.svg', dark: '/logo-dark.svg' },
     socialLinks: [
       { icon: 'x', link: 'https://x.com/m7server' },
       { icon: 'discord', link: 'https://discord.gg/QKrKMtCuDg' },
@@ -128,4 +174,4 @@ export default defineConfig({
       }
     }
   }
-}); 
+});
