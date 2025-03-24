@@ -10,12 +10,12 @@ const nav = {
 };
 const commonThemeConfig = (locales: '' | 'zh' | 'en' = '', translation = translations[locales || 'zh']) => ({
   nav: [
-    { text: translation.nav.document, link: '/guide/what-is-monibuca' },
-    { text: translation.nav.features, link: '/#features' },
-    { text: translation.nav.quickStart, link: '/#quickstart' },
-    { text: translation.nav.plugins, link: '/#plugins' },
-    { text: translation.nav.admin, link: '/#admin' },
-    { text: translation.nav.pricing, link: '/#pricing' },
+    { text: translation.nav.document, link: locales + '/guide/what-is-monibuca' },
+    { text: translation.nav.features, link: locales + '/#features' },
+    { text: translation.nav.quickStart, link: locales + '/#quickstart' },
+    { text: translation.nav.plugins, link: locales + '/#plugins' },
+    { text: translation.nav.admin, link: locales + '/#admin' },
+    { text: translation.nav.pricing, link: locales + '/#pricing' },
     ...nav[locales || 'zh']
   ],
 
