@@ -64,6 +64,7 @@
                   <div class="logo"></div>
                 </div>
               </div>
+              <SurveillanceCamera class="camera"/>
             </div>
           </div>
           <div class="features-grid">
@@ -238,6 +239,7 @@ import MediaIcon from "./icons/MediaIcon.vue";
 import Architecture from "./Architecture.vue";
 import RingBuffer from "./icons/RingBuffer.vue";
 import { Icon } from "@iconify/vue";
+import SurveillanceCamera from "./SurveillanceCamera.vue";
 
 const { lang } = useData();
 const i18n = computed(() => translations[lang.value] || translations.zh);
@@ -524,6 +526,15 @@ h3 {
     justify-content: center;
     align-items: center;
     position: relative;
+    .camera {
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 150px;
+      z-index: 10;
+    }
   }
 }
 

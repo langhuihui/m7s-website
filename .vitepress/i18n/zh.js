@@ -169,6 +169,7 @@ export default {
     encryption: '加密',
     screenshot: '截图',
     preview: '预览',
+    routeForwarding: '路由转发',
     monitoring: '监控',
     cluster: '集群',
     secondaryDevelopment: '进阶指南',

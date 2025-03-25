@@ -169,6 +169,7 @@ export default {
     encryption: 'Encryption',
     screenshot: 'Screenshot',
     preview: 'Preview',
+    routeForwarding: 'Route Forwarding',
     monitoring: 'Monitoring',
     cluster: 'Cluster',
     secondaryDevelopment: 'Advanced Guide',
