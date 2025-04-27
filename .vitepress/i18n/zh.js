@@ -169,6 +169,7 @@ export default {
     encryption: '加密',
     screenshot: '截图',
     preview: '预览',
+    routeForwarding: '路由转发',
     monitoring: '监控',
     cluster: '集群',
     secondaryDevelopment: '进阶指南',
@@ -239,5 +240,9 @@ export default {
         'Cascade - 级联功能'
       ]
     }
+  },
+  admin: {
+    title: '管理界面',
+    videoNotSupported: '您的浏览器不支持视频标签。'
   }
 };

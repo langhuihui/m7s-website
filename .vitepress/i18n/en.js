@@ -169,6 +169,7 @@ export default {
     encryption: 'Encryption',
     screenshot: 'Screenshot',
     preview: 'Preview',
+    routeForwarding: 'Route Forwarding',
     monitoring: 'Monitoring',
     cluster: 'Cluster',
     secondaryDevelopment: 'Advanced Guide',
@@ -239,5 +240,9 @@ export default {
         'Cascade - Cascade functionality'
       ]
     }
+  },
+  admin: {
+    title: 'Admin Interface',
+    videoNotSupported: 'Your browser does not support the video tag.'
   }
 };
