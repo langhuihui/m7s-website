@@ -64,7 +64,7 @@
                   <div class="logo"></div>
                 </div>
               </div>
-              <SurveillanceCamera class="camera"/>
+              <SurveillanceCamera class="camera" />
             </div>
           </div>
           <div class="features-grid">
@@ -146,39 +146,6 @@ go run -tags sqlite main.go
 {{ i18n.quickstart.code.adminZip }}
 {{ i18n.quickstart.code.visit }}</code></pre>
           </div>
-          <div id="pricing" class="pricing-section">
-            <h2>{{ i18n.pricing.title }}</h2>
-            <div class="pricing-cards">
-              <div class="pricing-card free">
-                <h4>{{ i18n.pricing.free.title }}</h4>
-                <ul>
-                  <li
-                    v-for="(feature, index) in i18n.pricing.free.features"
-                    :key="'free-' + index"
-                  >
-                    {{ feature }}
-                  </li>
-                </ul>
-              </div>
-              <div class="pricing-card commercial">
-                <h4>{{ i18n.pricing.commercial.title }}</h4>
-                <ul>
-                  <li
-                    v-for="(feature, index) in i18n.pricing.commercial.features"
-                    :key="'commercial-' + index"
-                  >
-                    {{ feature }}
-                  </li>
-                </ul>
-                <p class="contact-info">
-                  {{ i18n.pricing.commercial.contact
-                  }}<a href="mailto:support@monibuca.com"
-                    >support@monibuca.com</a
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -222,13 +189,75 @@ go run -tags sqlite main.go
           </div>
         </div>
       </section>
+
+      <section id="admin" class="admin">
+        <div class="container">
+          <h2>{{ i18n.admin?.title || "Admin" }}</h2>
+          <div class="admin-video-container">
+            <video
+              ref="videoRef"
+              :key="videoKey"
+              autoplay
+              loop
+              muted
+              playsinline
+            >
+            <source
+                :src="withBase(isDark ? '/admin-dark.webm' : '/admin.webm')"
+                type="video/mp4"
+              />
+              <source
+                :src="withBase(isDark ? '/admin-dark.mp4' : '/admin.mp4')"
+                type="video/mp4"
+              />
+              {{
+                i18n.admin?.videoNotSupported ||
+                "Your browser does not support the video tag."
+              }}
+            </video>
+          </div>
+        </div>
+      </section>
+      <section id="pricing" class="pricing-section">
+        <div class="container">
+          <h2>{{ i18n.pricing.title }}</h2>
+          <div class="pricing-cards">
+            <div class="pricing-card free">
+              <h4>{{ i18n.pricing.free.title }}</h4>
+              <ul>
+                <li
+                  v-for="(feature, index) in i18n.pricing.free.features"
+                  :key="'free-' + index"
+                >
+                  {{ feature }}
+                </li>
+              </ul>
+            </div>
+            <div class="pricing-card commercial">
+              <h4>{{ i18n.pricing.commercial.title }}</h4>
+              <ul>
+                <li
+                  v-for="(feature, index) in i18n.pricing.commercial.features"
+                  :key="'commercial-' + index"
+                >
+                  {{ feature }}
+                </li>
+              </ul>
+              <p class="contact-info">
+                {{ i18n.pricing.commercial.contact
+                }}<a href="mailto:support@monibuca.com">support@monibuca.com</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useData, withBase } from "vitepress";
-import { computed, ref } from "vue";
+import { computed, ref, watch, onMounted } from "vue";
 import translations from "../i18n";
 import PerformanceIcon from "./icons/PerformanceIcon.vue";
 import LatencyIcon from "./icons/LatencyIcon.vue";
@@ -241,8 +270,43 @@ import RingBuffer from "./icons/RingBuffer.vue";
 import { Icon } from "@iconify/vue";
 import SurveillanceCamera from "./SurveillanceCamera.vue";
 
-const { lang } = useData();
+const { lang, isDark } = useData();
 const i18n = computed(() => translations[lang.value] || translations.zh);
+
+// Video handling
+const videoRef = ref(null);
+const videoKey = ref(0);
+
+// Watch for theme changes to reload the video
+watch(isDark, () => {
+  // Change the key to force Vue to recreate the video element
+  videoKey.value += 1;
+
+  // Additional handling to ensure video plays after reload
+  setTimeout(() => {
+    if (videoRef.value) {
+      videoRef.value.load();
+      const playPromise = videoRef.value.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((error: Error) => {
+          console.log("Auto-play was prevented:", error);
+        });
+      }
+    }
+  }, 100);
+});
+
+// Ensure video plays on mount
+onMounted(() => {
+  if (videoRef.value) {
+    const playPromise = videoRef.value.play();
+    if (playPromise !== undefined) {
+      playPromise.catch((error: Error) => {
+        console.log("Auto-play was prevented:", error);
+      });
+    }
+  }
+});
 
 // RingBuffer速度控制
 const ringSpeed = ref(100); // 默认速度0
@@ -758,15 +822,6 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    h2 {
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-
-      html:not(.dark) & {
-        color: var(--text-color);
-      }
-    }
   }
 }
 
@@ -807,17 +862,6 @@ h1 {
         rgba(71, 202, 255, 0.05),
         rgba(255, 255, 255, 0) 50%
       );
-  }
-
-  h2 {
-    color: var(--text-color-dark);
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-
-    html:not(.dark) & {
-      color: var(--text-color);
-    }
   }
 
   &-list {
@@ -877,18 +921,16 @@ h1 {
   html:not(.dark) & {
     background: #ffffff;
   }
+}
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
 
-  h2 {
-    text-align: center;
-    margin-bottom: 3rem;
-    font-size: 2.5rem;
-
-    html:not(.dark) & {
-      color: var(--text-color);
-    }
+  html:not(.dark) & {
+    color: var(--text-color);
   }
 }
-
 // Code block
 .code-block {
   background: @black-card-bg;
@@ -1008,16 +1050,6 @@ code {
         rgba(71, 202, 255, 0.05),
         rgba(255, 255, 255, 0) 50%
       );
-  }
-
-  h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    text-align: center;
-
-    html:not(.dark) & {
-      color: var(--text-color);
-    }
   }
 }
 
@@ -1141,14 +1173,6 @@ code {
         rgba(189, 52, 254, 0.05),
         rgba(255, 255, 255, 0) 50%
       );
-  }
-
-  h2 {
-    color: @text-color-dark;
-
-    html:not(.dark) & {
-      color: var(--text-color);
-    }
   }
 
   &-grid {
@@ -1306,6 +1330,81 @@ footer {
   }
 }
 
+// Admin section
+.admin {
+  padding: 80px 0;
+  background: var(--background-color);
+  position: relative;
+
+  html:not(.dark) & {
+    background: #ffffff;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        circle at 50% 0%,
+        rgba(189, 52, 254, 0.15),
+        rgba(36, 36, 36, 0) 50%
+      ),
+      radial-gradient(
+        circle at 50% 100%,
+        rgba(71, 202, 255, 0.15),
+        rgba(36, 36, 36, 0) 50%
+      );
+    z-index: -1;
+  }
+
+  html:not(.dark) &::before {
+    background: radial-gradient(
+        circle at 50% 0%,
+        rgba(189, 52, 254, 0.05),
+        rgba(255, 255, 255, 0) 50%
+      ),
+      radial-gradient(
+        circle at 50% 100%,
+        rgba(71, 202, 255, 0.05),
+        rgba(255, 255, 255, 0) 50%
+      );
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+
+    html:not(.dark) & {
+      color: var(--text-color);
+    }
+  }
+
+  .admin-video-container {
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+
+    html:not(.dark) & {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    video {
+      width: 100%;
+      display: block;
+      background: @black-card-bg;
+
+      html:not(.dark) & {
+        background: #f5f5f5;
+      }
+    }
+  }
+}
+
 // Responsive Design
 @media (max-width: 960px) {
   .hero-content {
@@ -1440,7 +1539,8 @@ footer {
     word-break: break-word;
   }
 
-  .plugins {
+  .plugins,
+  .admin {
     padding: 40px 0;
   }
 
@@ -1451,6 +1551,10 @@ footer {
 
   .plugin-category {
     padding: 1.5rem;
+  }
+
+  .admin-video-container {
+    margin: 0 1rem;
   }
 }
 

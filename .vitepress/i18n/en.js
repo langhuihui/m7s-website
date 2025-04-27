@@ -240,5 +240,9 @@ export default {
         'Cascade - Cascade functionality'
       ]
     }
+  },
+  admin: {
+    title: 'Admin Interface',
+    videoNotSupported: 'Your browser does not support the video tag.'
   }
 };

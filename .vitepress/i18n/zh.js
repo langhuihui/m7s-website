@@ -240,5 +240,9 @@ export default {
         'Cascade - 级联功能'
       ]
     }
+  },
+  admin: {
+    title: '管理界面',
+    videoNotSupported: '您的浏览器不支持视频标签。'
   }
 };
