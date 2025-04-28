@@ -63,11 +63,11 @@
 
         <div class="link-column">
           <h3>下载链接</h3>
-          <a href="#">Windows</a>
-          <a href="#">Mac</a>
-          <a href="#">Mac(arm64)</a>
-          <a href="#">Linux</a>
-          <a href="#">Linux(arm64)</a>
+          <a href="https://download.m7s.live/beta/m7s_v5_windows_amd64.tar.gz">Windows</a>
+          <a href="https://download.m7s.live/beta/m7s_v5_darwin_amd64.tar.gz">Mac</a>
+          <a href="https://download.m7s.live/beta/m7s_v5_darwin_arm64.tar.gz">Mac(arm64)</a>
+          <a href="https://download.m7s.live/beta/m7s_v5_linux_amd64.tar.gz">Linux</a>
+          <a href="https://download.m7s.live/beta/m7s_v5_linux_arm64.tar.gz">Linux(arm64)</a>
         </div>
         <section id="contact">
           <div class="link-column">
