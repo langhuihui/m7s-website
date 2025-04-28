@@ -146,6 +146,16 @@ go run -tags sqlite main.go
 {{ i18n.quickstart.code.adminZip }}
 {{ i18n.quickstart.code.visit }}</code></pre>
           </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span>Docker</span>
+              <button class="copy-button" data-target="docker-code">
+                {{ i18n.quickstart.copy }}
+              </button>
+            </div>
+            <pre><code id="docker-code">docker run -id -p 1935:1935 -p 6000:6000 -p 8080:8080 -p 554:554 -p 50051:50051 -p 5060:5060/udp -p 9000:9000 langhuihui/monibuca:v5</code></pre>
+          </div>
         </div>
       </section>
 
@@ -203,7 +213,7 @@ go run -tags sqlite main.go
               muted
               playsinline
             >
-            <source
+              <source
                 :src="withBase(isDark ? '/admin-dark.webm' : '/admin.webm')"
                 type="video/mp4"
               />
@@ -1009,6 +1019,11 @@ code {
 
   html:not(.dark) & {
     color: @text-color;
+  }
+
+  &#docker-code {
+    white-space: pre-wrap;
+    word-break: break-all;
   }
 }
 
