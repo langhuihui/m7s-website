@@ -1,209 +1,154 @@
 <template>
-  <div class="surveillance-camera" ref="camera">
-    <div class="camera-stand">
-      <div class="camera-neck"></div>
-      <div class="camera-head">
-        <div class="camera-body"></div>
-        <div class="camera-lens">
-          <div class="camera-lens-inner"></div>
-        </div>
-        <div class="camera-indicator"></div>
-      </div>
-    </div>
-    <div class="camera-base"></div>
-  </div>
+  <div ref="container" class="camera-container"></div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+<script setup>
+import { ref, onMounted, onBeforeUnmount } from "vue";
+import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-const camera = ref<HTMLElement | null>(null);
+const container = ref(null);
+let scene, camera, renderer, controls, model;
+let targetRotationY = 0;
+let targetRotationZ = 0;
+const rotationSpeed = 0.1; // 旋转速度系数
 
-// 定义摄像头可能的角度状态
-const cameraAngles = {
-  center: { x: -45, y: 0 },
-  left: { x: -45, y: -20 },
-  right: { x: -45, y: 20 },
-  up: { x: -30, y: 0 },
-  down: { x: -60, y: 0 },
-  upLeft: { x: -30, y: -20 },
-  upRight: { x: -30, y: 20 },
-  downLeft: { x: -60, y: -20 },
-  downRight: { x: -60, y: 20 },
+const handleMouseMove = (event) => {
+  if (!container.value || !model) return;
+
+  const rect = container.value.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
+  // 计算鼠标在容器中的相对位置（0-1）
+  const relativeX = Math.max(-2, Math.min(x / rect.width, 2));
+  const relativeY = Math.min(y / rect.height, 1.5);
+  // 计算目标旋转角度（-0.2 到 0.2 弧度）
+  targetRotationY = (relativeX - 0.5) * 0.4 + Math.PI * 1.5;
+  targetRotationZ = -(relativeY - 0.5) * 0.4 + 0.3;
 };
 
-// 处理鼠标移动更新摄像头朝向
-const handleMouseMove = (e: MouseEvent) => {
-  if (!camera.value) return;
+const init = () => {
+  // 创建场景
+  scene = new THREE.Scene();
 
-  const cameraRect = camera.value.getBoundingClientRect();
-  const cameraCenterX = cameraRect.left + cameraRect.width / 2;
-  const cameraCenterY = cameraRect.top + cameraRect.height / 2;
+  // 创建相机
+  camera = new THREE.PerspectiveCamera(
+    75,
+    container.value.clientWidth / container.value.clientHeight,
+    0.1,
+    1000
+  );
+  camera.position.z = 2;
 
-  // 计算鼠标与摄像头中心的相对位置
-  const deltaX = e.clientX - cameraCenterX;
-  const deltaY = e.clientY - cameraCenterY;
+  // 创建渲染器
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(container.value.clientWidth, container.value.clientHeight);
+  renderer.setClearColor(0x000000, 0); // 设置透明背景
+  container.value.appendChild(renderer.domElement);
 
-  // 根据鼠标位置选择摄像头角度状态
-  let angle;
+  // 添加轨道控制器
+  controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.05;
 
-  if (Math.abs(deltaX) < 100 && Math.abs(deltaY) < 100) {
-    angle = cameraAngles.center;
-  } else if (deltaY < -100) {
-    if (deltaX < -100) angle = cameraAngles.upLeft;
-    else if (deltaX > 100) angle = cameraAngles.upRight;
-    else angle = cameraAngles.up;
-  } else if (deltaY > 100) {
-    if (deltaX < -100) angle = cameraAngles.downLeft;
-    else if (deltaX > 100) angle = cameraAngles.downRight;
-    else angle = cameraAngles.down;
-  } else {
-    if (deltaX < -100) angle = cameraAngles.left;
-    else if (deltaX > 100) angle = cameraAngles.right;
-    else angle = cameraAngles.center;
+  // 添加环境光和平行光
+  // const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+  // scene.add(ambientLight);
+
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+  directionalLight.position.set(1, 1, 1);
+  scene.add(directionalLight);
+
+  // 添加从下往上的聚光灯
+  const spotLight = new THREE.SpotLight(0xffffff, 1);
+  spotLight.position.set(0, -2, 0);
+  // spotLight.angle = Math.PI / 2; // 45度照射角度
+  spotLight.penumbra = 0.1; // 边缘柔和度
+  spotLight.decay = 1; // 光照衰减
+  spotLight.distance = 50; // 照射距离
+  spotLight.power = 100;
+  scene.add(spotLight);
+
+  // 添加聚光灯的辅助对象（可选，用于调试）
+  // const spotLightHelper = new THREE.SpotLightHelper(spotLight);
+  // scene.add(spotLightHelper);
+
+  // 加载 GLB 模型
+  const loader = new GLTFLoader();
+  loader.load("/models/camera.glb", (gltf) => {
+    model = gltf.scene;
+    scene.add(model);
+
+    // 调整模型位置和大小
+    const box = new THREE.Box3().setFromObject(model);
+    const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
+
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const scale = 2 / maxDim;
+    model.scale.setScalar(scale);
+
+    model.position.sub(center.multiplyScalar(scale));
+    model.rotateY(Math.PI * 1.5);
+    model.rotateZ(-Math.PI * 0.15);
+    // 如果模型包含动画，可以播放第一个动画
+    if (gltf.animations.length > 0) {
+      const mixer = new THREE.AnimationMixer(model);
+      const action = mixer.clipAction(gltf.animations[0]);
+      action.play();
+    }
+  });
+
+  animate();
+};
+
+const animate = () => {
+  requestAnimationFrame(animate);
+
+  if (model) {
+    // 平滑过渡到目标旋转角度
+    model.rotation.y += (targetRotationY - model.rotation.y) * rotationSpeed;
+    model.rotation.z += (targetRotationZ - model.rotation.z) * rotationSpeed;
   }
 
-  // 应用旋转
-  const cameraHead = camera.value.querySelector(".camera-head") as HTMLElement;
-  if (cameraHead) {
-    cameraHead.style.transform = `rotateX(${angle.x}deg) rotateY(${angle.y}deg)`;
-  }
+  controls.update();
+  renderer.render(scene, camera);
+};
+
+const handleResize = () => {
+  if (!container.value) return;
+
+  camera.aspect = container.value.clientWidth / container.value.clientHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(container.value.clientWidth, container.value.clientHeight);
 };
 
 onMounted(() => {
-  // 设置初始角度为向下45度
-  const cameraHead = camera.value?.querySelector(".camera-head") as HTMLElement;
-  if (cameraHead) {
-    cameraHead.style.transform = `rotateX(${cameraAngles.center.x}deg) rotateY(${cameraAngles.center.y}deg)`;
-  }
-
+  init();
+  window.addEventListener("resize", handleResize);
   window.addEventListener("mousemove", handleMouseMove);
 });
 
-onUnmounted(() => {
-  window.removeEventListener("mousemove", handleMouseMove);
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", handleResize);
+  if (container.value) {
+    window.removeEventListener("mousemove", handleMouseMove);
+  }
+  if (renderer) {
+    renderer.dispose();
+  }
 });
 </script>
 
-<style scoped lang="less">
-// 监控摄像头样式
-.surveillance-camera {
-  position: absolute;
-  top: -50px;
-  right: 30px;
-  width: 80px;
-  height: 120px;
-  z-index: 3;
-  perspective: 500px;
-}
-
-.camera-stand {
-  position: relative;
+<style scoped>
+.camera-container {
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.camera-neck {
-  width: 10px;
-  height: 40px;
-  background: linear-gradient(to bottom, #333, #555);
-  border-radius: 5px;
-}
-
-.camera-head {
-  width: 60px;
-  height: 45px;
-  background: transparent;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.3s ease-out;
-  transform-origin: center bottom;
-}
-
-.camera-body {
-  position: absolute;
-  width: 100px;
-  height: 30px;
-  background: linear-gradient(to bottom, #555, #444);
+  height: 400px;
   border-radius: 8px;
-  transform: translateZ(20px); // 改为向前伸出
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    height: 3px;
-    background: #333;
-    border-radius: 5px;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
-    right: 5px;
-    height: 3px;
-    background: #333;
-    border-radius: 5px;
-  }
-}
-
-.camera-lens {
-  width: 25px;
-  height: 25px;
-  background: #222;
-  border-radius: 50%;
-  position: absolute;
-  left: 50%; // 居中
-  transform: translateX(-50%) translateZ(60px); // 向前伸出到机身前端
   overflow: hidden;
-  border: 2px solid #111;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-}
-
-.camera-indicator {
-  position: absolute;
-  top: 5px;
-  right: 30px; // 调整指示灯位置
-  width: 6px;
-  height: 6px;
-  background: #f00;
-  border-radius: 50%;
-  animation: blink 2s infinite;
-  z-index: 2;
-}
-
-.camera-base {
-  width: 40px;
-  height: 10px;
-  background: linear-gradient(to bottom, #777, #555);
-  border-radius: 5px;
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
+  background: transparent;
+  cursor: pointer;
 }
 </style>

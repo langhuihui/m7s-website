@@ -197,6 +197,7 @@ go run -tags sqlite main.go
             <video
               ref="videoRef"
               :key="videoKey"
+              controls
               autoplay
               loop
               muted
