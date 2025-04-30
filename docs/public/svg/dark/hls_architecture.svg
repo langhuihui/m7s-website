@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg aria-roledescription="class" role="graphics-document document" viewBox="0 0 1236.69921875 884"
+  style="max-width: 1236.69921875px;" class="classDiagram" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns="http://www.w3.org/2000/svg" width="100%" id="mermaid-5rmtvspij3a">
+  <style>
+    #mermaid-5rmtvspij3a {
+      font-family: ui-sans-serif, -apple-system, system-ui, Segoe UI, Helvetica;
+      font-size: 16px;
+      fill: #ccc;
+    }
+
+    @keyframes edge-animation-frame {
+      from {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes dash {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    #mermaid-5rmtvspij3a .edge-animation-slow {
+      stroke-dasharray: 9, 5 !important;
+      stroke-dashoffset: 900;
+      animation: dash 50s linear infinite;
+      stroke-linecap: round;
+    }
+
+    #mermaid-5rmtvspij3a .edge-animation-fast {
+      stroke-dasharray: 9, 5 !important;
+      stroke-dashoffset: 900;
+      animation: dash 20s linear infinite;
+      stroke-linecap: round;
+    }
+
+    #mermaid-5rmtvspij3a .error-icon {
+      fill: #333;
+    }
+
+    #mermaid-5rmtvspij3a .error-text {
+      fill: #cccccc;
+      stroke: #cccccc;
+    }
+
+    #mermaid-5rmtvspij3a .edge-thickness-normal {
+      stroke-width: 1px;
+    }
+
+    #mermaid-5rmtvspij3a .edge-thickness-thick {
+      stroke-width: 3.5px;
+    }
+
+    #mermaid-5rmtvspij3a .edge-pattern-solid {
+      stroke-dasharray: 0;
+    }
+
+    #mermaid-5rmtvspij3a .edge-thickness-invisible {
+      stroke-width: 0;
+      fill: none;
+    }
+
+    #mermaid-5rmtvspij3a .edge-pattern-dashed {
+      stroke-dasharray: 3;
+    }
+
+    #mermaid-5rmtvspij3a .edge-pattern-dotted {
+      stroke-dasharray: 2;
+    }
+
+    #mermaid-5rmtvspij3a .marker {
+      fill: #666;
+      stroke: #666;
+    }
+
+    #mermaid-5rmtvspij3a .marker.cross {
+      stroke: #666;
+    }
+
+    #mermaid-5rmtvspij3a svg {
+      font-family: ui-sans-serif, -apple-system, system-ui, Segoe UI, Helvetica;
+      font-size: 16px;
+    }
+
+    #mermaid-5rmtvspij3a p {
+      margin: 0;
+    }
+
+    #mermaid-5rmtvspij3a g.classGroup text {
+      fill: #222;
+      stroke: none;
+      font-family: ui-sans-serif, -apple-system, system-ui, Segoe UI, Helvetica;
+      font-size: 10px;
+    }
+
+    #mermaid-5rmtvspij3a g.classGroup text .title {
+      font-weight: bolder;
+    }
+
+    #mermaid-5rmtvspij3a .nodeLabel,
+    #mermaid-5rmtvspij3a .edgeLabel {
+      color: #ccc;
+    }
+
+    #mermaid-5rmtvspij3a .edgeLabel .label rect {
+      fill: #111;
+    }
+
+    #mermaid-5rmtvspij3a .label text {
+      fill: #ccc;
+    }
+
+    #mermaid-5rmtvspij3a .labelBkg {
+      background: #111;
+    }
+
+    #mermaid-5rmtvspij3a .edgeLabel .label span {
+      background: #111;
+    }
+
+    #mermaid-5rmtvspij3a .classTitle {
+      font-weight: bolder;
+    }
+
+    #mermaid-5rmtvspij3a .node rect,
+    #mermaid-5rmtvspij3a .node circle,
+    #mermaid-5rmtvspij3a .node ellipse,
+    #mermaid-5rmtvspij3a .node polygon,
+    #mermaid-5rmtvspij3a .node path {
+      fill: #111;
+      stroke: #222;
+      stroke-width: 1px;
+    }
+
+    #mermaid-5rmtvspij3a .divider {
+      stroke: #222;
+      stroke-width: 1;
+    }
+
+    #mermaid-5rmtvspij3a g.clickable {
+      cursor: pointer;
+    }
+
+    #mermaid-5rmtvspij3a g.classGroup rect {
+      fill: #111;
+      stroke: #222;
+    }
+
+    #mermaid-5rmtvspij3a g.classGroup line {
+      stroke: #222;
+      stroke-width: 1;
+    }
+
+    #mermaid-5rmtvspij3a .classLabel .box {
+      stroke: none;
+      stroke-width: 0;
+      fill: #111;
+      opacity: 0.5;
+    }
+
+    #mermaid-5rmtvspij3a .classLabel .label {
+      fill: #222;
+      font-size: 10px;
+    }
+
+    #mermaid-5rmtvspij3a .relation {
+      stroke: #666;
+      stroke-width: 1;
+      fill: none;
+    }
+
+    #mermaid-5rmtvspij3a .dashed-line {
+      stroke-dasharray: 3;
+    }
+
+    #mermaid-5rmtvspij3a .dotted-line {
+      stroke-dasharray: 1 2;
+    }
+
+    #mermaid-5rmtvspij3a #compositionStart,
+    #mermaid-5rmtvspij3a .composition {
+      fill: #666 !important;
+      stroke: #666 !important;
+      stroke-width: 1;
+    }
+
+    #mermaid-5rmtvspij3a #compositionEnd,
+    #mermaid-5rmtvspij3a .composition {
+      fill: #666 !important;
+      stroke: #666 !important;
+      stroke-width: 1;
+    }
+
+    #mermaid-5rmtvspij3a #dependencyStart,
+    #mermaid-5rmtvspij3a .dependency {
+      fill: #666 !important;
+      stroke: #666 !important;
+      stroke-width: 1;
+    }
+
+    #mermaid-5rmtvspij3a #dependencyStart,
+    #mermaid-5rmtvspij3a .dependency {
+      fill: #666 !important;
+      stroke: #666 !important;
+      stroke-width: 1;
+    }
+
+    #mermaid-5rmtvspij3a #extensionStart,
+    #mermaid-5rmtvspij3a .extension {
+      fill: transparent !important;
+      stroke: #666 !important;
+      stroke-width: 1;
+    }
+
+    #mermaid-5rmtvspij3a #extensionEnd,
+    #mermaid-5rmtvspij3a .extension {
+      fill: transparent !important;
+      stroke: #666 !important;
+      stroke-width: 1;
+    }
+
+    #mermaid-5rmtvspij3a #aggregationStart,
+    #mermaid-5rmtvspij3a .aggregation {
+      fill: transparent !important;
+      stroke: #666 !important;
+      stroke-width: 1;
+    }
+
+    #mermaid-5rmtvspij3a #aggregationEnd,
+    #mermaid-5rmtvspij3a .aggregation {
+      fill: transparent !important;
+      stroke: #666 !important;
+      stroke-width: 1;
+    }
+
+    #mermaid-5rmtvspij3a #lollipopStart,
+    #mermaid-5rmtvspij3a .lollipop {
+      fill: #111 !important;
+      stroke: #666 !important;
+      stroke-width: 1;
+    }
+
+    #mermaid-5rmtvspij3a #lollipopEnd,
+    #mermaid-5rmtvspij3a .lollipop {
+      fill: #111 !important;
+      stroke: #666 !important;
+      stroke-width: 1;
+    }
+
+    #mermaid-5rmtvspij3a .edgeTerminals {
+      font-size: 11px;
+      line-height: initial;
+    }
+
+    #mermaid-5rmtvspij3a .classTitleText {
+      text-anchor: middle;
+      font-size: 18px;
+      fill: #ccc;
+    }
+
+    #mermaid-5rmtvspij3a :root {
+      --mermaid-font-family: "trebuchet ms", verdana, arial, sans-serif;
+    }
+  </style>
+  <g>
+    <defs>
+      <marker orient="auto" markerHeight="240" markerWidth="190" refY="7" refX="18" class="marker dependency class"
+        id="dependency-end">
+        <path d="M 18,7 L9,13 L14,7 L9,1 Z"></path>
+      </marker>
+    </defs>
+    <g class="root">
+      <g class="clusters"></g>
+      <g class="edgePaths">
+        <path marker-end="url(#dependency-end)" class="edge-thickness-normal edge-pattern-solid relation"
+          d="M406.365,209.991L371.979,222.492C337.592,234.994,268.82,259.997,234.433,277.665C200.047,295.333,200.047,305.667,200.047,310.833L200.047,316">
+        </path>
+        <path marker-end="url(#dependency-end)" class="edge-thickness-normal edge-pattern-solid relation"
+          d="M631.887,248L631.887,254.167C631.887,260.333,631.887,272.667,631.887,288C631.887,303.333,631.887,321.667,631.887,330.833L631.887,340">
+        </path>
+        <path marker-end="url(#dependency-end)" class="edge-thickness-normal edge-pattern-solid relation"
+          d="M857.408,212.644L889.538,224.703C921.669,236.763,985.929,260.881,1018.059,282.107C1050.189,303.333,1050.189,321.667,1050.189,330.833L1050.189,340">
+        </path>
+        <path marker-end="url(#dependency-end)" class="edge-thickness-normal edge-pattern-solid relation"
+          d="M200.047,658L200.047,664.167C200.047,670.333,200.047,682.667,247.239,700.935C294.431,719.203,388.816,743.406,436.008,755.507L483.201,767.608">
+        </path>
+        <path marker-end="url(#dependency-end)" class="edge-thickness-normal edge-pattern-solid relation"
+          d="M1050.189,634L1050.189,644.167C1050.189,654.333,1050.189,674.667,1002.997,696.935C955.805,719.203,861.42,743.406,814.228,755.507L767.036,767.608">
+        </path>
+      </g>
+      <g class="nodes">
+        <g transform="translate(631.88671875, 128)" class="node default">
+          <rect height="240" width="451.04296875" y="-120" x="-225.521484375" fill="#111" stroke="#222"></rect>
+          <text x="-40.26953125" y="-96" fill="#ccc" font-weight="bold">HLSPlugin</text>
+          <line x1="-225.521484375" y1="-72" x2="225.521484375" y2="-72" stroke="#222"></line>
+          <text x="-213.521484375" y="-48">+Plugin</text>
+          <text x="-213.521484375" y="-24">+PlayAddr[]</text>
+          <line x1="-225.521484375" y1="0" x2="225.521484375" y2="0" stroke="#222"></line>
+          <text x="-213.521484375" y="24">+OnInit() : error</text>
+          <text x="-213.521484375" y="48">+RegisterHandler() : map[string]http.HandlerFunc</text>
+          <text x="-213.521484375" y="72">+ServeHTTP(w http.ResponseWriter, r *http.Request)</text>
+          <text x="-213.521484375" y="96">+vod(w http.ResponseWriter, r *http.Request)</text>
+        </g>
+        <g transform="translate(200.046875, 490)" class="node default">
+          <rect height="336" width="384.09375" y="-168" x="-192.046875" fill="#111" stroke="#222"></rect>
+          <text x="-40.0234375" y="-144" fill="#ccc" font-weight="bold">HLSWriter</text>
+          <line x1="-192.046875" y1="-120" x2="192.046875" y2="-120" stroke="#222"></line>
+          <text x="-180.046875" y="-96">+Window int</text>
+          <text x="-180.046875" y="-72">+Fragment time.Duration</text>
+          <text x="-180.046875" y="-48">+M3u8 util.Buffer</text>
+          <text x="-180.046875" y="-24">+memoryTs sync.Map</text>
+          <text x="-180.046875" y="0">+playlist Playlist</text>
+          <line x1="-192.046875" y1="24" x2="192.046875" y2="24" stroke="#222"></line>
+          <text x="-180.046875" y="48">+Start() : error</text>
+          <text x="-180.046875" y="72">+Run() : error</text>
+          <text x="-180.046875" y="96">+ProcessADTS(audio *pkg.ADTS) : error</text>
+          <text x="-180.046875" y="120">+ProcessAnnexB(video *pkg.AnnexB) : error</text>
+          <text x="-180.046875" y="144">+checkFragment(ts time.Duration) : error</text>
+        </g>
+        <g transform="translate(631.88671875, 490)" class="node default">
+          <rect height="288" width="379.5859375" y="-144" x="-189.79296875" fill="#111" stroke="#222"></rect>
+          <text x="-35.515625" y="-120" fill="#ccc" font-weight="bold">Recorder</text>
+          <line x1="-189.79296875" y1="-96" x2="189.79296875" y2="-96" stroke="#222"></line>
+          <text x="-177.79296875" y="-72">+stream m7s.RecordStream</text>
+          <text x="-177.79296875" y="-48">+segmentCount uint32</text>
+          <line x1="-189.79296875" y1="-24" x2="189.79296875" y2="-24" stroke="#222"></line>
+          <text x="-177.79296875" y="0">+Run() : error</text>
+          <text x="-177.79296875" y="24">+createStream(start time.Time) : error</text>
+          <text x="-177.79296875" y="48">+createNewTs()</text>
+          <text x="-177.79296875" y="72">+writeSegment(ts time.Duration) : error</text>
+          <text x="-177.79296875" y="96">+ProcessADTS(audio *pkg.ADTS) : error</text>
+          <text x="-177.79296875" y="120">+ProcessAnnexB(video *pkg.AnnexB) : error</text>
+        </g>
+        <g transform="translate(1050.189453125, 490)" class="node default">
+          <rect height="288" width="357.01953125" y="-144" x="-178.509765625" fill="#111" stroke="#222"></rect>
+          <text x="-22.48046875" y="-120" fill="#ccc" font-weight="bold">Puller</text>
+          <line x1="-178.509765625" y1="-96" x2="178.509765625" y2="-96" stroke="#222"></line>
+          <text x="-166.509765625" y="-72">+PullJob m7s.PullJob</text>
+          <text x="-166.509765625" y="-48">+Video M3u8Info</text>
+          <text x="-166.509765625" y="-24">+Audio M3u8Info</text>
+          <text x="-166.509765625" y="0">+memoryTs sync.Map</text>
+          <line x1="-178.509765625" y1="24" x2="178.509765625" y2="24" stroke="#222"></line>
+          <text x="-166.509765625" y="48">+Start() : error</text>
+          <text x="-166.509765625" y="72">+Run() : error</text>
+          <text x="-166.509765625" y="96">+pull(info *M3u8Info) : error</text>
+          <text x="-166.509765625" y="120">+writePublisher(t *mpegts.MpegTsStream)</text>
+        </g>
+        <g transform="translate(625.1181640625, 804)" class="node default">
+          <rect height="144" width="272.2109375" y="-72" x="-136.10546875" fill="#111" stroke="#222"></rect>
+          <text x="-62.5078125" y="-48" fill="#ccc" font-weight="bold">MemoryStorage</text>
+          <line x1="-136.10546875" y1="-24" x2="136.10546875" y2="-24" stroke="#222"></line>
+          <text x="-124.10546875" y="0">+MemoryM3u8 sync.Map</text>
+          <text x="-124.10546875" y="24">+MemoryTs sync.Map</text>
+          <line x1="-136.10546875" y1="48" x2="136.10546875" y2="48" stroke="#222"></line>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 1312.953125 482"
+  style="max-width: 1312.953125px;" class="flowchart" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns="http://www.w3.org/2000/svg" width="100%" id="mermaid-kzhakuvgxa">
+  <style>
+    #mermaid-kzhakuvgxa {
+      font-family: ui-sans-serif, -apple-system, system-ui, Segoe UI, Helvetica;
+      font-size: 16px;
+      fill: #ccc;
+    }
+
+    @keyframes edge-animation-frame {
+      from {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes dash {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    #mermaid-kzhakuvgxa .edge-animation-slow {
+      stroke-dasharray: 9, 5 !important;
+      stroke-dashoffset: 900;
+      animation: dash 50s linear infinite;
+      stroke-linecap: round;
+    }
+
+    #mermaid-kzhakuvgxa .edge-animation-fast {
+      stroke-dasharray: 9, 5 !important;
+      stroke-dashoffset: 900;
+      animation: dash 20s linear infinite;
+      stroke-linecap: round;
+    }
+
+    #mermaid-kzhakuvgxa .error-icon {
+      fill: #333;
+    }
+
+    #mermaid-kzhakuvgxa .error-text {
+      fill: #cccccc;
+      stroke: #cccccc;
+    }
+
+    #mermaid-kzhakuvgxa .edge-thickness-normal {
+      stroke-width: 1px;
+    }
+
+    #mermaid-kzhakuvgxa .edge-thickness-thick {
+      stroke-width: 3.5px;
+    }
+
+    #mermaid-kzhakuvgxa .edge-pattern-solid {
+      stroke-dasharray: 0;
+    }
+
+    #mermaid-kzhakuvgxa .edge-thickness-invisible {
+      stroke-width: 0;
+      fill: none;
+    }
+
+    #mermaid-kzhakuvgxa .edge-pattern-dashed {
+      stroke-dasharray: 3;
+    }
+
+    #mermaid-kzhakuvgxa .edge-pattern-dotted {
+      stroke-dasharray: 2;
+    }
+
+    #mermaid-kzhakuvgxa .marker {
+      fill: #666;
+      stroke: #666;
+    }
+
+    #mermaid-kzhakuvgxa .marker.cross {
+      stroke: #666;
+    }
+
+    #mermaid-kzhakuvgxa svg {
+      font-family: ui-sans-serif, -apple-system, system-ui, Segoe UI, Helvetica;
+      font-size: 16px;
+    }
+
+    #mermaid-kzhakuvgxa p {
+      margin: 0;
+    }
+
+    #mermaid-kzhakuvgxa .label {
+      font-family: ui-sans-serif, -apple-system, system-ui, Segoe UI, Helvetica;
+      color: #fff;
+    }
+
+    #mermaid-kzhakuvgxa .cluster-label text {
+      fill: #fff;
+    }
+
+    #mermaid-kzhakuvgxa .cluster-label span {
+      color: #fff;
+    }
+
+    #mermaid-kzhakuvgxa .cluster-label span p {
+      background-color: transparent;
+    }
+
+    #mermaid-kzhakuvgxa .label text,
+    #mermaid-kzhakuvgxa span {
+      fill: #fff;
+      color: #fff;
+    }
+
+    #mermaid-kzhakuvgxa .node rect,
+    #mermaid-kzhakuvgxa .node circle,
+    #mermaid-kzhakuvgxa .node ellipse,
+    #mermaid-kzhakuvgxa .node polygon,
+    #mermaid-kzhakuvgxa .node path {
+      fill: #111;
+      stroke: #222;
+      stroke-width: 1px;
+    }
+
+    #mermaid-kzhakuvgxa .rough-node .label text,
+    #mermaid-kzhakuvgxa .node .label text,
+    #mermaid-kzhakuvgxa .image-shape .label,
+    #mermaid-kzhakuvgxa .icon-shape .label {
+      text-anchor: middle;
+    }
+
+    #mermaid-kzhakuvgxa .node .katex path {
+      fill: #000;
+      stroke: #000;
+      stroke-width: 1px;
+    }
+
+    #mermaid-kzhakuvgxa .rough-node .label,
+    #mermaid-kzhakuvgxa .node .label,
+    #mermaid-kzhakuvgxa .image-shape .label,
+    #mermaid-kzhakuvgxa .icon-shape .label {
+      text-align: center;
+    }
+
+    #mermaid-kzhakuvgxa .node.clickable {
+      cursor: pointer;
+    }
+
+    #mermaid-kzhakuvgxa .root .anchor path {
+      fill: #666 !important;
+      stroke-width: 0;
+      stroke: #666;
+    }
+
+    #mermaid-kzhakuvgxa .arrowheadPath {
+      fill: #0b0b0b;
+    }
+
+    #mermaid-kzhakuvgxa .edgePath .path {
+      stroke: #666;
+      stroke-width: 2.0px;
+    }
+
+    #mermaid-kzhakuvgxa .flowchart-link {
+      stroke: #666;
+      fill: none;
+    }
+
+    #mermaid-kzhakuvgxa .edgeLabel {
+      background-color: #161616;
+      text-align: center;
+    }
+
+    #mermaid-kzhakuvgxa .edgeLabel p {
+      background-color: #161616;
+    }
+
+    #mermaid-kzhakuvgxa .edgeLabel rect {
+      opacity: 0.5;
+      background-color: #161616;
+      fill: #161616;
+    }
+
+    #mermaid-kzhakuvgxa .labelBkg {
+      background-color: rgba(22, 22, 22, 0.5);
+    }
+
+    #mermaid-kzhakuvgxa .cluster rect {
+      fill: #161616;
+      stroke: #222;
+      stroke-width: 1px;
+    }
+
+    #mermaid-kzhakuvgxa .cluster text {
+      fill: #fff;
+    }
+
+    #mermaid-kzhakuvgxa .cluster span {
+      color: #fff;
+    }
+
+    #mermaid-kzhakuvgxa div.mermaidTooltip {
+      position: absolute;
+      text-align: center;
+      max-width: 200px;
+      padding: 2px;
+      font-family: ui-sans-serif, -apple-system, system-ui, Segoe UI, Helvetica;
+      font-size: 12px;
+      background: #333;
+      border: 1px solid hsl(0, 0%, 10%);
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    #mermaid-kzhakuvgxa .flowchartTitleText {
+      text-anchor: middle;
+      font-size: 18px;
+      fill: #ccc;
+    }
+
+    #mermaid-kzhakuvgxa rect.text {
+      fill: none;
+      stroke-width: 0;
+    }
+
+    #mermaid-kzhakuvgxa .icon-shape,
+    #mermaid-kzhakuvgxa .image-shape {
+      background-color: #161616;
+      text-align: center;
+    }
+
+    #mermaid-kzhakuvgxa .icon-shape p,
+    #mermaid-kzhakuvgxa .image-shape p {
+      background-color: #161616;
+      padding: 2px;
+    }
+
+    #mermaid-kzhakuvgxa .icon-shape rect,
+    #mermaid-kzhakuvgxa .image-shape rect {
+      opacity: 0.5;
+      background-color: #161616;
+      fill: #161616;
+    }
+
+    #mermaid-kzhakuvgxa :root {
+      --mermaid-font-family: "trebuchet ms", verdana, arial, sans-serif;
+    }
+  </style>
+  <g>
+    <defs>
+      <marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5"
+        viewBox="0 0 10 10" class="marker flowchart-v2" id="flowchart-pointEnd">
+        <path style="stroke-width: 1;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path>
+      </marker>
+    </defs>
+    <g class="root">
+      <g class="clusters">
+        <g data-look="classic" id="Initialization" class="cluster">
+          <rect height="337" width="288.640625" y="137" x="8" fill="#161616" stroke="#222"></rect>
+          <text x="109.421875" y="161" fill="#fff">Initialization</text>
+        </g>
+        <g data-look="classic" id="Plugin Registration" class="cluster">
+          <rect height="337" width="988.3125" y="8" x="316.640625" fill="#161616" stroke="#222"></rect>
+          <text x="742.8984375" y="32" fill="#fff">Plugin Registration</text>
+        </g>
+      </g>
+      <g class="edgePaths">
+        <path marker-end="url(#flowchart-pointEnd)" class="edge-thickness-normal edge-pattern-solid flowchart-link"
+          d="M790.157,87L790.958,91.167C791.76,95.333,793.362,103.667,794.164,112C794.965,120.333,794.965,128.667,794.965,136.333C794.965,144,794.965,151,794.965,154.5L794.965,158">
+        </path>
+        <path marker-end="url(#flowchart-pointEnd)" class="edge-thickness-normal edge-pattern-solid flowchart-link"
+          d="M724.352,199.551L678.12,206.459C631.888,213.368,539.424,227.184,493.193,237.592C446.961,248,446.961,255,446.961,258.5L446.961,262">
+        </path>
+        <path marker-end="url(#flowchart-pointEnd)" class="edge-thickness-normal edge-pattern-solid flowchart-link"
+          d="M737.492,216L728.623,220.167C719.754,224.333,702.016,232.667,693.147,240.333C684.277,248,684.277,255,684.277,258.5L684.277,262">
+        </path>
+        <path marker-end="url(#flowchart-pointEnd)" class="edge-thickness-normal edge-pattern-solid flowchart-link"
+          d="M852.437,216L861.306,220.167C870.176,224.333,887.914,232.667,896.783,240.333C905.652,248,905.652,255,905.652,258.5L905.652,262">
+        </path>
+        <path marker-end="url(#flowchart-pointEnd)" class="edge-thickness-normal edge-pattern-solid flowchart-link"
+          d="M865.578,199.27L913.397,206.225C961.216,213.18,1056.854,227.09,1104.673,237.545C1152.492,248,1152.492,255,1152.492,258.5L1152.492,262">
+        </path>
+        <path marker-end="url(#flowchart-pointEnd)" class="edge-thickness-normal edge-pattern-solid flowchart-link"
+          d="M152.32,216L152.32,220.167C152.32,224.333,152.32,232.667,152.32,240.333C152.32,248,152.32,255,152.32,258.5L152.32,262">
+        </path>
+        <path marker-end="url(#flowchart-pointEnd)" class="edge-thickness-normal edge-pattern-solid flowchart-link"
+          d="M152.32,320L152.32,324.167C152.32,328.333,152.32,336.667,152.32,345C152.32,353.333,152.32,361.667,152.32,369.333C152.32,377,152.32,384,152.32,387.5L152.32,391">
+        </path>
+        <path marker-end="url(#flowchart-pointEnd)" class="edge-thickness-normal edge-pattern-solid flowchart-link"
+          d="M651.094,78.619L611.091,84.182C571.088,89.746,491.082,100.873,451.079,110.603C411.076,120.333,411.076,128.667,384.705,138.133C358.333,147.599,305.59,158.199,279.219,163.498L252.847,168.798">
+        </path>
+      </g>
+      <g class="nodes">
+        <g transform="translate(784.96484375, 60)" class="node default">
+          <rect height="54" width="267.7421875" y="-27" x="-133.87109375" fill="#111" stroke="#222"></rect>
+          <text x="-103.87109375" y="0" fill="#ccc">m7s.InstallPlugin[HLSPlugin]</text>
+        </g>
+        <g transform="translate(794.96484375, 189)" class="node default">
+          <rect height="54" width="141.2265625" y="-27" x="-70.61328125" fill="#111" stroke="#222"></rect>
+          <text x="-40.61328125" y="0" fill="#ccc">PluginMeta</text>
+        </g>
+        <g transform="translate(446.9609375, 293)" class="node default">
+          <rect height="54" width="190.640625" y="-27" x="-95.3203125" fill="#111" stroke="#222"></rect>
+          <text x="-65.3203125" y="0" fill="#ccc">hls.NewTransform</text>
+        </g>
+        <g transform="translate(684.27734375, 293)" class="node default">
+          <rect height="54" width="183.9921875" y="-27" x="-91.99609375" fill="#111" stroke="#222"></rect>
+          <text x="-61.99609375" y="0" fill="#ccc">hls.NewRecorder</text>
+        </g>
+        <g transform="translate(905.65234375, 293)" class="node default">
+          <rect height="54" width="158.7578125" y="-27" x="-79.37890625" fill="#111" stroke="#222"></rect>
+          <text x="-49.37890625" y="0" fill="#ccc">hls.NewPuller</text>
+        </g>
+        <g transform="translate(1152.4921875, 293)" class="node default">
+          <rect height="54" width="234.921875" y="-27" x="-117.4609375" fill="#111" stroke="#222"></rect>
+          <text x="-87.4609375" y="0" fill="#ccc">m7s.NewHTTPPullPorxy</text>
+        </g>
+        <g transform="translate(152.3203125, 189)" class="node default">
+          <rect height="54" width="193.2109375" y="-27" x="-96.60546875" fill="#111" stroke="#222"></rect>
+          <text x="-66.60546875" y="0" fill="#ccc">HLSPlugin.OnInit()</text>
+        </g>
+        <g transform="translate(152.3203125, 293)" class="node default">
+          <rect height="54" width="218.640625" y="-27" x="-109.3203125" fill="#111" stroke="#222"></rect>
+          <text x="-79.3203125" y="0" fill="#ccc">Configure HTTP ports</text>
+        </g>
+        <g transform="translate(152.3203125, 422)" class="node default">
+          <rect height="54" width="210.921875" y="-27" x="-105.4609375" fill="#111" stroke="#222"></rect>
+          <text x="-75.4609375" y="0" fill="#ccc">Build Play Addresses</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

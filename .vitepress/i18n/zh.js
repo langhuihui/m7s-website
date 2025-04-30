@@ -145,6 +145,7 @@ export default {
     github: 'GitHub'
   },
   sidebar: {
+    protocols: '传输协议',
     introduction: '介绍',
     whatIsMonibuca: '什么是 Monibuca',
     quickStart: '快速开始',
