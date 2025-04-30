@@ -8,6 +8,12 @@ const nav = {
     }
   ],
 };
+const protocols = {
+  en: [],
+  zh: [
+    { text: 'gb28181', link: '/protocols/gb28181' }
+  ]
+};
 const commonThemeConfig = (locales: '' | 'zh' | 'en' = '', translation = translations[locales || 'zh']) => ({
   nav: [
     { text: translation.nav.document, link: locales + '/guide/what-is-monibuca' },
@@ -49,6 +55,17 @@ const commonThemeConfig = (locales: '' | 'zh' | 'en' = '', translation = transla
       ]
     },
     {
+      text: translation.sidebar.protocols,
+      items: [
+        { text: "rtmp", link: locales + '/protocols/rtmp' },
+        { text: "rtsp", link: locales + '/protocols/rtsp' },
+        { text: "webrtc", link: locales + '/protocols/webrtc' },
+        { text: "hls", link: locales + '/protocols/hls' },
+        { text: "srt", link: locales + '/protocols/srt' },
+        ...protocols[locales || 'zh']
+      ]
+    },
+    {
       text: translation.sidebar.secondaryDevelopment,
       items: [
         { text: translation.sidebar.catalog, link: locales + '/develop/catalog' },
@@ -84,7 +101,7 @@ export default defineConfig({
   description: '高性能流媒体服务器框架',
   lastUpdated: true,
   appearance: 'dark',
-
+  srcDir: 'docs',
   // 添加head配置，包含keywords元标签
   head: [
     ['meta', { name: 'keywords', content: '流媒体服务器,Monibuca,直播服务器,推流,拉流,录制,回放,转码,流媒体框架,RTMP,RTSP,WebRTC,HLS,SRT,Go' }]

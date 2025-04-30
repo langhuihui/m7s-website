@@ -145,6 +145,7 @@ export default {
     github: 'GitHub'
   },
   sidebar: {
+    protocols: 'Protocols',
     introduction: 'Introduction',
     whatIsMonibuca: 'What is Monibuca',
     quickStart: 'Quick Start',

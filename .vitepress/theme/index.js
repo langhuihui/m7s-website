@@ -5,6 +5,7 @@ import FooterChinese from '../components/FooterChinese.vue';
 import ContactQQGroup from '../components/ContactQQGroup.vue';
 import ContactQQChannel from '../components/ContactQQChannel.vue';
 import ContactWechatPublic from '../components/ContactWechatPublic.vue';
+import SVG from '../components/SVG.vue';
 import './custom.css'; // 导入自定义 CSS
 
 export default {
@@ -16,6 +17,7 @@ export default {
     app.component('ContactQQGroup', ContactQQGroup);
     app.component('ContactQQChannel', ContactQQChannel);
     app.component('ContactWechatPublic', ContactWechatPublic);
+    app.component('SVG', SVG);
   },
   setup() {
     // Theme setup

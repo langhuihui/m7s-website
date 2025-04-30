@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 958.4921875 404"
+  style="max-width: 958.4921875px;" class="flowchart" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns="http://www.w3.org/2000/svg" width="100%" id="mermaid-weh1jd2thwq">
+  <style>
+    #mermaid-weh1jd2thwq {
+      font-family: ui-sans-serif, -apple-system, system-ui, Segoe UI, Helvetica;
+      font-size: 16px;
+      fill: #ccc;
+    }
+
+    @keyframes edge-animation-frame {
+      from {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes dash {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    #mermaid-weh1jd2thwq .edge-animation-slow {
+      stroke-dasharray: 9, 5 !important;
+      stroke-dashoffset: 900;
+      animation: dash 50s linear infinite;
+      stroke-linecap: round;
+    }
+
+    #mermaid-weh1jd2thwq .edge-animation-fast {
+      stroke-dasharray: 9, 5 !important;
+      stroke-dashoffset: 900;
+      animation: dash 20s linear infinite;
+      stroke-linecap: round;
+    }
+
+    #mermaid-weh1jd2thwq .error-icon {
+      fill: #333;
+    }
+
+    #mermaid-weh1jd2thwq .error-text {
+      fill: #cccccc;
+      stroke: #cccccc;
+    }
+
+    #mermaid-weh1jd2thwq .edge-thickness-normal {
+      stroke-width: 1px;
+    }
+
+    #mermaid-weh1jd2thwq .edge-thickness-thick {
+      stroke-width: 3.5px;
+    }
+
+    #mermaid-weh1jd2thwq .edge-pattern-solid {
+      stroke-dasharray: 0;
+    }
+
+    #mermaid-weh1jd2thwq .edge-thickness-invisible {
+      stroke-width: 0;
+      fill: none;
+    }
+
+    #mermaid-weh1jd2thwq .edge-pattern-dashed {
+      stroke-dasharray: 3;
+    }
+
+    #mermaid-weh1jd2thwq .edge-pattern-dotted {
+      stroke-dasharray: 2;
+    }
+
+    #mermaid-weh1jd2thwq .marker {
+      fill: #666;
+      stroke: #666;
+    }
+
+    #mermaid-weh1jd2thwq .marker.cross {
+      stroke: #666;
+    }
+
+    #mermaid-weh1jd2thwq svg {
+      font-family: ui-sans-serif, -apple-system, system-ui, Segoe UI, Helvetica;
+      font-size: 16px;
+    }
+
+    #mermaid-weh1jd2thwq p {
+      margin: 0;
+    }
+
+    #mermaid-weh1jd2thwq .label {
+      font-family: ui-sans-serif, -apple-system, system-ui, Segoe UI, Helvetica;
+      color: #fff;
+    }
+
+    #mermaid-weh1jd2thwq .cluster-label text {
+      fill: #fff;
+    }
+
+    #mermaid-weh1jd2thwq .cluster-label span {
+      color: #fff;
+    }
+
+    #mermaid-weh1jd2thwq .cluster-label span p {
+      background-color: transparent;
+    }
+
+    #mermaid-weh1jd2thwq .label text,
+    #mermaid-weh1jd2thwq span {
+      fill: #fff;
+      color: #fff;
+    }
+
+    #mermaid-weh1jd2thwq .node rect,
+    #mermaid-weh1jd2thwq .node circle,
+    #mermaid-weh1jd2thwq .node ellipse,
+    #mermaid-weh1jd2thwq .node polygon,
+    #mermaid-weh1jd2thwq .node path {
+      fill: #111;
+      stroke: #222;
+      stroke-width: 1px;
+    }
+
+    #mermaid-weh1jd2thwq .rough-node .label text,
+    #mermaid-weh1jd2thwq .node .label text,
+    #mermaid-weh1jd2thwq .image-shape .label,
+    #mermaid-weh1jd2thwq .icon-shape .label {
+      text-anchor: middle;
+    }
+
+    #mermaid-weh1jd2thwq .node .katex path {
+      fill: #000;
+      stroke: #000;
+      stroke-width: 1px;
+    }
+
+    #mermaid-weh1jd2thwq .rough-node .label,
+    #mermaid-weh1jd2thwq .node .label,
+    #mermaid-weh1jd2thwq .image-shape .label,
+    #mermaid-weh1jd2thwq .icon-shape .label {
+      text-align: center;
+    }
+
+    #mermaid-weh1jd2thwq .node.clickable {
+      cursor: pointer;
+    }
+
+    #mermaid-weh1jd2thwq .root .anchor path {
+      fill: #666 !important;
+      stroke-width: 0;
+      stroke: #666;
+    }
+
+    #mermaid-weh1jd2thwq .arrowheadPath {
+      fill: #0b0b0b;
+    }
+
+    #mermaid-weh1jd2thwq .edgePath .path {
+      stroke: #666;
+      stroke-width: 2.0px;
+    }
+
+    #mermaid-weh1jd2thwq .flowchart-link {
+      stroke: #666;
+      fill: none;
+    }
+
+    #mermaid-weh1jd2thwq .edgeLabel {
+      background-color: #161616;
+      text-align: center;
+    }
+
+    #mermaid-weh1jd2thwq .edgeLabel p {
+      background-color: #161616;
+    }
+
+    #mermaid-weh1jd2thwq .edgeLabel rect {
+      opacity: 0.5;
+      background-color: #161616;
+      fill: #161616;
+    }
+
+    #mermaid-weh1jd2thwq .labelBkg {
+      background-color: rgba(22, 22, 22, 0.5);
+    }
+
+    #mermaid-weh1jd2thwq .cluster rect {
+      fill: #161616;
+      stroke: #222;
+      stroke-width: 1px;
+    }
+
+    #mermaid-weh1jd2thwq .cluster text {
+      fill: #fff;
+    }
+
+    #mermaid-weh1jd2thwq .cluster span {
+      color: #fff;
+    }
+
+    #mermaid-weh1jd2thwq div.mermaidTooltip {
+      position: absolute;
+      text-align: center;
+      max-width: 200px;
+      padding: 2px;
+      font-family: ui-sans-serif, -apple-system, system-ui, Segoe UI, Helvetica;
+      font-size: 12px;
+      background: #333;
+      border: 1px solid hsl(0, 0%, 10%);
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    #mermaid-weh1jd2thwq .flowchartTitleText {
+      text-anchor: middle;
+      font-size: 18px;
+      fill: #ccc;
+    }
+
+    #mermaid-weh1jd2thwq rect.text {
+      fill: none;
+      stroke-width: 0;
+    }
+
+    #mermaid-weh1jd2thwq .icon-shape,
+    #mermaid-weh1jd2thwq .image-shape {
+      background-color: #161616;
+      text-align: center;
+    }
+
+    #mermaid-weh1jd2thwq .icon-shape p,
+    #mermaid-weh1jd2thwq .image-shape p {
+      background-color: #161616;
+      padding: 2px;
+    }
+
+    #mermaid-weh1jd2thwq .icon-shape rect,
+    #mermaid-weh1jd2thwq .image-shape rect {
+      opacity: 0.5;
+      background-color: #161616;
+      fill: #161616;
+    }
+
+    #mermaid-weh1jd2thwq :root {
+      --mermaid-font-family: "trebuchet ms", verdana, arial, sans-serif;
+    }
+  </style>
+  <g>
+    <defs>
+      <marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5"
+        viewBox="0 0 10 10" class="marker flowchart-v2" id="flowchart-pointEnd">
+        <path style="stroke-width: 1;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path>
+      </marker>
+    </defs>
+    <g class="root">
+      <g class="clusters">
+        <g data-look="classic" id="Storage" class="cluster">
+          <rect height="374" width="247.6328125" y="20" x="702.859375" fill="#161616" stroke="#222"></rect>
+          <text x="798.19140625" y="44" fill="#fff">Storage</text>
+        </g>
+        <g data-look="classic" id="HTTP Handlers" class="cluster">
+          <rect height="388" width="331.234375" y="8" x="321.625" fill="#161616" stroke="#222"></rect>
+          <text x="414.9765625" y="32" fill="#fff">HLS HTTP Handlers</text>
+        </g>
+        <g data-look="classic" id="HTTP Requests" class="cluster">
+          <rect height="300" width="263.625" y="42" x="8" fill="#161616" stroke="#222"></rect>
+          <text x="83.4765625" y="66" fill="#fff">HTTP Requests</text>
+        </g>
+      </g>
+      <g class="edgePaths">
+        <path marker-end="url(#flowchart-pointEnd)" class="edge-thickness-normal edge-pattern-solid flowchart-link"
+          d="M169.47,175L186.496,159.5C203.522,144,237.573,113,258.766,97.5C279.958,82,288.292,82,296.625,82C304.958,82,313.292,82,322.728,82C332.164,82,342.703,82,347.973,82L353.242,82">
+        </path>
+        <path marker-end="url(#flowchart-pointEnd)" class="edge-thickness-normal edge-pattern-solid flowchart-link"
+          d="M169.47,229L186.496,244.5C203.522,260,237.573,291,258.766,306.5C279.958,322,288.292,322,296.625,322C304.958,322,313.292,322,320.958,322C328.625,322,335.625,322,339.125,322L342.625,322">
+        </path>
+        <path marker-end="url(#flowchart-pointEnd)" class="edge-thickness-normal edge-pattern-solid flowchart-link"
+          d="M246.625,202L250.792,202C254.958,202,263.292,202,271.625,202C279.958,202,288.292,202,296.625,202C304.958,202,313.292,202,324.541,202C335.79,202,349.956,202,357.038,202L364.121,202">
+        </path>
+        <path marker-end="url(#flowchart-pointEnd)" class="edge-thickness-normal edge-pattern-solid flowchart-link"
+          d="M617.242,85.14L623.178,85.283C629.115,85.427,640.987,85.713,651.09,85.857C661.193,86,669.526,86,677.859,86C686.193,86,694.526,86,702.193,85.887C709.86,85.774,716.861,85.548,720.361,85.435L723.861,85.322">
+        </path>
+        <path marker-end="url(#flowchart-pointEnd)" class="edge-thickness-normal edge-pattern-solid flowchart-link"
+          d="M611.455,283L618.356,280.833C625.257,278.667,639.058,274.333,650.125,272.167C661.193,270,669.526,270,677.859,270C686.193,270,694.526,270,709.119,265.116C723.711,260.232,744.563,250.465,754.989,245.581L765.415,240.697">
+        </path>
+        <path marker-end="url(#flowchart-pointEnd)" class="edge-thickness-normal edge-pattern-solid flowchart-link"
+          d="M627.859,344.924L632.026,345.604C636.193,346.283,644.526,347.641,652.859,348.321C661.193,349,669.526,349,677.859,349C686.193,349,694.526,349,706.746,347.894C718.967,346.788,735.074,344.577,743.128,343.471L751.182,342.365">
+        </path>
+        <path marker-end="url(#flowchart-pointEnd)" class="edge-thickness-normal edge-pattern-solid flowchart-link"
+          d="M519.882,175L542.045,156.667C564.208,138.333,608.534,101.667,634.863,83.333C661.193,65,669.526,65,677.859,65C686.193,65,694.526,65,702.199,65.481C709.872,65.963,716.884,66.926,720.39,67.407L723.897,67.888">
+        </path>
+        <path marker-end="url(#flowchart-pointEnd)" class="edge-thickness-normal edge-pattern-solid flowchart-link"
+          d="M606.363,202L614.113,202C621.862,202,637.361,202,649.277,202C661.193,202,669.526,202,677.859,202C686.193,202,694.526,202,704.413,202.462C714.3,202.924,725.74,203.848,731.461,204.31L737.181,204.772">
+        </path>
+        <path marker-end="url(#flowchart-pointEnd)" class="edge-thickness-normal edge-pattern-solid flowchart-link"
+          d="M538.057,229L557.19,239.167C576.324,249.333,614.592,269.667,637.892,279.833C661.193,290,669.526,290,677.859,290C686.193,290,694.526,290,706.776,292.742C719.025,295.484,735.191,300.967,743.274,303.709L751.357,306.451">
+        </path>
+      </g>
+      <g class="nodes">
+        <g transform="translate(139.8125, 202)" class="node default">
+          <rect height="54" width="213.625" y="-27" x="-106.8125" fill="#111" stroke="#222"></rect>
+          <text x="-76.8125" y="0" fill="#ccc">Client Browser/Player</text>
+        </g>
+        <g transform="translate(487.2421875, 82)" class="node default">
+          <rect height="78" width="260" y="-39" x="-130" fill="#111" stroke="#222"></rect>
+          <text x="-100" y="-12" fill="#ccc">GET /hls/{streamPath}.m3u8</text>
+        </g>
+        <g transform="translate(487.2421875, 322)" class="node default">
+          <rect height="78" width="281.234375" y="-39" x="-140.6171875" fill="#111" stroke="#222"></rect>
+          <text x="-110.6171875" y="-12" fill="#ccc">GET /hls/{streamPath}/{segment}.ts</text>
+        </g>
+        <g transform="translate(487.2421875, 202)" class="node default">
+          <rect height="54" width="238.2421875" y="-27" x="-119.12109375" fill="#111" stroke="#222"></rect>
+          <text x="-89.12109375" y="0" fill="#ccc">GET /vod/{streamPath...}</text>
+        </g>
+        <g transform="translate(826.67578125, 82)" class="node default">
+          <rect height="54" width="197.6328125" y="-27" x="-98.81640625" fill="#111" stroke="#222"></rect>
+          <text x="-68.81640625" y="0" fill="#ccc">MemoryM3u8 Map</text>
+        </g>
+        <g transform="translate(826.67578125, 212)" class="node default">
+          <rect height="54" width="171.015625" y="-27" x="-85.5078125" fill="#111" stroke="#222"></rect>
+          <text x="-55.5078125" y="0" fill="#ccc">MemoryTs Map</text>
+        </g>
+        <g transform="translate(826.67578125, 332)" class="node default">
+          <rect height="54" width="143.0625" y="-27" x="-71.53125" fill="#111" stroke="#222"></rect>
+          <text x="-41.53125" y="0" fill="#ccc">File System</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
