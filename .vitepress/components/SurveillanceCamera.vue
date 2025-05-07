@@ -3,16 +3,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref, onMounted, onBeforeUnmount, watch } from "vue";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { useData } from "vitepress";
 
+const { isDark } = useData();
 const container = ref(null);
 let scene, camera, renderer, controls, model;
 let targetRotationY = 0;
 let targetRotationZ = 0;
 const rotationSpeed = 0.1; // 旋转速度系数
+let directionalLight, spotLight, ambientLight; // 添加 ambientLight 声明
 
 const handleMouseMove = (event) => {
   if (!container.value || !model) return;
@@ -29,6 +32,51 @@ const handleMouseMove = (event) => {
   targetRotationZ = -(relativeY - 0.5) * 0.4 + 0.3;
 };
 
+const updateLighting = () => {
+  if (isDark.value) {
+    // 黑暗模式灯光设置
+    if (directionalLight) {
+      directionalLight.intensity = 0.8;
+    }
+    if (!spotLight) {
+      spotLight = new THREE.SpotLight(0xffffff, 1);
+      spotLight.position.set(0, -2, 0);
+      spotLight.penumbra = 0.1;
+      spotLight.decay = 1;
+      spotLight.distance = 50;
+      spotLight.power = 100;
+      if (scene) scene.add(spotLight);
+    } else if (scene && !scene.children.includes(spotLight)) {
+      scene.add(spotLight);
+    }
+    // 移除环境光
+    if (ambientLight && scene && scene.children.includes(ambientLight)) {
+      scene.remove(ambientLight);
+    }
+  } else {
+    // 非黑暗模式灯光设置
+    if (directionalLight) {
+      directionalLight.intensity = 5;
+    }
+    if (spotLight && scene && scene.children.includes(spotLight)) {
+      scene.remove(spotLight);
+    }
+    // 添加环境光
+    if (!ambientLight) {
+      ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // 初始化环境光
+      if (scene) scene.add(ambientLight);
+    } else if (scene && !scene.children.includes(ambientLight)) {
+      ambientLight.intensity = 0.5; // 确保强度正确
+      scene.add(ambientLight);
+    }
+  }
+};
+
+// 监听 isDark 变化
+watch(isDark, () => {
+  updateLighting();
+});
+
 const init = () => {
   // 创建场景
   scene = new THREE.Scene();
@@ -44,7 +92,7 @@ const init = () => {
 
   // 创建渲染器
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setSize(container.value.clientWidth, container.value.clientHeight);
+  renderer.setSize(container.value.clientWidth / container.value.clientHeight);
   renderer.setClearColor(0x000000, 0); // 设置透明背景
   container.value.appendChild(renderer.domElement);
 
@@ -54,26 +102,12 @@ const init = () => {
   controls.dampingFactor = 0.05;
 
   // 添加环境光和平行光
-  // const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-  // scene.add(ambientLight);
-
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-  directionalLight.position.set(1, 1, 1);
+  directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); // 初始化平行光
+  // directionalLight.position.set(1, 1, 1);
   scene.add(directionalLight);
 
-  // 添加从下往上的聚光灯
-  const spotLight = new THREE.SpotLight(0xffffff, 1);
-  spotLight.position.set(0, -2, 0);
-  // spotLight.angle = Math.PI / 2; // 45度照射角度
-  spotLight.penumbra = 0.1; // 边缘柔和度
-  spotLight.decay = 1; // 光照衰减
-  spotLight.distance = 50; // 照射距离
-  spotLight.power = 100;
-  scene.add(spotLight);
-
-  // 添加聚光灯的辅助对象（可选，用于调试）
-  // const spotLightHelper = new THREE.SpotLightHelper(spotLight);
-  // scene.add(spotLightHelper);
+  // 根据初始模式设置灯光
+  updateLighting();
 
   // 加载 GLB 模型
   const loader = new GLTFLoader();
@@ -138,6 +172,17 @@ onBeforeUnmount(() => {
   }
   if (renderer) {
     renderer.dispose();
+  }
+  // 清理灯光资源
+  if (directionalLight) {
+    directionalLight.dispose();
+  }
+  if (spotLight) {
+    spotLight.dispose();
+  }
+  if (ambientLight) {
+    // 清理 ambientLight
+    ambientLight.dispose();
   }
 });
 </script>
