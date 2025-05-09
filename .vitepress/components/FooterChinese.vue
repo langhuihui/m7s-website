@@ -55,10 +55,6 @@
             >视频教程</a
           >
           <a href="https://www.bilibili.com/video/BV1jg411H7qE">RTS 分享</a>
-          <a
-            href="https://apifox.com/apidoc/shared-25b77980-8f42-42f3-b1b3-9b36275c2439"
-            >API</a
-          >
         </div>
 
         <div class="link-column">

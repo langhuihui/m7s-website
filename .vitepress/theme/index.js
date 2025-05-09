@@ -22,6 +22,10 @@ export default {
   setup() {
     // Theme setup
     if (typeof window !== 'undefined') {
+      // 设置默认暗黑模式
+      const htmlElement = document.documentElement;
+      htmlElement.classList.add('dark');
+
       // Client-side only code
       const { pathname } = window.location;
       const isRoot = pathname === '/' || pathname === '/index.html';

@@ -92,7 +92,7 @@ const init = () => {
 
   // 创建渲染器
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setSize(container.value.clientWidth / container.value.clientHeight);
+  renderer.setSize(container.value.clientWidth, container.value.clientHeight); // 修正: 使用实际宽度和高度
   renderer.setClearColor(0x000000, 0); // 设置透明背景
   container.value.appendChild(renderer.domElement);
 

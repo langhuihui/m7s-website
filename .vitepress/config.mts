@@ -4,6 +4,9 @@ const nav = {
   en: [],
   zh: [
     {
+      text: 'v4', link : 'http://v4.monibuca.com'
+    },
+    {
       text: '联系我们', link: '/#contact'
     }
   ],
@@ -21,6 +24,7 @@ const commonThemeConfig = (locales: '' | 'zh' | 'en' = '', translation = transla
     { text: translation.nav.quickStart, link: locales + '/#quickstart' },
     { text: translation.nav.plugins, link: locales + '/#plugins' },
     { text: translation.nav.admin, link: locales + '/#admin' },
+    { text: 'API', link: 'https://monibuca.apifox.cn' },
     { text: translation.nav.pricing, link: locales + '/#pricing' },
     ...nav[locales || 'zh']
   ],
