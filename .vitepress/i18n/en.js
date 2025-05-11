@@ -5,34 +5,18 @@ export default {
     quickStart: 'Quick Start',
   },
   features: {
-    title: 'Core Features',
-    highPerformance: {
-      title: 'High Performance',
-      desc: 'Lock-free design, partial manual memory management, multi-core computing'
-    },
-    lowLatency: {
-      title: 'Low Latency',
-      desc: 'Zero-wait forwarding, sub-second end-to-end latency'
+    sectionTitle: 'Core Advantages',
+    oneStop: {
+      title: 'One-stop Solution',
+      desc: 'Fully built-in, cross-platform, easy to deploy'
     },
     observability: {
-      title: 'Observability',
-      desc: 'Comprehensive monitoring, logging, and diagnostic capabilities'
+      title: 'Observable System Architecture',
+      desc: 'Visualizable, traceable, testable'
     },
-    multiProtocol: {
-      title: 'Multi-Protocol',
-      desc: 'Support for RTMP, RTSP, WebRTC, HLS, SRT, ONVIF and other protocols'
-    },
-    pluginBased: {
-      title: 'Plugin-Based',
-      desc: 'Load on demand, unlimited extensibility'
-    },
-    aiCapabilities: {
-      title: 'AI Capabilities',
-      desc: 'Integrated ONNX inference engine, support for custom processing'
-    },
-    mediaProcessing: {
-      title: 'Media Processing',
-      desc: 'Support for screenshots, transcoding, SEI data processing'
+    extendable: {
+      title: 'Extendable & Developer-Friendly',
+      desc: 'Plugin-based, interface-based, standardized'
     }
   },
   architecture: {
@@ -48,7 +32,7 @@ export default {
     clients: 'Clients'
   },
   coreFeatures: {
-    title: 'Core Features',
+    title: 'Feature Overview',
     mediaProcessing: {
       title: 'Media Processing',
       desc: 'Support for screenshots, transcoding, SEI data processing'
