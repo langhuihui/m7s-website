@@ -1,0 +1,21 @@
+{
+    "envId": "monibuca-9gwzsmn5c85b5e0e",
+    "version": "2.0",
+    "$schema": "https://framework-1258016615.tcloudbaseapp.com/schema/latest.json",
+    "functionRoot": "./functions",
+    "functions": [],
+    "region": "ap-shanghai",
+    "framework": {
+        "name": "website",
+        "plugins": {
+            "website": {
+                "use": "@cloudbase/framework-plugin-website",
+                "inputs": {
+                    "installCommand": "pnpm i",
+                    "buildCommand": "pnpm run build",
+                    "outputPath": "./.vitepress/dist"
+                }
+            }
+        }
+    }
+}
