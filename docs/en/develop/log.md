@@ -16,7 +16,7 @@ Configuration example:
 
 ```yaml
 global:
-  LogLevel: "debug" # Set log level to debug
+  loglevel: debug # Set log level to debug
 ```
 
 ## Log Format

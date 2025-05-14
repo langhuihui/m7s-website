@@ -16,7 +16,7 @@ Monibuca 使用 Go 标准库的 `slog` 作为日志系统，提供了结构化�
 
 ```yaml
 global:
-  LogLevel: "debug" # 设置日志级别为 debug
+  loglevel: debug # 设置日志级别为 debug
 ```
 
 ## 日志格式

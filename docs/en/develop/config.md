@@ -80,18 +80,15 @@ Global configuration is located under the `global` node in the YAML file and inc
 
 ```yaml
 global:
-  settingDir: ".m7s"        # Settings directory
-  fatalDir: "fatal"         # Error log directory
-  pulseInterval: "5s"       # Heartbeat interval
-  disableAll: false         # Whether to disable all plugins
-  streamAlias:              # Stream alias configuration
+  disableall: false         # Whether to disable all plugins
+  streamalias:              # Stream alias configuration
     pattern: "target"       # Regex -> target path
   location:                 # HTTP routing rules
     pattern: "target"       # Regex -> target address
   admin:                    # Admin interface configuration
-    enableLogin: false      # Whether to enable login mechanism
-    filePath: "admin.zip"   # Admin interface file path
-    homePage: "home"        # Admin interface homepage
+    enablelogin: false      # Whether to enable login mechanism
+    filepath: "admin.zip"   # Admin interface file path
+    homepage: "home"        # Admin interface homepage
     users:                  # User list (effective only when login is enabled)
       - username: "admin"   # Username
         password: "admin"   # Password
@@ -111,7 +108,7 @@ If database connection is configured, the system will automatically:
 global:
   db:
     dsn: ""                # Database connection string
-    type: ""              # Database type
+    dbtype: ""              # Database type
 ```
 
 ### Proxy Configuration
@@ -125,14 +122,14 @@ global:
       name: "proxy1"     # Proxy name
       url: "rtmp://..."  # Proxy address
       type: "rtmp"       # Proxy type
-      pullOnStart: true  # Whether to pull on startup
+      pullonstart: true  # Whether to pull on startup
 
   pushProxy:              # Push proxy configuration
     - id: 1              # Proxy ID
       name: "proxy1"     # Proxy name
       url: "rtmp://..."  # Proxy address
       type: "rtmp"       # Proxy type
-      pushOnStart: true  # Whether to push on startup
+      pushonstart: true  # Whether to push on startup
       audio: true        # Whether to push audio
 ```
 
@@ -142,10 +139,10 @@ Each plugin can have its own configuration node, named as the lowercase version 
 
 ```yaml
 rtmp:                    # RTMP plugin configuration
-  port: 1935            # Listen port
+  tcp: :1935            # Listen port
 
 rtsp:                   # RTSP plugin configuration
-  port: 554             # Listen port
+  tcp: :554             # Listen port
 ```
 
 ## Configuration Priority
@@ -161,18 +158,18 @@ The configuration system uses a multi-level priority mechanism, from highest to 
    ```yaml
    rtmp:
      publish:
-       audio: true
+       pubaudio: true
      subscribe:
-       audio: true
+       subaudio: true
    ```
 
 3. Global Configuration - Configuration items under the global node
    ```yaml
    global:
      publish:
-       audio: true
+       pubaudio: true
      subscribe:
-       audio: true
+       subaudio: true
    ```
 
 ## Common Configuration
@@ -184,23 +181,23 @@ Main common configurations include:
 1. Publish Configuration
    ```yaml
    publish:
-     audio: true          # Whether to include audio
-     video: true          # Whether to include video
-     bufferLength: 1000   # Buffer length
+     pubaudio: true          # Whether to include audio
+     pubvideo: true          # Whether to include video
+     bufferlength: 1000   # Buffer length
    ```
 
 2. Subscribe Configuration
    ```yaml
    subscribe:
-     audio: true          # Whether to subscribe to audio
-     video: true          # Whether to subscribe to video
-     bufferLength: 1000   # Buffer length
+     subaudio: true          # Whether to subscribe to audio
+     subvideo: true          # Whether to subscribe to video
+     bufferlength: 1000   # Buffer length
    ```
 
 3. HTTP Configuration
    ```yaml
    http:
-     listenAddr: ":8080"  # Listen address
+     listenaddr: :8080  # Listen address
    ```
 
 4. Other Common Configurations
@@ -215,21 +212,21 @@ Usage example:
 # Global configuration
 global:
   publish:
-    audio: true
-    video: true
+    pubaudio: true
+    pubvideo: true
   subscribe:
-    audio: true
-    video: true
+    subaudio: true
+    subvideo: true
 
 # Plugin configuration (higher priority than global)
 rtmp:
   publish:
-    audio: false  # Overrides global configuration
+    pubaudio: false  # Overrides global configuration
   subscribe:
-    video: false  # Overrides global configuration
+    subvideo: false  # Overrides global configuration
 
 # URL query parameters (highest priority)
-# rtmp://localhost/live/stream?audio=true&video=false
+# rtmp://localhost/live/stream?subaudio=true&subvideo=false
 ```
 
 ## Hot Configuration Update

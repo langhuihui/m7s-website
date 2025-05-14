@@ -6,17 +6,6 @@
 - 支持按大小分段
 - 支持按时间分段
 - 支持录制文件自动清理
-## 配置说明
-在 Monibuca 的配置文件中，可以通过以下方式配置录制相关参数：
-
-```yaml
-record:
-  # 录制配置
-  type: mp4           # 录制类型 mp4、flv、hls、hlsv7
-  filepath: "./records"   # 录制文件保存路径
-  fragment: 1m        # 分片时长（支持时间单位：s, m, h）
-  append: false       # 是否追加录制
-```
 
 ## 使用示例
 ### 配置录制规则

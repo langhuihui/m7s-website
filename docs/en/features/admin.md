@@ -18,14 +18,15 @@ The Admin service provides a Web management interface by loading the `admin.zip`
 Admin service configuration is located in the admin section of the global configuration, including:
 
 ```yaml
-admin:
-  enableLogin: false    # Whether to enable login mechanism
-  filePath: admin.zip  # Management interface file path
-  homePage: home      # Management interface home page
-  users:             # User list (only effective when login mechanism is enabled)
-    - username: admin   # Username
-      password: admin   # Password
-      role: admin      # Role, optional values: admin, user
+global:
+  admin:
+    enableLogin: false    # Whether to enable login mechanism
+    filePath: admin.zip  # Management interface file path
+    homePage: home      # Management interface home page
+    users:             # User list (only effective when login mechanism is enabled)
+      - username: admin   # Username
+        password: admin   # Password
+        role: admin      # Role, optional values: admin, user
 ```
 
 When `enableLogin` is false, all users access as anonymous users.

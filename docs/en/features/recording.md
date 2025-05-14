@@ -8,18 +8,6 @@ Recording is an important feature in Monibuca that allows saving video streams a
 - Supports time-based segmentation
 - Supports automatic recording file cleanup
 
-## Configuration
-In Monibuca's configuration file, you can configure recording parameters as follows:
-
-```yaml
-record:
-  # Recording configuration
-  type: mp4           # Recording type: mp4, flv, hls, hlsv7
-  filepath: "./records"   # Recording file save path
-  fragment: 1m        # Fragment duration (supports time units: s, m, h)
-  append: false       # Whether to append to existing recording
-```
-
 ## Usage Examples
 ### Configuring Recording Rules
 Configure recording rules in the YAML configuration file:

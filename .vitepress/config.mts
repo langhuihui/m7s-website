@@ -1,10 +1,11 @@
 import { defineConfig } from 'vitepress';
+import { withMermaid } from 'vitepress-plugin-mermaid';
 import translations from "./i18n";
 const nav = {
   en: [],
   zh: [
     {
-      text: 'v4', link : 'http://v4.monibuca.com'
+      text: 'v4', link: 'http://v4.monibuca.com'
     },
     {
       text: '联系我们', link: '/#contact'
@@ -100,7 +101,7 @@ const commonThemeConfig = (locales: '' | 'zh' | 'en' = '', translation = transla
   }
 });
 
-export default defineConfig({
+export default defineConfig(withMermaid({
   title: 'Monibuca v5',
   description: '高性能流媒体服务器框架',
   lastUpdated: true,
@@ -156,6 +157,15 @@ export default defineConfig({
     },
     // 优化依赖预构建
     optimizeDeps: {
+      // 包含 dayjs 及其被 mermaid 使用的插件，以确保它们被正确处理
+      include: [
+        'dayjs',
+        'dayjs/plugin/advancedFormat.js',
+        'dayjs/plugin/isoWeek.js',
+        'dayjs/plugin/customParseFormat.js',
+        'dayjs/plugin/toArray.js',
+        'dayjs/plugin/toObject.js',
+      ],
       // 排除不需要预构建的依赖
       exclude: ['@vueuse/core', '@vueuse/head']
     },
@@ -196,4 +206,4 @@ export default defineConfig({
       }
     }
   }
-});
+}));

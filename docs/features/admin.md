@@ -18,14 +18,15 @@ Admin 服务通过加载 `admin.zip` 文件来提供 Web 管理界面。该界�
 Admin 服务的配置位于全局配置（global）中的 admin 节，包括：
 
 ```yaml
-admin:
-  enableLogin: false    # 是否启用登录机制
-  filePath: admin.zip  # 管理界面文件路径
-  homePage: home      # 管理界面首页
-  users:             # 用户列表（仅在启用登录机制时生效）
-    - username: admin   # 用户名
-      password: admin   # 密码
-      role: admin      # 角色，可选值：admin、user
+global:
+  admin:
+    enableLogin: false    # 是否启用登录机制
+    filePath: admin.zip  # 管理界面文件路径
+    homePage: home      # 管理界面首页
+    users:             # 用户列表（仅在启用登录机制时生效）
+      - username: admin   # 用户名
+        password: admin   # 密码
+        role: admin      # 角色，可选值：admin、user
 ```
 
 当 `enableLogin` 为 false 时，所有用户都以匿名用户身份访问。

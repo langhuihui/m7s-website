@@ -80,18 +80,15 @@ func (p *Plugin) SaveConfig() (err error)
 
 ```yaml
 global:
-  settingDir: ".m7s"        # 设置文件目录
-  fatalDir: "fatal"         # 错误日志目录
-  pulseInterval: "5s"       # 心跳间隔
-  disableAll: false         # 是否禁用所有插件
-  streamAlias:              # 流别名配置
+  disableall: false         # 是否禁用所有插件
+  streamalias:              # 流别名配置
     pattern: "target"       # 正则表达式 -> 目标路径
   location:                 # HTTP 路由转发规则
     pattern: "target"       # 正则表达式 -> 目标地址
   admin:                    # 管理界面配置
-    enableLogin: false      # 是否启用登录机制
-    filePath: "admin.zip"   # 管理界面文件路径
-    homePage: "home"        # 管理界面首页
+    enablelogin: false      # 是否启用登录机制
+    filepath: "admin.zip"   # 管理界面文件路径
+    homepage: "home"        # 管理界面首页
     users:                  # 用户列表(仅在启用登录时生效)
       - username: "admin"   # 用户名
         password: "admin"   # 密码
@@ -111,7 +108,7 @@ global:
 global:
   db:
     dsn: ""                # 数据库连接字符串
-    type: ""              # 数据库类型
+    dbtype: ""              # 数据库类型
 ```
 
 ### 代理配置
@@ -125,14 +122,14 @@ global:
       name: "proxy1"     # 代理名称
       url: "rtmp://..."  # 代理地址
       type: "rtmp"       # 代理类型
-      pullOnStart: true  # 是否启动时拉流
+      pullonstart: true  # 是否启动时拉流
 
   pushProxy:              # 推流代理配置
     - id: 1              # 代理ID
       name: "proxy1"     # 代理名称
       url: "rtmp://..."  # 代理地址
       type: "rtmp"       # 代理类型
-      pushOnStart: true  # 是否启动时推流
+      pushonstart: true  # 是否启动时推流
       audio: true        # 是否推送音频
 ```
 
@@ -142,10 +139,10 @@ global:
 
 ```yaml
 rtmp:                    # RTMP插件配置
-  port: 1935            # 监听端口
+  tcp: :1935            # 监听端口
 
 rtsp:                   # RTSP插件配置
-  port: 554             # 监听端口
+  tcp: :554             # 监听端口
 ```
 
 ## 配置优先级
@@ -161,18 +158,18 @@ rtsp:                   # RTSP插件配置
    ```yaml
    rtmp:
      publish:
-       audio: true
+       pubaudio: true
      subscribe:
-       audio: true
+       subaudio: true
    ```
 
 3. 全局配置 - 在 global 节点下的配置项
    ```yaml
    global:
      publish:
-       audio: true
+       pubaudio: true
      subscribe:
-       audio: true
+       subaudio: true
    ```
 
 ## 通用配置
@@ -184,23 +181,23 @@ rtsp:                   # RTSP插件配置
 1. 发布配置（Publish）
    ```yaml
    publish:
-     audio: true          # 是否包含音频
-     video: true          # 是否包含视频
-     bufferLength: 1000   # 缓冲长度
+     pubaudio: true          # 是否包含音频
+     pubvideo: true          # 是否包含视频
+     bufferlength: 1000   # 缓冲长度
    ```
 
 2. 订阅配置（Subscribe）
    ```yaml
    subscribe:
-     audio: true          # 是否订阅音频
-     video: true          # 是否订阅视频
-     bufferLength: 1000   # 缓冲长度
+     subaudio: true          # 是否订阅音频
+     subvideo: true          # 是否订阅视频
+     bufferlength: 1000   # 缓冲长度
    ```
 
 3. HTTP 配置
    ```yaml
    http:
-     listenAddr: ":8080"  # 监听地址
+     listenaddr: :8080  # 监听地址
    ```
 
 4. 其他通用配置
@@ -215,21 +212,21 @@ rtsp:                   # RTSP插件配置
 # 全局配置
 global:
   publish:
-    audio: true
-    video: true
+    pubaudio: true
+    pubvideo: true
   subscribe:
-    audio: true
-    video: true
+    subaudio: true
+    subvideo: true
 
 # 插件配置（优先级高于全局配置）
 rtmp:
   publish:
-    audio: false  # 覆盖全局配置
+    pubaudio: false  # 覆盖全局配置
   subscribe:
-    video: false  # 覆盖全局配置
+    subvideo: false  # 覆盖全局配置
 
 # URL 查询参数（最高优先级）
-# rtmp://localhost/live/stream?audio=true&video=false
+# rtmp://localhost/live/stream?subaudio=true&subvideo=false
 ```
 
 ## 配置热更新
@@ -250,25 +247,22 @@ rtmp:
 
 ```yaml
 global:
-  settingDir: ".m7s"
-  fatalDir: "fatal"
-  pulseInterval: "5s"
-  disableAll: false
-  streamAlias:
-    "live/(.*)": "record/$1"
+  disableall: false
+  streamalias:
+    live/(.*): "record/$1"
   location:
-    "^/live/(.*)": "/hls/$1"
+    ^/live/(.*): "/hls/$1"
   admin:
-    enableLogin: true
-    filePath: "admin.zip"
-    homePage: "home"
+    enablelogin: true
+    filepath: "admin.zip"
+    homepage: "home"
     users:
       - username: "admin"
         password: "admin"
         role: "admin"
   db:
     dsn: "host=localhost user=postgres password=postgres dbname=monibuca port=5432 sslmode=disable TimeZone=Asia/Shanghai"
-    type: "postgres"
+    dbtype: "postgres"
   pullProxy:
     - id: 1
       name: "proxy1"
@@ -280,12 +274,12 @@ global:
       name: "proxy1"
       url: "rtmp://example.com/live/stream"
       type: "rtmp"
-      pushOnStart: true
+      pushonstart: true
       audio: true
 
 rtmp:
-  port: 1935
+  tcp: :1935
 
 rtsp:
-  port: 554
+  tcp: :554
 ```
