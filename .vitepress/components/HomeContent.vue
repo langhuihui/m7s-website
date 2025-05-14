@@ -67,36 +67,61 @@
               <SurveillanceCamera class="camera" />
             </div>
           </div>
+          <h2>{{ i18n.features.sectionTitle }}</h2>
           <div class="features-grid">
             <div class="feature-card">
-              <div class="icon"><PerformanceIcon /></div>
-              <h3>{{ i18n.features.highPerformance.title }}</h3>
-              <p>{{ i18n.features.highPerformance.desc }}</p>
+              <div class="icon"><Icon icon="mdi:all-inclusive" /></div>
+              <h3>
+                <template v-if="lang === 'en'">
+                  <span class="highlight"
+                    >{{ i18n.features.oneStop.title.split(' ')[0] }}</span
+                  >{{ i18n.features.oneStop.title.substring(
+                    i18n.features.oneStop.title.split(' ')[0].length
+                  ) }}
+                </template>
+                <template v-else>
+                  <span class="highlight"
+                    >{{ i18n.features.oneStop.title.substring(0, 3) }}</span
+                  >{{ i18n.features.oneStop.title.substring(3) }}
+                </template>
+              </h3>
+              <p>{{ i18n.features.oneStop.desc }}</p>
             </div>
             <div class="feature-card">
-              <div class="icon"><LatencyIcon /></div>
-              <h3>{{ i18n.features.lowLatency.title }}</h3>
-              <p>{{ i18n.features.lowLatency.desc }}</p>
-            </div>
-            <div class="feature-card">
-              <div class="icon"><ProtocolIcon /></div>
-              <h3>{{ i18n.features.observability.title }}</h3>
+              <div class="icon"><Icon icon="mdi:magnify-scan" /></div>
+              <h3>
+                <template v-if="lang === 'en'">
+                  <span class="highlight"
+                    >{{ i18n.features.observability.title.split(' ')[0] }}</span
+                  >{{ i18n.features.observability.title.substring(
+                    i18n.features.observability.title.split(' ')[0].length
+                  ) }}
+                </template>
+                <template v-else>
+                  <span class="highlight"
+                    >{{ i18n.features.observability.title.substring(0, 3) }}</span
+                  >{{ i18n.features.observability.title.substring(3) }}
+                </template>
+              </h3>
               <p>{{ i18n.features.observability.desc }}</p>
             </div>
             <div class="feature-card">
-              <div class="icon"><PluginIcon /></div>
-              <h3>{{ i18n.features.pluginBased.title }}</h3>
-              <p>{{ i18n.features.pluginBased.desc }}</p>
-            </div>
-            <div class="feature-card">
-              <div class="icon"><AiIcon /></div>
-              <h3>{{ i18n.features.aiCapabilities.title }}</h3>
-              <p>{{ i18n.features.aiCapabilities.desc }}</p>
-            </div>
-            <div class="feature-card">
-              <div class="icon"><MediaIcon /></div>
-              <h3>{{ i18n.features.mediaProcessing.title }}</h3>
-              <p>{{ i18n.features.mediaProcessing.desc }}</p>
+              <div class="icon"><Icon icon="mdi:puzzle-edit" /></div>
+              <h3>
+                <template v-if="lang === 'en'">
+                  <span class="highlight"
+                    >{{ i18n.features.extendable.title.split(' ')[0] }}</span
+                  >{{ i18n.features.extendable.title.substring(
+                    i18n.features.extendable.title.split(' ')[0].length
+                  ) }}
+                </template>
+                <template v-else>
+                  <span class="highlight"
+                    >{{ i18n.features.extendable.title.substring(0, 3) }}</span
+                  >{{ i18n.features.extendable.title.substring(3) }}
+                </template>
+              </h3>
+              <p>{{ i18n.features.extendable.desc }}</p>
             </div>
           </div>
         </div>
@@ -764,16 +789,12 @@ h1 {
 // Features Grid
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
-  margin-top: 4rem;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 0rem; // Adjusted margin-top
+  margin-bottom: 0rem; // Adjusted margin-bottom
 }
 
-// Feature Card styles
 .feature-card {
   .card-base();
   .dark-card();
@@ -809,6 +830,11 @@ h1 {
     text-align: center;
     color: @gradient-highlight-1;
 
+    .highlight {
+      color: @gradient-highlight-2; // Or any color you prefer for highlighting
+      font-weight: bold; // Make it bold
+    }
+
     html:not(.dark) & {
       color: @primary-color-dark;
     }
@@ -816,6 +842,7 @@ h1 {
 
   p {
     color: @text-color-dark-2;
+    text-align: center; // Add this line to center the text
 
     html:not(.dark) & {
       color: @text-color-light;

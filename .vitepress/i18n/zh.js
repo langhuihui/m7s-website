@@ -5,38 +5,22 @@ export default {
     quickStart: '快速入门',
   },
   features: {
-    title: '核心特性',
-    highPerformance: {
-      title: '高性能',
-      desc: '无锁设计、部分手动管理内存、多核计算'
-    },
-    lowLatency: {
-      title: '低延迟',
-      desc: '0等待转发、全链路亚秒级延迟'
+    sectionTitle: '核心优势',
+    oneStop: {
+      title: '一站式解决方案',
+      desc: '全内置、跨平台、易部署'
     },
     observability: {
-      title: '可观测',
-      desc: '全面的监控、日志和诊断能力'
+      title: '可观测系统架构',
+      desc: '可视化、可追溯、可测试'
     },
-    multiProtocol: {
-      title: '多协议',
-      desc: 'RTMP、RTSP、WebRTC、HLS、SRT、ONVIF、GB28181等协议支持'
-    },
-    pluginBased: {
-      title: '插件化',
-      desc: '按需加载，无限扩展能力'
-    },
-    aiCapabilities: {
-      title: 'AI能力',
-      desc: '集成ONNX推理引擎，支持自定义处理'
-    },
-    mediaProcessing: {
-      title: '媒体处理',
-      desc: '支持截图、转码、SEI数据处理'
+    extendable: {
+      title: '易扩展二开友好',
+      desc: '插件化、接口化、标准化'
     }
   },
   architecture: {
-    title: '架构',
+    title: '整体架构',
     visualization: '可视化',
     admin: 'Admin',
     integration: '集成',
@@ -48,7 +32,7 @@ export default {
     clients: '客户端'
   },
   coreFeatures: {
-    title: '核心特性',
+    title: '功能一览',
     mediaProcessing: {
       title: '🎥 媒体处理',
       desc: '支持截图、转码、SEI数据处理'

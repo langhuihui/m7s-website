@@ -10,8 +10,9 @@ Database can be configured in global settings using these fields:
 
 ```yaml
 global:
-  dsn: "database connection string"
-  dbType: "database type"
+  db:
+    dsn: "database connection string"
+    dbType: "database type"
 ```
 
 ### Plugin Configuration
@@ -20,8 +21,9 @@ Each plugin can have its own database configuration:
 
 ```yaml
 pluginName:
-  dsn: "database connection string"
-  dbType: "database type"
+  db:
+    dsn: "database connection string"
+    dbType: "database type"
 ```
 
 ## Database Initialization Process

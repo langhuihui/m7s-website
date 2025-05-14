@@ -34,11 +34,21 @@ fi
 # Start deployment
 echo -e "${YELLOW}Starting deployment...${NC}"
 
-# Transfer files
-echo "Uploading files to server..."
-scp -r ${SOURCE_DIR}/* ${REMOTE_PATH}
+# Delete remote assets directory first
+echo "Removing existing assets directory on server..."
+ssh ${REMOTE_USER}@${REMOTE_HOST} "rm -rf ${REMOTE_DIR}/assets"
+if [ $? -ne 0 ]; then
+  echo -e "${RED}Failed to remove remote assets directory. Continuing anyway...${NC}"
+fi
 
-# Check if the scp command was successful
+# Transfer files
+echo "Uploading index.html to server..."
+scp ${SOURCE_DIR}/index.html ${REMOTE_PATH}/
+
+echo "Uploading assets directory to server..."
+scp -r ${SOURCE_DIR}/assets ${REMOTE_PATH}/
+
+# Check if the scp commands were successful
 if [ $? -eq 0 ]; then
   echo -e "${GREEN}Deployment completed successfully!${NC}"
   echo -e "Your website should now be available at ${YELLOW}https://v5.monibuca.com${NC}"
@@ -47,4 +57,4 @@ else
   exit 1
 fi
 
-echo -e "${GREEN}All done!${NC}" 
+echo -e "${GREEN}All done!${NC}"

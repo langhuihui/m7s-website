@@ -85,6 +85,9 @@ WebRTC 连接在两个方向上处理媒体：
 
 服务器支持用于 WebRTC 摄取的 WHIP 协议标准。
 
+> Monibuca 自带测试页面，访问 `http://localhost:8080/webrtc/test/publish` 即可测试推流。
+> 此外可以访问 `http://localhost:8080/webrtc/test/sharescreen` 测试屏幕分享推流。
+
 ### 4.2 播放（订阅）
 
 `servePlay` 端点允许客户端从 Monibuca 接收 WebRTC 流：
@@ -99,9 +102,14 @@ WebRTC 连接在两个方向上处理媒体：
 
 对于 WebRTC 不支持的编解码器，当 `EnableDC` 为 true 时，插件可以使用 DataChannel 以 FLV 格式传输媒体数据。
 
+
+> Monibuca 自带测试页面，访问 `http://localhost:8080/webrtc/test/play` 即可测试播放。
+
 ## 5. 多流 BatchV2 模式
 
 BatchV2 模式允许在单个 WebRTC 连接中处理多个流，这对于客户端需要接收或发送多个流的场景更高效。
+
+> Monibuca 自带测试页面，访问 `http://localhost:8080/webrtc/test/batchv2` 即可测试批量播放。
 
 ### 5.1 架构
 
