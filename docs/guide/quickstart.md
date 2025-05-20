@@ -213,15 +213,32 @@ func main() {
 | postgres | 启用 PostgreSQL 数据库支持 |
 | duckdb | 启用 DuckDB 数据库支持 |
 | disable_rm | 禁用内存池 |
-
+| fasthttp | 启用 fasthttp 代替标准库 |
 使用示例：
 
 ```bash
 go run -tags "sqlite mysql" main.go
 ```
 
-## 下一步
+## 使用 Docker
 
-- 探索插件开发指南以创建自己的插件
+您可以使用 Docker 运行 Monibuca：
 
-有关更多示例，请查看 Monibuca 存储库中的 example 目录。 
+```bash
+docker run -id -p 1935:1935 -p 6000:6000 -p 8080:8080 -p 554:554 -p 50051:50051 -p 5060:5060/udp -p 9000:9000 langhuihui/monibuca:v5
+```
+
+如果你需要修改配置文件，需要挂载配置文件目录到容器中：
+
+```bash
+docker run -id -p 1935:1935 -p 6000:6000 -p 8080:8080 -p 554:554 -p 50051:50051 -p 5060:5060/udp -p 9000:9000 \
+-v /etc/monibuca:/etc/monibuca langhuihui/monibuca:v5
+```
+你将会看到这个目录中有一个 config.yaml 文件，你可以修改这个文件，然后重启容器。
+
+
+### 通过传入参数指定其他配置文件
+
+```bash
+docker run -id -p 1935:1935 -p 6000:6000 -p 8080:8080 -p 554:554 -p 50051:50051 -p 5060:5060/udp -p 9000:9000 langhuihui/monibuca:v5 -c /your/config.yaml
+```

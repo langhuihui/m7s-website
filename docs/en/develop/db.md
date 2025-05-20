@@ -12,7 +12,7 @@ Database can be configured in global settings using these fields:
 global:
   db:
     dsn: "database connection string"
-    dbType: "database type"
+    dbtype: "database type"
 ```
 
 ### Plugin Configuration
@@ -23,7 +23,7 @@ Each plugin can have its own database configuration:
 pluginName:
   db:
     dsn: "database connection string"
-    dbType: "database type"
+    dbtype: "database type"
 ```
 
 ## Database Initialization Process
@@ -93,4 +93,4 @@ Stores push proxy configurations
 Stores stream alias configurations
 
 ### RecordStream Table
-Stores recording-related information (only created when plugin implements Recorder interface) 
+Stores recording-related information (only created when plugin implements Recorder interface)

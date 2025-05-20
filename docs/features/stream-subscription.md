@@ -42,33 +42,17 @@ global:
 
 ```yaml
 subscribe:
-  # 最大同时订阅者数量，0表示不限制
-  maxCount: 0
-  # 是否订阅音频
-  subAudio: true
-  # 是否订阅视频
-  subVideo: true
-  # 缓冲时长，从缓冲时长的关键帧开始播放
-  bufferTime: 0s
-  # 订阅模式
-  # 0: 实时模式-追赶发布者进度，在播放首屏后等待发布者的下一个关键帧，然后跳到该帧
-  # 1: 首屏后不进行追赶
-  # 2: 从缓冲最大的关键帧开始播放，也不追赶，需要发布者配置缓存长度
-  subMode: 0
-  # 同步模式
-  # 0: 采用时间戳同步
-  # 1: 采用写入时间同步
-  syncMode: 1
-  # 是否只要关键帧
-  iFrameOnly: false
-  # 等待流超时时间
-  waitTimeout: 10s
-  # 写缓冲大小
-  writeBufferSize: 0
-  # 订阅鉴权key
+  maxcount: 0
+  subaudio: true
+  subvideo: true
+  buffertime: 0s
+  submode: 0
+  syncmode: 1
+  iframeonly: false
+  waittimeout: 10s
+  writebuffersize: 0
   key: ""
-  # 订阅类型
-  subType: ""
+  subtype: ""
 ```
 
 #### 配置说明
@@ -90,8 +74,8 @@ Subscribe 配置可以在以下两个位置设置：
 # config.yaml
 global:
   subscribe:
-    waitTimeout: 30s  # 等待流超时时间改为30秒
-    iFrameOnly: true  # 只传输关键帧，节省带宽
+    waittimeout: 30s  # 等待流超时时间改为30秒
+    iframeonly: true  # 只传输关键帧，节省带宽
 ```
 
 **特定插件配置示例**：
@@ -100,18 +84,18 @@ global:
 # config.yaml
 global:
   subscribe:
-    waitTimeout: 30s
+    waittimeout: 30s
 
 # HTTP-FLV插件特定配置
 flv:
   subscribe:
-    writeBufferSize: 4096  # 设置更大的写缓冲区
-    waitTimeout: 60s  # 覆盖全局配置，FLV等待流超时改为60秒
+    writebuffersize: 4096  # 设置更大的写缓冲区
+    waittimeout: 60s  # 覆盖全局配置，FLV等待流超时改为60秒
 
 # HLS插件特定配置
 hls:
   subscribe:
-    bufferTime: 3s  # HLS缓冲3秒内容
+    buffertime: 3s  # HLS缓冲3秒内容
 ```
 
 ## 使用示例

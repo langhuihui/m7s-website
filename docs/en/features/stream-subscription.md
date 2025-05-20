@@ -42,33 +42,17 @@ Here are the detailed subscription (Subscribe) configuration options that can be
 
 ```yaml
 subscribe:
-  # Maximum number of simultaneous subscribers, 0 means unlimited
-  maxCount: 0
-  # Whether to subscribe to audio
-  subAudio: true
-  # Whether to subscribe to video
-  subVideo: true
-  # Buffer duration, start playback from keyframe at buffer duration
-  bufferTime: 0s
-  # Subscription mode
-  # 0: Real-time mode - catch up with publisher progress, wait for next keyframe after first screen, then jump to that frame
-  # 1: No catch-up after first screen
-  # 2: Start playback from keyframe with maximum buffer, no catch-up, requires publisher to configure cache length
-  subMode: 0
-  # Synchronization mode
-  # 0: Use timestamp synchronization
-  # 1: Use write time synchronization
-  syncMode: 1
-  # Whether to only use keyframes
-  iFrameOnly: false
-  # Stream wait timeout
-  waitTimeout: 10s
-  # Write buffer size
-  writeBufferSize: 0
-  # Subscription authentication key
+  maxcount: 0
+  subaudio: true
+  subvideo: true
+  buffertime: 0s
+  submode: 0
+  syncmode: 1
+  iframeonly: false
+  waittimeout: 10s
+  writebuffersize: 0
   key: ""
-  # Subscription type
-  subType: ""
+  subtype: ""
 ```
 
 #### Configuration Notes
@@ -90,8 +74,8 @@ Important notes:
 # config.yaml
 global:
   subscribe:
-    waitTimeout: 30s  # Change stream wait timeout to 30 seconds
-    iFrameOnly: true  # Only transmit keyframes to save bandwidth
+    waittimeout: 30s  # Change stream wait timeout to 30 seconds
+    iframeonly: true  # Only transmit keyframes to save bandwidth
 ```
 
 **Specific Plugin Configuration Example**:
@@ -100,18 +84,18 @@ global:
 # config.yaml
 global:
   subscribe:
-    waitTimeout: 30s
+    waittimeout: 30s
 
 # HTTP-FLV plugin specific configuration
 flv:
   subscribe:
-    writeBufferSize: 4096  # Set larger write buffer
-    waitTimeout: 60s  # Override global config, FLV stream wait timeout changed to 60 seconds
+    writebuffersize: 4096  # Set larger write buffer
+    waittimeout: 60s  # Override global config, FLV stream wait timeout changed to 60 seconds
 
 # HLS plugin specific configuration
 hls:
   subscribe:
-    bufferTime: 3s  # HLS buffer 3 seconds of content
+    buffertime: 3s  # HLS buffer 3 seconds of content
 ```
 
 ## Usage Examples
@@ -246,4 +230,4 @@ When using FFPlay or FFmpeg-based players, these parameters are helpful for redu
 Complete low latency FFPlay command example:
 ```bash
 ffplay -fflags nobuffer -flags low_delay -framedrop -probesize 32 -analyzeduration 0 -sync ext rtmp://your-server:1935/live/stream
-``` 
+```

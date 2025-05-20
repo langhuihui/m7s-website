@@ -12,7 +12,7 @@ Monibuca 提供了数据库支持功能，可以在全局配置和插件中分�
 global:
   db:
     dsn: "数据库连接字符串"
-    dbType: "数据库类型"
+    dbtype: "数据库类型"
 ```
 
 ### 插件配置
@@ -23,7 +23,7 @@ global:
 pluginName:
   db:
     dsn: "数据库连接字符串"
-    dbType: "数据库类型"
+    dbtype: "数据库类型"
 ```
 
 ## 数据库初始化流程

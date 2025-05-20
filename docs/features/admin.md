@@ -20,16 +20,16 @@ Admin 服务的配置位于全局配置（global）中的 admin 节，包括：
 ```yaml
 global:
   admin:
-    enableLogin: false    # 是否启用登录机制
-    filePath: admin.zip  # 管理界面文件路径
-    homePage: home      # 管理界面首页
+    enablelogin: false    # 是否启用登录机制
+    filepath: admin.zip  # 管理界面文件路径
+    homepage: home      # 管理界面首页
     users:             # 用户列表（仅在启用登录机制时生效）
       - username: admin   # 用户名
         password: admin   # 密码
         role: admin      # 角色，可选值：admin、user
 ```
 
-当 `enableLogin` 为 false 时，所有用户都以匿名用户身份访问。
+当 `enablelogin` 为 false 时，所有用户都以匿名用户身份访问。
 当启用登录机制且数据库中没有用户时，系统会自动创建一个默认管理员账户（用户名：admin，密码：admin）。
 
 ### 3. 认证机制
@@ -109,4 +109,4 @@ Admin 提供专门的用户登录验证接口，用于：
 3. 可维护性
    - 完整的操作日志
    - 清晰的错误提示
-   - 配置热更新 
+   - 配置热更新
