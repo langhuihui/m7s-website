@@ -20,16 +20,16 @@ Admin service configuration is located in the admin section of the global config
 ```yaml
 global:
   admin:
-    enableLogin: false    # Whether to enable login mechanism
-    filePath: admin.zip  # Management interface file path
-    homePage: home      # Management interface home page
+    enablelogin: false    # Whether to enable login mechanism
+    filepath: admin.zip  # Management interface file path
+    homepage: home      # Management interface home page
     users:             # User list (only effective when login mechanism is enabled)
       - username: admin   # Username
         password: admin   # Password
         role: admin      # Role, optional values: admin, user
 ```
 
-When `enableLogin` is false, all users access as anonymous users.
+When `enablelogin` is false, all users access as anonymous users.
 When login mechanism is enabled and there are no users in the database, the system automatically creates a default administrator account (username: admin, password: admin).
 
 ### 3. Authentication Mechanism
@@ -109,4 +109,4 @@ All Admin APIs must follow these specifications:
 3. Maintainability
    - Complete operation logs
    - Clear error messages
-   - Hot configuration updates 
+   - Hot configuration updates

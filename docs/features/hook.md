@@ -24,7 +24,7 @@ global:
         Content-Type: application/json
       timeout: 5  # 超时时间(秒)
       retry: 3  # 重试次数
-      retryInterval: 1s  # 重试间隔
+      retryinterval: 1s  # 重试间隔
     publish_end:  # 流发布结束事件
       url: http://your-server/hook
       method: POST
@@ -52,7 +52,7 @@ rtmp:  # 插件名称
         Content-Type: application/json
       timeout: 5
       retry: 3
-      retryInterval: 1s
+      retryinterval: 1s
 ```
 
 ## 使用示例
@@ -67,7 +67,7 @@ global:
         Content-Type: application/json
       timeout: 5
       retry: 3
-      retryInterval: 1s
+      retryinterval: 1s
     subscribe:
       url: http://your-server/subscribe-hook
       method: POST

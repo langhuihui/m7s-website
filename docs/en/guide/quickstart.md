@@ -213,6 +213,7 @@ You can customize your Monibuca build using the following build tags:
 | postgres | Enables PostgreSQL database support |
 | duckdb | Enables DuckDB database support |
 | disable_rm | Disables the memory pool |
+| fasthttp | Enables fasthttp instead of the standard library |
 
 Example usage:
 
@@ -220,8 +221,24 @@ Example usage:
 go run -tags "sqlite mysql" main.go
 ```
 
-## Next Steps
+## Use Docker
 
-- Explore the plugin development guide to create your own plugins
+You can run Monibuca using Docker:
 
-For more examples, check out the example directory in the Monibuca repository. 
+```bash
+docker run -id -p 1935:1935 -p 6000:6000 -p 8080:8080 -p 554:554 -p 50051:50051 -p 5060:5060/udp -p 9000:9000 langhuihui/monibuca:v5
+```
+This command will start a Monibuca container with the default configuration.
+
+```bash
+docker run -id -p 1935:1935 -p 6000:6000 -p 8080:8080 -p 554:554 -p 50051:50051 -p 5060:5060/udp -p 9000:9000 \
+-v /etc/monibuca:/etc/monibuca langhuihui/monibuca:v5
+```
+You will see a config.yaml file in this directory, which you can modify and then restart the container.
+
+
+### Specify Other Configuration Files by Passing Parameters
+
+```bash
+docker run -id -p 1935:1935 -p 6000:6000 -p 8080:8080 -p 554:554 -p 50051:50051 -p 5060:5060/udp -p 9000:9000 langhuihui/monibuca:v5 -c /your/config.yaml
+```

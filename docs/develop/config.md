@@ -117,14 +117,14 @@ global:
 
 ```yaml
 global:
-  pullProxy:              # 拉流代理配置
+  pullproxy:              # 拉流代理配置
     - id: 1              # 代理ID
       name: "proxy1"     # 代理名称
       url: "rtmp://..."  # 代理地址
       type: "rtmp"       # 代理类型
       pullonstart: true  # 是否启动时拉流
 
-  pushProxy:              # 推流代理配置
+  pushproxy:              # 推流代理配置
     - id: 1              # 代理ID
       name: "proxy1"     # 代理名称
       url: "rtmp://..."  # 代理地址
@@ -263,13 +263,13 @@ global:
   db:
     dsn: "host=localhost user=postgres password=postgres dbname=monibuca port=5432 sslmode=disable TimeZone=Asia/Shanghai"
     dbtype: "postgres"
-  pullProxy:
+  pullproxy:
     - id: 1
       name: "proxy1"
       url: "rtmp://example.com/live/stream"
       type: "rtmp"
       pullOnStart: true
-  pushProxy:
+  pushproxy:
     - id: 1
       name: "proxy1"
       url: "rtmp://example.com/live/stream"

@@ -24,7 +24,7 @@ global:
         Content-Type: application/json
       timeout: 5  # Timeout (seconds)
       retry: 3  # Retry count
-      retryInterval: 1s  # Retry interval
+      retryinterval: 1s  # Retry interval
     publish_end:  # Stream publish end event
       url: http://your-server/hook
       method: POST
@@ -52,7 +52,7 @@ rtmp:  # Plugin name
         Content-Type: application/json
       timeout: 5
       retry: 3
-      retryInterval: 1s
+      retryinterval: 1s
 ```
 
 ## Usage Examples
@@ -67,7 +67,7 @@ global:
         Content-Type: application/json
       timeout: 5
       retry: 3
-      retryInterval: 1s
+      retryinterval: 1s
     subscribe:
       url: http://your-server/subscribe-hook
       method: POST
@@ -183,4 +183,4 @@ Content-Type: application/json
 3. Retry Mechanism
    - Check retry configuration
    - Verify retry logs
-   - Confirm retry results 
+   - Confirm retry results

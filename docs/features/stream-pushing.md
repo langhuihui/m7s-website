@@ -62,40 +62,23 @@ rtsp:
 
 ```yaml
 publish:
-  # 最大同时发布者数量，0表示不限制
-  maxCount: 0
-  # 是否发布音频
-  pubAudio: true
-  # 是否发布视频
-  pubVideo: true
-  # 是否踢掉同名已存在的发布者
-  kickExist: false
-  # 发布无数据超时时间
-  publishTimeout: 10s
-  # 延迟自动关闭时间（等待重连）
-  waitCloseTimeout: 0s
-  # 延迟自动关闭时间（无订阅时）
-  delayCloseTimeout: 0s
-  # 空闲(无订阅)超时时间
-  idleTimeout: 0s
-  # 暂停超时时间
-  pauseTimeout: 30s
-  # 缓冲时长，0代表取最近关键帧
-  bufferTime: 0s
-  # 发送速率，0为不限速
+  maxcount: 0
+  pubaudio: true
+  pubvideo: true
+  kickexist: false
+  publishtimeout: 10s
+  waitclosetimeout: 0s
+  delayclosetimeout: 0s
+  idletimeout: 0s
+  pausetimout: 30s
+  buffertime: 0s
   speed: 0
-  # 缩放倍数
   scale: 1
-  # 最大FPS
-  maxFPS: 30
-  # 发布鉴权key
+  maxfps: 30
   key: ""
-  # 缓冲区大小范围
-  ringSize: "20-1024"
-  # 转发模式：remux(转格式), relay(纯转发), mix(混合转发)
-  relayMode: "remux"
-  # 发布类型
-  pubType: "server"
+  ringsize: "20-1024"
+  relaymode: "remux"
+  pubtype: "server"
 ```
 
 #### 配置说明
@@ -117,9 +100,9 @@ Publish 配置可以在以下两个位置设置：
 # config.yaml
 global:
   publish:
-    kickExist: true  # 允许同名流被新的推流踢掉
-    publishTimeout: 30s  # 将无数据超时改为30秒
-    idleTimeout: 300s  # 无人观看5分钟后自动关闭流
+    kickexist: true  # 允许同名流被新的推流踢掉
+    publishtimeout: 30s  # 将无数据超时改为30秒
+    idletimeout: 300s  # 无人观看5分钟后自动关闭流
 ```
 
 **特定插件配置示例**：
@@ -128,20 +111,20 @@ global:
 # config.yaml
 global:
   publish:
-    kickExist: true
-    maxFPS: 25
+    kickexist: true
+    maxfps: 25
 
 # RTMP插件特定配置
 rtmp:
   publish:
-    kickExist: false  # 覆盖全局配置，RTMP不允许同名流被踢掉
-    publishTimeout: 60s  # RTMP推流无数据60秒后超时
-    maxFPS: 30  # RTMP最大帧率30
+    kickexist: false  # 覆盖全局配置，RTMP不允许同名流被踢掉
+    publishtimeout: 60s  # RTMP推流无数据60秒后超时
+    maxfps: 30  # RTMP最大帧率30
 
 # RTSP插件特定配置
 rtsp:
   publish:
-    waitCloseTimeout: 10s  # RTSP断开后等待10秒重连
+    waitclosetimeout: 10s  # RTSP断开后等待10秒重连
 ```
 
 ## 使用示例

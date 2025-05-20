@@ -62,40 +62,23 @@ Here are the detailed push (Publish) configuration options that can be used in g
 
 ```yaml
 publish:
-  # Maximum number of simultaneous publishers, 0 means unlimited
-  maxCount: 0
-  # Whether to publish audio
-  pubAudio: true
-  # Whether to publish video
-  pubVideo: true
-  # Whether to kick existing publisher with same name
-  kickExist: false
-  # No data timeout for publishing
-  publishTimeout: 10s
-  # Auto-close delay time (waiting for reconnection)
-  waitCloseTimeout: 0s
-  # Auto-close delay time (when no subscribers)
-  delayCloseTimeout: 0s
-  # Idle (no subscribers) timeout
-  idleTimeout: 0s
-  # Pause timeout
-  pauseTimeout: 30s
-  # Buffer duration, 0 means use latest keyframe
-  bufferTime: 0s
-  # Send rate, 0 means unlimited
+  maxcount: 0
+  pubaudio: true
+  pubvideo: true
+  kickexist: false
+  publishtimeout: 10s
+  waitclosetimeout: 0s
+  delayclosetimeout: 0s
+  idletimeout: 0s
+  pausetimout: 30s
+  buffertime: 0s
   speed: 0
-  # Scale factor
   scale: 1
-  # Maximum FPS
-  maxFPS: 30
-  # Publish authentication key
+  maxfps: 30
   key: ""
-  # Buffer size range
-  ringSize: "20-1024"
-  # Forward mode: remux(transcode), relay(pure forward), mix(mixed forward)
-  relayMode: "remux"
-  # Publish type
-  pubType: "server"
+  ringsize: "20-1024"
+  relaymode: "remux"
+  pubtype: "server"
 ```
 
 #### Configuration Notes
@@ -117,9 +100,9 @@ Important notes:
 # config.yaml
 global:
   publish:
-    kickExist: true  # Allow new push to kick existing stream with same name
-    publishTimeout: 30s  # Change no data timeout to 30 seconds
-    idleTimeout: 300s  # Auto-close stream after 5 minutes without viewers
+    kickexist: true  # Allow new push to kick existing stream with same name
+    publishtimeout: 30s  # Change no data timeout to 30 seconds
+    idletimeout: 300s  # Auto-close stream after 5 minutes without viewers
 ```
 
 **Specific Plugin Configuration Example**:
@@ -128,20 +111,20 @@ global:
 # config.yaml
 global:
   publish:
-    kickExist: true
-    maxFPS: 25
+    kickexist: true
+    maxfps: 25
 
 # RTMP plugin specific configuration
 rtmp:
   publish:
-    kickExist: false  # Override global config, RTMP does not allow kicking existing streams
-    publishTimeout: 60s  # RTMP push timeout after 60 seconds without data
-    maxFPS: 30  # RTMP maximum frame rate 30
+    kickexist: false  # Override global config, RTMP does not allow kicking existing streams
+    publishtimeout: 60s  # RTMP push timeout after 60 seconds without data
+    maxfps: 30  # RTMP maximum frame rate 30
 
 # RTSP plugin specific configuration
 rtsp:
   publish:
-    waitCloseTimeout: 10s  # Wait 10 seconds for reconnection after RTSP disconnection
+    waitclosetimeout: 10s  # Wait 10 seconds for reconnection after RTSP disconnection
 ```
 
 ## Usage Examples
@@ -234,4 +217,4 @@ ffmpeg -re -i input.mp4 -c copy -f mpegts srt://your-server:6000?streamid=publis
 2. Push Latency
    - Check network bandwidth
    - Adjust encoding parameters
-   - Consider using low latency protocols like SRT 
+   - Consider using low latency protocols like SRT

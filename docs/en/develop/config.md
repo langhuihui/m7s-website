@@ -117,14 +117,14 @@ The system supports pull and push proxy configurations:
 
 ```yaml
 global:
-  pullProxy:              # Pull proxy configuration
+  pullproxy:              # Pull proxy configuration
     - id: 1              # Proxy ID
       name: "proxy1"     # Proxy name
       url: "rtmp://..."  # Proxy address
       type: "rtmp"       # Proxy type
       pullonstart: true  # Whether to pull on startup
 
-  pushProxy:              # Push proxy configuration
+  pushproxy:              # Push proxy configuration
     - id: 1              # Proxy ID
       name: "proxy1"     # Proxy name
       url: "rtmp://..."  # Proxy address

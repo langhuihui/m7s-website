@@ -87,7 +87,7 @@ global:
       pullurl: "rtsp://192.168.1.100:554/live"
       streampath: "live/camera2"
       pullonstart: false
-      stoponjdle: true
+      stoponidle: true
 ```
 
 ## API接口示例
