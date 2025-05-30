@@ -1,371 +1,297 @@
-# 回放
-回放是 Monibuca 的一个重要功能，允许用户查看历史录制的视频文件。
+# 回放功能
 
-## 功能特点
-- 支持多种格式回放（FLV、MP4、TS）
-- 支持快进快退
-- 支持时间点定位
-- 支持倍速播放
-- 支持录制文件索引
+## 概述
 
-## 使用方法
+回放功能为音视频流提供强大的回放能力，支持多种输出格式，包括 MP4、FLV 和碎片化 MP4（fMP4）。该系统支持实时回放、点播回放、多段合并回放等多种回放模式，提供灵活的播放控制和丰富的播放器集成选项。
 
-回放功能不需要单独配置。要使用回放功能，需要按照以下步骤操作：
+## 系统架构
 
-### 1. 在录制时开启数据库功能
-
-录制视频流时，需要确保数据库功能已开启，这样系统会自动保存录制文件的相关信息到数据库中。
-
-### 2. 播放回放流
-
-通过在订阅流时增加时间参数来播放回放内容：
-
+```mermaid
+graph TB
+    A[录制文件存储] --> B[回放引擎]
+    C[数据库索引] --> B
+    
+    E[回放请求] --> F[回放API]
+    F --> B
+    B --> G[流输出]
+    
+    H[播放控制API] --> B
+    
+    subgraph "回放模式"
+        I[实时回放]
+        J[点播回放]
+        K[多段合并]
+        L[循环播放]
+    end
+    
+    subgraph "输出格式"
+        M[MP4下载]
+        N[fMP4流式]
+        O[FLV流]
+        P[WebSocket流]
+    end
+    
+    B --> I
+    B --> J
+    B --> K
+    B --> L
+    
+    G --> M
+    G --> N
+    G --> O
+    G --> P
 ```
-订阅流地址?start=开始时间&end=结束时间(可选)
+
+## 主要特性
+
+### 回放模式
+- **实时回放**: 低延迟的实时流回放
+- **点播回放**: 按需播放指定时间段内容
+- **多段合并**: 自动合并多个录制片段
+- **循环播放**: 连续循环播放模式
+
+### 格式支持
+- **MP4**: 标准容器格式，支持完整文件下载
+- **fMP4**: 碎片化格式，支持流式传输和实时播放
+- **FLV**: 传统格式，兼容性好
+- **WebSocket流**: 低延迟实时传输
+
+### 播放控制
+- **时间范围回放**: 精确时间段播放
+- **跳转和变速**: 灵活的播放控制
+- **暂停恢复**: 实时播放控制
+- **进度调整**: 任意时间点跳转
+
+## 回放工作流程
+
+```mermaid
+sequenceDiagram
+    participant Player as 播放器
+    participant API as 回放API
+    participant Engine as 回放引擎
+    participant Storage as 存储系统
+    participant DB as 数据库
+    
+    Player->>API: 请求回放流
+    API->>DB: 查询录制文件
+    DB-->>API: 返回文件信息
+    API->>Engine: 启动回放任务
+    Engine->>Storage: 读取录制文件
+    Engine-->>Player: 推送音视频流
+    
+    Player->>API: 播放控制(暂停/跳转)
+    API->>Engine: 执行控制命令
+    Engine->>Storage: 调整读取位置
+    Engine-->>Player: 继续推送流
 ```
 
-例如：
-```
-http://localhost:8080/flv/vod12/live/camera1.flv?start=2024-01-01T12:00:00&end=2024-01-01T13:00:00
-```
+## 配置示例
 
-- `start`: 必填参数，指定回放的开始时间，可使用以下格式：
-  - ISO 8601 时间格式（YYYY-MM-DDThh:mm:ss）
-  - Unix 时间戳格式（秒数）
-- `end`: 可选参数，指定回放的结束时间，如不指定则播放到录制文件结束，格式同 start
-
-### 3. 配置按需拉取录像文件
-
-可以通过配置对应插件的按需拉取功能，自动处理回放请求。示例配置如下：
+### 回放拉流配置
 
 ```yaml
 mp4:
-  publish:
-    delayclosetimeout: 3s  # 设置延迟关闭时间
-  # 订阅触发器
   onsub:
     pull:
-      ^vod(\d)/(.+)$: live/$2  # 通过正则匹配转发流
-  # 发布触发器
-  onpub:
-    record:
-      ^live/.+:
-        fragment: 1m
-        filepath: record/$0  # 录制文件路径
-```
-
-**配置说明**:
-- `delayclosetimeout`: 设置当录像回放的所有订阅者退出后，延迟多长时间自动关闭录像回放的发布者。这样可以释放系统资源，避免无人观看的回放流持续占用服务器资源。
-
-#### 正则表达式匹配说明
-
-在 `onsub.pull` 配置中，可以使用正则表达式来灵活匹配流名称：
-
-订阅触发正则匹配：
-
-在 `onsub.pull` 配置中，使用正则表达式动态匹配流名称：
-```yaml
-onsub:
+      ^vod/(.+)$: live/$1  # vod/camera1 → live/camera1
   pull:
-    正则表达式: 匹配结果模板
+    live/movie: /path/to/movie.mp4
+    delayclosetimeout: 3s
 ```
 
-正则表达式可以包含捕获组，在匹配结果中使用 `$数字` 引用这些捕获组：
-- `$0`: 表示整个匹配字符串
-- `$1`, `$2`, ...: 表示第1个、第2个...捕获组
+### 高级回放配置
 
-**示例1**: 基础回放匹配
 ```yaml
-^vod/(.+)$: live/$1
-```
-当订阅 `vod/camera1` 时，系统会自动拉取 `live/camera1` 的录像
-
-**示例2**: 多级目录匹配
-```yaml
-^archive/(\d{4})/(\d{2})/(\d{2})/(.+)$: live/$4?start=$1-$2-$3T00:00:00
-```
-当订阅 `archive/2024/01/15/camera1` 时，系统会拉取 `live/camera1?start=2024-01-15T00:00:00`
-
-**示例3**: 不同订阅者独立回放进度
-```yaml
-^vod(\d)/(.+)$: live/$2
-```
-当订阅 `vod1/camera1` 或 `vod2/camera1` 时，系统都会拉取 `live/camera1`，但不同的前缀使不同的订阅者可以拥有各自独立的回放进度，互不影响
-
-## 注意事项
-1. 确保录制文件完整
-2. 合理设置缓存大小
-3. 确保数据库功能正常开启
-4. 监控磁盘使用情况
-5. 定期清理过期录制文件
-
-## 录像管理API
-
-Monibuca提供了一系列API用于获取和管理录像文件信息，便于开发自定义的回放界面。
-
-### 获取正在录制的流列表
-
-```http
-GET /api/record/list
+mp4:
+  onsub:
+    pull:
+      # 基础回放匹配
+      ^vod/(.+)$: live/$1
+      # 多级目录匹配
+      ^archive/(\d{4})/(\d{2})/(\d{2})/(.+)$: live/$4?start=$1-$2-$3T00:00:00
+      # 独立回放进度
+      ^vod(\d)/(.+)$: live/$2
 ```
 
-**响应示例**：
-```json
-{
-  "code": 0,
-  "message": "success",
-  "data": [
-    {
-      "streamPath": "live/camera1",
-      "startTime": "2024-06-12T10:25:00Z",
-      "type": "mp4",
-      "pointer": 123456789
-    }
-  ]
-}
-```
+**关键参数说明**:
+- `delayclosetimeout`: 无订阅者时延迟关闭时间
+- 正则表达式支持捕获组，用`$1`、`$2`引用
+- 时间参数支持 ISO 8601 格式和 Unix 时间戳
 
-### 获取录像文件列表
+## 回放管理API
 
-```http
-GET /api/record/{type}/list/{streamPath}?start=2024-01-01T00:00:00&end=2024-01-02T00:00:00&pageNum=1&pageSize=20
-```
+### 查询API接口
 
-**参数说明**：
-- `type`: 录像类型，如"mp4"、"flv"等
-- `streamPath`: 流路径
-- `start`: 开始时间(可选)
-- `end`: 结束时间(可选)
-- `pageNum`: 页码，从1开始(可选)
-- `pageSize`: 每页数量(可选)
-- `mode`: 录像模式(可选)
-- `eventLevel`: 事件级别(可选)
+| 功能 | 方法 | 路径 | 说明 |
+|------|------|------|------|
+| 录像列表 | GET | `/api/record/{type}/list/{streamPath}` | 获取录像文件列表 |
+| 录像目录 | GET | `/api/record/{type}/catalog` | 获取录像目录结构 |
 
-**响应示例**：
-```json
-{
-  "code": 0,
-  "message": "success",
-  "totalCount": 100,
-  "pageNum": 1,
-  "pageSize": 20,
-  "data": [
-    {
-      "id": 1,
-      "filePath": "record/live/camera1/20240101120000.mp4",
-      "streamPath": "live/camera1",
-      "startTime": "2024-01-01T12:00:00Z",
-      "endTime": "2024-01-01T12:30:00Z",
-      "eventLevel": "normal",
-      "eventName": "",
-      "eventDesc": ""
-    }
-  ]
-}
-```
+### 查询API接口
 
-### 获取录像目录
+| 功能 | 方法 | 路径 | 说明 |
+|------|------|------|------|
+| 录像文件列表 | GET | `/mp4/api/list/{streamPath}` | 获取录像文件列表 |
+| 录像目录 | GET | `/mp4/api/catalog` | 获取录像目录结构 |
 
-```http
-GET /api/record/{type}/catalog
-```
+### 流控制API
 
-**参数说明**：
-- `type`: 录像类型，如"mp4"、"flv"等
+| 功能 | 方法 | 路径 | 说明 |
+|------|------|------|------|
+| 暂停播放 | POST | `/api/stream/pause/{streamPath}` | 暂停流播放 |
+| 恢复播放 | POST | `/api/stream/resume/{streamPath}` | 恢复流播放 |
+| 设置速度 | POST | `/api/stream/speed/{streamPath}` | 设置播放速度 |
+| 时间跳转 | POST | `/api/stream/seek/{streamPath}` | 跳转到指定时间 |
 
-**响应示例**：
-```json
-{
-  "code": 0,
-  "message": "success",
-  "data": [
-    {
-      "streamPath": "live/camera1",
-      "count": 150,
-      "startTime": "2024-01-01T00:00:00Z",
-      "endTime": "2024-01-15T23:59:59Z"
-    },
-    {
-      "streamPath": "live/camera2",
-      "count": 120,
-      "startTime": "2024-01-02T00:00:00Z",
-      "endTime": "2024-01-14T23:59:59Z"
-    }
-  ]
-}
-```
-
-### 删除录像文件
-
-```http
-POST /api/record/{type}/delete/{streamPath}
-```
-
-**请求体示例**：
-```json
-{
-  "ids": [1, 2, 3],  // 指定要删除的文件ID
-  "startTime": "2024-01-01T00:00:00",  // 或指定时间范围删除
-  "endTime": "2024-01-02T00:00:00"
-}
-```
-
-**参数说明**：
-- `type`: 录像类型，如"mp4"、"flv"等
-- `streamPath`: 流路径
-- `ids`: 要删除的文件ID数组(可选)
-- `startTime`: 开始时间(可选，与endTime配合使用)
-- `endTime`: 结束时间(可选，与startTime配合使用)
-
-**响应示例**：
-```json
-{
-  "code": 0,
-  "message": "success",
-  "data": [  // 返回被删除的文件列表
-    {
-      "id": 1,
-      "filePath": "record/live/camera1/20240101120000.mp4",
-      "streamPath": "live/camera1",
-      "startTime": "2024-01-01T12:00:00Z",
-      "endTime": "2024-01-01T12:30:00Z"
-    }
-  ]
-}
-```
-
-## 流控制API
-
-Monibuca提供了一系列API用于控制回放流的播放进度和速度，实现诸如暂停、恢复、调速和时间跳转等功能。
-
-### 暂停流播放
-
-```http
-POST /api/stream/pause/{streamPath}
-```
-
-**参数说明**：
-- `streamPath`: 流路径，需要URL编码
-
-**响应示例**：
-```json
-{
-  "code": 0,
-  "message": "success"
-}
-```
-
-### 恢复流播放
-
-```http
-POST /api/stream/resume/{streamPath}
-```
-
-**参数说明**：
-- `streamPath`: 流路径，需要URL编码
-
-**响应示例**：
-```json
-{
-  "code": 0,
-  "message": "success"
-}
-```
-
-### 设置流播放速度
-
-```http
-POST /api/stream/speed/{streamPath}
-```
-
-**请求体示例**：
-```json
-{
-  "speed": 2.0  // 设置播放速度，1.0为正常速度
-}
-```
-
-**参数说明**：
-- `streamPath`: 流路径，需要URL编码
-- `speed`: 播放速度倍率，常用值：0.5(半速)、1.0(正常)、2.0(两倍速)、4.0(四倍速)
-
-**响应示例**：
-```json
-{
-  "code": 0,
-  "message": "success"
-}
-```
-
-### 跳转流播放位置
-
-```http
-POST /api/stream/seek/{streamPath}
-```
-
-**请求体示例**：
-```json
-{
-  "timeStamp": 1612960800  // Unix时间戳（秒）
-}
-```
-
-**参数说明**：
-- `streamPath`: 流路径，需要URL编码
-- `timeStamp`: 目标时间戳，Unix时间戳格式（秒）
-
-**响应示例**：
-```json
-{
-  "code": 0,
-  "message": "success"
-}
-```
-
-### 使用示例
-
-以下是使用JavaScript结合上述API控制回放流的示例代码：
+### API使用示例
 
 ```javascript
-// 暂停回放流
-async function pauseStream(streamPath) {
-  const response = await fetch(`/api/stream/pause/${encodeURIComponent(streamPath)}`, {
-    method: 'POST'
-  });
-  return await response.json();
-}
+// 获取录像列表
+const recordings = await fetch('/mp4/api/list/live/camera1').then(r => r.json());
 
-// 恢复回放流
-async function resumeStream(streamPath) {
-  const response = await fetch(`/api/stream/resume/${encodeURIComponent(streamPath)}`, {
-    method: 'POST'
-  });
-  return await response.json();
-}
+// 获取录像目录
+const catalog = await fetch('/mp4/api/catalog').then(r => r.json());
 
-// 设置回放速度
-async function setStreamSpeed(streamPath, speed) {
-  const response = await fetch(`/api/stream/speed/${encodeURIComponent(streamPath)}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ speed: speed })
-  });
-  return await response.json();
-}
+// 播放控制
+await fetch('/api/stream/pause/live/camera1', { method: 'POST' });
+await fetch('/api/stream/speed/live/camera1', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ speed: 2.0 })
+});
 
-// 跳转到指定时间点
-async function seekStream(streamPath, timestamp) {
-  const response = await fetch(`/api/stream/seek/${encodeURIComponent(streamPath)}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ timeStamp: timestamp })
-  });
-  return await response.json();
-}
+// 时间跳转
+await fetch('/api/stream/seek/live/camera1', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ timeStamp: Math.floor(Date.now() / 1000) })
+});
 ```
 
+### 回放URL格式
+
+**基础回放：**
+`http://localhost:8080/flv/live/camera1.flv?start=2024-01-01T12:00:00`
+
+**时间范围回放：**
+`http://localhost:8080/mp4/live/camera1.mp4?start=2024-01-01T12:00:00&end=2024-01-01T13:00:00`
+
+**WebSocket实时回放：**
+`ws://localhost:8080/mp4/live/camera1.mp4`
 ## 前端播放器集成
+
+### 支持的播放方式
+
+```mermaid
+graph LR
+    A[Monibuca回放] --> B[MP4下载]
+    A --> C[fMP4流式]
+    A --> D[WebSocket实时]
+    A --> E[HLS切片]
+    
+    B --> F[HTML5 Video]
+    C --> G[MSE播放器]
+    D --> H[WebRTC播放器]
+    E --> I[HLS.js播放器]
+    
+    F --> J[基础播放]
+    G --> K[低延迟播放]
+    H --> L[实时播放]
+    I --> M[自适应播放]
+```
+
+### 常用播放器集成
+
+| 播放器类型 | 适用场景 | 主要特点 |
+|------------|----------|----------|
+| HTML5 Video | 基础回放 | 简单易用，兼容性好 |
+| Video.js | 专业回放 | 功能丰富，插件众多 |
+| HLS.js | 流式回放 | 自适应码率，低延迟 |
+| 自定义MSE | 实时回放 | 精确控制，实时性强 |
+
+### 基础集成示例
+
+```html
+<!-- 基础MP4播放 -->
+<video controls>
+  <source src="/mp4/download/live/camera1.mp4" type="video/mp4">
+</video>
+
+<!-- fMP4流式播放 -->
+<video id="player"></video>
+<script>
+const video = document.getElementById('player');
+const ws = new WebSocket('ws://localhost:8080/mp4/live/camera1.mp4');
+// 使用MSE实现流式播放
+</script>
+```
+
+## 性能优化建议
+
+### 系统优化
+
+```mermaid
+graph TD
+    A[性能优化] --> B[存储优化]
+    A --> C[网络优化]
+    A --> D[播放优化]
+    
+    B --> B1[SSD存储]
+    B --> B2[分片存储]
+    B --> B3[定期清理]
+    
+    C --> C1[CDN加速]
+    C --> C2[负载均衡]
+    C --> C3[带宽控制]
+    
+    D --> D1[预加载]
+    D --> D2[缓存策略]
+    D --> D3[自适应码率]
+```
+
+### 关键参数配置
+
+| 参数 | 推荐值 | 说明 |
+|------|--------|------|
+| fragment | 10-30s | 平衡文件大小和性能 |
+| buffer_size | 10-30MB | 根据网络条件调整 |
+| max_connections | 100-500 | 根据服务器性能设置 |
+| cleanup_interval | 24h | 定期清理过期文件 |
+
+## 故障排除
+
+### 常见问题解决流程
+
+```mermaid
+flowchart TD
+    A[播放问题] --> B{文件存在?}
+    B -->|否| C[检查录制配置]
+    B -->|是| D{网络正常?}
+    D -->|否| E[检查网络连接]
+    D -->|是| F{格式支持?}
+    F -->|否| G[更换播放器]
+    F -->|是| H[检查服务器日志]
+    
+    C --> I[修复配置重启]
+    E --> J[网络故障排除]
+    G --> K[使用兼容格式]
+    H --> L[分析错误信息]
+```
+
+### 监控指标
+
+- **回放状态**: 实时监控回放任务状态
+- **文件读取**: 磁盘IO和读取性能
+- **网络带宽**: 下载带宽使用情况
+- **播放质量**: 延迟、丢帧率、错误率
+- **用户体验**: 缓冲时间、播放成功率
+
+## 总结
+
+Monibuca回放功能提供了完整的视频回放解决方案，支持多种格式和播放方式。通过合理的配置和优化，可以实现高质量、低延迟的音视频回放服务。主要优势包括：
+
+- **灵活的回放模式**: 支持实时、点播、多段合并回放
+- **多格式支持**: MP4、fMP4、FLV等多种格式
+- **丰富的播放控制**: 暂停、跳转、变速等功能
+- **易于集成**: 支持各种主流播放器
+- **高性能**: 优化的存储读取和传输机制

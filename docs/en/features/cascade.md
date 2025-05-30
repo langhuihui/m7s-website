@@ -35,7 +35,7 @@ The cascade feature consists of two core components:
 Configure the cascade server in the configuration file:
 
 ```yaml
-cascade-server:
+cascadeserver:
   # QUIC listening address configuration
   quic:
     listenaddr: ":44944"  # Cascade server listening port
@@ -45,10 +45,10 @@ cascade-server:
   
   # Access control configuration
   relayapi:
-    enable: true          # Whether to enable API forwarding
-    whitelist:            # IP whitelist
+    allow:                # Allowed IP addresses/networks
       - "192.168.1.0/24"
       - "10.0.0.0/8"
+    deny: []              # Denied IP addresses/networks
 ```
 
 ### Cascade Client Configuration
@@ -56,7 +56,10 @@ cascade-server:
 Configure the cascade client in the configuration file:
 
 ```yaml
-cascade-client:
+cascadeclient:
+  # Whether to enable cascade client
+  enable: true
+  
   # Upper-level server address
   server: "192.168.1.100:44944"
   
@@ -66,11 +69,15 @@ cascade-client:
   # Whether to automatically push streams to upper level
   autopush: true
   
+  # On-demand pull configuration
+  onsub:
+    pull: "live/.*"       # Regex pattern for streams to pull on subscription
+  
   # Access control configuration
   relayapi:
-    enable: true
-    whitelist:
+    allow:                # Allowed IP addresses/networks
       - "192.168.1.0/24"
+    deny: []              # Denied IP addresses/networks
 ```
 
 ### Detailed Configuration Options
@@ -81,18 +88,20 @@ cascade-client:
 |--------|------|----------|---------|-------------|
 | quic.listenaddr | string | Yes | ":44944" | QUIC protocol listening address and port |
 | autoregister | boolean | No | true | Whether to allow automatic registration of lower-level nodes |
-| relayapi.enable | boolean | No | false | Whether to enable API forwarding functionality |
-| relayapi.whitelist | string array | No | [] | IP address whitelist for access |
+| relayapi.allow | string array | No | [] | Allowed IP addresses/networks for access |
+| relayapi.deny | string array | No | [] | Denied IP addresses/networks for access |
 
 #### Cascade Client Configuration Options
 
 | Option | Type | Required | Default | Description |
 |--------|------|----------|---------|-------------|
+| enable | boolean | No | false | Whether to enable cascade client |
 | server | string | Yes | - | Upper-level server address (IP:port) |
 | secret | string | No | - | Connection secret for authentication |
 | autopush | boolean | No | false | Whether to automatically push streams to upper-level node |
-| relayapi.enable | boolean | No | false | Whether to enable API forwarding functionality |
-| relayapi.whitelist | string array | No | [] | IP address whitelist for access |
+| onsub.pull | string | No | - | Regex pattern for streams to pull on subscription |
+| relayapi.allow | string array | No | [] | Allowed IP addresses/networks for access |
+| relayapi.deny | string array | No | [] | Denied IP addresses/networks for access |
 
 ## Deployment Architecture Examples
 
@@ -109,7 +118,7 @@ Configuration example:
 
 **Upper Node Configuration:**
 ```yaml
-cascade-server:
+cascadeserver:
   quic:
     listenaddr: ":44944"
   autoregister: true
@@ -117,7 +126,8 @@ cascade-server:
 
 **Lower Node Configuration:**
 ```yaml
-cascade-client:
+cascadeclient:
+  enable: true
   server: "192.168.1.100:44944"
   autopush: true
 ```
@@ -140,17 +150,17 @@ Headquarters Node (HQ)
 
 When a lower-level node is configured with `autopush: true`, all streams published to the lower-level node will be automatically forwarded to the upper-level node.
 
-#### Manual Pull
+#### On-demand Pull
 
-Lower-level nodes can also pull specific streams from upper-level nodes:
+Lower-level nodes can also configure regex patterns to automatically pull specific streams from upper-level nodes when they are subscribed to:
 
 ```yaml
-cascade-client:
+cascadeclient:
+  enable: true
   server: "192.168.1.100:44944"
-  # Configure pull rules
-  pull:
-    - streampath: "live/camera1"
-      pullurl: "cascade://live/camera1"
+  # Configure on-demand pull rules using regex patterns
+  onsub:
+    pull: "live/.*"       # Pull any stream matching this pattern when subscribed
 ```
 
 ### API Forwarding
@@ -236,7 +246,8 @@ curl -X POST http://server:8080/api/cascade/clients \
 
 **Client-side corresponding key configuration:**
 ```yaml
-cascade-client:
+cascadeclient:
+  enable: true
   server: "server:44944"
   secret: "unique-secret-key"
 ```

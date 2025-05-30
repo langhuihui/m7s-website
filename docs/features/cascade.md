@@ -35,7 +35,7 @@
 在配置文件中配置级联服务器：
 
 ```yaml
-cascade-server:
+cascadeserver:
   # QUIC监听地址配置
   quic:
     listenaddr: ":44944"  # 级联服务器监听端口
@@ -45,10 +45,11 @@ cascade-server:
   
   # 访问控制配置
   relayapi:
-    enable: true          # 是否启用API转发
-    whitelist:            # IP白名单
-      - "192.168.1.0/24"
-      - "10.0.0.0/8"
+    allow:                # 允许转发的路径前缀
+      - "/api/"
+      - "/flv/"
+    deny:                 # 禁止转发的路径前缀
+      - "/api/admin/"
 ```
 
 ### 级联客户端配置
@@ -56,7 +57,10 @@ cascade-server:
 在配置文件中配置级联客户端：
 
 ```yaml
-cascade-client:
+cascadeclient:
+  # 启用级联客户端
+  enable: true
+  
   # 上级服务器地址
   server: "192.168.1.100:44944"
   
@@ -68,9 +72,15 @@ cascade-client:
   
   # 访问控制配置
   relayapi:
-    enable: true
-    whitelist:
-      - "192.168.1.0/24"
+    allow:                # 允许转发的路径前缀
+      - "/api/"
+    deny:                 # 禁止转发的路径前缀
+      - "/api/admin/"
+  
+  # 按需拉流配置
+  onsub:
+    pull:
+      ".*": "m7s://$0"    # 正则表达式匹配流路径，$0表示完整匹配
 ```
 
 ### 配置项详细说明
@@ -81,18 +91,20 @@ cascade-client:
 |------|------|------|------|------|
 | quic.listenaddr | 字符串 | 是 | ":44944" | QUIC协议监听地址和端口 |
 | autoregister | 布尔值 | 否 | true | 是否允许下级节点自动注册 |
-| relayapi.enable | 布尔值 | 否 | false | 是否启用API转发功能 |
-| relayapi.whitelist | 字符串数组 | 否 | [] | 允许访问的IP地址白名单 |
+| relayapi.allow | 字符串数组 | 否 | [] | 允许转发的路径前缀列表 |
+| relayapi.deny | 字符串数组 | 否 | [] | 禁止转发的路径前缀列表 |
 
 #### 级联客户端配置项
 
 | 配置项 | 类型 | 必填 | 默认值 | 说明 |
 |------|------|------|------|------|
+| enable | 布尔值 | 否 | false | 是否启用级联客户端 |
 | server | 字符串 | 是 | - | 上级服务器地址（IP:端口） |
 | secret | 字符串 | 否 | - | 连接密钥，用于身份验证 |
 | autopush | 布尔值 | 否 | false | 是否自动推流到上级节点 |
-| relayapi.enable | 布尔值 | 否 | false | 是否启用API转发功能 |
-| relayapi.whitelist | 字符串数组 | 否 | [] | 允许访问的IP地址白名单 |
+| relayapi.allow | 字符串数组 | 否 | [] | 允许转发的路径前缀列表 |
+| relayapi.deny | 字符串数组 | 否 | [] | 禁止转发的路径前缀列表 |
+| onsub.pull | 映射 | 否 | {} | 按需拉流配置，键为正则表达式，值为拉流URL模板 |
 
 ## 部署架构示例
 
@@ -109,7 +121,7 @@ cascade-client:
 
 **上级节点配置：**
 ```yaml
-cascade-server:
+cascadeserver:
   quic:
     listenaddr: ":44944"
   autoregister: true
@@ -117,7 +129,8 @@ cascade-server:
 
 **下级节点配置：**
 ```yaml
-cascade-client:
+cascadeclient:
+  enable: true
   server: "192.168.1.100:44944"
   autopush: true
 ```
@@ -140,18 +153,21 @@ cascade-client:
 
 当下级节点配置了 `autopush: true` 时，所有发布到下级节点的流都会自动转发到上级节点。
 
-#### 手动拉流
+#### 按需拉流
 
-下级节点也可以从上级节点拉取特定的流：
+下级节点可以通过 `onsub.pull` 配置按需从上级节点拉取流：
 
 ```yaml
-cascade-client:
+cascadeclient:
   server: "192.168.1.100:44944"
-  # 配置拉流规则
-  pull:
-    - streampath: "live/camera1"
-      pullurl: "cascade://live/camera1"
+  secret: "your-secret-key"
+  onsub:
+    pull:
+      ".*": "m7s://$0"              # 匹配所有流路径，从上级拉取对应流
+      "live/(.*)": "m7s://live/$1"  # 匹配 live/ 前缀的流
 ```
+
+这种配置方式使用正则表达式匹配流路径，当有订阅者请求某个流时，如果本地没有该流，会自动从上级节点拉取。
 
 ### API转发
 
@@ -236,7 +252,7 @@ curl -X POST http://server:8080/api/cascade/clients \
 
 **客户端配置对应密钥：**
 ```yaml
-cascade-client:
+cascadeclient:
   server: "server:44944"
   secret: "unique-secret-key"
 ```
@@ -305,22 +321,22 @@ log:
 ## 相关资源
 
 ### 配置示例
-- [级联配置示例](../examples/cascade/README.md) - 完整的配置示例和部署指南
-- [Docker Compose 部署](../examples/cascade/docker-compose.yml) - 容器化部署示例
-- [多级级联配置](../examples/cascade/multi-level-cascade.yaml) - 复杂网络拓扑配置
+- **级联配置示例** - 完整的配置示例和部署指南
+- **Docker Compose 部署** - 容器化部署示例
+- **多级级联配置** - 复杂网络拓扑配置
 
 ### 性能优化
-- [性能调优指南](../examples/cascade/performance-tuning.md) - 详细的性能优化配置
-- [硬件配置建议](../examples/cascade/performance-tuning.md#硬件建议) - 不同规模部署的硬件推荐
+- **性能调优指南** - 详细的性能优化配置
+- **硬件配置建议** - 不同规模部署的硬件推荐
 
 ### 测试和监控
-- [集成测试](../examples/cascade/integration-tests/README.md) - 自动化测试套件
-- [故障排除指南](../examples/cascade/troubleshooting.md) - 常见问题解决方案
-- [监控配置](../examples/cascade/troubleshooting.md#监控工具) - 实时监控和告警设置
+- **集成测试** - 自动化测试套件
+- **故障排除指南** - 常见问题解决方案
+- **监控配置** - 实时监控和告警设置
 
 ### 数据库
-- [数据库配置](../examples/cascade/init.sql) - PostgreSQL 初始化脚本
-- [级联状态管理](../examples/cascade/init.sql) - 级联连接状态跟踪
+- **数据库配置** - PostgreSQL 初始化脚本
+- **级联状态管理** - 级联连接状态跟踪
 
 ## 最佳实践
 
@@ -345,10 +361,10 @@ log:
 
 如果您是初次使用级联功能，建议按以下顺序进行：
 
-1. 阅读 [配置示例](../examples/cascade/README.md) 了解基本配置
-2. 使用 [Docker Compose](../examples/cascade/docker-compose.yml) 快速搭建测试环境
-3. 运行 [集成测试](../examples/cascade/integration-tests/README.md) 验证功能
-4. 参考 [性能调优指南](../examples/cascade/performance-tuning.md) 优化配置
-5. 遇到问题时查阅 [故障排除指南](../examples/cascade/troubleshooting.md)
+1. 阅读配置示例了解基本配置
+2. 使用 Docker Compose 快速搭建测试环境  
+3. 运行集成测试验证功能
+4. 参考性能调优指南优化配置
+5. 遇到问题时查阅故障排除指南
 
 通过级联功能，Monibuca可以构建大规模、高可用的分布式流媒体网络，满足不同场景下的部署需求。

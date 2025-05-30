@@ -31,18 +31,26 @@ jobs:
     - name: Build project
       run: pnpm run build
       
+    - name: Verify build output
+      run: |
+        echo "Checking build output..."
+        ls -la .vitepress/
+        if [ -d ".vitepress/dist" ]; then
+          echo "Build directory exists"
+          ls -la .vitepress/dist/
+        else
+          echo "Build directory does not exist!"
+          exit 1
+        fi
+      
     - name: Deploy to server via SFTP
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      uses: appleboy/scp-action@v0.1.7
       with:
-        server: ${{ secrets.SFTP_HOST }}
+        host: ${{ secrets.SFTP_HOST }}
         username: ${{ secrets.SFTP_USERNAME }}
-        password: ${{ secrets.SFTP_PASSWORD }}
+        key: ${{ secrets.SFTP_KEY }}
         port: ${{ secrets.SFTP_PORT }}
-        protocol: sftp
-        local-dir: ./.vitepress/dist/
-        server-dir: ${{ secrets.SFTP_SERVER_DIR }}
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/node_modules/**
-          .env
+        source: ".vitepress/dist/"
+        target: ${{ secrets.SFTP_SERVER_DIR }}
+        strip_components: 2
+        rm: true

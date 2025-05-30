@@ -74,7 +74,7 @@ Monibuca comes with a built-in web UI for management and monitoring. To use it:
 
 1. Download the latest `admin.zip` from the releases or use the one included in the example.
 2. Place the `admin.zip` file (do not unzip) in the same directory as your configuration file.
-3. Visit [http://localhost:8080](http://localhost:8080) in your browser to access the UI.
+3. Visit `http://localhost:8080` in your browser to access the UI.
 
 ## Basic Usage
 

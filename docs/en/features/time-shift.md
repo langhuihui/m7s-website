@@ -18,7 +18,7 @@ global:
 > This doesn't have to be under global, this is just an example. It can be placed under any plugin configuration.
 
 ### Through Subscription URL Parameters
-Example: http://localhost:8080/hdl/live/test?buffertime=10s
+Example: `http://localhost:8080/hdl/live/test?buffertime=10s`
 
 > In v5, URL parameters for publishing and subscribing automatically override values in the publish and subscribe configurations.
 
