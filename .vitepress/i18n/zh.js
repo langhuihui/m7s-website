@@ -157,6 +157,7 @@ export default {
     routeForwarding: '路由转发',
     monitoring: '监控',
     cluster: '集群',
+    cascade: '级联',
     secondaryDevelopment: '进阶指南',
     pluginDevelopment: '插件开发',
     apiReference: 'API 参考',

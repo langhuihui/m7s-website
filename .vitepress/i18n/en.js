@@ -157,6 +157,7 @@ export default {
     routeForwarding: 'Route Forwarding',
     monitoring: 'Monitoring',
     cluster: 'Cluster',
+    cascade: 'Cascade',
     secondaryDevelopment: 'Advanced Guide',
     pluginDevelopment: 'Plugin Development',
     apiReference: 'API Reference',
