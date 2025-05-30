@@ -44,13 +44,11 @@ jobs:
         fi
       
     - name: Deploy to server via SFTP
-      uses: appleboy/scp-action@v0.1.7
+      uses: milanmk/actions-file-deployer@master
       with:
-        host: ${{ secrets.SFTP_HOST }}
-        username: ${{ secrets.SFTP_USERNAME }}
-        key: ${{ secrets.SFTP_KEY }}
-        port: ${{ secrets.SFTP_PORT }}
-        source: ".vitepress/dist/"
-        target: ${{ secrets.SFTP_SERVER_DIR }}
-        strip_components: 2
-        rm: true
+        remote-protocol: "sftp"
+        remote-host: ${{ secrets.SFTP_HOST }}
+        remote-user: ${{ secrets.SFTP_USERNAME }}
+        ssh-private-key: ${{ secrets.SFTP_KEY }}
+        remote-path: ${{ secrets.SFTP_SERVER_DIR }}
+        local-path: ".vitepress/dist/"
