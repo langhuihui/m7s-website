@@ -44,11 +44,12 @@ jobs:
         fi
       
     - name: Deploy to server via SFTP
-      uses: milanmk/actions-file-deployer@master
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.6
       with:
-        remote-protocol: "sftp"
-        remote-host: ${{ secrets.SFTP_HOST }}
-        remote-user: ${{ secrets.SFTP_USERNAME }}
-        ssh-private-key: ${{ secrets.SFTP_KEY }}
-        remote-path: ${{ secrets.SFTP_SERVER_DIR }}
-        local-path: ".vitepress/dist/"
+        username: ${{ secrets.SFTP_USERNAME }}
+        server: ${{ secrets.SFTP_HOST }}
+        port: ${{ secrets.SFTP_PORT }}
+        local_path: '.vitepress/dist/*'
+        remote_path: ${{ secrets.SFTP_SERVER_DIR }}
+        sftp_only: true
+        ssh_private_key:  ${{ secrets.SFTP_KEY }}
