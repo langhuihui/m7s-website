@@ -100,21 +100,21 @@ export default {
     free: {
       title: 'Free Version',
       features: [
-        'Complete core functionality',
-        'Basic plugin support',
-        'Community support',
-        'Non-commercial use only',
-        'Admin source code not included'
+        '✅ Complete core functionality',
+        '✅ Basic plugin support',
+        '✅ Community technical support',
+        '❌ Non-commercial use only',
+        '❌ Admin source code not included'
       ]
     },
     commercial: {
       title: 'Commercial Version',
       features: [
-        'Complete core functionality',
-        'All plugin support',
-        'Commercial technical support',
-        'Commercial authorization',
-        'Admin source code (sold separately)'
+        '✅ Complete core functionality',
+        '✅ Plugin customization services',
+        '✅ VIP technical support',
+        '✅ Commercial authorization',
+        '✅ Admin source code'
       ],
       contact: 'For commercial licensing details, please contact:'
     }
