@@ -16,7 +16,8 @@ global:
     - id: 1                        # 唯一ID标识，必须大于0
       name: "camera-1"             # 拉流代理名称
       type: "rtmp"                 # 拉流协议类型
-      pullurl: "rtmp://example.com/live/stream1"  # 拉流源地址
+      pull:
+        url: "rtmp://example.com/live/stream1"  # 拉流源地址
       streampath: "live/camera1"   # 在Monibuca中的流路径
       pullonstart: true            # 是否在启动时自动开始拉流
       stoponidle: true             # 是否在无人观看时停止拉流
@@ -59,7 +60,7 @@ go build -tags="sqlite" ...
 | id | 整数 | 是 | - | 拉流代理唯一标识，必须大于0 |
 | name | 字符串 | 是 | - | 拉流代理名称 |
 | type | 字符串 | 否 | - | 拉流协议类型，如rtmp、rtsp、srt等，不填会根据URL自动判断 |
-| pullurl | 字符串 | 是 | - | 拉流源地址 |
+| pull.url | 字符串 | 是 | - | 拉流源地址 |
 | streampath | 字符串 | 否 | pull/{type}/{id} | 流在系统中的路径，不填自动生成 |
 | pullonstart | 布尔值 | 否 | false | 是否在启动时自动开始拉流，设为false时启用按需拉流，即只有当有客户端请求该streamPath的流时才从远端拉流 |
 | stoponidle | 布尔值 | 否 | false | 是否在没有客户端观看时自动停止拉流 |
@@ -77,14 +78,16 @@ global:
     - id: 1
       name: "camera-1"
       type: "rtmp"
-      pullurl: "rtmp://example.com/live/stream1"
+      pull:
+        url: "rtmp://example.com/live/stream1"
       streampath: "live/camera1"
       pullonstart: true
       
     - id: 2
       name: "camera-2"
       type: "rtsp"
-      pullurl: "rtsp://192.168.1.100:554/live"
+      pull:
+        url: "rtsp://192.168.1.100:554/live"
       streampath: "live/camera2"
       pullonstart: false
       stoponidle: true
