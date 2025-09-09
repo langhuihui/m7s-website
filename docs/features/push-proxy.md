@@ -16,7 +16,8 @@ global:
     - id: 1                        # 唯一ID标识，必须大于0
       name: "target-1"             # 推流代理名称
       type: "rtmp"                 # 推流协议类型
-      pushurl: "rtmp://target-server:1935/live/stream1"  # 推流目标地址
+      push:
+        url: "rtmp://target-server:1935/live/stream1"  # 推流目标地址
       streampath: "live/camera1"   # 监听的源流路径
       pushonstart: true            # 是否在启动时自动开始推流
       audio: true                  # 是否转发音频流
@@ -70,21 +71,24 @@ global:
     - id: 1
       name: "target-1"
       type: "rtmp"
-      pushurl: "rtmp://target1.com/live/stream1"
+      push:
+        url: "rtmp://target1.com/live/stream1"
       streampath: "live/camera1"
       pushonstart: true
       
     - id: 2
       name: "target-2"
       type: "rtmp"
-      pushurl: "rtmp://target2.com/live/stream1"
+      push:
+        url: "rtmp://target2.com/live/stream1"
       streampath: "live/camera1"
       pushonstart: true
       
     - id: 3
       name: "backup-server"
       type: "srt"
-      pushurl: "srt://backup.com:10080"
+      push:
+        url: "srt://backup.com:10080"
       streampath: "live/camera2"
       pushonstart: false
       audio: false

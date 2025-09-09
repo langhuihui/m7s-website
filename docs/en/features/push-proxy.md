@@ -16,7 +16,8 @@ global:
     - id: 1                        # Unique ID identifier, must be greater than 0
       name: "target-1"             # Push proxy name
       type: "rtmp"                 # Push protocol type
-      pushurl: "rtmp://target-server:1935/live/stream1"  # Push target URL
+      push:
+        url: "rtmp://target-server:1935/live/stream1"  # Push target URL
       streampath: "live/camera1"   # Source stream path to monitor
       pushonstart: true            # Whether to start pushing automatically on stream publish
       audio: true                  # Whether to forward audio stream
@@ -70,21 +71,24 @@ global:
     - id: 1
       name: "target-1"
       type: "rtmp"
-      pushurl: "rtmp://target1.com/live/stream1"
+      push:
+        url: "rtmp://target1.com/live/stream1"
       streampath: "live/camera1"
       pushonstart: true
       
     - id: 2
       name: "target-2"
       type: "rtmp"
-      pushurl: "rtmp://target2.com/live/stream1"
+      push:
+        url: "rtmp://target2.com/live/stream1"
       streampath: "live/camera1"
       pushonstart: true
       
     - id: 3
       name: "backup-server"
       type: "srt"
-      pushurl: "srt://backup.com:10080"
+      push:
+        url: "srt://backup.com:10080"
       streampath: "live/camera2"
       pushonstart: false
       audio: false
