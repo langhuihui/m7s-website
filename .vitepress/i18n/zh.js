@@ -168,7 +168,10 @@ export default {
     log: '日志系统',
     task: '任务系统',
     relay: '中继系统',
-    http: 'HTTP'
+    http: 'HTTP',
+    arch: '架构设计',
+    reuse: '对象复用',
+    readerDesignPhilosophy: 'Reader接口设计哲学'
   },
   themeConfig: {
     siteTitle: 'Monibuca v5',

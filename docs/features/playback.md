@@ -170,14 +170,17 @@ await fetch('/api/stream/seek/live/camera1', {
 
 ### 回放URL格式
 
-**基础回放：**
-`http://localhost:8080/flv/live/camera1.flv?start=2024-01-01T12:00:00`
+ start 和 end 参数控制回放范围，end 可以省略
 
-**时间范围回放：**
-`http://localhost:8080/mp4/live/camera1.mp4?start=2024-01-01T12:00:00&end=2024-01-01T13:00:00`
+**使用 http-flv 进行回放：**
+`http://localhost:8080/flv/vod1/live/camera1.flv?start=2024-01-01T12:00:00`
 
-**WebSocket实时回放：**
-`ws://localhost:8080/mp4/live/camera1.mp4`
+**使用 http-mp4 进行回放：**
+`http://localhost:8080/mp4/vod2/live/camera1.mp4?start=2024-01-01T12:00:00&end=2024-01-01T13:00:00`
+
+**使用 rtmp 进行回放：**
+`rtmp://localhost/vod3/live/camera1?start=2024-01-01T12:00:00`
+
 ## 前端播放器集成
 
 ### 支持的播放方式

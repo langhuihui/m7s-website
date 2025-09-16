@@ -209,11 +209,14 @@ func main() {
 | 构建标签 | 描述 |
 |-----------|-------------|
 | sqlite | 启用 SQLite 数据库支持 |
+| sqliteCGO | 启用 SQLite CGO 版本 |
 | mysql | 启用 MySQL 数据库支持 |
 | postgres | 启用 PostgreSQL 数据库支持 |
 | duckdb | 启用 DuckDB 数据库支持 |
 | disable_rm | 禁用内存池 |
+| enable_buddy | 开启 buddy 内存预申请|
 | fasthttp | 启用 fasthttp 代替标准库 |
+| taskpanic | 抛出 panic（用于测试） |
 使用示例：
 
 ```bash
@@ -241,4 +244,20 @@ docker run -id -p 1935:1935 -p 6000:6000 -p 8080:8080 -p 554:554 -p 50051:50051 
 
 ```bash
 docker run -id -p 1935:1935 -p 6000:6000 -p 8080:8080 -p 554:554 -p 50051:50051 -p 5060:5060/udp -p 9000:9000 langhuihui/monibuca:v5 -c /your/config.yaml
+```
+
+### 使用轻量级镜像
+
+默认进行包含 ffmpeg ，因此体积较大，如果不需要使用 ffmpeg，可以使用轻量级镜像：
+
+```bash
+docker run -id -p 1935:1935 -p 6000:6000 -p 8080:8080 -p 554:554 -p 50051:50051 -p 5060:5060/udp -p 9000:9000 monibuca/v5:latest
+```
+
+### 注意事项
+
+由于 docker 和宿主之间存在一个网络隔离，因此像 WebRTC、GB28181这类协议需要将宿主的 IP 地址添加到配置文件中。否则会导致设备无法向服务器建立连接，传输流。因此前期调试过程中可以开启 docker 的宿主模式，方便 docker 直接访问宿主的网卡。
+
+```bash
+docker run -id -p 1935:1935 -p 6000:6000 -p 8080:8080 -p 554:554 -p 50051:50051 -p 5060:5060/udp -p 9000:9000 --network host langhuihui/monibuca:v5
 ```

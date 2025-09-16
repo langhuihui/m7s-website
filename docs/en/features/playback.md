@@ -90,23 +90,6 @@ sequenceDiagram
     Engine->>Storage: Adjust Read Position
     Engine-->>Player: Continue Pushing Stream
 ```
-    participant API as Playback API
-    participant Engine as Playback Engine
-    participant Storage as Storage System
-    participant DB as Database
-    
-    Player->>API: Request Playback Stream
-    API->>DB: Query Recording Files
-    DB-->>API: Return File Info
-    API->>Engine: Start Playback Task
-    Engine->>Storage: Read Recording File
-    Engine-->>Player: Push Audio/Video Stream
-    
-    Player->>API: Playback Control (Pause/Seek)
-    API->>Engine: Execute Control Command
-    Engine->>Storage: Adjust Read Position
-    Engine-->>Player: Continue Stream Push
-```
 ## Configuration Examples
 
 ### Playback Pull Configuration
@@ -185,14 +168,16 @@ await fetch('/api/stream/seek/live/camera1', {
 
 ### Playback URL Formats
 
-**Basic playback:**
-`http://localhost:8080/flv/live/camera1.flv?start=2024-01-01T12:00:00`
+ start and end parameters control playback range, end can be omitted
 
-**Time range playback:**
-`http://localhost:8080/mp4/live/camera1.mp4?start=2024-01-01T12:00:00&end=2024-01-01T13:00:00`
+**Using http-flv for playback:**
+`http://localhost:8080/flv/vod1/live/camera1.flv?start=2024-01-01T12:00:00`
 
-**WebSocket real-time playback:**
-`ws://localhost:8080/mp4/live/camera1.mp4`
+**Using http-mp4 for playback:**
+`http://localhost:8080/mp4/vod2/live/camera1.mp4?start=2024-01-01T12:00:00&end=2024-01-01T13:00:00`
+
+**Using rtmp for playback:**
+`rtmp://localhost/vod3/live/camera1?start=2024-01-01T12:00:00`
 
 ## Frontend Player Integration
 

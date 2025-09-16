@@ -168,7 +168,10 @@ export default {
     log: 'Logging',
     task: 'Task System',
     relay: 'Relay System',
-    http: 'HTTP'
+    http: 'HTTP',
+    arch: 'Architecture',
+    reuse: 'Reuse',
+    readerDesignPhilosophy: 'Reader Design Philosophy'
   },
   themeConfig: {
     siteTitle: 'Monibuca v5',

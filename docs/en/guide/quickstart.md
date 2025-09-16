@@ -209,11 +209,14 @@ You can customize your Monibuca build using the following build tags:
 | Build Tag | Description |
 |-----------|-------------|
 | sqlite | Enables SQLite database support |
+| sqliteCGO | Enables SQLite CGO database support |
 | mysql | Enables MySQL database support |
 | postgres | Enables PostgreSQL database support |
 | duckdb | Enables DuckDB database support |
 | disable_rm | Disables the memory pool |
+| enable_buddy | Enables buddy memory pre-allocation |
 | fasthttp | Enables fasthttp instead of the standard library |
+| taskpanic | Enables panics for testing |
 
 Example usage:
 
@@ -241,4 +244,20 @@ You will see a config.yaml file in this directory, which you can modify and then
 
 ```bash
 docker run -id -p 1935:1935 -p 6000:6000 -p 8080:8080 -p 554:554 -p 50051:50051 -p 5060:5060/udp -p 9000:9000 langhuihui/monibuca:v5 -c /your/config.yaml
+```
+
+### Use Lightweight Image
+
+The default image includes ffmpeg, so it is large. If you do not need to use ffmpeg, you can use the lightweight image:
+
+```bash
+docker run -id -p 1935:1935 -p 6000:6000 -p 8080:8080 -p 554:554 -p 50051:50051 -p 5060:5060/udp -p 9000:9000 monibuca/v5:latest
+```
+
+### Notes
+
+Since docker and the host have a network isolation, protocols like WebRTC, GB28181 need to add the host's IP address to the configuration file. Otherwise, the device will not be able to establish a connection and transmit streams. Therefore, during the early debugging process, you can enable the host mode of docker to allow docker to directly access the host's network card.
+
+```bash
+docker run -id -p 1935:1935 -p 6000:6000 -p 8080:8080 -p 554:554 -p 50051:50051 -p 5060:5060/udp -p 9000:9000 --network host langhuihui/monibuca:v5
 ```
