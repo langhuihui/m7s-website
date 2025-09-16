@@ -1,4 +1,4 @@
-name: Build and Deploy via SFTP
+name: Build and Deploy via FTP
 
 on:
   push:
@@ -43,13 +43,12 @@ jobs:
           exit 1
         fi
       
-    - name: Deploy to server via SFTP
-      uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+    - name: Deploy to server via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        username: ${{ secrets.SFTP_USERNAME }}
-        server: ${{ secrets.SFTP_HOST }}
-        port: ${{ secrets.SFTP_PORT }}
-        local_path: '.vitepress/dist/*'
-        remote_path: ${{ secrets.SFTP_SERVER_DIR }}
-        sftp_only: true
-        ssh_private_key:  ${{ secrets.SFTP_KEY }}
+        server: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        port: ${{ secrets.FTP_PORT }}
+        local-dir: .vitepress/dist/
+        server-dir: monibuca/
