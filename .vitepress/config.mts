@@ -84,8 +84,8 @@ const commonThemeConfig = (locales: '' | 'zh' | 'en' = '', translation = transla
         { text: translation.sidebar.relay, link: locales + '/develop/relay' },
         { text: translation.sidebar.http, link: locales + '/develop/http' },
         { text: translation.sidebar.alias, link: locales + '/develop/alias' },
-        { text: translation.sidebar.reuse, link: locales + '/arch/reuse' },
-        { text: translation.sidebar.readerDesignPhilosophy, link: locales + '/arch/reader_design_philosophy' }
+        { text: translation.sidebar.reuse, link: locales + '/develop/reuse' },
+        { text: translation.sidebar.readerDesignPhilosophy, link: locales + '/develop/reader_design_philosophy' }
       ]
     }
   ],
