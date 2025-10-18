@@ -110,6 +110,17 @@
             </div>
           </div>
         </div>
+        <section>
+          <div class="link-column">
+            <h3>友情链接</h3>
+            <a href="https://hellogithub.com/" target="blank">
+              <img
+                :src="withBase('/img/hellogithub_white.png')"
+                alt="HelloGithub"
+              />
+            </a>
+          </div>
+        </section>
       </div>
     </div>
     <div class="chinese-copyright">
