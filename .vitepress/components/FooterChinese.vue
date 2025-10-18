@@ -125,7 +125,7 @@
     </div>
     <div class="chinese-copyright">
       <div class="copyright-content">
-        <div>©2024 Monibuca All Rights Reserved 南京莫妮不卡科技有限公司</div>
+        <div>©2025 Monibuca All Rights Reserved 南京莫妮不卡科技有限公司</div>
         <div style="display: flex">
           <a href="https://beian.miit.gov.cn/">苏ICP备20230258075号-1</a>
           <a
