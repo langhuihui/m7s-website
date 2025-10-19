@@ -110,11 +110,22 @@
             </div>
           </div>
         </div>
+        <section>
+          <div class="link-column">
+            <h3>友情链接</h3>
+            <a href="https://hellogithub.com/" target="blank">
+              <img
+                :src="withBase('/img/hellogithub_white.png')"
+                alt="HelloGithub"
+              />
+            </a>
+          </div>
+        </section>
       </div>
     </div>
     <div class="chinese-copyright">
       <div class="copyright-content">
-        <div>©2024 Monibuca All Rights Reserved 南京莫妮不卡科技有限公司</div>
+        <div>©2025 Monibuca All Rights Reserved 南京莫妮不卡科技有限公司</div>
         <div style="display: flex">
           <a href="https://beian.miit.gov.cn/">苏ICP备20230258075号-1</a>
           <a
